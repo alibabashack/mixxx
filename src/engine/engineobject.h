@@ -8,8 +8,8 @@
 class EngineObject : public QObject {
     Q_OBJECT
   public:
-    EngineObject();
-    ~EngineObject() override;
+    EngineObject() = default;
+    ~EngineObject() override = default;
     virtual void process(CSAMPLE* pInOut,
                          const int iBufferSize) = 0;
 

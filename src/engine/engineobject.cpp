@@ -2,12 +2,6 @@
 
 #include "moc_engineobject.cpp"
 
-EngineObject::EngineObject() {
-}
-
-EngineObject::~EngineObject() {
-}
-
 EngineObjectConstIn::EngineObjectConstIn() {
 }
 
