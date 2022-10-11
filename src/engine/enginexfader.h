@@ -17,8 +17,8 @@ class EngineXfader {
             CSAMPLE_GAIN* gain1,
             CSAMPLE_GAIN* gain2);
 
-    static const char* kXfaderConfigKey;
-    static const double kTransformDefault;
-    static const double kTransformMax;
-    static const double kTransformMin;
+    static constexpr const char* const kXfaderConfigKey = "[Mixer Profile]";
+    static constexpr double kTransformDefault = 1.0;
+    static constexpr double kTransformMax = 1000.0;
+    static constexpr double kTransformMin = 0.6;
 };
