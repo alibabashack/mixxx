@@ -10,9 +10,9 @@ class EngineDelay : public EngineObject {
     Q_OBJECT
   public:
     EngineDelay(const QString& group, const ConfigKey& delayControl, bool bPersist = true);
-    virtual ~EngineDelay();
+    ~EngineDelay() override;
 
-    void process(CSAMPLE* pInOut, const int iBufferSize);
+    void process(CSAMPLE* pInOut, const int iBufferSize) override;
 
     void setDelay(double newDelay);
 
