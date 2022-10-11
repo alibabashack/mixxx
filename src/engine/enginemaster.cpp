@@ -242,8 +242,7 @@ EngineMaster::~EngineMaster() {
 
     delete m_pWorkerScheduler;
 
-    for (int i = 0; i < m_channels.size(); ++i) {
-        ChannelInfo* pChannelInfo = m_channels[i];
+    for (auto pChannelInfo : m_channels) {
         SampleUtil::free(pChannelInfo->m_pBuffer);
         delete pChannelInfo->m_pChannel;
         delete pChannelInfo->m_pVolumeControl;
