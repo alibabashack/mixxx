@@ -201,49 +201,6 @@ class EngineMaster : public QObject, public AudioSource {
         MASTER_AND_BOOTH
     };
 
-    template<typename T, unsigned int CAPACITY>
-    class FastVector {
-      public:
-        inline FastVector() : m_size(0), m_data((T*)((void *)m_buffer)) {};
-        inline ~FastVector() {
-            if (QTypeInfo<T>::isComplex) {
-                for (int i = 0; i < m_size; ++i) {
-                    m_data[i].~T();
-                }
-            }
-        }
-        inline void append(const T& t) {
-            if (QTypeInfo<T>::isComplex) {
-                new (&m_data[m_size++]) T(t);
-            } else {
-                m_data[m_size++] = t;
-            }
-        };
-        inline const T& operator[](unsigned int i) const {
-            return m_data[i];
-        }
-        inline T& operator[](unsigned int i) {
-            return m_data[i];
-        }
-        inline const T& at(unsigned int i) const {
-            return m_data[i];
-        }
-        inline void replace(unsigned int i, const T& t) {
-            T copy(t);
-            m_data[i] = copy;
-        }
-        inline int size () const {
-            return m_size;
-        }
-      private:
-        int m_size;
-        T* const m_data;
-        // Using a long double buffer guarantees the alignment for any type
-        // but avoids the constructor call T();
-        long double m_buffer[(CAPACITY * sizeof(T) + sizeof(long double) - 1) /
-                             sizeof(long double)];
-    };
-
   protected:
     // The master buffer is protected so it can be accessed by test subclasses.
     CSAMPLE* m_pMaster;
