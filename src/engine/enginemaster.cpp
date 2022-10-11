@@ -63,7 +63,7 @@ EngineMaster::EngineMaster(
     m_bBusOutputConnected[EngineChannel::CENTER] = false;
     m_bBusOutputConnected[EngineChannel::RIGHT] = false;
     m_bExternalRecordBroadcastInputConnected = false;
-    m_pWorkerScheduler = new EngineWorkerScheduler(this);
+    m_pWorkerScheduler = std::make_unique<EngineWorkerScheduler>(this);
     m_pWorkerScheduler->start(QThread::HighPriority);
 
     // Master sample rate
@@ -239,8 +239,6 @@ EngineMaster::~EngineMaster() {
     for (int o = EngineChannel::LEFT; o <= EngineChannel::RIGHT; o++) {
         SampleUtil::free(m_pOutputBusBuffers[o]);
     }
-
-    delete m_pWorkerScheduler;
 
     for (auto pChannelInfo : m_channels) {
         SampleUtil::free(pChannelInfo->m_pBuffer);
@@ -862,7 +860,7 @@ void EngineMaster::addChannel(EngineChannel* pChannel) {
 
     EngineBuffer* pBuffer = pChannelInfo->m_pChannel->getEngineBuffer();
     if (pBuffer != nullptr) {
-        pBuffer->bindWorkers(m_pWorkerScheduler);
+        pBuffer->bindWorkers(m_pWorkerScheduler.get());
     }
 }
 

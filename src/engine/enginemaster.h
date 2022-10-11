@@ -295,7 +295,7 @@ class EngineMaster : public QObject, public AudioSource {
     CSAMPLE* m_pTalkoverHeadphones;
     CSAMPLE* m_pSidechainMix;
 
-    EngineWorkerScheduler* m_pWorkerScheduler;
+    std::unique_ptr<EngineWorkerScheduler> m_pWorkerScheduler;
     EngineSync* m_pEngineSync;
 
     ControlObject* m_pMasterGain;
