@@ -29,6 +29,7 @@ EngineDelay::EngineDelay(const QString& group, const ConfigKey& delayControl, bo
 
 EngineDelay::~EngineDelay() {
     SampleUtil::free(m_pDelayBuffer);
+    delete m_pSampleRate;
     delete m_pDelayPot;
 }
 
