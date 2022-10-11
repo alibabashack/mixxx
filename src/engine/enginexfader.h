@@ -3,8 +3,8 @@
 #include "util/types.h"
 
 // HACK until we have Control 2.0
-#define MIXXX_XFADER_ADDITIVE   0.0
-#define MIXXX_XFADER_CONSTPWR   1.0
+constexpr double MIXXX_XFADER_ADDITIVE = 0.0;
+constexpr double MIXXX_XFADER_CONSTPWR = 1.0;
 
 class EngineXfader {
   public:
