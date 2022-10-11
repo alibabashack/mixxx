@@ -23,6 +23,6 @@ class EngineDelay : public EngineObject {
     ControlPotmeter* m_pDelayPot;
     ControlProxy* m_pSampleRate;
     CSAMPLE* m_pDelayBuffer;
-    int m_iDelayPos;
-    int m_iDelay;
+    int m_iDelayPos{0};
+    int m_iDelay{0};
 };
