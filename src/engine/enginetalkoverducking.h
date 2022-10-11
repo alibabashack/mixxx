@@ -11,6 +11,7 @@ class EngineTalkoverDucking : public QObject, public EngineSideChainCompressor {
   Q_OBJECT
   public:
 
+    // should be enum class
     enum TalkoverDuckSetting {
         OFF = 0,
         AUTO,

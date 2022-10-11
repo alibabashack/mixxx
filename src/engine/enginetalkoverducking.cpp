@@ -37,6 +37,7 @@ EngineTalkoverDucking::EngineTalkoverDucking(
     m_pTalkoverDucking = new ControlPushButton(ConfigKey(m_group, "talkoverDucking"));
     m_pTalkoverDucking->setButtonMode(ControlPushButton::TOGGLE);
     m_pTalkoverDucking->setStates(3);
+    // strange usage of a double type storage to store enum value TalkoverDuckSetting::AUTO
     m_pTalkoverDucking->set(
             m_pConfig->getValue<double>(
                 ConfigKey(m_group, "duckMode"), AUTO));
