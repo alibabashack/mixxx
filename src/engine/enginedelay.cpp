@@ -13,15 +13,15 @@ const int kiMaxDelay = static_cast<int>((kdMaxDelayPot + 8) / 1000 *
         mixxx::audio::SampleRate::kValueMax * mixxx::kEngineChannelCount);
 } // anonymous namespace
 
-EngineDelay::EngineDelay(const QString& group, const ConfigKey& delayControl, bool bPersist) {
-    m_pDelayBuffer = SampleUtil::alloc(kiMaxDelay);
+EngineDelay::EngineDelay(const QString& group, const ConfigKey& delayControl, bool bPersist)
+        : m_pDelayPot(new ControlPotmeter(delayControl, 0, kdMaxDelayPot, false, true, false, bPersist)),
+          m_pSampleRate(new ControlProxy(group, "samplerate", this)),
+          m_pDelayBuffer(SampleUtil::alloc(kiMaxDelay)) {
     SampleUtil::clear(m_pDelayBuffer, kiMaxDelay);
-    m_pDelayPot = new ControlPotmeter(delayControl, 0, kdMaxDelayPot, false, true, false, bPersist);
     m_pDelayPot->setDefaultValue(0);
     connect(m_pDelayPot, &ControlObject::valueChanged, this,
             &EngineDelay::slotDelayChanged, Qt::DirectConnection);
 
-    m_pSampleRate = new ControlProxy(group, "samplerate", this);
     m_pSampleRate->connectValueChanged(this, &EngineDelay::slotDelayChanged, Qt::DirectConnection);
 }
 
@@ -45,7 +45,6 @@ void EngineDelay::slotDelayChanged() {
         SampleUtil::clear(m_pDelayBuffer, kiMaxDelay);
     }
 }
-
 
 void EngineDelay::process(CSAMPLE* pInOut, const int iBufferSize) {
     if (m_iDelay > 0) {
