@@ -10,6 +10,7 @@ class EngineSideChainCompressor {
 
     void setParameters(CSAMPLE threshold, CSAMPLE strength,
                        unsigned int attack_time, unsigned int decay_time) {
+        // handle this:
         // TODO(owilliams): There is a race condition here because the parameters
         // are not updated atomically.  This function should instead take a
         // struct.
