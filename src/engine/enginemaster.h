@@ -47,7 +47,7 @@ class EngineMaster : public QObject, public AudioSource {
 
     // Get access to the sample buffers. None of these are thread safe. Only to
     // be called by SoundManager.
-    const CSAMPLE* buffer(const AudioOutput& output) const;
+    [[nodiscard]] const CSAMPLE* buffer(const AudioOutput& output) const;
 
     ChannelHandleAndGroup registerChannelGroup(const QString& group) {
         return ChannelHandleAndGroup(
