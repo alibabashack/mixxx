@@ -34,5 +34,6 @@ class EngineWorkerScheduler : public QThread {
 
     QWaitCondition m_waitCondition;
     QMutex m_mutex;
+    // suspicious volatile flag used for thread communication!
     volatile bool m_bQuit;
 };
