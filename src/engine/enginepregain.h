@@ -38,6 +38,7 @@ class EnginePregain : public EngineObject {
     ControlObject* m_pTotalGain;
     ControlObject* m_pCOReplayGain;
     ControlObject* m_pPassthroughEnabled;
+    // why are these static, but are initialized by ctor?
     static ControlPotmeter* s_pReplayGainBoost;
     static ControlPotmeter* s_pDefaultBoost;
     static ControlObject* s_pEnableReplayGain;
