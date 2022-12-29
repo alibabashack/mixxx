@@ -6,7 +6,7 @@
 class EngineSideChainCompressor {
   public:
     explicit EngineSideChainCompressor(const QString& group);
-    virtual ~EngineSideChainCompressor() { };
+    virtual ~EngineSideChainCompressor() = default;
 
     void setParameters(CSAMPLE threshold, CSAMPLE strength,
                        unsigned int attack_time, unsigned int decay_time) {
