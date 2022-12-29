@@ -12,7 +12,7 @@ class EngineVuMeter : public EngineObject {
     explicit EngineVuMeter(const QString& group);
     ~EngineVuMeter() override = default;
 
-    virtual void process(CSAMPLE* pInOut, const int iBufferSize);
+    void process(CSAMPLE* pInOut, const int iBufferSize) override;
 
     void reset();
 
