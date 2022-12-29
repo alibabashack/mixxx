@@ -18,9 +18,9 @@ class ControlPushButton;
 class SyncControl : public EngineControl, public Syncable {
     Q_OBJECT
   public:
-    static const double kBpmUnity;
-    static const double kBpmHalve;
-    static const double kBpmDouble;
+    static constexpr double kBpmUnity = 1.0;
+    static constexpr double kBpmHalve = 0.5;
+    static constexpr double kBpmDouble = 2.0;
     SyncControl(const QString& group,
             UserSettingsPointer pConfig,
             EngineChannel* pChannel,

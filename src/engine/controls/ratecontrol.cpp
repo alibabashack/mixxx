@@ -27,9 +27,6 @@ ControlValueAtomic<double> RateControl::m_dPermanentRateChangeFine;
 int RateControl::m_iRateRampSensitivity;
 RateControl::RampMode RateControl::m_eRateRampMode;
 
-const double RateControl::kWheelMultiplier = 40.0;
-const double RateControl::kPausedJogMultiplier = 18.0;
-
 RateControl::RateControl(const QString& group,
         UserSettingsPointer pConfig)
         : EngineControl(group, pConfig),

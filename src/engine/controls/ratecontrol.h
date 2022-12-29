@@ -155,9 +155,9 @@ private:
   // The Rate Temp Sensitivity, the higher it is the slower it gets
   static int m_iRateRampSensitivity;
   // Factor applied to the deprecated "wheel" rate value.
-  static const double kWheelMultiplier;
+  static constexpr double kWheelMultiplier = 40.0;
   // Factor applied to jogwheels when the track is paused to speed up seeking.
-  static const double kPausedJogMultiplier;
+  static constexpr double kPausedJogMultiplier = 18.0;
   // Temporary pitchrate, added to the permanent rate for calculateRate
   double m_tempRateRatio;
   // Speed for temporary rate change

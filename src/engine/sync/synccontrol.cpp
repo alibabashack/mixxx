@@ -14,10 +14,6 @@
 #include "util/logger.h"
 #include "util/math.h"
 
-const double SyncControl::kBpmUnity = 1.0;
-const double SyncControl::kBpmHalve = 0.5;
-const double SyncControl::kBpmDouble = 2.0;
-
 namespace {
 const mixxx::Logger kLogger("SyncControl");
 } // namespace
