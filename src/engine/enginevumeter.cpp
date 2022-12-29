@@ -61,16 +61,16 @@ void EngineVuMeter::process(CSAMPLE* pIn, const int iBufferSize) {
         // ControlObject will not prevent us from causing tons of extra
         // work. Because of this, we use an epsilon here to be gentle on the GUI
         // and MIDI controllers.
-        if (fabs(m_fRMSvolumeL - m_ctrlVuMeterL->get()) > epsilon) {
-            m_ctrlVuMeterL->set(m_fRMSvolumeL);
+        if (fabs(m_fRMSvolumeL - m_ctrlVuMeterL.get()) > epsilon) {
+            m_ctrlVuMeterL.set(m_fRMSvolumeL);
         }
-        if (fabs(m_fRMSvolumeR - m_ctrlVuMeterR->get()) > epsilon) {
-            m_ctrlVuMeterR->set(m_fRMSvolumeR);
+        if (fabs(m_fRMSvolumeR - m_ctrlVuMeterR.get()) > epsilon) {
+            m_ctrlVuMeterR.set(m_fRMSvolumeR);
         }
 
         double fRMSvolume = (m_fRMSvolumeL + m_fRMSvolumeR) / 2.0;
-        if (fabs(fRMSvolume - m_ctrlVuMeter->get()) > epsilon) {
-            m_ctrlVuMeter->set(fRMSvolume);
+        if (fabs(fRMSvolume - m_ctrlVuMeter.get()) > epsilon) {
+            m_ctrlVuMeter.set(fRMSvolume);
         }
 
         // Reset calculation:
@@ -80,25 +80,25 @@ void EngineVuMeter::process(CSAMPLE* pIn, const int iBufferSize) {
     }
 
     if (clipped & SampleUtil::CLIPPING_LEFT) {
-        m_ctrlPeakIndicatorL->set(1.);
+        m_ctrlPeakIndicatorL.set(1.);
         m_peakDurationL = kPeakDuration * sampleRate / iBufferSize / 2000;
     } else if (m_peakDurationL <= 0) {
-        m_ctrlPeakIndicatorL->set(0.);
+        m_ctrlPeakIndicatorL.set(0.);
     } else {
         --m_peakDurationL;
     }
 
     if (clipped & SampleUtil::CLIPPING_RIGHT) {
-        m_ctrlPeakIndicatorR->set(1.);
+        m_ctrlPeakIndicatorR.set(1.);
         m_peakDurationR = kPeakDuration * sampleRate / iBufferSize / 2000;
     } else if (m_peakDurationR <= 0) {
-        m_ctrlPeakIndicatorR->set(0.);
+        m_ctrlPeakIndicatorR.set(0.);
     } else {
         --m_peakDurationR;
     }
 
-    m_ctrlPeakIndicator->set(
-            (m_ctrlPeakIndicatorR->toBool() || m_ctrlPeakIndicatorL->toBool())
+    m_ctrlPeakIndicator.set(
+            (m_ctrlPeakIndicatorR.toBool() || m_ctrlPeakIndicatorL.toBool())
                     ? 1.0
                     : 0.0);
 }
@@ -119,12 +119,12 @@ void EngineVuMeter::doSmooth(CSAMPLE &currentVolume, CSAMPLE newVolume)
 }
 
 void EngineVuMeter::reset() {
-    m_ctrlVuMeter->set(0);
-    m_ctrlVuMeterL->set(0);
-    m_ctrlVuMeterR->set(0);
-    m_ctrlPeakIndicator->set(0);
-    m_ctrlPeakIndicatorL->set(0);
-    m_ctrlPeakIndicatorR->set(0);
+    m_ctrlVuMeter.set(0);
+    m_ctrlVuMeterL.set(0);
+    m_ctrlVuMeterR.set(0);
+    m_ctrlPeakIndicator.set(0);
+    m_ctrlPeakIndicatorL.set(0);
+    m_ctrlPeakIndicatorR.set(0);
 
     m_iSamplesCalculated = 0;
     m_fRMSvolumeL = 0;
