@@ -1,6 +1,5 @@
 #include "engine/enginevumeter.h"
 
-#include "control/controlpotmeter.h"
 #include "control/controlproxy.h"
 #include "moc_enginevumeter.cpp"
 #include "util/sample.h"
@@ -18,36 +17,26 @@ constexpr CSAMPLE kDecaySmoothing = 0.1f;  //.16//.4
 
 } // namespace
 
-EngineVuMeter::EngineVuMeter(const QString& group)
-        : m_sampleRate("[Master]", "samplerate") {
+EngineVuMeter::EngineVuMeter(const QString& group):
     // The VUmeter widget is controlled via a controlpotmeter, which means
     // that it should react on the setValue(int) signal.
-    m_ctrlVuMeter = new ControlPotmeter(ConfigKey(group, "VuMeter"), 0., 1.);
+    m_ctrlVuMeter(ConfigKey(group, "VuMeter"), 0., 1.),
     // left channel VU meter
-    m_ctrlVuMeterL = new ControlPotmeter(ConfigKey(group, "VuMeterL"), 0., 1.);
+    m_ctrlVuMeterL(ConfigKey(group, "VuMeterL"), 0., 1.),
     // right channel VU meter
-    m_ctrlVuMeterR = new ControlPotmeter(ConfigKey(group, "VuMeterR"), 0., 1.);
+    m_ctrlVuMeterR(ConfigKey(group, "VuMeterR"), 0., 1.),
 
     // Used controlpotmeter as the example used it :/ perhaps someone with more
     // knowledge could use something more suitable...
-    m_ctrlPeakIndicator = new ControlPotmeter(ConfigKey(group, "PeakIndicator"),
-                                              0., 1.);
-    m_ctrlPeakIndicatorL = new ControlPotmeter(ConfigKey(group, "PeakIndicatorL"),
-                                              0., 1.);
-    m_ctrlPeakIndicatorR = new ControlPotmeter(ConfigKey(group, "PeakIndicatorR"),
-                                              0., 1.);
+    m_ctrlPeakIndicator(ConfigKey(group, "PeakIndicator"),
+                                              0., 1.),
+    m_ctrlPeakIndicatorL(ConfigKey(group, "PeakIndicatorL"),
+                                              0., 1.),
+    m_ctrlPeakIndicatorR(ConfigKey(group, "PeakIndicatorR"),
+                                              0., 1.),
+    m_sampleRate("[Master]", "samplerate") {
     // Initialize the calculation:
     reset();
-}
-
-EngineVuMeter::~EngineVuMeter()
-{
-    delete m_ctrlVuMeter;
-    delete m_ctrlVuMeterL;
-    delete m_ctrlVuMeterR;
-    delete m_ctrlPeakIndicator;
-    delete m_ctrlPeakIndicatorL;
-    delete m_ctrlPeakIndicatorR;
 }
 
 void EngineVuMeter::process(CSAMPLE* pIn, const int iBufferSize) {

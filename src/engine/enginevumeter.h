@@ -1,5 +1,6 @@
 #pragma once
 
+#include "control/controlpotmeter.h"
 #include "control/pollingcontrolproxy.h"
 #include "engine/engineobject.h"
 
@@ -9,7 +10,7 @@ class EngineVuMeter : public EngineObject {
     Q_OBJECT
   public:
     EngineVuMeter(const QString& group);
-    virtual ~EngineVuMeter();
+    ~EngineVuMeter() override = default;
 
     virtual void process(CSAMPLE* pInOut, const int iBufferSize);
 
@@ -18,18 +19,18 @@ class EngineVuMeter : public EngineObject {
   private:
     void doSmooth(CSAMPLE &currentVolume, CSAMPLE newVolume);
 
-    ControlPotmeter* m_ctrlVuMeter;
-    ControlPotmeter* m_ctrlVuMeterL;
-    ControlPotmeter* m_ctrlVuMeterR;
+    ControlPotmeter m_ctrlVuMeter;
+    ControlPotmeter m_ctrlVuMeterL;
+    ControlPotmeter m_ctrlVuMeterR;
     CSAMPLE m_fRMSvolumeL;
     CSAMPLE m_fRMSvolumeSumL;
     CSAMPLE m_fRMSvolumeR;
     CSAMPLE m_fRMSvolumeSumR;
     int m_iSamplesCalculated;
 
-    ControlPotmeter* m_ctrlPeakIndicator;
-    ControlPotmeter* m_ctrlPeakIndicatorL;
-    ControlPotmeter* m_ctrlPeakIndicatorR;
+    ControlPotmeter m_ctrlPeakIndicator;
+    ControlPotmeter m_ctrlPeakIndicatorL;
+    ControlPotmeter m_ctrlPeakIndicatorR;
     int m_peakDurationL;
     int m_peakDurationR;
 
