@@ -16,7 +16,7 @@ class MidiOutputHandler : public QObject {
     MidiOutputHandler(MidiController* controller,
             const MidiOutputMapping& mapping,
             const RuntimeLoggingCategory& logger);
-    virtual ~MidiOutputHandler();
+    ~MidiOutputHandler() override;
 
     bool validate();
     void update();

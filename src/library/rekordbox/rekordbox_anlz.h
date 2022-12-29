@@ -112,7 +112,7 @@ private:
     void _read();
 
 public:
-    ~rekordbox_anlz_t();
+    ~rekordbox_anlz_t() override;
 
     class phrase_up_down_t : public kaitai::kstruct {
 
@@ -124,7 +124,7 @@ public:
         void _read();
 
     public:
-        ~phrase_up_down_t();
+        ~phrase_up_down_t() override;
 
     private:
         phrase_up_down_id_t m_id;
@@ -152,7 +152,7 @@ public:
         void _read();
 
     public:
-        ~path_tag_t();
+        ~path_tag_t() override;
 
     private:
         uint32_t m_len_path;
@@ -188,7 +188,7 @@ public:
         void _read();
 
     public:
-        ~wave_preview_tag_t();
+        ~wave_preview_tag_t() override;
 
     private:
         uint32_t m_len_preview;
@@ -237,7 +237,7 @@ public:
         void _read();
 
     public:
-        ~beat_grid_tag_t();
+        ~beat_grid_tag_t() override;
 
     private:
         uint32_t m__unnamed0;
@@ -280,7 +280,7 @@ public:
         void _read();
 
     public:
-        ~wave_color_preview_tag_t();
+        ~wave_color_preview_tag_t() override;
 
     private:
         uint32_t m_len_entry_bytes;
@@ -323,7 +323,7 @@ public:
         void _read();
 
     public:
-        ~wave_scroll_tag_t();
+        ~wave_scroll_tag_t() override;
 
     private:
         uint32_t m_len_entry_bytes;
@@ -361,7 +361,7 @@ public:
         void _read();
 
     public:
-        ~phrase_verse_bridge_t();
+        ~phrase_verse_bridge_t() override;
 
     private:
         phrase_verse_bridge_id_t m_id;
@@ -389,7 +389,7 @@ public:
         void _read();
 
     public:
-        ~song_structure_tag_t();
+        ~song_structure_tag_t() override;
 
     private:
         uint32_t m_len_entry_bytes;
@@ -453,7 +453,7 @@ public:
         void _read();
 
     public:
-        ~cue_extended_entry_t();
+        ~cue_extended_entry_t() override;
 
     private:
         std::string m__unnamed0;
@@ -599,7 +599,7 @@ public:
         void _read();
 
     public:
-        ~vbr_tag_t();
+        ~vbr_tag_t() override;
 
     private:
         uint32_t m__unnamed0;
@@ -628,7 +628,7 @@ public:
         void _read();
 
     public:
-        ~song_structure_entry_t();
+        ~song_structure_entry_t() override;
 
     private:
         uint16_t m_phrase_number;
@@ -685,7 +685,7 @@ public:
         void _read();
 
     public:
-        ~cue_entry_t();
+        ~cue_entry_t() override;
 
     private:
         std::string m__unnamed0;
@@ -767,7 +767,7 @@ public:
         void _read();
 
     public:
-        ~beat_grid_beat_t();
+        ~beat_grid_beat_t() override;
 
     private:
         uint16_t m_beat_number;
@@ -816,7 +816,7 @@ public:
         void _read();
 
     public:
-        ~cue_extended_tag_t();
+        ~cue_extended_tag_t() override;
 
     private:
         cue_list_type_t m_type;
@@ -853,7 +853,7 @@ public:
         void _read();
 
     public:
-        ~unknown_tag_t();
+        ~unknown_tag_t() override;
 
     private:
         rekordbox_anlz_t* m__root;
@@ -880,7 +880,7 @@ public:
         void _read();
 
     public:
-        ~tagged_section_t();
+        ~tagged_section_t() override;
 
     private:
         int32_t m_fourcc;
@@ -931,7 +931,7 @@ public:
         void _read();
 
     public:
-        ~wave_color_scroll_tag_t();
+        ~wave_color_scroll_tag_t() override;
 
     private:
         uint32_t m_len_entry_bytes;
@@ -974,7 +974,7 @@ public:
         void _read();
 
     public:
-        ~cue_tag_t();
+        ~cue_tag_t() override;
 
     private:
         cue_list_type_t m_type;

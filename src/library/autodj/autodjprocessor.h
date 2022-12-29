@@ -22,7 +22,7 @@ class DeckAttributes : public QObject {
   public:
     DeckAttributes(int index,
             BaseTrackPlayer* pPlayer);
-    virtual ~DeckAttributes();
+    ~DeckAttributes() override;
 
     bool isLeft() const {
         return m_orientation.get() == static_cast<double>(EngineChannel::LEFT);
@@ -171,7 +171,7 @@ class AutoDJProcessor : public QObject {
                     PlayerManagerInterface* pPlayerManager,
                     TrackCollectionManager* pTrackCollectionManager,
                     int iAutoDJPlaylistId);
-    virtual ~AutoDJProcessor();
+    ~AutoDJProcessor() override;
 
     AutoDJState getState() const {
         return m_eState;

@@ -61,7 +61,7 @@ class EngineFilterMoogLadderBase : public EngineObjectConstIn {
         m_k2vg = m_k2vgNew;
     }
 
-    virtual ~EngineFilterMoogLadderBase() {
+    ~EngineFilterMoogLadderBase() override {
     }
 
     void initBuffers() {
@@ -119,8 +119,8 @@ class EngineFilterMoogLadderBase : public EngineObjectConstIn {
         initBuffers();
     }
 
-    virtual void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
-                         const int iBufferSize) {
+    void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
+                         const int iBufferSize) override {
         if (!m_doRamping) {
             for (int i = 0; i < iBufferSize; i += 2) {
                 pOutput[i] = processSample(pIn[i], &m_buf[0]);

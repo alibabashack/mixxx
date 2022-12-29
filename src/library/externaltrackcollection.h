@@ -30,7 +30,7 @@ class ExternalTrackCollection : public QObject {
 Q_OBJECT
 
   public:
-    virtual ~ExternalTrackCollection() = default;
+    ~ExternalTrackCollection() override = default;
 
     // Identifying name, e.g. for actions and menus
     virtual QString name() const = 0;

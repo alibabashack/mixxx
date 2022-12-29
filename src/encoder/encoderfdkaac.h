@@ -11,7 +11,7 @@
 class EncoderFdkAac : public Encoder {
   public:
     EncoderFdkAac(EncoderCallback* pCallback);
-    virtual ~EncoderFdkAac();
+    ~EncoderFdkAac() override;
 
     int initEncoder(mixxx::audio::SampleRate sampleRate, QString* pUserErrorMessage) override;
     void encodeBuffer(const CSAMPLE* samples, const int sampleCount) override;

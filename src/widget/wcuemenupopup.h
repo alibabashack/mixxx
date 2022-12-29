@@ -15,7 +15,7 @@ class WCueMenuPopup : public QWidget {
   public:
     WCueMenuPopup(UserSettingsPointer pConfig, QWidget* parent = nullptr);
 
-    ~WCueMenuPopup() {
+    ~WCueMenuPopup() override {
         delete m_pCueNumber;
         delete m_pCuePosition;
         delete m_pEditLabel;

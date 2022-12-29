@@ -26,7 +26,7 @@ class DlgPrefController : public DlgPreferencePage {
             Controller* controller,
             std::shared_ptr<ControllerManager> controllerManager,
             UserSettingsPointer pConfig);
-    virtual ~DlgPrefController();
+    ~DlgPrefController() override;
 
     QUrl helpUrl() const override;
 

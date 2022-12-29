@@ -15,9 +15,9 @@ class KeyboardEventFilter : public QObject {
   public:
     KeyboardEventFilter(ConfigObject<ConfigValueKbd> *pKbdConfigObject,
                         QObject *parent = nullptr, const char* name = nullptr);
-    virtual ~KeyboardEventFilter();
+    ~KeyboardEventFilter() override;
 
-    bool eventFilter(QObject* obj, QEvent* e);
+    bool eventFilter(QObject* obj, QEvent* e) override;
 
     // Set the keyboard config object. KeyboardEventFilter does NOT take
     // ownership of pKbdConfigObject.

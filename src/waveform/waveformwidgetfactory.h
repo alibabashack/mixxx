@@ -150,7 +150,7 @@ class WaveformWidgetFactory : public QObject, public Singleton<WaveformWidgetFac
 
   protected:
     WaveformWidgetFactory();
-    virtual ~WaveformWidgetFactory();
+    ~WaveformWidgetFactory() override;
 
     friend class Singleton<WaveformWidgetFactory>;
 

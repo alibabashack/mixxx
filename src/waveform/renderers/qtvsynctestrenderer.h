@@ -7,10 +7,10 @@ class ControlObject;
 class QtVSyncTestRenderer : public WaveformRendererSignalBase {
   public:
     explicit QtVSyncTestRenderer(WaveformWidgetRenderer* waveformWidgetRenderer);
-    virtual ~QtVSyncTestRenderer();
+    ~QtVSyncTestRenderer() override;
 
-    virtual void onSetup(const QDomNode &node);
-    virtual void draw(QPainter* painter, QPaintEvent* event);
+    void onSetup(const QDomNode &node) override;
+    void draw(QPainter* painter, QPaintEvent* event) override;
   private:
     int m_drawcount;
 };

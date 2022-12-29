@@ -54,7 +54,7 @@ class FakeController : public Controller {
         }
     }
 
-    virtual std::shared_ptr<LegacyControllerMapping> cloneMapping() override {
+    std::shared_ptr<LegacyControllerMapping> cloneMapping() override {
         if (m_pMidiMapping) {
             return m_pMidiMapping->clone();
         } else if (m_pHidMapping) {

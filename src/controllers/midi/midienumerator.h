@@ -18,9 +18,9 @@ class MidiEnumerator : public ControllerEnumerator {
     Q_OBJECT
   public:
     MidiEnumerator();
-    virtual ~MidiEnumerator();
+    ~MidiEnumerator() override;
 
-    virtual QList<Controller*> queryDevices() = 0;
+    QList<Controller*> queryDevices() override = 0;
 };
 
 #endif

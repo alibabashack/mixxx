@@ -104,7 +104,7 @@ private:
     void _read();
 
 public:
-    ~rekordbox_pdb_t();
+    ~rekordbox_pdb_t() override;
 
     /**
      * A variable length string which can be stored in a variety of
@@ -121,7 +121,7 @@ public:
         void _read();
 
     public:
-        ~device_sql_string_t();
+        ~device_sql_string_t() override;
 
     private:
         uint8_t m_length_and_kind;
@@ -158,7 +158,7 @@ public:
         void _read();
 
     public:
-        ~playlist_tree_row_t();
+        ~playlist_tree_row_t() override;
 
     private:
         bool f_is_folder;
@@ -225,7 +225,7 @@ public:
         void _read();
 
     public:
-        ~color_row_t();
+        ~color_row_t() override;
 
     private:
         std::string m__unnamed0;
@@ -267,7 +267,7 @@ public:
         void _read();
 
     public:
-        ~device_sql_short_ascii_t();
+        ~device_sql_short_ascii_t() override;
 
     private:
         bool f_length;
@@ -322,7 +322,7 @@ public:
         void _read();
 
     public:
-        ~album_row_t();
+        ~album_row_t() override;
 
     private:
         bool f_name;
@@ -404,7 +404,7 @@ public:
         void _read();
 
     public:
-        ~page_t();
+        ~page_t() override;
 
     private:
         bool f_num_rows;
@@ -603,7 +603,7 @@ public:
         void _read();
 
     public:
-        ~row_group_t();
+        ~row_group_t() override;
 
     private:
         bool f_base;
@@ -672,7 +672,7 @@ public:
         void _read();
 
     public:
-        ~genre_row_t();
+        ~genre_row_t() override;
 
     private:
         uint32_t m_id;
@@ -711,7 +711,7 @@ public:
         void _read();
 
     public:
-        ~artwork_row_t();
+        ~artwork_row_t() override;
 
     private:
         uint32_t m_id;
@@ -750,7 +750,7 @@ public:
         void _read();
 
     public:
-        ~device_sql_long_ascii_t();
+        ~device_sql_long_ascii_t() override;
 
     private:
         uint16_t m_length;
@@ -787,7 +787,7 @@ public:
         void _read();
 
     public:
-        ~artist_row_t();
+        ~artist_row_t() override;
 
     private:
         bool f_ofs_name_far;
@@ -877,7 +877,7 @@ public:
         void _read();
 
     public:
-        ~page_ref_t();
+        ~page_ref_t() override;
 
     private:
         bool f_body;
@@ -924,7 +924,7 @@ public:
         void _read();
 
     public:
-        ~device_sql_long_utf16be_t();
+        ~device_sql_long_utf16be_t() override;
 
     private:
         uint16_t m_length;
@@ -963,7 +963,7 @@ public:
         void _read();
 
     public:
-        ~track_row_t();
+        ~track_row_t() override;
 
     private:
         bool f_unknown_string_8;
@@ -1441,7 +1441,7 @@ public:
         void _read();
 
     public:
-        ~key_row_t();
+        ~key_row_t() override;
 
     private:
         uint32_t m_id;
@@ -1485,7 +1485,7 @@ public:
         void _read();
 
     public:
-        ~playlist_entry_row_t();
+        ~playlist_entry_row_t() override;
 
     private:
         uint32_t m_entry_index;
@@ -1528,7 +1528,7 @@ public:
         void _read();
 
     public:
-        ~label_row_t();
+        ~label_row_t() override;
 
     private:
         uint32_t m_id;
@@ -1568,7 +1568,7 @@ public:
         void _read();
 
     public:
-        ~table_t();
+        ~table_t() override;
 
     private:
         page_type_t m_type;
@@ -1624,7 +1624,7 @@ public:
         void _read();
 
     public:
-        ~row_ref_t();
+        ~row_ref_t() override;
 
     private:
         bool f_ofs_row;

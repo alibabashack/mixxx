@@ -19,7 +19,7 @@ class EngineFilterDelay : public EngineObjectConstIn {
         memset(m_buf, 0, sizeof(m_buf));
     }
 
-    virtual ~EngineFilterDelay() {};
+    ~EngineFilterDelay() override {};
 
     void pauseFilter() {
         // Set the current buffers to 0
@@ -45,8 +45,8 @@ class EngineFilterDelay : public EngineObjectConstIn {
         m_delaySamples = delaySamples;
     }
 
-    virtual void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
-                         const int iBufferSize) {
+    void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
+                         const int iBufferSize) override {
         if (m_oldDelaySamples == m_delaySamples) {
             // The "+ SIZE" addition ensures positive values for the modulo calculation.
             // From a mathematical point of view, this addition can be removed. Anyway,

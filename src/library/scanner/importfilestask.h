@@ -18,9 +18,9 @@ class ImportFilesTask : public ScannerTask {
             const std::list<QFileInfo>& filesToImport,
             const std::list<QFileInfo>& possibleCovers,
             SecurityTokenPointer pToken);
-    virtual ~ImportFilesTask() {}
+    ~ImportFilesTask() override {}
 
-    virtual void run();
+    void run() override;
 
   private:
     const QString m_dirPath;

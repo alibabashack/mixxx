@@ -25,7 +25,7 @@ class FakeOverwriteAnswerer : public QObject {
                 this,
                 &FakeOverwriteAnswerer::cancelButtonClicked);
     }
-    virtual ~FakeOverwriteAnswerer();
+    ~FakeOverwriteAnswerer() override;
 
     void setAnswer(const QString& expected_filename,
             TrackExportWorker::OverwriteAnswer answer) {

@@ -7,9 +7,9 @@
 class RGBWaveformWidget : public NonGLWaveformWidgetAbstract {
     Q_OBJECT
   public:
-    virtual ~RGBWaveformWidget();
+    ~RGBWaveformWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::RGBWaveform; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::RGBWaveform; }
 
     static inline QString getWaveformWidgetName() { return tr("RGB"); }
     static inline bool useOpenGl() { return false; }
@@ -18,8 +18,8 @@ class RGBWaveformWidget : public NonGLWaveformWidgetAbstract {
     static inline bool developerOnly() { return false; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
 
   private:
     RGBWaveformWidget(const QString& group, QWidget* parent);

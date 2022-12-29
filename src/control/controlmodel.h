@@ -27,7 +27,7 @@ class ControlModel : public QAbstractTableModel {
     };
 
     ControlModel(QObject* pParent=nullptr);
-    virtual ~ControlModel();
+    ~ControlModel() override;
 
     void addControl(const ConfigKey& control, const QString& title,
                     const QString& description);
@@ -35,16 +35,16 @@ class ControlModel : public QAbstractTableModel {
     ////////////////////////////////////////////////////////////////////////////
     // QAbstractItemModel methods
     ////////////////////////////////////////////////////////////////////////////
-    int rowCount(const QModelIndex& parent = QModelIndex()) const;
-    int columnCount(const QModelIndex& parent = QModelIndex()) const;
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     bool setHeaderData(int section, Qt::Orientation orientation,
-                       const QVariant& value, int role = Qt::EditRole);
+                       const QVariant& value, int role = Qt::EditRole) override;
     QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
-    Qt::ItemFlags flags(const QModelIndex& index) const;
+                        int role = Qt::DisplayRole) const override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
     bool setData(const QModelIndex& index, const QVariant& value,
-                 int role = Qt::EditRole);
+                 int role = Qt::EditRole) override;
 
   private:
     struct ControlInfo {

@@ -39,7 +39,7 @@ class PhaserGroupState final : public EffectState {
 class PhaserEffect : public EffectProcessorImpl<PhaserGroupState> {
   public:
     PhaserEffect() = default;
-    virtual ~PhaserEffect();
+    ~PhaserEffect() override;
 
     static QString getId();
     static EffectManifestPointer getManifest();

@@ -6,9 +6,9 @@ class QtVSyncTestWidget : public GLWaveformWidgetAbstract {
     Q_OBJECT
   public:
     QtVSyncTestWidget(const QString& group, QWidget* parent);
-    virtual ~QtVSyncTestWidget();
+    ~QtVSyncTestWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::QtVSyncTest; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::QtVSyncTest; }
 
     static inline QString getWaveformWidgetName() { return tr("VSyncTest") + " - Qt"; }
     static inline bool useOpenGl() { return true; }
@@ -17,9 +17,9 @@ class QtVSyncTestWidget : public GLWaveformWidgetAbstract {
     static inline bool developerOnly() { return true; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
-    virtual mixxx::Duration render();
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
+    mixxx::Duration render() override;
 
   private:
     friend class WaveformWidgetFactory;

@@ -122,7 +122,7 @@ class EffectProcessorImpl : public EffectProcessor {
     }
     /// Subclasses should not implement their own destructor. All state should
     /// be stored in the EffectState subclass, not the EffectProcessorImpl subclass.
-    ~EffectProcessorImpl() {
+    ~EffectProcessorImpl() override {
         if (kEffectDebugOutput) {
             qDebug() << "~EffectProcessorImpl" << this;
         }
@@ -143,7 +143,7 @@ class EffectProcessorImpl : public EffectProcessor {
 
     /// By default, the group delay for every effect is zero. The effect implementation
     /// can override this method and set actual number of frames for the effect delay.
-    virtual SINT getGroupDelayFrames() override {
+    SINT getGroupDelayFrames() override {
         return 0;
     }
 

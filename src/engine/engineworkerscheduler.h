@@ -16,14 +16,14 @@ class EngineWorkerScheduler : public QThread {
     Q_OBJECT
   public:
     EngineWorkerScheduler(QObject* pParent=nullptr);
-    virtual ~EngineWorkerScheduler();
+    ~EngineWorkerScheduler() override;
 
     void addWorker(EngineWorker* pWorker);
     void runWorkers();
     void workerReady();
 
   protected:
-    void run();
+    void run() override;
 
   private:
     // Indicates whether workerReady has been called since the last time

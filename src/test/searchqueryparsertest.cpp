@@ -24,7 +24,7 @@ class SearchQueryParserTest : public LibraryTest {
             : m_parser(internalCollection()) {
     }
 
-    virtual ~SearchQueryParserTest() {
+    ~SearchQueryParserTest() override {
     }
 
     TrackId addTrackToCollection(const QString& trackLocation) {

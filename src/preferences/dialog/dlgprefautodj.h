@@ -10,7 +10,7 @@ class DlgPrefAutoDJ : public DlgPreferencePage, public Ui::DlgPrefAutoDJDlg {
     Q_OBJECT
   public:
     DlgPrefAutoDJ(QWidget* pParent, UserSettingsPointer pConfig);
-    virtual ~DlgPrefAutoDJ();
+    ~DlgPrefAutoDJ() override;
 
   public slots:
     void slotUpdate() override;

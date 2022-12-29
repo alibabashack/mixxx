@@ -11,7 +11,7 @@ class ScreensaverManager : public QObject {
     Q_OBJECT
   public:
     ScreensaverManager(UserSettingsPointer pConfig, QObject* pParent = nullptr);
-    ~ScreensaverManager();
+    ~ScreensaverManager() override;
 
     void setStatus(mixxx::ScreenSaverPreference status);
 

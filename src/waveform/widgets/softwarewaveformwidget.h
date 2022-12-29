@@ -7,9 +7,9 @@
 class SoftwareWaveformWidget : public NonGLWaveformWidgetAbstract {
     Q_OBJECT
   public:
-    virtual ~SoftwareWaveformWidget();
+    ~SoftwareWaveformWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::SoftwareWaveform; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::SoftwareWaveform; }
 
     static inline QString getWaveformWidgetName() { return tr("Filtered"); }
     static inline bool useOpenGl() { return false; }
@@ -18,8 +18,8 @@ class SoftwareWaveformWidget : public NonGLWaveformWidgetAbstract {
     static inline bool developerOnly() { return false; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
 
   private:
     SoftwareWaveformWidget(const QString& groupp, QWidget* parent);

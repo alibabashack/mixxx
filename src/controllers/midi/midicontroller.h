@@ -26,7 +26,7 @@ class MidiController : public Controller {
     QString mappingExtension() override;
 
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
-    virtual std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
+    std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
 
     bool isMappable() const override {
         if (!m_pMapping) {

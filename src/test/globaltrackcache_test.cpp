@@ -81,7 +81,7 @@ class GlobalTrackCacheTest: public MixxxTest, public virtual GlobalTrackCacheSav
     GlobalTrackCacheTest() {
         GlobalTrackCache::createInstance(this, deleteTrack);
     }
-    ~GlobalTrackCacheTest() {
+    ~GlobalTrackCacheTest() override {
         GlobalTrackCache::destroyInstance();
     }
 

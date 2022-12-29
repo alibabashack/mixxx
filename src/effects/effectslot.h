@@ -66,7 +66,7 @@ class EffectSlot : public QObject {
             const unsigned int iEffectNumber,
             EffectChain* pChainSlot,
             EngineEffectChain* pEngineEffectChain);
-    virtual ~EffectSlot();
+    ~EffectSlot() override;
 
     inline int getEffectSlotNumber() const {
         return m_iEffectNumber;

@@ -18,7 +18,7 @@ class DlgPrefBroadcast : public DlgPreferencePage, public Ui::DlgPrefBroadcastDl
   public:
     DlgPrefBroadcast(QWidget *parent,
                      BroadcastSettingsPointer pBroadcastSettings);
-    virtual ~DlgPrefBroadcast();
+    ~DlgPrefBroadcast() override;
 
     QUrl helpUrl() const override;
 

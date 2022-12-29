@@ -30,7 +30,7 @@ class EngineEffect final : public EffectsRequestHandler {
             const QSet<ChannelHandleAndGroup>& registeredInputChannels,
             const QSet<ChannelHandleAndGroup>& registeredOutputChannels);
     /// Called in main thread by EffectSlot
-    ~EngineEffect();
+    ~EngineEffect() override;
 
     /// Called from the main thread to make sure that the channel already has states
     void initalizeInputChannel(ChannelHandle inputChannel);

@@ -20,7 +20,7 @@ class LoadToGroupController : public QObject {
     Q_OBJECT
   public:
     LoadToGroupController(LibraryControl* pParent, const QString& group);
-    virtual ~LoadToGroupController();
+    ~LoadToGroupController() override;
 
   signals:
     void loadToGroup(const QString& group, bool);
@@ -39,7 +39,7 @@ class LibraryControl : public QObject {
     Q_OBJECT
   public:
     LibraryControl(Library* pLibrary);
-    virtual ~LibraryControl();
+    ~LibraryControl() override;
 
     void bindLibraryWidget(WLibrary* pLibrary, KeyboardEventFilter* pKeyboard);
     void bindSidebarWidget(WLibrarySidebar* pLibrarySidebar);

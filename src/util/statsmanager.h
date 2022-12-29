@@ -51,7 +51,7 @@ class StatsManager : public QThread, public Singleton<StatsManager> {
     Q_OBJECT
   public:
     explicit StatsManager();
-    virtual ~StatsManager();
+    ~StatsManager() override;
 
     // Returns true if write succeeds.
     bool maybeWriteReport(StatReport report);
@@ -71,7 +71,7 @@ class StatsManager : public QThread, public Singleton<StatsManager> {
     void statUpdated(const Stat& stat);
 
   protected:
-    virtual void run();
+    void run() override;
 
   private:
     void processIncomingStatReports();

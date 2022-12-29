@@ -25,7 +25,7 @@ class EffectChainPresetManager : public QObject {
     EffectChainPresetManager(
             UserSettingsPointer pConfig,
             EffectsBackendManagerPointer pBackendManager);
-    ~EffectChainPresetManager() = default;
+    ~EffectChainPresetManager() override = default;
 
     const QList<EffectChainPresetPointer> getPresetsSorted() const {
         return m_effectChainPresetsSorted;

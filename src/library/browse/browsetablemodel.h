@@ -50,7 +50,7 @@ class BrowseTableModel final : public QStandardItemModel, public virtual TrackMo
 
   public:
     BrowseTableModel(QObject* parent, TrackCollectionManager* pTrackCollectionManager, RecordingManager* pRec);
-    virtual ~BrowseTableModel();
+    ~BrowseTableModel() override;
 
     // initiate table population, store path
     void setPath(mixxx::FileAccess path);

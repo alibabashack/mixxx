@@ -26,7 +26,7 @@ class EffectParameterSlotBase : public QObject {
             const unsigned int iParameterSlotNumber,
             const EffectParameterType parameterType);
 
-    virtual ~EffectParameterSlotBase();
+    ~EffectParameterSlotBase() override;
 
     virtual void loadParameter(EffectParameterPointer pEffectParameter) = 0;
 

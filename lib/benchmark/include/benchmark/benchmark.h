@@ -1061,7 +1061,7 @@ class FunctionBenchmark : public Benchmark {
   FunctionBenchmark(const char* name, Function* func)
       : Benchmark(name), func_(func) {}
 
-  virtual void Run(State& st) BENCHMARK_OVERRIDE;
+  void Run(State& st) BENCHMARK_OVERRIDE;
 
  private:
   Function* func_;
@@ -1071,7 +1071,7 @@ class FunctionBenchmark : public Benchmark {
 template <class Lambda>
 class LambdaBenchmark : public Benchmark {
  public:
-  virtual void Run(State& st) BENCHMARK_OVERRIDE { lambda_(st); }
+  void Run(State& st) BENCHMARK_OVERRIDE { lambda_(st); }
 
  private:
   template <class OLambda>
@@ -1123,7 +1123,7 @@ class Fixture : public internal::Benchmark {
  public:
   Fixture() : internal::Benchmark("") {}
 
-  virtual void Run(State& st) BENCHMARK_OVERRIDE {
+  void Run(State& st) BENCHMARK_OVERRIDE {
     this->SetUp(st);
     this->BenchmarkCase(st);
     this->TearDown(st);
@@ -1583,8 +1583,8 @@ class ConsoleReporter : public BenchmarkReporter {
         prev_counters_(),
         printed_header_(false) {}
 
-  virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
-  virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
+  bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
+  void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
 
  protected:
   virtual void PrintRunData(const Run& report);
@@ -1599,9 +1599,9 @@ class ConsoleReporter : public BenchmarkReporter {
 class JSONReporter : public BenchmarkReporter {
  public:
   JSONReporter() : first_report_(true) {}
-  virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
-  virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
-  virtual void Finalize() BENCHMARK_OVERRIDE;
+  bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
+  void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
+  void Finalize() BENCHMARK_OVERRIDE;
 
  private:
   void PrintRunData(const Run& report);
@@ -1614,8 +1614,8 @@ class BENCHMARK_DEPRECATED_MSG(
     : public BenchmarkReporter {
  public:
   CSVReporter() : printed_header_(false) {}
-  virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
-  virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
+  bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
+  void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
 
  private:
   void PrintRunData(const Run& report);

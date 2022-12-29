@@ -22,7 +22,7 @@ class ControlObject : public QObject {
             bool bTrack = false,
             bool bPersist = false,
             double defaultValue = 0.0);
-    virtual ~ControlObject();
+    ~ControlObject() override;
 
     // Returns a pointer to the ControlObject matching the given ConfigKey
     static ControlObject* getControl(const ConfigKey& key, ControlFlags flags = ControlFlag::None);

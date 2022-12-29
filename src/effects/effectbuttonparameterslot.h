@@ -16,7 +16,7 @@ class EffectButtonParameterSlot : public EffectParameterSlotBase {
     Q_OBJECT
   public:
     EffectButtonParameterSlot(const QString& group, const unsigned int iParameterSlotNumber);
-    virtual ~EffectButtonParameterSlot();
+    ~EffectButtonParameterSlot() override;
 
     static QString formatItemPrefix(const unsigned int iParameterSlotNumber) {
         return QString("button_parameter%1").arg(iParameterSlotNumber + 1);

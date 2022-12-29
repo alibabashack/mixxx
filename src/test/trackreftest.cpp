@@ -23,12 +23,12 @@ class TrackRefTest : public testing::Test {
         m_invalidTrackId() {
     }
 
-    virtual void SetUp() {
+    void SetUp() override {
         ASSERT_TRUE(m_validTrackId.isValid());
         ASSERT_FALSE(m_invalidTrackId.isValid());
     }
 
-    virtual void TearDown() {
+    void TearDown() override {
     }
 
     static void verifyFileInfo(const TrackRef& actual, const mixxx::FileInfo& fileInfo) {

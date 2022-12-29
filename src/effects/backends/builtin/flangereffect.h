@@ -49,7 +49,7 @@ struct FlangerGroupState : public EffectState {
 class FlangerEffect : public EffectProcessorImpl<FlangerGroupState> {
   public:
     FlangerEffect() = default;
-    virtual ~FlangerEffect();
+    ~FlangerEffect() override;
 
     static QString getId();
     static EffectManifestPointer getManifest();

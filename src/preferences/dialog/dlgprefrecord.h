@@ -16,7 +16,7 @@ class DlgPrefRecord : public DlgPreferencePage, public Ui::DlgPrefRecordDlg  {
     Q_OBJECT
   public:
     DlgPrefRecord(QWidget *parent, UserSettingsPointer _config);
-    virtual ~DlgPrefRecord();
+    ~DlgPrefRecord() override;
 
   public slots:
     // Apply changes to widget

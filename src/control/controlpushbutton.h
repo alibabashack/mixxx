@@ -53,7 +53,7 @@ class ControlPushButton : public ControlObject {
     }
 
     ControlPushButton(const ConfigKey& key, bool bPersist = false, double defaultValue = 0.0);
-    virtual ~ControlPushButton();
+    ~ControlPushButton() override;
 
     inline ButtonMode getButtonMode() const {
         return m_buttonMode;

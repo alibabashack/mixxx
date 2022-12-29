@@ -15,9 +15,9 @@ class EngineFilter : public EngineObject {
     Q_OBJECT
   public:
     EngineFilter(char* conf, int predefinedType = 0);
-    virtual ~EngineFilter();
+    ~EngineFilter() override;
 
-    void process(CSAMPLE* pInOut, const int iBufferSize);
+    void process(CSAMPLE* pInOut, const int iBufferSize) override;
 
   protected:
     double iir;

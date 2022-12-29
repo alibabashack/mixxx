@@ -96,6 +96,6 @@ class DebugTrace : public Trace {
     DebugTrace(const char* tag, bool time=true)
             : Trace(tag, "", CmdlineArgs::Instance().getDeveloper(), time) {
     }
-    virtual ~DebugTrace() {
+    ~DebugTrace() override {
     }
 };

@@ -27,7 +27,7 @@ class DlgControllerLearning : public QDialog,
 
   public:
     DlgControllerLearning(QWidget *parent, Controller *controller);
-    virtual ~DlgControllerLearning();
+    ~DlgControllerLearning() override;
 
   signals:
     void learnTemporaryInputMappings(const MidiInputMappings& mappings);

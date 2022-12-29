@@ -17,7 +17,7 @@ class ControlSortFilterModel : public QSortFilterProxyModel {
     QML_ELEMENT
   public:
     ControlSortFilterModel(QObject* pParent = nullptr);
-    virtual ~ControlSortFilterModel();
+    ~ControlSortFilterModel() override;
 
     bool sortDescending() const;
 

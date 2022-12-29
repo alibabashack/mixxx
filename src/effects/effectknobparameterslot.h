@@ -19,7 +19,7 @@ class EffectKnobParameterSlot : public EffectParameterSlotBase {
     Q_OBJECT
   public:
     EffectKnobParameterSlot(const QString& group, const unsigned int iParameterSlotNumber);
-    virtual ~EffectKnobParameterSlot();
+    ~EffectKnobParameterSlot() override;
 
     static QString formatItemPrefix(const unsigned int iParameterSlotNumber) {
         return QString("parameter%1").arg(iParameterSlotNumber + 1);

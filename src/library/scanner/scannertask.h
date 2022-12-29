@@ -12,9 +12,9 @@ class ScannerTask : public QObject, public QRunnable {
   public:
     ScannerTask(LibraryScanner* pScanner,
                 const ScannerGlobalPointer scannerGlobal);
-    virtual ~ScannerTask();
+    ~ScannerTask() override;
 
-    virtual void run() = 0;
+    void run() override = 0;
 
   signals:
     void taskDone(bool success);

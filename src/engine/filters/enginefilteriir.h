@@ -46,7 +46,7 @@ class EngineFilterIIR : public EngineFilterIIRBase {
         pauseFilter();
     }
 
-    virtual ~EngineFilterIIR() {};
+    ~EngineFilterIIR() override {};
 
     // this can be called continuously for Filters that have own ramping
     // or need no fade when disabling
@@ -223,13 +223,13 @@ class EngineFilterIIR : public EngineFilterIIRBase {
 #endif
     }
 
-    virtual void assumeSettled() {
+    void assumeSettled() override {
         m_doRamping = false;
         m_doStart = false;
     }
 
-    virtual void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
-                         const int iBufferSize) {
+    void process(const CSAMPLE* pIn, CSAMPLE* pOutput,
+                         const int iBufferSize) override {
         if (!m_doRamping) {
             for (int i = 0; i < iBufferSize; i += 2) {
                 pOutput[i] = static_cast<CSAMPLE>(processSample(m_coef, m_buf1, pIn[i]));

@@ -12,7 +12,7 @@ class DlgPreferencePage : public QWidget {
     Q_OBJECT
   public:
     DlgPreferencePage(QWidget* pParent);
-    virtual ~DlgPreferencePage();
+    ~DlgPreferencePage() override;
 
     /// Returns the help URL for the current page.
     /// Subclasses can provide a path to the appropriate manual page by

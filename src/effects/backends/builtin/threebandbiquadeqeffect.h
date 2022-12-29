@@ -15,7 +15,7 @@
 class ThreeBandBiquadEQEffectGroupState final : public EffectState {
   public:
     ThreeBandBiquadEQEffectGroupState(const mixxx::EngineParameters& engineParameters);
-    ~ThreeBandBiquadEQEffectGroupState();
+    ~ThreeBandBiquadEQEffectGroupState() override;
 
     void setFilters(
             int sampleRate, double lowFreqCorner, double highFreqCorner);

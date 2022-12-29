@@ -10,13 +10,13 @@ class WaveformRendererFilteredSignal : public WaveformRendererSignalBase {
   public:
     explicit WaveformRendererFilteredSignal(
         WaveformWidgetRenderer* waveformWidget);
-    virtual ~WaveformRendererFilteredSignal();
+    ~WaveformRendererFilteredSignal() override;
 
-    virtual void onSetup(const QDomNode& node);
+    void onSetup(const QDomNode& node) override;
 
-    virtual void draw(QPainter* painter, QPaintEvent* event);
+    void draw(QPainter* painter, QPaintEvent* event) override;
 
-    virtual void onResize();
+    void onResize() override;
 
   private:
     std::vector<QLineF> m_lowLines;

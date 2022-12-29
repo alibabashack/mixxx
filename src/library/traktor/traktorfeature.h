@@ -18,7 +18,7 @@ class TraktorTrackModel : public BaseExternalTrackModel {
     TraktorTrackModel(QObject* parent,
                       TrackCollectionManager* pTrackCollectionManager,
                       QSharedPointer<BaseTrackCache> trackSource);
-    virtual bool isColumnHiddenByDefault(int column);
+    bool isColumnHiddenByDefault(int column) override;
 };
 
 class TraktorPlaylistModel : public BaseExternalPlaylistModel {
@@ -27,14 +27,14 @@ class TraktorPlaylistModel : public BaseExternalPlaylistModel {
     TraktorPlaylistModel(QObject* parent,
                          TrackCollectionManager* pTrackCollectionManager,
                          QSharedPointer<BaseTrackCache> trackSource);
-    virtual bool isColumnHiddenByDefault(int column);
+    bool isColumnHiddenByDefault(int column) override;
 };
 
 class TraktorFeature : public BaseExternalLibraryFeature {
     Q_OBJECT
   public:
     TraktorFeature(Library* pLibrary, UserSettingsPointer pConfig);
-    virtual ~TraktorFeature();
+    ~TraktorFeature() override;
 
     QVariant title() override;
     static bool isSupported();

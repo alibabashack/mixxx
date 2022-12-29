@@ -35,7 +35,7 @@ class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
             : m_contains(contains),
               m_expected_params(expected_params) {
     }
-    virtual ~RequestForUrlMatcher() {
+    ~RequestForUrlMatcher() override {
     }
 
     virtual bool Matches(const QNetworkRequest& req) const {
@@ -57,12 +57,12 @@ class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
         return true;
     }
 
-    virtual bool MatchAndExplain(const QNetworkRequest& req, MatchResultListener* listener) const {
+    bool MatchAndExplain(const QNetworkRequest& req, MatchResultListener* listener) const override {
         *listener << "which is " << req.url().toString().toUtf8().constData();
         return Matches(req);
     }
 
-    virtual void DescribeTo(::std::ostream* os) const {
+    void DescribeTo(::std::ostream* os) const override {
         *os << "matches url";
     }
 

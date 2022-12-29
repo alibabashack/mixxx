@@ -27,7 +27,7 @@ class NetworkTask : public QObject {
     explicit NetworkTask(
             QNetworkAccessManager* networkAccessManager,
             QObject* parent = nullptr);
-    virtual ~NetworkTask();
+    ~NetworkTask() override;
 
     /// Cancel the task by aborting the pending network request.
     ///

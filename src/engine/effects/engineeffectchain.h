@@ -29,7 +29,7 @@ class EngineEffectChain final : public EffectsRequestHandler {
             const QSet<ChannelHandleAndGroup>& registeredInputChannels,
             const QSet<ChannelHandleAndGroup>& registeredOutputChannels);
     /// called from main thread
-    ~EngineEffectChain();
+    ~EngineEffectChain() override;
 
     /// called from audio thread
     bool processEffectsRequest(

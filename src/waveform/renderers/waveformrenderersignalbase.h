@@ -10,10 +10,10 @@ class ControlProxy;
 class WaveformRendererSignalBase : public WaveformRendererAbstract {
 public:
     explicit WaveformRendererSignalBase(WaveformWidgetRenderer* waveformWidgetRenderer);
-    virtual ~WaveformRendererSignalBase();
+    ~WaveformRendererSignalBase() override;
 
-    virtual bool init();
-    virtual void setup(const QDomNode& node, const SkinContext& context);
+    bool init() override;
+    void setup(const QDomNode& node, const SkinContext& context) override;
 
     virtual bool onInit() {return true;}
     virtual void onSetup(const QDomNode &node) = 0;

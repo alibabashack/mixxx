@@ -29,9 +29,9 @@ typedef QSharedPointer<BrowseThread> BrowseThreadPointer;
 class BrowseThread : public QThread {
     Q_OBJECT
   public:
-    virtual ~BrowseThread();
+    ~BrowseThread() override;
     void executePopulation(mixxx::FileAccess path, BrowseTableModel* client);
-    void run();
+    void run() override;
     static BrowseThreadPointer getInstanceRef();
 
   signals:

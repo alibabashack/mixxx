@@ -20,7 +20,7 @@ class ControllerScriptInterfaceLegacy : public QObject {
     ControllerScriptInterfaceLegacy(ControllerScriptEngineLegacy* m_pEngine,
             const RuntimeLoggingCategory& logger);
 
-    virtual ~ControllerScriptInterfaceLegacy();
+    ~ControllerScriptInterfaceLegacy() override;
 
     Q_INVOKABLE double getValue(const QString& group, const QString& name);
     Q_INVOKABLE void setValue(const QString& group, const QString& name, double newValue);
@@ -73,7 +73,7 @@ class ControllerScriptInterfaceLegacy : public QObject {
     void triggerScriptConnection(const ScriptConnection& conn);
 
     /// Handler for timers that scripts set.
-    virtual void timerEvent(QTimerEvent* event);
+    void timerEvent(QTimerEvent* event) override;
 
   private:
     QJSValue makeConnectionInternal(const QString& group,

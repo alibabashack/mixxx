@@ -11,7 +11,7 @@ class VinylControlControl : public EngineControl {
     Q_OBJECT
   public:
     VinylControlControl(const QString& group, UserSettingsPointer pConfig);
-    virtual ~VinylControlControl();
+    ~VinylControlControl() override;
 
     // If the engine asks for a seek, we may need to disable absolute mode.
     void notifySeekQueued();

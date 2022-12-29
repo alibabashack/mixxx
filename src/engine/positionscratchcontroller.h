@@ -13,7 +13,7 @@ class PositionScratchController : public QObject {
     Q_OBJECT
   public:
     PositionScratchController(const QString& group);
-    virtual ~PositionScratchController();
+    ~PositionScratchController() override;
 
     void process(double currentSample, double releaseRate,
                  int iBufferSize, double baserate);

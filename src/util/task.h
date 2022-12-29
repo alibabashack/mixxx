@@ -9,7 +9,7 @@ class TaskWatcher : public QObject {
     Q_OBJECT
   public:
     TaskWatcher(QObject* pParent=nullptr);
-    virtual ~TaskWatcher();
+    ~TaskWatcher() override;
 
     // Increment the number of active tasks by one and watch pTask for
     // doneSignal. This should be called before the task starts to prevent a

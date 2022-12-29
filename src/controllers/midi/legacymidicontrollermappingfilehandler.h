@@ -7,14 +7,14 @@
 class LegacyMidiControllerMappingFileHandler : public LegacyControllerMappingFileHandler {
   public:
     LegacyMidiControllerMappingFileHandler(){};
-    virtual ~LegacyMidiControllerMappingFileHandler(){};
+    ~LegacyMidiControllerMappingFileHandler() override{};
 
     bool save(const LegacyMidiControllerMapping& mapping, const QString& fileName) const;
 
   private:
-    virtual std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
+    std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
             const QString& filePath,
-            const QDir& systemMappingPath);
+            const QDir& systemMappingPath) override;
 
     void addControlsToDocument(const LegacyMidiControllerMapping& mapping,
             QDomDocument* doc) const;

@@ -17,7 +17,7 @@ class DlgPrefKey : public DlgPreferencePage, Ui::DlgPrefKeyDlg {
     Q_OBJECT
   public:
     DlgPrefKey(QWidget *parent, UserSettingsPointer _config);
-    virtual ~DlgPrefKey();
+    ~DlgPrefKey() override;
 
     QUrl helpUrl() const override;
 

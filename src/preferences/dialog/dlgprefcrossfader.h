@@ -11,15 +11,15 @@ class DlgPrefCrossfader : public DlgPreferencePage, public Ui::DlgPrefCrossfader
     Q_OBJECT
   public:
     DlgPrefCrossfader(QWidget* parent, UserSettingsPointer _config);
-    virtual ~DlgPrefCrossfader();
+    ~DlgPrefCrossfader() override;
 
   public slots:
     // Update X-Fader
     void slotUpdateXFader();
     // Apply changes to widget
-    void slotApply();
-    void slotUpdate();
-    void slotResetToDefaults();
+    void slotApply() override;
+    void slotUpdate() override;
+    void slotResetToDefaults() override;
 
   signals:
     void apply(const QString &);

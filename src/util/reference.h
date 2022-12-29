@@ -14,7 +14,7 @@ class ReferenceHolder : public BaseReferenceHolder {
     ReferenceHolder(QSharedPointer<T>& reference)
             : m_reference(reference) {
     }
-    virtual ~ReferenceHolder() {}
+    ~ReferenceHolder() override {}
 
   private:
     QSharedPointer<T> m_reference;

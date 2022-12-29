@@ -21,7 +21,7 @@ class ControllerScriptEngineBase : public QObject {
   public:
     explicit ControllerScriptEngineBase(
             Controller* controller, const RuntimeLoggingCategory& logger);
-    virtual ~ControllerScriptEngineBase() override = default;
+    ~ControllerScriptEngineBase() override = default;
 
     virtual bool initialize();
 

@@ -38,7 +38,7 @@ class CoreServices : public QObject {
 
   public:
     CoreServices(const CmdlineArgs& args, QApplication* pApp);
-    ~CoreServices();
+    ~CoreServices() override;
 
     /// The secondary long run which should be called after displaying the start up screen
     void initialize(QApplication* pApp);

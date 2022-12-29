@@ -7,9 +7,9 @@
 class HSVWaveformWidget : public NonGLWaveformWidgetAbstract {
     Q_OBJECT
   public:
-    virtual ~HSVWaveformWidget();
+    ~HSVWaveformWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::HSVWaveform; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::HSVWaveform; }
 
     static inline QString getWaveformWidgetName() { return tr("HSV"); }
     static inline bool useOpenGl() { return false; }
@@ -18,8 +18,8 @@ class HSVWaveformWidget : public NonGLWaveformWidgetAbstract {
     static inline bool developerOnly() { return false; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
 
   private:
     HSVWaveformWidget(const QString& group, QWidget* parent);

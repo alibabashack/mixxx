@@ -13,7 +13,7 @@ class DlgPrefReplayGain: public DlgPreferencePage,
     Q_OBJECT
   public:
     DlgPrefReplayGain(QWidget *parent, UserSettingsPointer _config);
-    virtual ~DlgPrefReplayGain();
+    ~DlgPrefReplayGain() override;
 
   public slots:
     // Update initial gain increment

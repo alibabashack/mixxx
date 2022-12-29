@@ -10,10 +10,10 @@ class ControlObject;
 class GLWaveformRendererSimpleSignal : public GLWaveformRenderer {
   public:
     explicit GLWaveformRendererSimpleSignal(WaveformWidgetRenderer* waveformWidgetRenderer);
-    virtual ~GLWaveformRendererSimpleSignal();
+    ~GLWaveformRendererSimpleSignal() override;
 
-    virtual void onSetup(const QDomNode &node);
-    virtual void draw(QPainter* painter, QPaintEvent* event);
+    void onSetup(const QDomNode &node) override;
+    void draw(QPainter* painter, QPaintEvent* event) override;
 };
 
 #endif // QT_NO_OPENGL && !QT_OPENGL_ES_2

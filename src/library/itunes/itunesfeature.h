@@ -21,7 +21,7 @@ class ITunesFeature : public BaseExternalLibraryFeature {
     Q_OBJECT
  public:
     ITunesFeature(Library* pLibrary, UserSettingsPointer pConfig);
-    virtual ~ITunesFeature();
+    ~ITunesFeature() override;
     static bool isSupported();
 
     QVariant title() override;

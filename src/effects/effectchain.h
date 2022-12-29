@@ -42,7 +42,7 @@ class EffectChain : public QObject {
             EffectsManager* pEffectsManager,
             EffectsMessengerPointer pEffectsMessenger,
             SignalProcessingStage stage = SignalProcessingStage::Postfader);
-    virtual ~EffectChain();
+    ~EffectChain() override;
 
     QString group() const;
 

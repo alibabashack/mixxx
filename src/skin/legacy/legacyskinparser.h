@@ -39,10 +39,10 @@ class LegacySkinParser : public QObject, public SkinParser {
             VinylControlManager* pVCMan,
             EffectsManager* pEffectsManager,
             RecordingManager* pRecordingManager);
-    virtual ~LegacySkinParser();
+    ~LegacySkinParser() override;
 
-    virtual bool canParse(const QString& skinPath);
-    virtual QWidget* parseSkin(const QString& skinPath, QWidget* pParent);
+    bool canParse(const QString& skinPath) override;
+    QWidget* parseSkin(const QString& skinPath, QWidget* pParent) override;
 
     LaunchImage* parseLaunchImage(const QString& skinPath, QWidget* pParent);
 

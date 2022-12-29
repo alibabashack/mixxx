@@ -9,7 +9,7 @@ class SkinContextTest : public MixxxTest {
             : m_context(config(), "test") {
     }
 
-    virtual ~SkinContextTest() {
+    ~SkinContextTest() override {
     }
 
   protected:

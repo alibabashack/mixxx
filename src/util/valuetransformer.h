@@ -18,11 +18,11 @@ class TransformAdd : public TransformNode {
   public:
     TransformAdd(double addend) : m_addend(addend) {}
 
-    double transform(double argument) const {
+    double transform(double argument) const override {
         return argument + m_addend;
     }
 
-    double transformInverse(double argument) const {
+    double transformInverse(double argument) const override {
         return argument - m_addend;
     }
 
@@ -34,11 +34,11 @@ class TransformInvert : public TransformNode {
   public:
     TransformInvert() {}
 
-    double transform(double argument) const {
+    double transform(double argument) const override {
         return -argument;
     }
 
-    double transformInverse(double argument) const {
+    double transformInverse(double argument) const override {
         return -argument;
     }
 };
@@ -47,11 +47,11 @@ class TransformNot : public TransformNode {
   public:
     TransformNot() {}
 
-    double transform(double argument) const {
+    double transform(double argument) const override {
         return !static_cast<bool>(argument);
     }
 
-    double transformInverse(double argument) const {
+    double transformInverse(double argument) const override {
         return !static_cast<bool>(argument);
     }
 };
@@ -62,11 +62,11 @@ class TransformIsEqual : public TransformNode {
         m_compareValue(compareValue) {
     }
 
-    double transform(double argument) const {
+    double transform(double argument) const override {
         return argument == m_compareValue;
     }
 
-    double transformInverse(double argument) const {
+    double transformInverse(double argument) const override {
         if (argument > 0.0) {
             return m_compareValue;
         }

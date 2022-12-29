@@ -7,12 +7,12 @@ class LegacyHidControllerMapping;
 class LegacyHidControllerMappingFileHandler : public LegacyControllerMappingFileHandler {
   public:
     LegacyHidControllerMappingFileHandler(){};
-    virtual ~LegacyHidControllerMappingFileHandler(){};
+    ~LegacyHidControllerMappingFileHandler() override{};
 
     bool save(const LegacyHidControllerMapping& mapping, const QString& fileName) const;
 
   private:
-    virtual std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
+    std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
             const QString& filePath,
-            const QDir& systemMappingsPath);
+            const QDir& systemMappingsPath) override;
 };

@@ -37,7 +37,7 @@ class TrackExportWorker : public QThread {
     TrackExportWorker(const QString& destDir, const TrackPointerList& tracks)
             : m_destDir(destDir), m_tracks(tracks) {
     }
-    virtual ~TrackExportWorker() { };
+    ~TrackExportWorker() override { };
 
     // exports ALL the tracks.  Thread joins on success or failure.
     void run() override;

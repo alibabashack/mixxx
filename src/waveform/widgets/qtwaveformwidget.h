@@ -6,9 +6,9 @@ class QtWaveformWidget : public GLWaveformWidgetAbstract {
     Q_OBJECT
   public:
     QtWaveformWidget(const QString& group, QWidget* parent);
-    virtual ~QtWaveformWidget();
+    ~QtWaveformWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::QtWaveform; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::QtWaveform; }
 
     static inline QString getWaveformWidgetName() { return tr("Filtered") + " - Qt"; }
     static inline bool useOpenGl() { return true; }
@@ -17,9 +17,9 @@ class QtWaveformWidget : public GLWaveformWidgetAbstract {
     static inline bool developerOnly() { return false; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
-    virtual mixxx::Duration render();
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
+    mixxx::Duration render() override;
 
   private:
     friend class WaveformWidgetFactory;

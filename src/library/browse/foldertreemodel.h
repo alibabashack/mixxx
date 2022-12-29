@@ -18,8 +18,8 @@ class FolderTreeModel : public TreeItemModel {
     Q_OBJECT
   public:
     FolderTreeModel(QObject *parent = nullptr);
-    virtual ~FolderTreeModel();
-    virtual bool hasChildren(const QModelIndex& parent = QModelIndex()) const;
+    ~FolderTreeModel() override;
+    bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
     bool directoryHasChildren(const QString& path) const;
 
   private:

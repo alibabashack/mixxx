@@ -10,7 +10,7 @@ class LibraryScannerDlg : public QWidget {
     Q_OBJECT
   public:
     LibraryScannerDlg(QWidget* parent = nullptr, Qt::WindowFlags f = Qt::Dialog);
-    virtual ~LibraryScannerDlg();
+    ~LibraryScannerDlg() override;
 
   public slots:
     void slotUpdate(const QString& path);

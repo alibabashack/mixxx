@@ -10,7 +10,7 @@
 class LegacyMidiControllerMapping : public LegacyControllerMapping {
   public:
     LegacyMidiControllerMapping(){};
-    virtual ~LegacyMidiControllerMapping(){};
+    ~LegacyMidiControllerMapping() override{};
 
     std::shared_ptr<LegacyControllerMapping> clone() const override {
         return std::make_shared<LegacyMidiControllerMapping>(*this);
@@ -18,7 +18,7 @@ class LegacyMidiControllerMapping : public LegacyControllerMapping {
 
     bool saveMapping(const QString& fileName) const override;
 
-    virtual bool isMappable() const override;
+    bool isMappable() const override;
 
     // Input mappings
     void addInputMapping(uint16_t key, const MidiInputMapping& mapping);

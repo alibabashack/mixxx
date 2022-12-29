@@ -20,7 +20,7 @@ class DlgPrefVinyl : public DlgPreferencePage, Ui::DlgPrefVinylDlg  {
             QWidget* pParent,
             std::shared_ptr<VinylControlManager> m_pVCMan,
             UserSettingsPointer _config);
-    virtual ~DlgPrefVinyl();
+    ~DlgPrefVinyl() override;
 
     QUrl helpUrl() const override;
 

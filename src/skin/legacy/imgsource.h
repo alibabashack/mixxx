@@ -34,7 +34,7 @@ class ImgProcessor : public ImgSource {
 class ImgColorProcessor : public ImgProcessor {
 
 public:
-    virtual ~ImgColorProcessor() {};
+    ~ImgColorProcessor() override {};
 
     inline ImgColorProcessor(ImgSource* parent) : ImgProcessor(parent) {}
 

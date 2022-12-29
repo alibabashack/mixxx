@@ -210,7 +210,7 @@ class LoopMoveControl : public QObject {
     Q_OBJECT
   public:
     LoopMoveControl(const QString& group, double size);
-    virtual ~LoopMoveControl();
+    ~LoopMoveControl() override;
 
   signals:
     void loopMove(double beats);
@@ -231,7 +231,7 @@ class BeatJumpControl : public QObject {
     Q_OBJECT
   public:
     BeatJumpControl(const QString& group, double size);
-    virtual ~BeatJumpControl();
+    ~BeatJumpControl() override;
 
   signals:
     void beatJump(double beats);
@@ -252,7 +252,7 @@ class BeatLoopingControl : public QObject {
     Q_OBJECT
   public:
     BeatLoopingControl(const QString& group, double size);
-    virtual ~BeatLoopingControl();
+    ~BeatLoopingControl() override;
 
     void activate();
     void deactivate();

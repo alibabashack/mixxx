@@ -12,7 +12,7 @@ class TapFilter : public QObject {
     Q_OBJECT
   public:
     TapFilter(QObject *pParent, int filterLength, mixxx::Duration maxInterval);
-    virtual ~TapFilter();
+    ~TapFilter() override;
 
   public slots:
     void tap();

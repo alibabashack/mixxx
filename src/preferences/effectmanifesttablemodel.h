@@ -17,7 +17,7 @@ class EffectManifestTableModel : public QAbstractTableModel {
     Q_OBJECT
   public:
     EffectManifestTableModel(QObject* parent, EffectsBackendManagerPointer pBackendManager);
-    ~EffectManifestTableModel() = default;
+    ~EffectManifestTableModel() override = default;
 
     const QList<EffectManifestPointer>& getList() const {
         return m_manifests;

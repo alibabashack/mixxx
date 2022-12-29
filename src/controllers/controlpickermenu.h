@@ -9,7 +9,7 @@ class ControlPickerMenu : public QMenu {
     Q_OBJECT
   public:
     ControlPickerMenu(QWidget* pParent);
-    virtual ~ControlPickerMenu();
+    ~ControlPickerMenu() override;
 
     const QList<ConfigKey>& controlsAvailable() const {
         return m_controlsAvailable;

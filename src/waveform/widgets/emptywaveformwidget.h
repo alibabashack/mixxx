@@ -10,9 +10,9 @@
 class EmptyWaveformWidget : public NonGLWaveformWidgetAbstract {
     Q_OBJECT
   public:
-    virtual ~EmptyWaveformWidget();
+    ~EmptyWaveformWidget() override;
 
-    virtual WaveformWidgetType::Type getType() const { return WaveformWidgetType::EmptyWaveform; }
+    WaveformWidgetType::Type getType() const override { return WaveformWidgetType::EmptyWaveform; }
 
     static inline QString getWaveformWidgetName() { return tr("Empty"); }
     static inline bool useOpenGl() { return false; }
@@ -21,9 +21,9 @@ class EmptyWaveformWidget : public NonGLWaveformWidgetAbstract {
     static inline bool developerOnly() { return false; }
 
   protected:
-    virtual void castToQWidget();
-    virtual void paintEvent(QPaintEvent* event);
-    virtual mixxx::Duration render();
+    void castToQWidget() override;
+    void paintEvent(QPaintEvent* event) override;
+    mixxx::Duration render() override;
 
   private:
     EmptyWaveformWidget(const QString& group, QWidget* parent);

@@ -10,7 +10,7 @@ class PotmeterControls : public QObject {
     Q_OBJECT
   public:
     PotmeterControls(const ConfigKey& key);
-    virtual ~PotmeterControls();
+    ~PotmeterControls() override;
 
     void setStepCount(int count) {
         m_stepCount = count;

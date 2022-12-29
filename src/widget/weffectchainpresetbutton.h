@@ -20,7 +20,7 @@ class WEffectChainPresetButton : public QPushButton, public WBaseWidget {
     void populateMenu();
 
   private:
-    bool event(QEvent* pEvent);
+    bool event(QEvent* pEvent) override;
     EffectChainPointer m_pChain;
 
     EffectsManager* m_pEffectsManager;

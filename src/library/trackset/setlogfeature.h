@@ -15,7 +15,7 @@ class SetlogFeature : public BasePlaylistFeature {
   public:
     SetlogFeature(Library* pLibrary,
             UserSettingsPointer pConfig);
-    virtual ~SetlogFeature();
+    ~SetlogFeature() override;
 
     QVariant title() override;
 

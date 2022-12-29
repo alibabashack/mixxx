@@ -11,10 +11,10 @@ class BPMDelegate : public TableItemDelegate {
     Q_OBJECT
   public:
     explicit BPMDelegate(QTableView* pTableView);
-    virtual ~BPMDelegate();
+    ~BPMDelegate() override;
 
     void paintItem(QPainter* painter, const QStyleOptionViewItem& option,
-               const QModelIndex& index) const;
+               const QModelIndex& index) const override;
 
   private:
     QTableView* m_pTableView;

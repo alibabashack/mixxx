@@ -24,15 +24,15 @@ class VinylControlXwax : public VinylControl {
     Q_OBJECT
   public:
     VinylControlXwax(UserSettingsPointer pConfig, const QString& group);
-    virtual ~VinylControlXwax();
+    ~VinylControlXwax() override;
 
     static void freeLUTs();
-    void analyzeSamples(CSAMPLE* pSamples, size_t nFrames);
+    void analyzeSamples(CSAMPLE* pSamples, size_t nFrames) override;
 
-    virtual bool writeQualityReport(VinylSignalQualityReport* qualityReportFifo);
+    bool writeQualityReport(VinylSignalQualityReport* qualityReportFifo) override;
 
   protected:
-    float getAngle();
+    float getAngle() override;
 
   private:
     void syncPosition();

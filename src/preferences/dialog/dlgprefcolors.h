@@ -20,7 +20,7 @@ class DlgPrefColors : public DlgPreferencePage, public Ui::DlgPrefColorsDlg {
             QWidget* parent,
             UserSettingsPointer pConfig,
             std::shared_ptr<Library> pLibrary);
-    virtual ~DlgPrefColors();
+    ~DlgPrefColors() override;
 
   public slots:
     /// Called when the preference dialog (not this page) is shown to the user.

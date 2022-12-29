@@ -17,7 +17,7 @@ class VSyncThread;
 class WaveformWidgetAbstract : public WaveformWidgetRenderer {
   public:
     WaveformWidgetAbstract(const QString& group);
-    virtual ~WaveformWidgetAbstract();
+    ~WaveformWidgetAbstract() override;
 
     //Type is use by the factory to safely up-cast waveform widgets
     virtual WaveformWidgetType::Type getType() const = 0;

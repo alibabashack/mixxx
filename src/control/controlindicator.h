@@ -21,7 +21,7 @@ class ControlIndicator : public ControlObject {
     };
 
     ControlIndicator(const ConfigKey& key);
-    virtual ~ControlIndicator();
+    ~ControlIndicator() override;
 
     void setBlinkValue(enum BlinkValue newBlinkValue);
 

@@ -8,7 +8,7 @@
 class EncoderFdkAacSettings : public EncoderRecordingSettings {
   public:
     EncoderFdkAacSettings(UserSettingsPointer pConfig, QString format);
-    virtual ~EncoderFdkAacSettings();
+    ~EncoderFdkAacSettings() override;
 
     // Indicates that it uses the quality slider section of the preferences
     bool usesQualitySlider() const override {

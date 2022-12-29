@@ -25,7 +25,7 @@ class TrackExportDlg : public QDialog, public Ui::DlgTrackExport {
     // take ownership of the export worker.
     TrackExportDlg(QWidget *parent, UserSettingsPointer pConfig,
                    TrackExportWorker* worker);
-    virtual ~TrackExportDlg() { }
+    ~TrackExportDlg() override { }
 
   public slots:
     void slotProgress(const QString& filename, int progress, int count);

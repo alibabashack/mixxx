@@ -24,7 +24,7 @@ class ModalTrackBatchProcessor
     Q_OBJECT
 
   public:
-    virtual ~ModalTrackBatchProcessor() = default;
+    ~ModalTrackBatchProcessor() override = default;
 
     /// Subsequently load and process a list of tracks.
     ///

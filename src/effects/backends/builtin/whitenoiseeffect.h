@@ -19,7 +19,7 @@ class WhiteNoiseGroupState final : public EffectState {
               previous_drywet(0.0),
               gen(rs()) {
     }
-    ~WhiteNoiseGroupState() {
+    ~WhiteNoiseGroupState() override {
     }
 
     CSAMPLE_GAIN previous_drywet;

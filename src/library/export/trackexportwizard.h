@@ -23,7 +23,7 @@ class TrackExportWizard : public QObject {
     TrackExportWizard(QWidget* parent, UserSettingsPointer pConfig, const TrackPointerList& tracks)
             : m_parent(parent), m_pConfig(pConfig), m_tracks(tracks) {
     }
-    virtual ~TrackExportWizard() { }
+    ~TrackExportWizard() override { }
 
     // Displays a dialog requesting destination directory, then performs
     // track export if a folder is chosen.  Handles errors gracefully.

@@ -16,7 +16,7 @@ class DlgKeywheel : public QDialog, public Ui::DlgKeywheel {
     explicit DlgKeywheel(QWidget* parent, const UserSettingsPointer& pConfig);
     void switchNotation(int dir = 1);
     void updateSvg();
-    ~DlgKeywheel() = default;
+    ~DlgKeywheel() override = default;
     void show();
 
   protected:

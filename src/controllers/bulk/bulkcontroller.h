@@ -17,7 +17,7 @@ class BulkReader : public QThread {
     Q_OBJECT
   public:
     BulkReader(libusb_device_handle *handle, unsigned char in_epaddr);
-    virtual ~BulkReader();
+    ~BulkReader() override;
 
     void stop();
 
@@ -25,7 +25,7 @@ class BulkReader : public QThread {
     void incomingData(const QByteArray& data, mixxx::Duration timestamp);
 
   protected:
-    void run();
+    void run() override;
 
   private:
     libusb_device_handle* m_phandle;
@@ -44,7 +44,7 @@ class BulkController : public Controller {
 
     QString mappingExtension() override;
 
-    virtual std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
+    std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
 
     bool isMappable() const override {

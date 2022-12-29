@@ -28,9 +28,9 @@ class ControllerLearningEventFilter : public QObject {
     Q_OBJECT
   public:
     ControllerLearningEventFilter(QObject* pParent = nullptr);
-    virtual ~ControllerLearningEventFilter();
+    ~ControllerLearningEventFilter() override;
 
-    virtual bool eventFilter(QObject* pObject, QEvent* pEvent);
+    bool eventFilter(QObject* pObject, QEvent* pEvent) override;
 
     void addWidgetClickInfo(QWidget* pWidget, Qt::MouseButton buttonState,
                             ControlObject* pControl,

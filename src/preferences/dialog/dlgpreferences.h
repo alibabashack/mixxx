@@ -77,7 +77,7 @@ class DlgPreferences : public QDialog, public Ui::DlgPreferencesDlg {
             std::shared_ptr<EffectsManager> pEffectsManager,
             std::shared_ptr<SettingsManager> pSettingsManager,
             std::shared_ptr<Library> pLibrary);
-    virtual ~DlgPreferences();
+    ~DlgPreferences() override;
 
     void addPageWidget(PreferencesPage page,
             const QString& pageTitle,
@@ -106,9 +106,9 @@ class DlgPreferences : public QDialog, public Ui::DlgPreferencesDlg {
     void tooltipModeChanged(mixxx::TooltipsPreference tooltipMode);
 
   protected:
-    bool eventFilter(QObject*, QEvent*);
-    void moveEvent(QMoveEvent* e);
-    void resizeEvent(QResizeEvent* e);
+    bool eventFilter(QObject*, QEvent*) override;
+    void moveEvent(QMoveEvent* e) override;
+    void resizeEvent(QResizeEvent* e) override;
 
   private:
     DlgPreferencePage* currentPage();

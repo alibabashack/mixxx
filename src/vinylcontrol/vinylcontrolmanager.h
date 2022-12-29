@@ -28,7 +28,7 @@ class VinylControlManager : public QObject {
   public:
     VinylControlManager(QObject* pParent, UserSettingsPointer pConfig,
                         SoundManager* pSoundManager);
-    virtual ~VinylControlManager();
+    ~VinylControlManager() override;
 
     // Some initialization must wait until the decks have been created
     void init();
@@ -40,7 +40,7 @@ class VinylControlManager : public QObject {
     void removeSignalQualityListener(VinylSignalQualityListener* pListener);
     void updateSignalQualityListeners();
 
-    void timerEvent(QTimerEvent* pEvent);
+    void timerEvent(QTimerEvent* pEvent) override;
 
   public slots:
     void requestReloadConfig();

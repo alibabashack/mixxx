@@ -22,7 +22,7 @@ class DlgPrefControllers : public DlgPreferencePage, public Ui::DlgPrefControlle
             UserSettingsPointer pConfig,
             std::shared_ptr<ControllerManager> pControllerManager,
             QTreeWidgetItem* pControllersRootItem);
-    virtual ~DlgPrefControllers();
+    ~DlgPrefControllers() override;
 
     bool handleTreeItemClick(QTreeWidgetItem* clickedItem);
     QUrl helpUrl() const override;

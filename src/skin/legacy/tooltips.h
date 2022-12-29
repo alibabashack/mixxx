@@ -8,7 +8,7 @@ class Tooltips : public QObject {
     Q_OBJECT
   public:
     Tooltips();
-    virtual ~Tooltips();
+    ~Tooltips() override;
     QString tooltipForId(const QString& id) const;
 
   private:

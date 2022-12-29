@@ -16,9 +16,9 @@ class EngineWorker : public QThread {
     Q_OBJECT
   public:
     EngineWorker();
-    virtual ~EngineWorker();
+    ~EngineWorker() override;
 
-    virtual void run();
+    void run() override;
 
     void setScheduler(EngineWorkerScheduler* pScheduler);
     void workReady();

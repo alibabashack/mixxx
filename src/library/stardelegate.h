@@ -10,24 +10,24 @@ class StarDelegate : public TableItemDelegate {
     // reimplemented from QItemDelegate and is called whenever the view needs to
     // repaint an item
     void paintItem(QPainter* painter, const QStyleOptionViewItem& option,
-               const QModelIndex& index) const;
+               const QModelIndex& index) const override;
 
     // returns an item's preferred size
     QSize sizeHint(const QStyleOptionViewItem& option,
-                   const QModelIndex& index) const;
+                   const QModelIndex& index) const override;
 
     // called when the user starts editing an item
     QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-                          const QModelIndex& index) const;
+                          const QModelIndex& index) const override;
 
     // called when an editor is created to initialize it with data from the
     // model
-    void setEditorData(QWidget* editor, const QModelIndex& index) const;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
 
     // called when editing is finished, to commit data from the editor to the
     // model
     void setModelData(QWidget* editor, QAbstractItemModel* model,
-                      const QModelIndex& index) const;
+                      const QModelIndex& index) const override;
 
   private slots:
     void commitAndCloseEditor();

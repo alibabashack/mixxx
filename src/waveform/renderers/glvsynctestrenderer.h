@@ -11,10 +11,10 @@ class GLVSyncTestRenderer : public GLWaveformRenderer {
   public:
     explicit GLVSyncTestRenderer(
             WaveformWidgetRenderer* waveformWidgetRenderer);
-    virtual ~GLVSyncTestRenderer();
+    ~GLVSyncTestRenderer() override;
 
-    virtual void onSetup(const QDomNode &node);
-    virtual void draw(QPainter* painter, QPaintEvent* event);
+    void onSetup(const QDomNode &node) override;
+    void draw(QPainter* painter, QPaintEvent* event) override;
 private:
     int m_drawcount;
 };

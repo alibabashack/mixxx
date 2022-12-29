@@ -14,10 +14,10 @@ class EncoderFlacSettings : public EncoderRecordingSettings {
     bool usesCompressionSlider() const override;
 
     // Returns the list of compression values supported, to assign them to the slider
-    virtual QList<int> getCompressionValues() const override;
+    QList<int> getCompressionValues() const override;
     // Sets the compression level
-    virtual void setCompression(int compression) override;
-    virtual int getCompression() const override;
+    void setCompression(int compression) override;
+    int getCompression() const override;
     // Returns the list of radio options to show to the user
     QList<OptionsGroup> getOptionGroups() const override;
     // Selects the option by its index. If it is a single-element option,

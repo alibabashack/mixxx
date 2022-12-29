@@ -7,18 +7,18 @@
 class BuiltInBackend : public EffectsBackend {
   public:
     BuiltInBackend();
-    virtual ~BuiltInBackend();
+    ~BuiltInBackend() override;
 
-    EffectBackendType getType() const {
+    EffectBackendType getType() const override {
         return EffectBackendType::BuiltIn;
     };
 
-    const QList<QString> getEffectIds() const;
-    EffectManifestPointer getManifest(const QString& effectId) const;
-    const QList<EffectManifestPointer> getManifests() const;
+    const QList<QString> getEffectIds() const override;
+    EffectManifestPointer getManifest(const QString& effectId) const override;
+    const QList<EffectManifestPointer> getManifests() const override;
     std::unique_ptr<EffectProcessor> createProcessor(
-            const EffectManifestPointer pManifest) const;
-    bool canInstantiateEffect(const QString& effectId) const;
+            const EffectManifestPointer pManifest) const override;
+    bool canInstantiateEffect(const QString& effectId) const override;
 
   private:
     QString debugString() const {

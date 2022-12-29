@@ -17,7 +17,7 @@ class DlgPrefEQ : public DlgPreferencePage, public Ui::DlgPrefEQDlg  {
             QWidget* parent,
             std::shared_ptr<EffectsManager> pEffectsManager,
             UserSettingsPointer _config);
-    virtual ~DlgPrefEQ();
+    ~DlgPrefEQ() override;
 
     QUrl helpUrl() const override;
 

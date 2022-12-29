@@ -92,7 +92,7 @@ class EngineBuffer : public EngineObject {
 
     EngineBuffer(const QString& group, UserSettingsPointer pConfig,
                  EngineChannel* pChannel, EngineMaster* pMixingEngine);
-    virtual ~EngineBuffer();
+    ~EngineBuffer() override;
 
     void bindWorkers(EngineWorkerScheduler* pWorkerScheduler);
 

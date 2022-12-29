@@ -16,7 +16,7 @@ class DlgPrefWaveform : public DlgPreferencePage, public Ui::DlgPrefWaveformDlg 
             QWidget* pParent,
             UserSettingsPointer pConfig,
             std::shared_ptr<Library> pLibrary);
-    virtual ~DlgPrefWaveform();
+    ~DlgPrefWaveform() override;
 
   public slots:
     void slotUpdate() override;

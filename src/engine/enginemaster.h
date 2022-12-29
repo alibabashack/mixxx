@@ -41,11 +41,11 @@ class EngineMaster : public QObject, public AudioSource {
             EffectsManager* pEffectsManager,
             ChannelHandleFactoryPointer pChannelHandleFactory,
             bool bEnableSidechain);
-    virtual ~EngineMaster();
+    ~EngineMaster() override;
 
     // Get access to the sample buffers. None of these are thread safe. Only to
     // be called by SoundManager.
-    [[nodiscard]] const CSAMPLE* buffer(const AudioOutput& output) const;
+    [[nodiscard]] const CSAMPLE* buffer(const AudioOutput& output) const override;
 
     ChannelHandleAndGroup registerChannelGroup(const QString& group) {
         return ChannelHandleAndGroup(
@@ -60,8 +60,8 @@ class EngineMaster : public QObject, public AudioSource {
     // these methods are called the callback is guaranteed to be inactive
     // (SoundManager closes all devices before calling these). This may change
     // in the future.
-    virtual void onOutputConnected(const AudioOutput& output);
-    virtual void onOutputDisconnected(const AudioOutput& output);
+    void onOutputConnected(const AudioOutput& output) override;
+    void onOutputDisconnected(const AudioOutput& output) override;
     void onInputConnected(const AudioInput& input);
     void onInputDisconnected(const AudioInput& input);
 
@@ -161,7 +161,7 @@ class EngineMaster : public QObject, public AudioSource {
                   m_dTalkoverDuckingGain(1.0) {
         }
 
-        inline CSAMPLE_GAIN getGain(ChannelInfo* pChannelInfo) const {
+        inline CSAMPLE_GAIN getGain(ChannelInfo* pChannelInfo) const override {
             const CSAMPLE_GAIN channelVolume = static_cast<CSAMPLE_GAIN>(
                     pChannelInfo->m_pVolumeControl->get());
             const CSAMPLE_GAIN orientationGain = EngineMaster::gainForOrientation(

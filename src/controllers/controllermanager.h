@@ -22,7 +22,7 @@ class ControllerManager : public QObject {
     Q_OBJECT
   public:
     ControllerManager(UserSettingsPointer pConfig);
-    virtual ~ControllerManager();
+    ~ControllerManager() override;
 
     static const mixxx::Duration kPollInterval;
 

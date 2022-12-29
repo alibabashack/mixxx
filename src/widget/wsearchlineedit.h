@@ -25,10 +25,10 @@ class WSearchLineEdit : public QComboBox, public WBaseWidget {
 
     // TODO(XXX): Replace with a public slot
     static void setDebouncingTimeoutMillis(int debouncingTimeoutMillis);
-    virtual void showPopup() override;
+    void showPopup() override;
 
     explicit WSearchLineEdit(QWidget* pParent, UserSettingsPointer pConfig = nullptr);
-    ~WSearchLineEdit();
+    ~WSearchLineEdit() override;
 
     void setup(const QDomNode& node, const SkinContext& context);
 

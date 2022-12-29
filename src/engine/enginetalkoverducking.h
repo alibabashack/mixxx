@@ -19,7 +19,7 @@ class EngineTalkoverDucking : public QObject, public EngineSideChainCompressor {
     };
 
     EngineTalkoverDucking(UserSettingsPointer pConfig, const QString& group);
-    virtual ~EngineTalkoverDucking();
+    ~EngineTalkoverDucking() override;
 
     TalkoverDuckSetting getMode() const {
         return static_cast<TalkoverDuckSetting>(int(m_pTalkoverDucking->get()));

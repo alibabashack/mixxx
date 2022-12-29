@@ -128,7 +128,7 @@ class MockPlayerManager : public PlayerManagerInterface {
                               true) {
     }
 
-    virtual ~MockPlayerManager() {
+    ~MockPlayerManager() override {
     }
 
     MOCK_CONST_METHOD1(getPlayer, BaseTrackPlayer*(const QString&));
@@ -137,15 +137,15 @@ class MockPlayerManager : public PlayerManagerInterface {
     MOCK_CONST_METHOD1(getPreviewDeck, PreviewDeck*(unsigned int));
     MOCK_CONST_METHOD1(getSampler, Sampler*(unsigned int));
 
-    unsigned int numberOfDecks() const {
+    unsigned int numberOfDecks() const override {
         return static_cast<unsigned int>(numDecks.get());
     }
 
-    unsigned int numberOfSamplers() const {
+    unsigned int numberOfSamplers() const override {
         return static_cast<unsigned int>(numSamplers.get());
     }
 
-    unsigned int numberOfPreviewDecks() const {
+    unsigned int numberOfPreviewDecks() const override {
         return static_cast<unsigned int>(numPreviewDecks.get());
     }
 
@@ -165,7 +165,7 @@ class MockAutoDJProcessor : public AutoDJProcessor {
                               pTrackCollectionManager, iAutoDJPlaylistId) {
     }
 
-    virtual ~MockAutoDJProcessor() {
+    ~MockAutoDJProcessor() override {
     }
 
     MOCK_METHOD3(emitLoadTrackToPlayer, void(TrackPointer, const QString&, bool));
@@ -230,7 +230,7 @@ class AutoDJProcessorTest : public LibraryTest {
                 m_iAutoDJPlaylistId));
     }
 
-    virtual ~AutoDJProcessorTest() {
+    ~AutoDJProcessorTest() override {
         PlayerInfo::destroy();
     }
 
