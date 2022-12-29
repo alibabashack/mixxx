@@ -38,7 +38,6 @@ class ReadAheadManager {
 
     /// Used to add a new EngineControls that ReadAheadManager will use to decide
     /// which samples to return.
-    void addLoopingControl();
     void addRateControl(RateControl* pRateControl);
 
     /// Get the current read-ahead position in samples.
