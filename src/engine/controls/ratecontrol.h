@@ -151,9 +151,9 @@ private:
   // This is true if we've already started to ramp the rate
   bool m_bTempStarted;
   // Set the Temporary Rate Change Mode
-  static RampMode m_eRateRampMode;
+  static RampMode m_eRateRampMode; // FIXME: may be used uninitialized
   // The Rate Temp Sensitivity, the higher it is the slower it gets
-  static int m_iRateRampSensitivity;
+  static int m_iRateRampSensitivity; // FIXME: may be used uninitialized
   // Factor applied to the deprecated "wheel" rate value.
   static constexpr double kWheelMultiplier = 40.0;
   // Factor applied to jogwheels when the track is paused to speed up seeking.
