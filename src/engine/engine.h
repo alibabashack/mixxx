@@ -11,18 +11,19 @@ static constexpr audio::ChannelCount kEngineChannelCount =
 // Contains the information needed to process a buffer of audio
 class EngineParameters {
   public:
-    SINT framesPerBuffer() const {
+    [[nodiscard]] SINT framesPerBuffer() const {
         return m_framesPerBuffer;
     }
-    SINT samplesPerBuffer() const {
+
+    [[nodiscard]] SINT samplesPerBuffer() const {
         return m_outputSignal.frames2samples(framesPerBuffer());
     }
 
-    audio::ChannelCount channelCount() const {
+    [[nodiscard]] audio::ChannelCount channelCount() const {
         return m_outputSignal.getChannelCount();
     }
 
-    audio::SampleRate sampleRate() const {
+    [[nodiscard]] audio::SampleRate sampleRate() const {
         return m_outputSignal.getSampleRate();
     }
 
