@@ -53,7 +53,7 @@ class PotmeterControls : public QObject {
 class ControlPotmeter : public ControlObject {
     Q_OBJECT
   public:
-    ControlPotmeter(const ConfigKey& key,
+    explicit ControlPotmeter(const ConfigKey& key,
             double dMinValue = 0.0,
             double dMaxValue = 1.0,
             bool allowOutOfBounds = false,

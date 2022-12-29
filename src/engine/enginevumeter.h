@@ -9,7 +9,7 @@ class ControlPotmeter;
 class EngineVuMeter : public EngineObject {
     Q_OBJECT
   public:
-    EngineVuMeter(const QString& group);
+    explicit EngineVuMeter(const QString& group);
     ~EngineVuMeter() override = default;
 
     virtual void process(CSAMPLE* pInOut, const int iBufferSize);
