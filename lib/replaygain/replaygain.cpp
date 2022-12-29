@@ -184,8 +184,8 @@ bool ReplayGain::initialise(long samplefreq, size_t channels) {
 
 
 bool ReplayGain::process(const float* left_samples, const float* right_samples, size_t blockSize) {
-    const float*  curleft = NULL;
-    const float*  curright = NULL;
+    const float*  curleft = nullptr;
+    const float*  curright = nullptr;
     long            batchsamples;
     long            cursamples;
     long            cursamplepos;

@@ -34,10 +34,10 @@
 
 DFProcess::DFProcess( DFProcConfig config )
 {
-    filtSrc = NULL;
-    filtDst = NULL;     
-    m_filtScratchIn = NULL;
-    m_filtScratchOut = NULL;
+    filtSrc = nullptr;
+    filtDst = nullptr;     
+    m_filtScratchIn = nullptr;
+    m_filtScratchOut = nullptr;
 
     m_FFOrd = 0;
 

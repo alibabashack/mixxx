@@ -44,7 +44,7 @@ class Delay
 		sample_t * data;
 		uint read, write;
 
-		Delay() { read = write = 0; data = 0; }
+		Delay() { read = write = 0; data = nullptr; }
 
 		~Delay() { free (data); }
 

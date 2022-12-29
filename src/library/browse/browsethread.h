@@ -39,7 +39,7 @@ class BrowseThread : public QThread {
     void clearModel(BrowseTableModel*);
 
   private:
-    BrowseThread(QObject *parent = 0);
+    BrowseThread(QObject *parent = nullptr);
 
     void populateModel();
 

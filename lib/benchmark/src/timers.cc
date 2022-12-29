@@ -217,7 +217,7 @@ std::string LocalDateTimeString() {
     // RFC3339 specifies an offset as +HH:MM or -HH:MM. To convert, we parse
     // the offset as an integer, then reprint it to a string.
 
-    offset_minutes = ::strtol(tz_offset, NULL, 10);
+    offset_minutes = ::strtol(tz_offset, nullptr, 10);
     if (offset_minutes < 0) {
       offset_minutes *= -1;
       tz_offset_sign = '-';

@@ -20,9 +20,9 @@
 Framer::Framer() :
     m_sampleLen(0),
     m_framesRead(0),
-    m_srcBuffer(0),
-    m_dataFrame(0),
-    m_strideFrame(0),
+    m_srcBuffer(nullptr),
+    m_dataFrame(nullptr),
+    m_strideFrame(nullptr),
     m_frameLength(0),
     m_stepSize(0),
     m_maxFrames(0),

@@ -74,8 +74,8 @@ struct PPickParams
         alpha(0),
         cutoff(0),
         LPOrd(0),
-        LPACoeffs(NULL),
-        LPBCoeffs(NULL),
+        LPACoeffs(nullptr),
+        LPBCoeffs(nullptr),
         WinT(0,0),
         QuadThresh(0,0,0),
         delta(0)

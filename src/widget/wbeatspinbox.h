@@ -41,7 +41,7 @@ class WBeatSpinBox : public QDoubleSpinBox, public WBaseWidget {
 class WBeatLineEdit : public QLineEdit {
     Q_OBJECT
   public:
-    explicit WBeatLineEdit(QWidget* parent=0)
+    explicit WBeatLineEdit(QWidget* parent=nullptr)
         : QLineEdit(parent),
           m_scaleFactor(1.0) {
     }

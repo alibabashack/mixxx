@@ -23,8 +23,8 @@ class FFT::D
 {
 public:
     D(int n) : m_n(n) {
-        m_planf = kiss_fft_alloc(m_n, 0, NULL, NULL);
-        m_plani = kiss_fft_alloc(m_n, 1, NULL, NULL);
+        m_planf = kiss_fft_alloc(m_n, 0, nullptr, nullptr);
+        m_plani = kiss_fft_alloc(m_n, 1, nullptr, nullptr);
         m_kin = new kiss_fft_cpx[m_n];
         m_kout = new kiss_fft_cpx[m_n];
     }
@@ -105,8 +105,8 @@ public:
             throw std::invalid_argument
                 ("nsamples must be even in FFTReal constructor");
         }
-        m_planf = kiss_fftr_alloc(m_n, 0, NULL, NULL);
-        m_plani = kiss_fftr_alloc(m_n, 1, NULL, NULL);
+        m_planf = kiss_fftr_alloc(m_n, 0, nullptr, nullptr);
+        m_plani = kiss_fftr_alloc(m_n, 1, nullptr, nullptr);
         m_c = new kiss_fft_cpx[m_n];
     }
 

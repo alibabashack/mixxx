@@ -34,11 +34,11 @@ using std::vector;
 
 TempoTrack::TempoTrack( TTParams Params )
 {
-    m_tempoScratch = NULL;
-    m_rawDFFrame = NULL;
-    m_smoothDFFrame = NULL;
-    m_frameACF = NULL;
-    m_smoothRCF = NULL;
+    m_tempoScratch = nullptr;
+    m_rawDFFrame = nullptr;
+    m_smoothDFFrame = nullptr;
+    m_frameACF = nullptr;
+    m_smoothRCF = nullptr;
 
     m_dataLength = 0;
     m_winLength = 0;

@@ -55,15 +55,15 @@ GetKeyMode::GetKeyMode(Config config) :
     m_hpcpAverage(config.hpcpAverage),
     m_medianAverage(config.medianAverage),
     m_decimationFactor(config.decimationFactor),
-    m_chrPointer(0),
-    m_decimatedBuffer(0),
-    m_chromaBuffer(0),
-    m_meanHPCP(0),
-    m_majCorr(0),
-    m_minCorr(0),
-    m_medianFilterBuffer(0),
-    m_sortedBuffer(0),
-    m_keyStrengths(0)
+    m_chrPointer(nullptr),
+    m_decimatedBuffer(nullptr),
+    m_chromaBuffer(nullptr),
+    m_meanHPCP(nullptr),
+    m_majCorr(nullptr),
+    m_minCorr(nullptr),
+    m_medianFilterBuffer(nullptr),
+    m_sortedBuffer(nullptr),
+    m_keyStrengths(nullptr)
 {
     ChromaConfig chromaConfig;
     

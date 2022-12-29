@@ -32,14 +32,14 @@ DownBeat::DownBeat(float originalSampleRate,
     m_rate(originalSampleRate),
     m_factor(decimationFactor),
     m_increment(dfIncrement),
-    m_decimator1(0),
-    m_decimator2(0),
-    m_buffer(0),
-    m_decbuf(0),
+    m_decimator1(nullptr),
+    m_decimator2(nullptr),
+    m_buffer(nullptr),
+    m_decbuf(nullptr),
     m_bufsiz(0),
     m_buffill(0),
     m_beatframesize(0),
-    m_beatframe(0)
+    m_beatframe(nullptr)
 {
     // beat frame size is next power of two up from 1.3 seconds at the
     // downsampled rate (happens to produce 4096 for 44100 or 48000 at
@@ -129,7 +129,7 @@ DownBeat::resetAudioBuffer()
     if (m_buffer) {
         free(m_buffer);
     }
-    m_buffer = 0;
+    m_buffer = nullptr;
     m_buffill = 0;
     m_bufsiz = 0;
 }

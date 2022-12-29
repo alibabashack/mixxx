@@ -127,8 +127,8 @@ public:
 
     static void circShift( double* data, int length, int shift);
 
-    static int getMax( double* data, int length, double* max = 0 );
-    static int getMax( const std::vector<double> &data, double* max = 0 );
+    static int getMax( double* data, int length, double* max = nullptr );
+    static int getMax( const std::vector<double> &data, double* max = nullptr );
     static int compareInt(const void * a, const void * b);
 
     /** 

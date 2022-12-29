@@ -43,8 +43,8 @@ struct DFProcConfig
     DFProcConfig() :
         length(0),
         LPOrd(0),
-        LPACoeffs(NULL),
-        LPBCoeffs(NULL),
+        LPACoeffs(nullptr),
+        LPBCoeffs(nullptr),
         winPre(0),
         winPost(0),
         AlphaNormParam(0),

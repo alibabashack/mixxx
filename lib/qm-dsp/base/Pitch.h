@@ -27,7 +27,7 @@ public:
                                       float concertA = 440.0);
 
     static int getPitchForFrequency(float frequency,
-                                    float *centsOffsetReturn = 0,
+                                    float *centsOffsetReturn = nullptr,
                                     float concertA = 440.0);
 };
 

@@ -21,12 +21,12 @@
 //////////////////////////////////////////////////////////////////////
 
 DetectionFunction::DetectionFunction( DFConfig config ) :
-    m_window(0)
+    m_window(nullptr)
 {
-    m_magHistory = NULL;
-    m_phaseHistory = NULL;
-    m_phaseHistoryOld = NULL;
-    m_magPeaks = NULL;
+    m_magHistory = nullptr;
+    m_phaseHistory = nullptr;
+    m_phaseHistoryOld = nullptr;
+    m_magPeaks = nullptr;
 
     initialise( config );
 }

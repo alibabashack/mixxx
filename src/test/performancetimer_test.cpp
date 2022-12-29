@@ -10,10 +10,10 @@ TEST(PerformanceTimerTest, DifferenceCanBeNegative) {
     PerformanceTimer early;
     early.start();
 
-    std::time_t start = time(0);
+    std::time_t start = time(nullptr);
     while (1) {
         // use the standard clock to make sure we don't run forever
-        double seconds = difftime(time(0), start);
+        double seconds = difftime(time(nullptr), start);
 
         PerformanceTimer late;
         late.start();

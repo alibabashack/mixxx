@@ -49,7 +49,7 @@ public:
     virtual ~TempoTrack();
 
     std::vector<int> process( std::vector <double> DF,
-                              std::vector <double> *tempoReturn = 0);
+                              std::vector <double> *tempoReturn = nullptr);
 
         
 private:

@@ -134,10 +134,10 @@ class BaseSignalPathTest : public MixxxTest, SoundSourceProviderRegistration {
         delete m_pMixerDeck1;
         delete m_pMixerDeck2;
         delete m_pMixerDeck3;
-        m_pChannel1 = NULL;
-        m_pChannel2 = NULL;
-        m_pChannel3 = NULL;
-        m_pEngineSync = NULL;
+        m_pChannel1 = nullptr;
+        m_pChannel2 = nullptr;
+        m_pChannel3 = nullptr;
+        m_pEngineSync = nullptr;
         delete m_pPreview1;
 
         // Deletes all EngineChannels added to it.

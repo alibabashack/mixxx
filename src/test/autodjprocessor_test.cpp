@@ -39,7 +39,7 @@ class FakeMaster {
 class FakeDeck : public BaseTrackPlayer {
   public:
     FakeDeck(const QString& group, EngineChannel::ChannelOrientation orient)
-            : BaseTrackPlayer(NULL, group),
+            : BaseTrackPlayer(nullptr, group),
               trackSamples(ConfigKey(group, "track_samples")),
               samplerate(ConfigKey(group, "track_samplerate")),
               rateratio(ConfigKey(group, "rate_ratio"), true, false, false, 1.0),

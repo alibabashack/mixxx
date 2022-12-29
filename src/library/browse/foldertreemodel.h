@@ -17,7 +17,7 @@ class TreeItem;
 class FolderTreeModel : public TreeItemModel {
     Q_OBJECT
   public:
-    FolderTreeModel(QObject *parent = 0);
+    FolderTreeModel(QObject *parent = nullptr);
     virtual ~FolderTreeModel();
     virtual bool hasChildren(const QModelIndex& parent = QModelIndex()) const;
     bool directoryHasChildren(const QString& path) const;

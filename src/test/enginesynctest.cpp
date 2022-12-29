@@ -88,8 +88,8 @@ class EngineSyncTest : public MockedEngineBackendTest {
     }
 
     void assertNoLeader() {
-        EXPECT_EQ(NULL, m_pEngineSync->getLeaderChannel());
-        EXPECT_EQ(NULL, m_pEngineSync->getLeaderSyncable());
+        EXPECT_EQ(nullptr, m_pEngineSync->getLeaderChannel());
+        EXPECT_EQ(nullptr, m_pEngineSync->getLeaderSyncable());
     }
 
   private:
@@ -1225,7 +1225,7 @@ TEST_F(EngineSyncTest, SyncToNonSyncDeck) {
     EXPECT_DOUBLE_EQ(
             100.0, ControlObject::get(ConfigKey(m_sInternalClockGroup, "bpm")));
     EXPECT_EQ(nullptr, m_pEngineSync->getLeaderChannel());
-    EXPECT_EQ(NULL, m_pEngineSync->getLeaderSyncable());
+    EXPECT_EQ(nullptr, m_pEngineSync->getLeaderSyncable());
     EXPECT_EQ(static_cast<double>(SyncMode::None),
             ControlObject::get(ConfigKey(m_sGroup1, "sync_mode")));
     EXPECT_EQ(0, ControlObject::get(ConfigKey(m_sGroup1, "sync_enabled")));
@@ -1251,7 +1251,7 @@ TEST_F(EngineSyncTest, SyncToNonSyncDeck) {
     EXPECT_DOUBLE_EQ(
             100.0, ControlObject::get(ConfigKey(m_sInternalClockGroup, "bpm")));
     EXPECT_EQ(nullptr, m_pEngineSync->getLeaderChannel());
-    EXPECT_EQ(NULL, m_pEngineSync->getLeaderSyncable());
+    EXPECT_EQ(nullptr, m_pEngineSync->getLeaderSyncable());
     EXPECT_EQ(static_cast<double>(SyncMode::None),
             ControlObject::get(ConfigKey(m_sGroup2, "sync_mode")));
     EXPECT_EQ(0, ControlObject::get(ConfigKey(m_sGroup2, "sync_enabled")));

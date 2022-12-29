@@ -21,7 +21,7 @@
 //----------------------------------------------------------------------------
 
 ConstantQ::ConstantQ( CQConfig config ) :
-    m_sparseKernel(0)
+    m_sparseKernel(nullptr)
 {
     initialise(config);
 }

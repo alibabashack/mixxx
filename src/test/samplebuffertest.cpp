@@ -65,7 +65,7 @@ TEST_F(ReadAheadSampleBufferTest, emptyWithoutCapacity) {
 
     const mixxx::SampleBuffer::WritableSlice writableSlice(
             sampleBuffer.growForWriting(10));
-    EXPECT_EQ(writableSlice.data(), static_cast<CSAMPLE*>(NULL));
+    EXPECT_EQ(writableSlice.data(), static_cast<CSAMPLE*>(nullptr));
     EXPECT_EQ(writableSlice.length(), 0);
     EXPECT_TRUE(sampleBuffer.empty());
 

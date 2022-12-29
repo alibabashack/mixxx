@@ -68,8 +68,8 @@ int Chromagram::initialise( ChromaConfig Config )
     m_CQRe  = new double[ m_uK ];
     m_CQIm  = new double[ m_uK ];
 
-    m_window = 0;
-    m_windowbuf = 0;
+    m_window = nullptr;
+    m_windowbuf = nullptr;
 
     return 1;
 }

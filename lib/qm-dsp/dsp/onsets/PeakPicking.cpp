@@ -34,7 +34,7 @@
 
 PeakPicking::PeakPicking( PPickParams Config )
 {
-    m_workBuffer = NULL;
+    m_workBuffer = nullptr;
     initialise( Config );
 }
 
@@ -70,7 +70,7 @@ void PeakPicking::deInitialise()
 {
     delete [] m_workBuffer;
     delete m_DFSmoothing;
-    m_workBuffer = NULL;
+    m_workBuffer = nullptr;
 }
 
 void PeakPicking::process( double* src, int len, vector<int> &onsets )
