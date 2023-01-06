@@ -47,7 +47,7 @@ class BulkController : public Controller {
     std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
 
-    bool isMappable() const override {
+    [[nodiscard]] bool isMappable() const override {
         if (!m_pMapping) {
             return false;
         }

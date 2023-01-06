@@ -103,11 +103,11 @@ class ChannelCount {
             : m_value(valueFromLayout(layout)) {
     }
 
-    constexpr bool isValid() const {
+    [[nodiscard]] constexpr bool isValid() const {
         return kValueMin <= m_value;
     }
 
-    constexpr value_t value() const {
+    [[nodiscard]] constexpr value_t value() const {
         return m_value;
     }
     /*implicit*/ constexpr operator value_t() const {
@@ -146,7 +146,7 @@ class SampleRate {
             : m_value(value) {
     }
 
-    constexpr bool isValid() const {
+    [[nodiscard]] constexpr bool isValid() const {
         return kValueMin <= m_value && m_value <= kValueMax;
     }
 
@@ -154,7 +154,7 @@ class SampleRate {
         m_value = value;
     }
 
-    constexpr value_t value() const {
+    [[nodiscard]] constexpr value_t value() const {
         return m_value;
     }
     /*implicit*/ constexpr operator value_t() const {
@@ -169,7 +169,7 @@ class SampleRate {
         return sampleRate;
     }
 
-    constexpr double toDouble() const {
+    [[nodiscard]] constexpr double toDouble() const {
         return static_cast<double>(value());
     }
 
@@ -209,11 +209,11 @@ class Bitrate {
             : m_value(value) {
     }
 
-    constexpr bool isValid() const {
+    [[nodiscard]] constexpr bool isValid() const {
         return m_value > kValueDefault;
     }
 
-    constexpr value_t value() const {
+    [[nodiscard]] constexpr value_t value() const {
         return m_value;
     }
     /*implicit*/ constexpr operator value_t() const {

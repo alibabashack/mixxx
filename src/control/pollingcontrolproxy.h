@@ -27,32 +27,32 @@ class PollingControlProxy {
         DEBUG_ASSERT(m_pControl);
     }
 
-    bool valid() const {
+    [[nodiscard]] bool valid() const {
         return m_pControl->getKey().isValid();
     }
 
     /// Returns the value of the object. Thread safe, non-blocking.
-    double get() const {
+    [[nodiscard]] double get() const {
         return m_pControl->get();
     }
 
     /// Returns the bool interpretation of the value
-    bool toBool() const {
+    [[nodiscard]] bool toBool() const {
         return get() > 0.0;
     }
 
     /// Returns the parameterized value of the object. Thread safe, non-blocking.
-    double getParameter() const {
+    [[nodiscard]] double getParameter() const {
         return m_pControl->getParameter();
     }
 
     /// Returns the parameterized value of the object. Thread safe, non-blocking.
-    double getParameterForValue(double value) const {
+    [[nodiscard]] double getParameterForValue(double value) const {
         return m_pControl->getParameterForValue(value);
     }
 
     /// Returns the normalized parameter of the object. Thread safe, non-blocking.
-    double getDefault() const {
+    [[nodiscard]] double getDefault() const {
         return m_pControl->defaultValue();
     }
 

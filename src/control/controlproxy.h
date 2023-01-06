@@ -27,7 +27,7 @@ class ControlProxy : public QObject {
             ControlFlags flags = ControlFlag::None);
     ~ControlProxy() override;
 
-    const ConfigKey& getKey() const;
+    [[nodiscard]] const ConfigKey& getKey() const;
 
     template<typename Receiver, typename Slot>
     bool connectValueChanged(Receiver receiver,
@@ -105,32 +105,32 @@ class ControlProxy : public QObject {
         emit valueChanged(get());
     }
 
-    inline bool valid() const {
+    [[nodiscard]] inline bool valid() const {
         return m_pControl->getKey().isValid();
     }
 
     /// Returns the value of the object. Thread safe, non-blocking.
-    inline double get() const {
+    [[nodiscard]] inline double get() const {
         return m_pControl->get();
     }
 
     /// Returns the bool interpretation of the value. Thread safe, non-blocking.
-    inline bool toBool() const {
+    [[nodiscard]] inline bool toBool() const {
         return get() > 0.0;
     }
 
     /// Returns the parameterized value of the object. Thread safe, non-blocking.
-    inline double getParameter() const {
+    [[nodiscard]] inline double getParameter() const {
         return m_pControl->getParameter();
     }
 
     /// Returns the parameterized value of the object. Thread safe, non-blocking.
-    inline double getParameterForValue(double value) const {
+    [[nodiscard]] inline double getParameterForValue(double value) const {
         return m_pControl->getParameterForValue(value);
     }
 
     /// Returns the normalized parameter of the object. Thread safe, non-blocking.
-    inline double getDefault() const {
+    [[nodiscard]] inline double getDefault() const {
         return m_pControl->defaultValue();
     }
 

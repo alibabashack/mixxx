@@ -64,7 +64,7 @@ class ControlDoublePrivate : public QObject {
 
     static QHash<ConfigKey, ConfigKey> getControlAliases();
 
-    const QString& name() const {
+    [[nodiscard]] const QString& name() const {
         return m_name;
     }
 
@@ -72,7 +72,7 @@ class ControlDoublePrivate : public QObject {
         m_name = name;
     }
 
-    const QString& description() const {
+    [[nodiscard]] const QString& description() const {
         return m_description;
     }
 
@@ -86,7 +86,7 @@ class ControlDoublePrivate : public QObject {
     // ValueChangeRequest slot.
     void setAndConfirm(double value, QObject* pSender);
     // Gets the control value.
-    double get() const {
+    [[nodiscard]] double get() const {
         return m_value.getValue();
     }
     // Resets the control value to its default.
@@ -101,14 +101,14 @@ class ControlDoublePrivate : public QObject {
     void setBehavior(ControlNumericBehavior* pBehavior);
 
     void setParameter(double dParam, QObject* pSender);
-    double getParameter() const;
-    double getParameterForValue(double value) const;
-    double getParameterForMidi(double midiValue) const;
+    [[nodiscard]] double getParameter() const;
+    [[nodiscard]] double getParameterForValue(double value) const;
+    [[nodiscard]] double getParameterForMidi(double midiValue) const;
 
     void setValueFromMidi(MidiOpCode opcode, double dParam);
-    double getMidiParameter() const;
+    [[nodiscard]] double getMidiParameter() const;
 
-    bool ignoreNops() const {
+    [[nodiscard]] bool ignoreNops() const {
         return m_bIgnoreNops;
     }
 
@@ -116,11 +116,11 @@ class ControlDoublePrivate : public QObject {
         m_defaultValue.setValue(dValue);
     }
 
-    double defaultValue() const {
+    [[nodiscard]] double defaultValue() const {
         return m_defaultValue.getValue();
     }
 
-    ControlObject* getCreatorCO() const {
+    [[nodiscard]] ControlObject* getCreatorCO() const {
         return m_pCreatorCO.loadAcquire();
     }
 

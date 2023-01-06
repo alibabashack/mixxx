@@ -35,7 +35,7 @@ class ControlPushButton : public ControlObject {
          TRIGGER,
     };
 
-    static QString buttonModeToString(int mode) {
+    [[nodiscard]] static QString buttonModeToString(int mode) {
         switch(mode) {
             case ControlPushButton::PUSH:
                 return "PUSH";
@@ -55,7 +55,7 @@ class ControlPushButton : public ControlObject {
     ControlPushButton(const ConfigKey& key, bool bPersist = false, double defaultValue = 0.0);
     ~ControlPushButton() override;
 
-    inline ButtonMode getButtonMode() const {
+    [[nodiscard]] inline ButtonMode getButtonMode() const {
         return m_buttonMode;
     }
     void setButtonMode(enum ButtonMode mode);

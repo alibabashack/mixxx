@@ -33,7 +33,7 @@ class ControlObject : public QObject {
         return getControl(key, flags);
     }
 
-    QString name() const {
+    [[nodiscard]] QString name() const {
         return m_pControl ?  m_pControl->name() : QString();
     }
 
@@ -43,7 +43,7 @@ class ControlObject : public QObject {
         }
     }
 
-    const QString description() const {
+    [[nodiscard]] const QString description() const {
         return m_pControl ?  m_pControl->description() : QString();
     }
 
@@ -54,25 +54,25 @@ class ControlObject : public QObject {
     }
 
     // Return the key of the object
-    inline ConfigKey getKey() const {
+    [[nodiscard]] inline ConfigKey getKey() const {
         return m_key;
     }
 
     // Returns the value of the ControlObject
-    inline double get() const {
+    [[nodiscard]] inline double get() const {
         return m_pControl ? m_pControl->get() : 0.0;
     }
 
     // Returns the bool interpretation of the ControlObject
-    inline bool toBool() const {
+    [[nodiscard]] inline bool toBool() const {
         return get() > 0.0;
     }
 
     // Instantly returns the value of the ControlObject
-    static double get(const ConfigKey& key);
+    [[nodiscard]] static double get(const ConfigKey& key);
 
     /// Returns the boolean interpretation of the ControlObject's value.
-    static bool toBool(const ConfigKey& key) {
+    [[nodiscard]] static bool toBool(const ConfigKey& key) {
         return ControlObject::get(key) > 0;
     }
 
@@ -111,18 +111,18 @@ class ControlObject : public QObject {
             m_pControl->setDefaultValue(dValue);
         }
     }
-    inline double defaultValue() const {
+    [[nodiscard]] inline double defaultValue() const {
         return m_pControl ? m_pControl->defaultValue() : 0.0;
     }
 
     // Returns the parameterized value of the object. Thread safe, non-blocking.
-    virtual double getParameter() const;
+    [[nodiscard]] virtual double getParameter() const;
 
     // Returns the parameterized value of the object. Thread safe, non-blocking.
-    virtual double getParameterForValue(double value) const;
+    [[nodiscard]] virtual double getParameterForValue(double value) const;
 
     // Returns the parameterized value of the object. Thread safe, non-blocking.
-    virtual double getParameterForMidi(double midiValue) const;
+    [[nodiscard]] virtual double getParameterForMidi(double midiValue) const;
 
     // Sets the control parameterized value to v. Thread safe, non-blocking.
     virtual void setParameter(double v);
@@ -157,7 +157,7 @@ class ControlObject : public QObject {
     // DEPRECATED: Called to set the control value from the controller
     // subsystem.
     virtual void setValueFromMidi(MidiOpCode o, double v);
-    virtual double getMidiParameter() const;
+    [[nodiscard]] virtual double getMidiParameter() const;
 
   protected:
     // Key of the object
@@ -174,7 +174,7 @@ class ControlObject : public QObject {
     ControlObject& operator=(ControlObject&&) = delete;
     ControlObject& operator=(const ControlObject&) = delete;
 
-    inline bool ignoreNops() const {
+    [[nodiscard]] inline bool ignoreNops() const {
         return m_pControl ? m_pControl->ignoreNops() : true;
     }
 };

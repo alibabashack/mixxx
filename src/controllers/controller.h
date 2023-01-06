@@ -37,23 +37,23 @@ class Controller : public QObject {
     /// Clone the mapping before passing to setMapping for use in the controller polling thread.
     virtual void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) = 0;
 
-    inline bool isOpen() const {
+    [[nodiscard]] inline bool isOpen() const {
         return m_bIsOpen;
     }
-    inline bool isOutputDevice() const {
+    [[nodiscard]] inline bool isOutputDevice() const {
         return m_bIsOutputDevice;
     }
-    inline bool isInputDevice() const {
+    [[nodiscard]] inline bool isInputDevice() const {
         return m_bIsInputDevice;
     }
-    inline const QString& getName() const {
+    [[nodiscard]] inline const QString& getName() const {
         return m_sDeviceName;
     }
-    inline const QString& getCategory() const {
+    [[nodiscard]] inline const QString& getCategory() const {
         return m_sDeviceCategory;
     }
-    virtual bool isMappable() const = 0;
-    inline bool isLearning() const {
+    [[nodiscard]] virtual bool isMappable() const = 0;
+    [[nodiscard]] inline bool isLearning() const {
         return m_bLearning;
     }
 
@@ -117,7 +117,7 @@ class Controller : public QObject {
     // To be called when receiving events
     void triggerActivity();
 
-    inline ControllerScriptEngineLegacy* getScriptEngine() const {
+    [[nodiscard]] inline ControllerScriptEngineLegacy* getScriptEngine() const {
         return m_pScriptEngineLegacy;
     }
     inline void setDeviceCategory(const QString& deviceCategory) {
@@ -149,7 +149,7 @@ class Controller : public QObject {
 
     // Returns true if this device should receive polling signals via calls to
     // its poll() method.
-    virtual bool isPolling() const {
+    [[nodiscard]] virtual bool isPolling() const {
         return false;
     }
 

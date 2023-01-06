@@ -42,7 +42,7 @@ class FramePos final {
     /// Return an engine sample position. The `FramePos` is expected to be
     /// valid. If invalid positions are possible (e.g. for control object
     /// values), use `FramePos::toEngineSamplePosMaybeInvalid` instead.
-    double toEngineSamplePos() const {
+    [[nodiscard]] double toEngineSamplePos() const {
         DEBUG_ASSERT(isValid());
         return value() * mixxx::kEngineChannelCount;
     }
@@ -69,7 +69,7 @@ class FramePos final {
     /// for compatibility with our control objects and legacy parts of the code
     /// base. Using a different code path based on the output of `isValid()` is
     /// preferable.
-    double toEngineSamplePosMaybeInvalid() const {
+    [[nodiscard]] double toEngineSamplePosMaybeInvalid() const {
         if (!isValid()) {
             return kLegacyInvalidEnginePosition;
         }
@@ -79,7 +79,7 @@ class FramePos final {
     /// Return true if the frame position is valid. Any finite value is
     /// considered valid, i.e. any value except NaN and negative/positive
     /// infinity.
-    bool isValid() const {
+    [[nodiscard]] bool isValid() const {
         return util_isfinite(m_framePosition);
     }
 
@@ -88,7 +88,7 @@ class FramePos final {
     }
 
     /// Return the underlying primitive value for this frame position.
-    value_t value() const {
+    [[nodiscard]] value_t value() const {
         VERIFY_OR_DEBUG_ASSERT(isValid()) {
             return FramePos::kInvalidValue;
         }
@@ -97,7 +97,7 @@ class FramePos final {
 
     /// Return true if the frame position has a fractional part, i.e. if it is
     /// not located at a full frame boundary.
-    bool isFractional() const {
+    [[nodiscard]] bool isFractional() const {
         DEBUG_ASSERT(isValid());
         value_t integerPart;
         return std::modf(value(), &integerPart) != 0;

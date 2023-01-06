@@ -19,7 +19,7 @@ class ControlSortFilterModel : public QSortFilterProxyModel {
     ControlSortFilterModel(QObject* pParent = nullptr);
     ~ControlSortFilterModel() override;
 
-    bool sortDescending() const;
+    [[nodiscard]] bool sortDescending() const;
 
     Q_INVOKABLE void sortByColumn(int sortColumn, bool sortDescending);
 

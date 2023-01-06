@@ -35,7 +35,7 @@ class StreamInfo final {
     StreamInfo(const StreamInfo&) = default;
     /*non-virtual*/ ~StreamInfo() = default;
 
-    constexpr bool isValid() const {
+    [[nodiscard]] constexpr bool isValid() const {
         return getSignalInfo().isValid() &&
                 getBitrate().isValid() &&
                 (getDuration() > Duration::empty());

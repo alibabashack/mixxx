@@ -20,7 +20,7 @@ class TrackAnalysisSchedulerEnvironment {
   public:
     virtual ~TrackAnalysisSchedulerEnvironment() = default;
 
-    virtual TrackPointer loadTrackById(TrackId trackId) const = 0;
+    [[nodiscard]] virtual TrackPointer loadTrackById(TrackId trackId) const = 0;
 };
 
 class TrackAnalysisScheduler : public QObject {
@@ -92,12 +92,12 @@ class TrackAnalysisScheduler : public QObject {
             return static_cast<bool>(m_thread);
         }
 
-        AnalyzerThread* thread() const {
+        [[nodiscard]] AnalyzerThread* thread() const {
             DEBUG_ASSERT(m_thread);
             return m_thread.get();
         }
 
-        AnalyzerProgress analyzerProgress() const {
+        [[nodiscard]] AnalyzerProgress analyzerProgress() const {
             return m_analyzerProgress;
         }
 
@@ -143,7 +143,7 @@ class TrackAnalysisScheduler : public QObject {
     bool submitNextTrack(Worker* worker);
     void emitProgressOrFinished();
 
-    bool allTracksFinished() const {
+    [[nodiscard]] bool allTracksFinished() const {
         return m_queuedTracks.empty() &&
                 m_pendingTrackIds.empty();
     }

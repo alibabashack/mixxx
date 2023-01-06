@@ -27,7 +27,7 @@ class SignalInfo final {
     SignalInfo(const SignalInfo&) = default;
     /*non-virtual*/ ~SignalInfo() = default;
 
-    constexpr bool isValid() const {
+    [[nodiscard]] constexpr bool isValid() const {
         return getChannelCount().isValid() &&
                 getSampleRate().isValid();
     }
@@ -37,48 +37,48 @@ class SignalInfo final {
 
     // Conversion: #samples / sample offset -> #frames / frame offset
     // Only works for integer sample offsets on frame boundaries!
-    SINT samples2frames(SINT samples) const {
+    [[nodiscard]] SINT samples2frames(SINT samples) const {
         DEBUG_ASSERT(getChannelCount().isValid());
         DEBUG_ASSERT(0 == (samples % getChannelCount()));
         return samples / getChannelCount();
     }
 
     // Conversion: #samples / sample offset -> #frames / frame offset
-    double samples2framesFractional(double samples) const {
+    [[nodiscard]] double samples2framesFractional(double samples) const {
         DEBUG_ASSERT(getChannelCount().isValid());
         return samples / getChannelCount();
     }
 
     // Conversion: #frames / frame offset -> #samples / sample offset
-    SINT frames2samples(SINT frames) const {
+    [[nodiscard]] SINT frames2samples(SINT frames) const {
         DEBUG_ASSERT(getChannelCount().isValid());
         return frames * getChannelCount();
     }
 
     // Conversion: #frames / frame offset -> second offset
-    double frames2secsFractional(double frames) const {
+    [[nodiscard]] double frames2secsFractional(double frames) const {
         DEBUG_ASSERT(getSampleRate().isValid());
         return frames / getSampleRate();
     }
 
     // Conversion: #frames / frame offset -> second offset
-    double frames2secs(SINT frames) const {
+    [[nodiscard]] double frames2secs(SINT frames) const {
         return frames2secsFractional(static_cast<double>(frames));
     }
 
     // Conversion: second offset -> #frames / frame offset
-    double secs2frames(double seconds) const {
+    [[nodiscard]] double secs2frames(double seconds) const {
         DEBUG_ASSERT(getSampleRate().isValid());
         return seconds * getSampleRate();
     }
 
     // Conversion: #frames / frame offset -> millisecond offset
-    double frames2millis(SINT frames) const {
+    [[nodiscard]] double frames2millis(SINT frames) const {
         return frames2secs(frames) * 1000;
     }
 
     // Conversion: millisecond offset -> #frames / frame offset
-    double millis2frames(double milliseconds) const {
+    [[nodiscard]] double millis2frames(double milliseconds) const {
         return secs2frames(milliseconds / 1000);
     }
 };
