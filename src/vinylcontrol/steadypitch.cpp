@@ -7,7 +7,6 @@
 SteadyPitch::SteadyPitch(double threshold, bool assumeSteady)
     : m_bAssumeSteady(assumeSteady),
       m_dSteadyPitch(0.0),
-      m_dOldSteadyPitch(1.0),       // last-known steady pitch value
       m_dSteadyPitchTime(0.0),      // last track location we had a steady pitch
       m_dLastSteadyDur(0.0),        // last known duration of steadiness
       m_dLastTime(0.0),             // track location of previous call
@@ -88,7 +87,6 @@ double SteadyPitch::check(double pitch, double time)
         if (fabs(time - m_dSteadyPitchTime) > 2.0) //fabs for both directions
         {
             m_dSteadyPitch = pitch;
-            m_dOldSteadyPitch = m_dSteadyPitch; //this was a known-good value
             //update steady pitch time so it's between 1 and 2 seconds ago
             //(or ahead, if moving backward)
             m_dSteadyPitchTime += 1.0 * m_iPlayDirection;
@@ -100,8 +98,4 @@ double SteadyPitch::check(double pitch, double time)
     //else
     reset(pitch, time);
     return 0.0;
-}
-
-double SteadyPitch::steadyValue(void) const {
-    return m_dOldSteadyPitch;
 }
