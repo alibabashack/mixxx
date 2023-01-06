@@ -115,7 +115,7 @@ void VinylControlManager::requestReloadConfig() {
     m_pProcessor->requestReloadConfig();
 }
 
-bool VinylControlManager::vinylInputConnected(int deck) {
+bool VinylControlManager::vinylInputConnected(int deck) const {
     if (deck < 0 || deck >= m_iNumConfiguredDecks) {
         return false;
     }
@@ -126,7 +126,7 @@ bool VinylControlManager::vinylInputConnected(int deck) {
     return m_pProcessor->deckConfigured(deck);
 }
 
-int VinylControlManager::vinylInputFromGroup(const QString& group) {
+int VinylControlManager::vinylInputFromGroup(const QString& group) const {
     QRegularExpressionMatch channelMatch = kChannelRegex.match(group);
     if (channelMatch.hasMatch()) {
         bool ok = false;

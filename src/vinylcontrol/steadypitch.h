@@ -9,8 +9,8 @@ class SteadyPitch {
         SteadyPitch(double threshold, bool assumeSteady);
         void reset(double pitch, double time);
         double check(double pitch, double time);
-        bool directionChanged(double pitch);
-        bool resyncDetected(double new_time);
+        [[nodiscard]] bool directionChanged(double pitch) const;
+        [[nodiscard]] bool resyncDetected(double new_time) const;
     private:
         const bool m_bAssumeSteady;
         double m_dSteadyPitch;
