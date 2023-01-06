@@ -16,21 +16,21 @@ class HidController final : public Controller {
             mixxx::hid::DeviceInfo&& deviceInfo);
     ~HidController() override;
 
-    ControllerJSProxy* jsProxy() override;
+    [[nodiscard]] ControllerJSProxy* jsProxy() override;
 
-    QString mappingExtension() override;
+    [[nodiscard]] QString mappingExtension() const override;
 
-    std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> cloneMapping() const override;
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
 
-    bool isMappable() const override {
+    [[nodiscard]] bool isMappable() const override {
         if (!m_pMapping) {
             return false;
         }
         return m_pMapping->isMappable();
     }
 
-    bool matchMapping(const MappingInfo& mapping) override;
+    [[nodiscard]] bool matchMapping(const MappingInfo& mapping) const override;
 
   private slots:
     int open() override;

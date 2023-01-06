@@ -26,7 +26,7 @@ HidController::~HidController() {
     }
 }
 
-QString HidController::mappingExtension() {
+QString HidController::mappingExtension() const {
     return HID_MAPPING_EXTENSION;
 }
 
@@ -34,14 +34,14 @@ void HidController::setMapping(std::shared_ptr<LegacyControllerMapping> pMapping
     m_pMapping = downcastAndTakeOwnership<LegacyHidControllerMapping>(std::move(pMapping));
 }
 
-std::shared_ptr<LegacyControllerMapping> HidController::cloneMapping() {
+std::shared_ptr<LegacyControllerMapping> HidController::cloneMapping() const {
     if (!m_pMapping) {
         return nullptr;
     }
     return m_pMapping->clone();
 }
 
-bool HidController::matchMapping(const MappingInfo& mapping) {
+bool HidController::matchMapping(const MappingInfo& mapping) const {
     const QList<ProductInfo>& products = mapping.getProducts();
     for (const auto& product : products) {
         if (m_deviceInfo.matchProductInfo(product)) {

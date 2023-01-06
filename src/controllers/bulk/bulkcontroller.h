@@ -42,9 +42,9 @@ class BulkController : public Controller {
             struct libusb_device_descriptor* desc);
     ~BulkController() override;
 
-    QString mappingExtension() override;
+    [[nodiscard]] QString mappingExtension() const override;
 
-    std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> cloneMapping() const override;
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
 
     [[nodiscard]] bool isMappable() const override {
@@ -54,7 +54,7 @@ class BulkController : public Controller {
         return m_pMapping->isMappable();
     }
 
-    bool matchMapping(const MappingInfo& mapping) override;
+    [[nodiscard]] bool matchMapping(const MappingInfo& mapping) const override;
 
   protected:
     void send(const QList<int>& data, unsigned int length) override;
@@ -68,7 +68,7 @@ class BulkController : public Controller {
     // 0x0.
     void sendBytes(const QByteArray& data) override;
 
-    bool matchProductInfo(const ProductInfo& product);
+    [[nodiscard]] bool matchProductInfo(const ProductInfo& product) const;
 
     libusb_context* m_context;
     libusb_device_handle *m_phandle;

@@ -25,14 +25,14 @@ class Controller : public QObject {
     /// The object that is exposed to the JS scripts as the "controller" object.
     /// Subclasses of Controller can return a subclass of ControllerJSProxy to further
     /// customize their JS api.
-    virtual ControllerJSProxy* jsProxy();
+    [[nodiscard]] virtual ControllerJSProxy* jsProxy();
 
     /// Returns the extension for the controller (type) mapping files.  This is
     /// used by the ControllerManager to display only relevant mapping files for
     /// the controller (type.)
-    virtual QString mappingExtension() = 0;
+    [[nodiscard]] virtual QString mappingExtension() const = 0;
 
-    virtual std::shared_ptr<LegacyControllerMapping> cloneMapping() = 0;
+    [[nodiscard]] virtual std::shared_ptr<LegacyControllerMapping> cloneMapping() const = 0;
     /// WARNING: LegacyControllerMapping is not thread safe!
     /// Clone the mapping before passing to setMapping for use in the controller polling thread.
     virtual void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) = 0;
@@ -57,7 +57,7 @@ class Controller : public QObject {
         return m_bLearning;
     }
 
-    virtual bool matchMapping(const MappingInfo& mapping) = 0;
+    [[nodiscard]] virtual bool matchMapping(const MappingInfo& mapping) const = 0;
 
   signals:
     /// Emitted when the controller is opened or closed.
@@ -82,7 +82,7 @@ class Controller : public QObject {
 
   protected:
     template<typename SpecificMappingType>
-    std::shared_ptr<SpecificMappingType> downcastAndTakeOwnership(
+    [[nodiscard]] std::shared_ptr<SpecificMappingType> downcastAndTakeOwnership(
             std::shared_ptr<LegacyControllerMapping>&& pMapping) {
         // Controller cannot take ownership if pMapping is referenced elsewhere because
         // the controller polling thread needs exclusive accesses to the non-thread safe

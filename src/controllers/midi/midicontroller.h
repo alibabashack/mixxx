@@ -21,21 +21,21 @@ class MidiController : public Controller {
     explicit MidiController(const QString& deviceName);
     ~MidiController() override;
 
-    ControllerJSProxy* jsProxy() override;
+    [[nodiscard]] ControllerJSProxy* jsProxy() override;
 
-    QString mappingExtension() override;
+    [[nodiscard]] QString mappingExtension() const override;
 
     void setMapping(std::shared_ptr<LegacyControllerMapping> pMapping) override;
-    std::shared_ptr<LegacyControllerMapping> cloneMapping() override;
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> cloneMapping() const override;
 
-    bool isMappable() const override {
+    [[nodiscard]] bool isMappable() const override {
         if (!m_pMapping) {
             return false;
         }
         return m_pMapping->isMappable();
     }
 
-    bool matchMapping(const MappingInfo& mapping) override;
+    [[nodiscard]] bool matchMapping(const MappingInfo& mapping) const override;
 
   signals:
     void messageReceived(unsigned char status, unsigned char control, unsigned char value);

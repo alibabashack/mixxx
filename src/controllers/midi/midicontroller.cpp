@@ -25,7 +25,7 @@ ControllerJSProxy* MidiController::jsProxy() {
     return new MidiControllerJSProxy(this);
 }
 
-QString MidiController::mappingExtension() {
+QString MidiController::mappingExtension() const {
     return MIDI_MAPPING_EXTENSION;
 }
 
@@ -33,7 +33,7 @@ void MidiController::setMapping(std::shared_ptr<LegacyControllerMapping> pMappin
     m_pMapping = downcastAndTakeOwnership<LegacyMidiControllerMapping>(std::move(pMapping));
 }
 
-std::shared_ptr<LegacyControllerMapping> MidiController::cloneMapping() {
+std::shared_ptr<LegacyControllerMapping> MidiController::cloneMapping() const {
     if (!m_pMapping) {
         return nullptr;
     }
@@ -45,7 +45,7 @@ int MidiController::close() {
     return 0;
 }
 
-bool MidiController::matchMapping(const MappingInfo& mapping) {
+bool MidiController::matchMapping(const MappingInfo& mapping) const {
     // Product info mapping not implemented for MIDI devices yet
     Q_UNUSED(mapping);
     return false;

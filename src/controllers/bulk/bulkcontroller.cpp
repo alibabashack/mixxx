@@ -92,7 +92,7 @@ BulkController::~BulkController() {
     }
 }
 
-QString BulkController::mappingExtension() {
+QString BulkController::mappingExtension() const {
     return BULK_MAPPING_EXTENSION;
 }
 
@@ -100,14 +100,14 @@ void BulkController::setMapping(std::shared_ptr<LegacyControllerMapping> pMappin
     m_pMapping = downcastAndTakeOwnership<LegacyHidControllerMapping>(std::move(pMapping));
 }
 
-std::shared_ptr<LegacyControllerMapping> BulkController::cloneMapping() {
+std::shared_ptr<LegacyControllerMapping> BulkController::cloneMapping() const {
     if (!m_pMapping) {
         return nullptr;
     }
     return m_pMapping->clone();
 }
 
-bool BulkController::matchMapping(const MappingInfo& mapping) {
+bool BulkController::matchMapping(const MappingInfo& mapping) const {
     const QList<ProductInfo>& products = mapping.getProducts();
     for (const auto& product : products) {
         if (matchProductInfo(product)) {
@@ -117,7 +117,7 @@ bool BulkController::matchMapping(const MappingInfo& mapping) {
     return false;
 }
 
-bool BulkController::matchProductInfo(const ProductInfo& product) {
+bool BulkController::matchProductInfo(const ProductInfo& product) const {
     int value;
     bool ok;
     // Product and vendor match is always required

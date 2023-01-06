@@ -26,12 +26,12 @@ class FakeController : public Controller {
     FakeController();
     ~FakeController() override;
 
-    QString mappingExtension() override {
+    [[nodiscard]] QString mappingExtension() const override {
         // Doesn't affect anything at the moment.
         return ".test.xml";
     }
 
-    ControllerJSProxy* jsProxy() override {
+    [[nodiscard]] ControllerJSProxy* jsProxy() const override {
         return new FakeControllerJSProxy();
     }
 
@@ -54,7 +54,7 @@ class FakeController : public Controller {
         }
     }
 
-    std::shared_ptr<LegacyControllerMapping> cloneMapping() override {
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> cloneMapping() const override {
         if (m_pMidiMapping) {
             return m_pMidiMapping->clone();
         } else if (m_pHidMapping) {
@@ -63,9 +63,9 @@ class FakeController : public Controller {
         return nullptr;
     };
 
-    bool isMappable() const override;
+    [[nodiscard]] bool isMappable() const override;
 
-    bool matchMapping(const MappingInfo& mapping) override {
+    [[nodiscard]] bool matchMapping(const MappingInfo& mapping) const override {
         // We're not testing product info matching in this test.
         Q_UNUSED(mapping);
         return false;
