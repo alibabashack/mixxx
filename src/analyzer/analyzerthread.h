@@ -68,7 +68,7 @@ class AnalyzerThread : public WorkerThread {
             AnalyzerModeFlags modeFlags);
     ~AnalyzerThread() override = default;
 
-    int id() const {
+    [[nodiscard]] int id() const {
         return m_id;
     }
 

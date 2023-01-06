@@ -35,8 +35,8 @@ class AnalyzerBeats : public Analyzer {
     void cleanup() override;
 
   private:
-    bool shouldAnalyze(TrackPointer pTrack) const;
-    static QHash<QString, QString> getExtraVersionInfo(
+    [[nodiscard]] bool shouldAnalyze(TrackPointer pTrack) const;
+    [[nodiscard]] static QHash<QString, QString> getExtraVersionInfo(
             const QString& pluginId, bool bPreferencesFastAnalysis);
 
     BeatDetectionSettings m_bpmSettings;

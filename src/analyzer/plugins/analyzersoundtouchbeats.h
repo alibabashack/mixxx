@@ -25,7 +25,7 @@ class AnalyzerSoundTouchBeats : public AnalyzerBeatsPlugin {
     AnalyzerSoundTouchBeats();
     ~AnalyzerSoundTouchBeats() override;
 
-    AnalyzerPluginInfo info() const override {
+    [[nodiscard]] AnalyzerPluginInfo info() const override {
         return pluginInfo();
     }
 
@@ -33,11 +33,11 @@ class AnalyzerSoundTouchBeats : public AnalyzerBeatsPlugin {
     bool processSamples(const CSAMPLE* pIn, SINT iLen) override;
     bool finalize() override;
 
-    bool supportsBeatTracking() const override {
+    [[nodiscard]] bool supportsBeatTracking() const override {
         return false;
     }
 
-    mixxx::Bpm getBpm() const override {
+    [[nodiscard]] mixxx::Bpm getBpm() const override {
         return m_resultBpm;
     }
 

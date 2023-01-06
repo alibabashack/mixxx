@@ -15,10 +15,10 @@ class AnalyzerTrack {
     AnalyzerTrack(TrackPointer track, Options options = Options());
 
     /// Fetches the (not-null) track to be analyzed.
-    const TrackPointer& getTrack() const;
+    [[nodiscard]] const TrackPointer& getTrack() const;
 
     /// Fetches the additional options.
-    const Options& getOptions() const;
+    [[nodiscard]] const Options& getOptions() const;
 
   private:
     /// The (not-null) track to be analyzed.

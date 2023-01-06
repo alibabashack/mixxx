@@ -28,7 +28,7 @@ class AnalyzerQueenMaryBeats : public AnalyzerBeatsPlugin {
     AnalyzerQueenMaryBeats();
     ~AnalyzerQueenMaryBeats() override;
 
-    AnalyzerPluginInfo info() const override {
+    [[nodiscard]] AnalyzerPluginInfo info() const override {
         return pluginInfo();
     }
 
@@ -36,11 +36,11 @@ class AnalyzerQueenMaryBeats : public AnalyzerBeatsPlugin {
     bool processSamples(const CSAMPLE* pIn, SINT iLen) override;
     bool finalize() override;
 
-    bool supportsBeatTracking() const override {
+    [[nodiscard]] bool supportsBeatTracking() const override {
         return true;
     }
 
-    QVector<mixxx::audio::FramePos> getBeats() const override {
+    [[nodiscard]] QVector<mixxx::audio::FramePos> getBeats() const override {
         return m_resultBeats;
     }
 

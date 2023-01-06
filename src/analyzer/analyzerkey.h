@@ -31,7 +31,7 @@ class AnalyzerKey : public Analyzer {
     static QHash<QString, QString> getExtraVersionInfo(
             const QString& pluginId, bool bPreferencesFastAnalysis);
 
-    bool shouldAnalyze(TrackPointer tio) const;
+    [[nodiscard]] bool shouldAnalyze(TrackPointer tio) const;
 
     KeyDetectionSettings m_keySettings;
     std::unique_ptr<mixxx::AnalyzerKeyPlugin> m_pPlugin;

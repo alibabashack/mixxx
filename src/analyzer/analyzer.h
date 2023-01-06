@@ -66,7 +66,7 @@ class AnalyzerWithState final {
         }
     }
 
-    bool isActive() const {
+    [[nodiscard]] bool isActive() const {
         return m_active;
     }
 

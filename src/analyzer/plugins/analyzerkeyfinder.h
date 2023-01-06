@@ -15,7 +15,7 @@ class AnalyzerKeyFinder : public AnalyzerKeyPlugin {
     AnalyzerKeyFinder();
     ~AnalyzerKeyFinder() override = default;
 
-    AnalyzerPluginInfo info() const override {
+    [[nodiscard]] AnalyzerPluginInfo info() const override {
         return pluginInfo();
     }
 
@@ -23,7 +23,7 @@ class AnalyzerKeyFinder : public AnalyzerKeyPlugin {
     bool processSamples(const CSAMPLE* pIn, SINT iLen) override;
     bool finalize() override;
 
-    KeyChangeList getKeyChanges() const override {
+    [[nodiscard]] KeyChangeList getKeyChanges() const override {
         return m_resultKeys;
     }
 
