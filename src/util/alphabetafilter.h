@@ -53,12 +53,12 @@ class AlphaBetaFilter {
     }
 
     // Get the velocity after filtering.
-    double predictedVelocity() const {
+    [[nodiscard]] double predictedVelocity() const {
         return m_v;
     }
 
     // Get the position after filtering.
-    double predictedPosition() const {
+    [[nodiscard]] double predictedPosition() const {
         return m_x;
     }
 

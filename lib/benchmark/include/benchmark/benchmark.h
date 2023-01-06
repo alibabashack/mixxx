@@ -581,7 +581,7 @@ class State {
   void SkipWithError(const char* msg);
 
   // Returns true if an error has been reported with 'SkipWithError(...)'.
-  bool error_occurred() const { return error_occurred_; }
+  [[nodiscard]] bool error_occurred() const { return error_occurred_; }
 
   // REQUIRES: called exactly once per iteration of the benchmarking loop.
   // Set the manually measured time for this benchmark iteration, which
@@ -603,7 +603,7 @@ class State {
         Counter(static_cast<double>(bytes), Counter::kIsRate, Counter::kIs1024);
   }
 
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int64_t bytes_processed() const {
     if (counters.find("bytes_per_second") != counters.end())
       return static_cast<int64_t>(counters.at("bytes_per_second"));
@@ -618,7 +618,7 @@ class State {
   BENCHMARK_ALWAYS_INLINE
   void SetComplexityN(int64_t complexity_n) { complexity_n_ = complexity_n; }
 
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int64_t complexity_length_n() const { return complexity_n_; }
 
   // If this routine is called with items > 0, then an items/s
@@ -633,7 +633,7 @@ class State {
         Counter(static_cast<double>(items), benchmark::Counter::kIsRate);
   }
 
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int64_t items_processed() const {
     if (counters.find("items_per_second") != counters.end())
       return static_cast<int64_t>(counters.at("items_per_second"));
@@ -659,27 +659,27 @@ class State {
   }
 
   // Range arguments for this run. CHECKs if the argument has been set.
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int64_t range(std::size_t pos = 0) const {
     assert(range_.size() > pos);
     return range_[pos];
   }
 
-  BENCHMARK_DEPRECATED_MSG("use 'range(0)' instead")
+  [[nodiscard]] BENCHMARK_DEPRECATED_MSG("use 'range(0)' instead")
   int64_t range_x() const { return range(0); }
 
-  BENCHMARK_DEPRECATED_MSG("use 'range(1)' instead")
+  [[nodiscard]] BENCHMARK_DEPRECATED_MSG("use 'range(1)' instead")
   int64_t range_y() const { return range(1); }
 
   // Number of threads concurrently executing the benchmark.
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int threads() const { return threads_; }
 
   // Index of the executing thread. Values from [0, threads).
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   int thread_index() const { return thread_index_; }
 
-  BENCHMARK_ALWAYS_INLINE
+  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
   IterationCount iterations() const {
     if (BENCHMARK_BUILTIN_EXPECT(!started_, false)) {
       return 0;
@@ -1009,7 +1009,7 @@ class Benchmark {
   Benchmark(Benchmark const&);
   void SetName(const char* name);
 
-  int ArgsCnt() const;
+  [[nodiscard]] int ArgsCnt() const;
 
  private:
   friend class BenchmarkFamilies;
@@ -1401,7 +1401,7 @@ struct BenchmarkName {
 
   // Return the full name of the benchmark with each non-empty
   // field separated by a '/'
-  std::string str() const;
+  [[nodiscard]] std::string str() const;
 };
 
 // Interface for custom benchmark result printers.
@@ -1444,7 +1444,7 @@ class BenchmarkReporter {
           allocs_per_iter(0.0),
           max_bytes_used(0) {}
 
-    std::string benchmark_name() const;
+    [[nodiscard]] std::string benchmark_name() const;
     BenchmarkName run_name;
     int64_t family_index;
     int64_t per_family_instance_index;
@@ -1467,13 +1467,13 @@ class BenchmarkReporter {
     // specified by 'time_unit'.
     // NOTE: If 'iterations' is zero the returned value represents the
     // accumulated time.
-    double GetAdjustedRealTime() const;
+    [[nodiscard]] double GetAdjustedRealTime() const;
 
     // Return a value representing the cpu time per iteration in the unit
     // specified by 'time_unit'.
     // NOTE: If 'iterations' is zero the returned value represents the
     // accumulated time.
-    double GetAdjustedCPUTime() const;
+    [[nodiscard]] double GetAdjustedCPUTime() const;
 
     // This is set to 0.0 if memory tracing is not enabled.
     double max_heapbytes_used;
@@ -1550,9 +1550,9 @@ class BenchmarkReporter {
     error_stream_ = err;
   }
 
-  std::ostream& GetOutputStream() const { return *output_stream_; }
+  [[nodiscard]] std::ostream& GetOutputStream() const { return *output_stream_; }
 
-  std::ostream& GetErrorStream() const { return *error_stream_; }
+  [[nodiscard]] std::ostream& GetErrorStream() const { return *error_stream_; }
 
   virtual ~BenchmarkReporter();
 

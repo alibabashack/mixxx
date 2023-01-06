@@ -41,7 +41,7 @@ class AnalysisDao : public DAO {
     bool deleteAnalysesByType(
             const QSqlDatabase& database,
             AnalysisType type) const;
-    size_t getDiskUsageInBytes(
+    [[nodiscard]] size_t getDiskUsageInBytes(
             const QSqlDatabase& database,
             AnalysisType type) const;
 
@@ -58,8 +58,8 @@ class AnalysisDao : public DAO {
             ConstWaveformPointer pWaveSummary);
 
   private:
-    QDir getAnalysisStoragePath() const;
-    QByteArray loadDataFromFile(const QString& fileName) const;
+    [[nodiscard]] QDir getAnalysisStoragePath() const;
+    [[nodiscard]] QByteArray loadDataFromFile(const QString& fileName) const;
     bool saveDataToFile(const QString& fileName, const QByteArray& data) const;
     bool deleteFile(const QString& filename) const;
     QList<AnalysisInfo> loadAnalysesFromQuery(TrackId trackId, QSqlQuery* query);
