@@ -70,7 +70,7 @@ class PortMidiController : public MidiController {
     // 0xf7.
     void sendBytes(const QByteArray& data) override;
 
-    bool isPolling() const override {
+    [[nodiscard]] bool isPolling() const override {
         return true;
     }
 

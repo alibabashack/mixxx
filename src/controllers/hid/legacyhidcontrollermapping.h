@@ -12,11 +12,11 @@ class LegacyHidControllerMapping : public LegacyControllerMapping {
     ~LegacyHidControllerMapping() override {
     }
 
-    std::shared_ptr<LegacyControllerMapping> clone() const override {
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> clone() const override {
         return std::make_shared<LegacyHidControllerMapping>(*this);
     }
 
-    bool saveMapping(const QString& fileName) const override;
+    [[nodiscard]] bool saveMapping(const QString& fileName) const override;
 
-    bool isMappable() const override;
+    [[nodiscard]] bool isMappable() const override;
 };

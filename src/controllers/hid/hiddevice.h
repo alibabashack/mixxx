@@ -38,49 +38,49 @@ class DeviceInfo final {
             const hid_device_info& device_info);
 
     // The VID.
-    unsigned short vendorId() const {
+    [[nodiscard]] unsigned short vendorId() const {
         return vendor_id;
     }
     // The PID.
-    unsigned short productId() const {
+    [[nodiscard]] unsigned short productId() const {
         return product_id;
     }
     /// The release number as a binary-coded decimal (BCD).
-    unsigned short releaseNumberBCD() const {
+    [[nodiscard]] unsigned short releaseNumberBCD() const {
         return release_number;
     }
 
     /// The raw path, needed for subsequent HIDAPI requests.
-    const char* pathRaw() const {
+    [[nodiscard]] const char* pathRaw() const {
         return m_pathRaw.c_str();
     }
     /// The raw serial number, needed for subsequent HIDAPI requests.
-    const wchar_t* serialNumberRaw() const {
+    [[nodiscard]] const wchar_t* serialNumberRaw() const {
         return m_serialNumberRaw.c_str();
     }
 
-    const QString& manufacturerString() const {
+    [[nodiscard]] const QString& manufacturerString() const {
         return m_manufacturerString;
     }
-    const QString& productString() const {
+    [[nodiscard]] const QString& productString() const {
         return m_productString;
     }
-    const QString& serialNumber() const {
+    [[nodiscard]] const QString& serialNumber() const {
         return m_serialNumber;
     }
 
-    bool isValid() const {
+    [[nodiscard]] bool isValid() const {
         return !productString().isNull() && !serialNumber().isNull();
     }
 
-    QString formatVID() const;
-    QString formatPID() const;
-    QString formatReleaseNumber() const;
-    QString formatInterface() const;
-    QString formatUsage() const;
-    QString formatName() const;
+    [[nodiscard]] QString formatVID() const;
+    [[nodiscard]] QString formatPID() const;
+    [[nodiscard]] QString formatReleaseNumber() const;
+    [[nodiscard]] QString formatInterface() const;
+    [[nodiscard]] QString formatUsage() const;
+    [[nodiscard]] QString formatName() const;
 
-    bool matchProductInfo(
+    [[nodiscard]] bool matchProductInfo(
             const ProductInfo& productInfo) const;
 
   private:
@@ -109,13 +109,13 @@ class DeviceCategory final : public QObject {
     // QObject needed for i18n device category
     Q_OBJECT
   public:
-    static QString guessFromDeviceInfo(
+    [[nodiscard]] static QString guessFromDeviceInfo(
             const DeviceInfo& deviceInfo) {
         return DeviceCategory().guessFromDeviceInfoImpl(deviceInfo);
     }
 
   private:
-    QString guessFromDeviceInfoImpl(
+    [[nodiscard]] QString guessFromDeviceInfoImpl(
             const DeviceInfo& deviceInfo) const;
 
     DeviceCategory() = default;

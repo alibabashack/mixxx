@@ -9,10 +9,10 @@ class LegacyMidiControllerMappingFileHandler : public LegacyControllerMappingFil
     LegacyMidiControllerMappingFileHandler(){};
     ~LegacyMidiControllerMappingFileHandler() override{};
 
-    bool save(const LegacyMidiControllerMapping& mapping, const QString& fileName) const;
+    [[nodiscard]] bool save(const LegacyMidiControllerMapping& mapping, const QString& fileName) const;
 
   private:
-    std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> load(const QDomElement& root,
             const QString& filePath,
             const QDir& systemMappingPath) override;
 

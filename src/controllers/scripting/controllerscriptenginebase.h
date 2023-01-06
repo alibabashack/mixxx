@@ -36,7 +36,7 @@ class ControllerScriptEngineBase : public QObject {
         m_bTesting = testing;
     };
 
-    bool isTesting() const {
+    [[nodiscard]] bool isTesting() const {
         return m_bTesting;
     }
 

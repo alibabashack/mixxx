@@ -8,10 +8,10 @@ class MidiByteDelegate : public QStyledItemDelegate {
     MidiByteDelegate(QObject* pParent);
     ~MidiByteDelegate() override;
 
-    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+    [[nodiscard]] QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
                           const QModelIndex& index) const override;
 
-    QString displayText(const QVariant& value, const QLocale& locale) const override;
+    [[nodiscard]] QString displayText(const QVariant& value, const QLocale& locale) const override;
 
     void setEditorData(QWidget* editor, const QModelIndex& index) const override;
 

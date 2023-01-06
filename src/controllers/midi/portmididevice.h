@@ -14,15 +14,15 @@ class PortMidiDevice {
     virtual ~PortMidiDevice() {
     }
 
-    virtual const PmDeviceInfo* info() const {
+    [[nodiscard]] virtual const PmDeviceInfo* info() const {
         return m_pDeviceInfo;
     }
 
-    virtual int index() const {
+    [[nodiscard]] virtual int index() const {
         return m_deviceIndex;
     }
 
-    virtual bool isOpen() const {
+    [[nodiscard]] virtual bool isOpen() const {
         return m_pStream != nullptr;
     }
 

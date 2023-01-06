@@ -12,24 +12,24 @@ class LegacyMidiControllerMapping : public LegacyControllerMapping {
     LegacyMidiControllerMapping(){};
     ~LegacyMidiControllerMapping() override{};
 
-    std::shared_ptr<LegacyControllerMapping> clone() const override {
+    [[nodiscard]] std::shared_ptr<LegacyControllerMapping> clone() const override {
         return std::make_shared<LegacyMidiControllerMapping>(*this);
     }
 
-    bool saveMapping(const QString& fileName) const override;
+    [[nodiscard]] bool saveMapping(const QString& fileName) const override;
 
-    bool isMappable() const override;
+    [[nodiscard]] bool isMappable() const override;
 
     // Input mappings
     void addInputMapping(uint16_t key, const MidiInputMapping& mapping);
     void removeInputMapping(uint16_t key);
-    const QMultiHash<uint16_t, MidiInputMapping>& getInputMappings() const;
+    [[nodiscard]] const QMultiHash<uint16_t, MidiInputMapping>& getInputMappings() const;
     void setInputMappings(const QMultiHash<uint16_t, MidiInputMapping>& mappings);
 
     // Output mappings
     void addOutputMapping(const ConfigKey& key, const MidiOutputMapping& mapping);
     void removeOutputMapping(const ConfigKey& key);
-    const QMultiHash<ConfigKey, MidiOutputMapping>& getOutputMappings() const;
+    [[nodiscard]] const QMultiHash<ConfigKey, MidiOutputMapping>& getOutputMappings() const;
     void setOutputMappings(const QMultiHash<ConfigKey, MidiOutputMapping>& mappings);
 
   private:
