@@ -157,6 +157,7 @@ class BpmControl : public EngineControl {
     // Button that translates beats to match another playing deck
     ControlPushButton* m_pBeatsTranslateMatchAlignment;
 
+    // Measures distance from last beat in percentage: 0.5 = half-beat away.
     ControlProxy* m_pThisBeatDistance;
     ControlValueAtomic<double> m_dSyncTargetBeatDistance;
     // The user offset is a beat distance percentage value that the user has tweaked a deck
