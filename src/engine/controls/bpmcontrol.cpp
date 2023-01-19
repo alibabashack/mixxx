@@ -56,7 +56,6 @@ BpmControl::BpmControl(const QString& group,
         UserSettingsPointer pConfig)
         : EngineControl(group, pConfig),
           m_pPlayButton(new ControlProxy(group, "play", this)),
-          m_oldPlayButton(),
           m_pReverseButton(new ControlProxy(group, "reverse", this)),
           m_pRateRatio(new ControlProxy(group, "rate_ratio", this)),
           m_pQuantize(ControlObject::getControl(group, "quantize")),

@@ -124,7 +124,6 @@ class BpmControl : public EngineControl {
 
     // ControlObjects that come from EngineBuffer
     ControlProxy* m_pPlayButton;
-    QAtomicInt m_oldPlayButton;
     ControlProxy* m_pReverseButton;
     ControlProxy* m_pRateRatio;
     ControlObject* m_pQuantize;
