@@ -16,26 +16,26 @@ EngineChannel::EngineChannel(const ChannelHandleAndGroup& handleGroup,
           m_sampleBuffer(nullptr),
           m_bIsPrimaryDeck(isPrimaryDeck),
           m_active(false),
+          m_pMaster(new ControlPushButton(ConfigKey(getGroup(), "master"))),
+          m_pPFL(new ControlPushButton(ConfigKey(getGroup(), "pfl"))),
+          m_pOrientation(new ControlPushButton(ConfigKey(getGroup(), "orientation"))),
+          m_pOrientationLeft(new ControlPushButton(ConfigKey(getGroup(), "orientation_left"))),
+          m_pOrientationRight(new ControlPushButton(ConfigKey(getGroup(), "orientation_right"))),
+          m_pOrientationCenter(new ControlPushButton(ConfigKey(getGroup(), "orientation_center"))),
+          m_pTalkover(new ControlPushButton(ConfigKey(getGroup(), "talkover"))),
           m_bIsTalkoverChannel(isTalkoverChannel),
           m_channelIndex(-1) {
-    m_pPFL = new ControlPushButton(ConfigKey(getGroup(), "pfl"));
     m_pPFL->setButtonMode(ControlPushButton::TOGGLE);
-    m_pMaster = new ControlPushButton(ConfigKey(getGroup(), "master"));
     m_pMaster->setButtonMode(ControlPushButton::POWERWINDOW);
-    m_pOrientation = new ControlPushButton(ConfigKey(getGroup(), "orientation"));
     m_pOrientation->setButtonMode(ControlPushButton::TOGGLE);
     m_pOrientation->setStates(3);
     m_pOrientation->set(defaultOrientation);
-    m_pOrientationLeft = new ControlPushButton(ConfigKey(getGroup(), "orientation_left"));
     connect(m_pOrientationLeft, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationLeft, Qt::DirectConnection);
-    m_pOrientationRight = new ControlPushButton(ConfigKey(getGroup(), "orientation_right"));
     connect(m_pOrientationRight, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationRight, Qt::DirectConnection);
-    m_pOrientationCenter = new ControlPushButton(ConfigKey(getGroup(), "orientation_center"));
     connect(m_pOrientationCenter, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationCenter, Qt::DirectConnection);
-    m_pTalkover = new ControlPushButton(ConfigKey(getGroup(), "talkover"));
     m_pTalkover->setButtonMode(ControlPushButton::POWERWINDOW);
 
     if (m_pEffectsManager != nullptr) {
