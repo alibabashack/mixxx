@@ -26,9 +26,9 @@ class ControllerManager : public QObject {
 
     static const mixxx::Duration kPollInterval;
 
-    QList<Controller*> getControllers() const;
+    [[nodiscard]] QList<Controller*> getControllers() const;
     QList<Controller*> getControllerList(bool outputDevices=true, bool inputDevices=true);
-    ControllerLearningEventFilter* getControllerLearningEventFilter() const;
+    [[nodiscard]] ControllerLearningEventFilter* getControllerLearningEventFilter() const;
     QSharedPointer<MappingInfoEnumerator> getMainThreadUserMappingEnumerator() {
         return m_pMainThreadUserMappingEnumerator;
     }

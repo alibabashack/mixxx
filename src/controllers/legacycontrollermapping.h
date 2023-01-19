@@ -19,7 +19,7 @@ class LegacyControllerMapping {
     }
     virtual ~LegacyControllerMapping() = default;
 
-    virtual std::shared_ptr<LegacyControllerMapping> clone() const = 0;
+    [[nodiscard]] virtual std::shared_ptr<LegacyControllerMapping> clone() const = 0;
 
     struct ScriptFileInfo {
         ScriptFileInfo()
@@ -50,7 +50,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    const QList<ScriptFileInfo>& getScriptFiles() const {
+    [[nodiscard]] const QList<ScriptFileInfo>& getScriptFiles() const {
         return m_scripts;
     }
 
@@ -58,7 +58,7 @@ class LegacyControllerMapping {
         m_bDirty = bDirty;
     }
 
-    inline bool isDirty() const {
+    [[nodiscard]] inline bool isDirty() const {
         return m_bDirty;
     }
 
@@ -67,7 +67,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString deviceId() const {
+    [[nodiscard]] inline QString deviceId() const {
         return m_deviceId;
     }
 
@@ -76,11 +76,11 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString filePath() const {
+    [[nodiscard]] inline QString filePath() const {
         return m_filePath;
     }
 
-    inline QDir dirPath() const {
+    [[nodiscard]] inline QDir dirPath() const {
         return QFileInfo(filePath()).absoluteDir();
     }
 
@@ -89,7 +89,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString name() const {
+    [[nodiscard]] inline QString name() const {
         return m_name;
     }
 
@@ -98,7 +98,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString author() const {
+    [[nodiscard]] inline QString author() const {
         return m_author;
     }
 
@@ -107,7 +107,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString description() const {
+    [[nodiscard]] inline QString description() const {
         return m_description;
     }
 
@@ -116,7 +116,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString forumlink() const {
+    [[nodiscard]] inline QString forumlink() const {
         return m_forumlink;
     }
 
@@ -125,11 +125,11 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    QString manualPage() const {
+    [[nodiscard]] QString manualPage() const {
         return m_manualPage;
     }
 
-    QString manualLink() const {
+    [[nodiscard]] QString manualLink() const {
         QString page = manualPage();
         if (page.isEmpty()) {
             return {};
@@ -143,7 +143,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString wikilink() const {
+    [[nodiscard]] inline QString wikilink() const {
         return m_wikilink;
     }
 
@@ -152,7 +152,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString schemaVersion() const {
+    [[nodiscard]] inline QString schemaVersion() const {
         return m_schemaVersion;
     }
 
@@ -161,7 +161,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    inline QString mixxxVersion() const {
+    [[nodiscard]] inline QString mixxxVersion() const {
         return m_mixxxVersion;
     }
 
@@ -172,7 +172,7 @@ class LegacyControllerMapping {
 
     virtual bool saveMapping(const QString& filename) const = 0;
 
-    virtual bool isMappable() const = 0;
+    [[nodiscard]] virtual bool isMappable() const = 0;
 
     // Optional list of controller device match details
     QList<QHash<QString, QString>> m_productMatches;

@@ -11,13 +11,13 @@ class ControlPickerMenu : public QMenu {
     ControlPickerMenu(QWidget* pParent);
     ~ControlPickerMenu() override;
 
-    const QList<ConfigKey>& controlsAvailable() const {
+    [[nodiscard]] const QList<ConfigKey>& controlsAvailable() const {
         return m_controlsAvailable;
     }
 
-    bool controlExists(const ConfigKey& key) const;
-    QString descriptionForConfigKey(const ConfigKey& key) const;
-    QString controlTitleForConfigKey(const ConfigKey& key) const;
+    [[nodiscard]] bool controlExists(const ConfigKey& key) const;
+    [[nodiscard]] QString descriptionForConfigKey(const ConfigKey& key) const;
+    [[nodiscard]] QString controlTitleForConfigKey(const ConfigKey& key) const;
 
   signals:
     // Emitted when the user selects a control from the menu.

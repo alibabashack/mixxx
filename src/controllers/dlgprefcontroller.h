@@ -28,7 +28,7 @@ class DlgPrefController : public DlgPreferencePage {
             UserSettingsPointer pConfig);
     ~DlgPrefController() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   public slots:
     /// Called when the preference dialog (not this page) is shown to the user.
@@ -69,14 +69,14 @@ class DlgPrefController : public DlgPreferencePage {
     void midiInputMappingsLearned(const MidiInputMappings& mappings);
 
   private:
-    QString mappingShortName(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingName(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingAuthor(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingDescription(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingSupportLinks(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingFileLinks(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
-    QString mappingPathFromIndex(int index) const;
-    QString askForMappingName(const QString& prefilledName = QString()) const;
+    [[nodiscard]] QString mappingShortName(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingName(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingAuthor(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingDescription(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingSupportLinks(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingFileLinks(const std::shared_ptr<LegacyControllerMapping> pMapping) const;
+    [[nodiscard]] QString mappingPathFromIndex(int index) const;
+    [[nodiscard]] QString askForMappingName(const QString& prefilledName = QString()) const;
     void applyMappingChanges();
     bool saveMapping();
     void initTableView(QTableView* pTable);
@@ -97,7 +97,7 @@ class DlgPrefController : public DlgPreferencePage {
     /// that can be applied or discarded.
     ///
     /// @param bDirty The new dialog's dirty state.
-    bool isDirty() const {
+    [[nodiscard]] bool isDirty() const {
         return m_bDirty;
     }
 

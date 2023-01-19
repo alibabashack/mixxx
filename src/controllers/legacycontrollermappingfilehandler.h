@@ -26,7 +26,7 @@ class LegacyControllerMappingFileHandler {
 
     // Returns just the name of a given device (everything before the first
     // space)
-    QString rootDeviceName(const QString& deviceName) const {
+    [[nodiscard]] QString rootDeviceName(const QString& deviceName) const {
         return deviceName.left(deviceName.indexOf(" "));
     }
 
@@ -51,9 +51,9 @@ class LegacyControllerMappingFileHandler {
 
     /// Creates the XML document and includes what script files are currently
     /// loaded. Sub-classes need to call this before adding any other items.
-    QDomDocument buildRootWithScripts(const LegacyControllerMapping& mapping) const;
+    [[nodiscard]] QDomDocument buildRootWithScripts(const LegacyControllerMapping& mapping) const;
 
-    bool writeDocument(const QDomDocument& root, const QString& fileName) const;
+    [[nodiscard]] bool writeDocument(const QDomDocument& root, const QString& fileName) const;
 
   private:
     // Sub-classes implement this.

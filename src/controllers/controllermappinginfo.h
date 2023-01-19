@@ -35,39 +35,39 @@ class MappingInfo {
     MappingInfo();
     MappingInfo(const QString& path);
 
-    inline bool isValid() const {
+    [[nodiscard]] inline bool isValid() const {
         return m_valid;
     }
 
-    inline const QString getPath() const {
+    [[nodiscard]] inline const QString getPath() const {
         return m_path;
     }
-    inline const QString getDirPath() const {
+    [[nodiscard]] inline const QString getDirPath() const {
         return m_dirPath;
     }
-    inline const QString getName() const {
+    [[nodiscard]] inline const QString getName() const {
         return m_name;
     }
-    inline const QString getDescription() const {
+    [[nodiscard]] inline const QString getDescription() const {
         return m_description;
     }
-    inline const QString getForumLink() const {
+    [[nodiscard]] inline const QString getForumLink() const {
         return m_forumlink;
     }
-    inline const QString getWikiLink() const {
+    [[nodiscard]] inline const QString getWikiLink() const {
         return m_wikilink;
     }
-    inline const QString getAuthor() const {
+    [[nodiscard]] inline const QString getAuthor() const {
         return m_author;
     }
 
-    inline const QList<ProductInfo>& getProducts() const {
+    [[nodiscard]] inline const QList<ProductInfo>& getProducts() const {
         return m_products;
     }
 
   private:
-    ProductInfo parseBulkProduct(const QDomElement& element) const;
-    ProductInfo parseHIDProduct(const QDomElement& element) const;
+    [[nodiscard]] ProductInfo parseBulkProduct(const QDomElement& element) const;
+    [[nodiscard]] ProductInfo parseHIDProduct(const QDomElement& element) const;
 
     bool m_valid;
     QString m_path;
