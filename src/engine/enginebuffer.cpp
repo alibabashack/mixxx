@@ -105,7 +105,7 @@ EngineBuffer::EngineBuffer(const QString& group,
           m_pBpmControl(nullptr),
           m_pKeyControl(nullptr),
           m_pReadAheadManager(nullptr),
-          m_pReader(nullptr),
+          m_pReader(buildCachingReader(group, pConfig, this)),
           m_playPosition(kInitialPlayPosition),
           m_speed_old(0),
           m_tempo_ratio_old(1.),
@@ -118,9 +118,16 @@ EngineBuffer::EngineBuffer(const QString& group,
           m_slipPosition(mixxx::audio::kStartFramePos),
           m_dSlipRate(1.0),
           m_bSlipEnabledProcessing(false),
-          m_pRepeat(nullptr),
-          m_startButton(nullptr),
-          m_endButton(nullptr),
+          m_playButton(buildButtonWithSlot(ConfigKey(group, "play"), ControlPushButton::TOGGLE, this, &EngineBuffer::slotControlPlayRequest)),
+          m_playStartButton(buildButtonWithSlot(ConfigKey(group, "start_play"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlPlayFromStart)),
+          m_stopStartButton(buildButtonWithSlot(ConfigKey(group, "start_stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlJumpToStartAndStop)),
+          m_stopButton(buildButtonWithSlot(ConfigKey(group, "stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlStop)),
+          m_pSlipButton(buildToggleButton(ConfigKey(group, "slip_enabled"))),
+          m_playposSlider(buildPlayPosSlider(group, this)),
+          m_pKeylock(buildToggleButton(ConfigKey(group, "keylock"))),
+          m_pRepeat(buildToggleButton(ConfigKey(group, "repeat"))),
+          m_startButton(buildButtonWithSlot(ConfigKey(group, "start"), ControlPushButton::TRIGGER, this, &EngineBuffer::slotControlStart)),
+          m_endButton(buildButtonWithSlot(ConfigKey(group, "end"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlEnd)),
           m_bScalerOverride(false),
           m_iSeekPhaseQueued(0),
           m_iEnableSyncQueued(SYNC_REQUEST_NONE),
@@ -137,27 +144,13 @@ EngineBuffer::EngineBuffer(const QString& group,
     // zero out crossfade buffer
     SampleUtil::clear(m_pCrossfadeBuffer, MAX_BUFFER_LEN);
 
-    m_pReader = buildCachingReader(group, pConfig, this);
-    m_playButton = buildButtonWithSlot(ConfigKey(group, "play"), ControlPushButton::TOGGLE, this, &EngineBuffer::slotControlPlayRequest);
-    m_playStartButton = buildButtonWithSlot(ConfigKey(group, "start_play"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlPlayFromStart);
-    m_stopStartButton = buildButtonWithSlot(ConfigKey(group, "start_stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlJumpToStartAndStop);
-    m_stopButton = buildButtonWithSlot(ConfigKey(group, "stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlStop);
-    m_startButton = buildButtonWithSlot(ConfigKey(group, "start"), ControlPushButton::TRIGGER, this, &EngineBuffer::slotControlStart);
-    m_endButton = buildButtonWithSlot(ConfigKey(group, "end"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlEnd);
-    m_pSlipButton = buildToggleButton(ConfigKey(group, "slip_enabled"));
-    m_playposSlider = buildPlayPosSlider(group, this);
-
     // Control used to communicate ratio playpos to GUI thread
     m_visualPlayPos = VisualPlayPosition::getVisualPlayPosition(m_group);
-
-    m_pRepeat = buildToggleButton(ConfigKey(group, "repeat"));
 
     m_pSampleRate = new ControlProxy("[Master]", "samplerate", this);
 
     m_pTrackSamples = new ControlObject(ConfigKey(m_group, "track_samples"));
     m_pTrackSampleRate = new ControlObject(ConfigKey(m_group, "track_samplerate"));
-
-    m_pKeylock = buildToggleButton(ConfigKey(group, "keylock"));
 
     m_pTrackLoaded = new ControlObject(ConfigKey(m_group, "track_loaded"), false);
     m_pTrackLoaded->setReadOnly();
