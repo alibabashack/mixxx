@@ -111,5 +111,4 @@ EngineChannel::ChannelOrientation EngineChannel::getOrientation() const {
     default:
         return CENTER;
     }
-    return CENTER;
 }
