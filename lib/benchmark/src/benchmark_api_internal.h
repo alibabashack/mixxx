@@ -21,23 +21,23 @@ class BenchmarkInstance {
                     int per_family_instance_index,
                     const std::vector<int64_t>& args, int threads);
 
-  const BenchmarkName& name() const { return name_; }
-  int family_index() const { return family_index_; }
-  int per_family_instance_index() const { return per_family_instance_index_; }
-  AggregationReportMode aggregation_report_mode() const {
+  [[nodiscard]] const BenchmarkName& name() const { return name_; }
+  [[nodiscard]] int family_index() const { return family_index_; }
+  [[nodiscard]] int per_family_instance_index() const { return per_family_instance_index_; }
+  [[nodiscard]] AggregationReportMode aggregation_report_mode() const {
     return aggregation_report_mode_;
   }
-  TimeUnit time_unit() const { return time_unit_; }
-  bool measure_process_cpu_time() const { return measure_process_cpu_time_; }
-  bool use_real_time() const { return use_real_time_; }
-  bool use_manual_time() const { return use_manual_time_; }
-  BigO complexity() const { return complexity_; }
-  BigOFunc* complexity_lambda() const { return complexity_lambda_; }
-  const std::vector<Statistics>& statistics() const { return statistics_; }
-  int repetitions() const { return repetitions_; }
-  double min_time() const { return min_time_; }
-  IterationCount iterations() const { return iterations_; }
-  int threads() const { return threads_; }
+  [[nodiscard]] TimeUnit time_unit() const { return time_unit_; }
+  [[nodiscard]] bool measure_process_cpu_time() const { return measure_process_cpu_time_; }
+  [[nodiscard]] bool use_real_time() const { return use_real_time_; }
+  [[nodiscard]] bool use_manual_time() const { return use_manual_time_; }
+  [[nodiscard]] BigO complexity() const { return complexity_; }
+  [[nodiscard]] BigOFunc* complexity_lambda() const { return complexity_lambda_; }
+  [[nodiscard]] const std::vector<Statistics>& statistics() const { return statistics_; }
+  [[nodiscard]] int repetitions() const { return repetitions_; }
+  [[nodiscard]] double min_time() const { return min_time_; }
+  [[nodiscard]] IterationCount iterations() const { return iterations_; }
+  [[nodiscard]] int threads() const { return threads_; }
 
   State Run(IterationCount iters, int thread_id, internal::ThreadTimer* timer,
             internal::ThreadManager* manager,

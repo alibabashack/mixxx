@@ -56,7 +56,7 @@ class EngineEffectChain final : public EffectsRequestHandler {
         EffectEnableState enableState;
     };
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EngineEffectChain(%1)").arg(m_group);
     }
 

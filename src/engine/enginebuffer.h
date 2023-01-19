@@ -96,15 +96,15 @@ class EngineBuffer : public EngineObject {
 
     void bindWorkers(EngineWorkerScheduler* pWorkerScheduler);
 
-    QString getGroup() const;
+    [[nodiscard]] QString getGroup() const;
     // Return the current rate (not thread-safe)
-    double getSpeed() const;
-    bool getScratching() const;
-    bool isReverse() const;
+    [[nodiscard]] double getSpeed() const;
+    [[nodiscard]] bool getScratching() const;
+    [[nodiscard]] bool isReverse() const;
     /// Returns current bpm value (not thread-safe)
-    mixxx::Bpm getBpm() const;
+    [[nodiscard]] mixxx::Bpm getBpm() const;
     /// Returns the BPM of the loaded track around the current position (not thread-safe)
-    mixxx::Bpm getLocalBpm() const;
+    [[nodiscard]] mixxx::Bpm getLocalBpm() const;
     /// Sets a beatloop for the loaded track (not thread safe)
     void setBeatLoop(mixxx::audio::FramePos startPosition, bool enabled);
     /// Sets a loop for the loaded track (not thread safe)
@@ -128,19 +128,19 @@ class EngineBuffer : public EngineObject {
 
     /// Returns the seek position iff a seek is currently queued but not yet
     /// processed. If no seek was queued, and invalid frame position is returned.
-    mixxx::audio::FramePos queuedSeekPosition() const;
+    [[nodiscard]] mixxx::audio::FramePos queuedSeekPosition() const;
 
-    bool isTrackLoaded() const;
-    TrackPointer getLoadedTrack() const;
+    [[nodiscard]] bool isTrackLoaded() const;
+    [[nodiscard]] TrackPointer getLoadedTrack() const;
     void ejectTrack();
 
-    mixxx::audio::FramePos getExactPlayPos() const;
-    double getVisualPlayPos() const;
-    mixxx::audio::FramePos getTrackEndPosition() const;
+    [[nodiscard]] mixxx::audio::FramePos getExactPlayPos() const;
+    [[nodiscard]] double getVisualPlayPos() const;
+    [[nodiscard]] mixxx::audio::FramePos getTrackEndPosition() const;
     void setTrackEndPosition(mixxx::audio::FramePos position);
-    double getUserOffset() const;
+    [[nodiscard]] double getUserOffset() const;
 
-    double getRateRatio() const;
+    [[nodiscard]] double getRateRatio() const;
 
     void collectFeatures(GroupFeatureState* pGroupFeatures) const override;
 
@@ -258,7 +258,7 @@ class EngineBuffer : public EngineObject {
     void processSeek(bool paused);
     // For debugging / testing -- returns true if the previous buffer call resulted in a seek.
     FRIEND_TEST(EngineSyncTest, FollowerUserTweakPreservedInSyncDisable);
-    bool previousBufferSeek() const {
+    [[nodiscard]] bool previousBufferSeek() const {
         return m_previousBufferSeek;
     }
     bool updateIndicatorsAndModifyPlay(bool newPlay, bool oldPlay);

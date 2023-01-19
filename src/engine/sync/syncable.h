@@ -89,8 +89,8 @@ inline SyncLeaderLight SyncModeToLeaderLight(SyncMode mode) {
 class Syncable {
   public:
     virtual ~Syncable() = default;
-    virtual const QString& getGroup() const = 0;
-    virtual EngineChannel* getChannel() const = 0;
+    [[nodiscard]] virtual const QString& getGroup() const = 0;
+    [[nodiscard]] virtual EngineChannel* getChannel() const = 0;
 
     // Notify a Syncable that their mode has changed. The Syncable must record
     // this mode and return the latest mode in response to getMode().
@@ -104,25 +104,25 @@ class Syncable {
 
     // Must NEVER return a mode that was not set directly via
     // notifySyncModeChanged.
-    virtual SyncMode getSyncMode() const = 0;
+    [[nodiscard]] virtual SyncMode getSyncMode() const = 0;
 
-    inline bool isSynchronized() const {
+    [[nodiscard]] inline bool isSynchronized() const {
         return toSynchronized(getSyncMode());
     }
 
     // Only relevant for player Syncables.
-    virtual bool isPlaying() const = 0;
-    virtual bool isAudible() const = 0;
-    virtual bool isQuantized() const = 0;
+    [[nodiscard]] virtual bool isPlaying() const = 0;
+    [[nodiscard]] virtual bool isAudible() const = 0;
+    [[nodiscard]] virtual bool isQuantized() const = 0;
 
     // Gets the current speed of the syncable in bpm (bpm * rate slider), doesn't
     // include scratch or FF/REW values.
-    virtual mixxx::Bpm getBpm() const = 0;
+    [[nodiscard]] virtual mixxx::Bpm getBpm() const = 0;
 
     // Gets the beat distance as a fraction from 0 to 1
-    virtual double getBeatDistance() const = 0;
+    [[nodiscard]] virtual double getBeatDistance() const = 0;
     // Gets the speed of the syncable if it was playing at 1.0 rate.
-    virtual mixxx::Bpm getBaseBpm() const = 0;
+    [[nodiscard]] virtual mixxx::Bpm getBaseBpm() const = 0;
 
     // The following functions are used to tell syncables about the state of the
     // current Sync Leader.

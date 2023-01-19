@@ -97,7 +97,7 @@ class MatchResultListener {
   // of the match result.  A matcher's MatchAndExplain() method can use
   // this information to avoid generating the explanation when no one
   // intends to hear it.
-  bool IsInterested() const { return stream_ != nullptr; }
+  [[nodiscard]] bool IsInterested() const { return stream_ != nullptr; }
 
  private:
   ::std::ostream* const stream_;
@@ -271,7 +271,7 @@ class MatcherBase : private MatcherDescriberInterface {
   }
 
   // Returns true if and only if this matcher matches x.
-  bool Matches(const T& x) const {
+  [[nodiscard]] bool Matches(const T& x) const {
     DummyMatchResultListener dummy;
     return MatchAndExplain(x, &dummy);
   }
@@ -297,7 +297,7 @@ class MatcherBase : private MatcherDescriberInterface {
   // Returns the describer for this matcher object; retains ownership
   // of the describer, which is only guaranteed to be alive when
   // this matcher object is alive.
-  const MatcherDescriberInterface* GetDescriber() const {
+  [[nodiscard]] const MatcherDescriberInterface* GetDescriber() const {
     if (vtable_ == nullptr) return nullptr;
     return vtable_->get_describer(*this);
   }
@@ -360,7 +360,7 @@ class MatcherBase : private MatcherDescriberInterface {
     void (*shared_destroy)(SharedPayloadBase*);
   };
 
-  bool IsShared() const {
+  [[nodiscard]] bool IsShared() const {
     return vtable_ != nullptr && vtable_->shared_destroy != nullptr;
   }
 
@@ -660,7 +660,7 @@ class PolymorphicMatcher {
 
   // Returns an immutable reference to the underlying matcher
   // implementation object.
-  const Impl& impl() const { return impl_; }
+  [[nodiscard]] const Impl& impl() const { return impl_; }
 
   template <typename T>
   operator Matcher<T>() const {

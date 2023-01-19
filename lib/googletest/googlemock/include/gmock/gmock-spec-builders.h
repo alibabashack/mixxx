@@ -208,11 +208,11 @@ class GTEST_API_ UntypedFunctionMockerBase {
   // Returns the mock object this mock method belongs to.  Must be
   // called after RegisterOwner() or SetOwnerAndName() has been
   // called.
-  const void* MockObject() const GTEST_LOCK_EXCLUDED_(g_gmock_mutex);
+  [[nodiscard]] const void* MockObject() const GTEST_LOCK_EXCLUDED_(g_gmock_mutex);
 
   // Returns the name of this mock method.  Must be called after
   // SetOwnerAndName() has been called.
-  const char* Name() const GTEST_LOCK_EXCLUDED_(g_gmock_mutex);
+  [[nodiscard]] const char* Name() const GTEST_LOCK_EXCLUDED_(g_gmock_mutex);
 
   // Returns the result of invoking this mock function with the given
   // arguments.  This function can be safely called from multiple
@@ -262,8 +262,8 @@ class UntypedOnCallSpecBase {
       : file_(a_file), line_(a_line), last_clause_(kNone) {}
 
   // Where in the source file was the default action spec defined?
-  const char* file() const { return file_; }
-  int line() const { return line_; }
+  [[nodiscard]] const char* file() const { return file_; }
+  [[nodiscard]] int line() const { return line_; }
 
  protected:
   // Gives each clause in the ON_CALL() statement a name.
@@ -555,7 +555,7 @@ class GTEST_API_ Expectation {
       const std::shared_ptr<internal::ExpectationBase>& expectation_base);
 
   // Returns the expectation this object references.
-  const std::shared_ptr<internal::ExpectationBase>& expectation_base() const {
+  [[nodiscard]] const std::shared_ptr<internal::ExpectationBase>& expectation_base() const {
     return expectation_base_;
   }
 
@@ -619,10 +619,10 @@ class ExpectationSet {
     return *this;
   }
 
-  int size() const { return static_cast<int>(expectations_.size()); }
+  [[nodiscard]] int size() const { return static_cast<int>(expectations_.size()); }
 
-  const_iterator begin() const { return expectations_.begin(); }
-  const_iterator end() const { return expectations_.end(); }
+  [[nodiscard]] const_iterator begin() const { return expectations_.begin(); }
+  [[nodiscard]] const_iterator end() const { return expectations_.end(); }
 
  private:
   Expectation::Set expectations_;

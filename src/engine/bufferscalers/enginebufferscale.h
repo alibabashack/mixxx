@@ -46,7 +46,7 @@ class EngineBufferScale : public QObject {
     void setSampleRate(
             mixxx::audio::SampleRate sampleRate);
 
-    const mixxx::audio::SignalInfo& getOutputSignal() const {
+    [[nodiscard]] const mixxx::audio::SignalInfo& getOutputSignal() const {
         return m_outputSignal;
     }
 

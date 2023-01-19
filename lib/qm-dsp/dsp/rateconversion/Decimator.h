@@ -53,7 +53,7 @@ public:
      */
     void process( const float* src, float* dst );
 
-    int getFactor() const { return m_decFactor; }
+    [[nodiscard]] int getFactor() const { return m_decFactor; }
     static int getHighestSupportedFactor() { return 8; }
 
     void resetFilter();

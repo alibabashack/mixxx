@@ -50,11 +50,11 @@ class EngineEffect final : public EffectsRequestHandler {
             const EffectEnableState chainEnableState,
             const GroupFeatureState& groupFeatures);
 
-    const EffectManifestPointer getManifest() const {
+    [[nodiscard]] const EffectManifestPointer getManifest() const {
         return m_pManifest;
     }
 
-    const QString& name() const {
+    [[nodiscard]] const QString& name() const {
         return m_pManifest->name();
     }
 
@@ -63,7 +63,7 @@ class EngineEffect final : public EffectsRequestHandler {
     }
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EngineEffect(%1)").arg(m_pManifest->name());
     }
 

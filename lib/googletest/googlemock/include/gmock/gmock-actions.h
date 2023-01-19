@@ -725,7 +725,7 @@ class Action<R(Args...)> {
       : fun_(action.fun_) {}
 
   // Returns true if and only if this is the DoDefault() action.
-  bool IsDoDefault() const { return fun_ == nullptr; }
+  [[nodiscard]] bool IsDoDefault() const { return fun_ == nullptr; }
 
   // Performs the action.  Note that this method is const even though
   // the corresponding method in ActionInterface is not.  The reason

@@ -319,19 +319,19 @@ class FloatingPoint {
   // Non-static methods
 
   // Returns the bits that represents this number.
-  const Bits& bits() const { return u_.bits_; }
+  [[nodiscard]] const Bits& bits() const { return u_.bits_; }
 
   // Returns the exponent bits of this number.
-  Bits exponent_bits() const { return kExponentBitMask & u_.bits_; }
+  [[nodiscard]] Bits exponent_bits() const { return kExponentBitMask & u_.bits_; }
 
   // Returns the fraction bits of this number.
-  Bits fraction_bits() const { return kFractionBitMask & u_.bits_; }
+  [[nodiscard]] Bits fraction_bits() const { return kFractionBitMask & u_.bits_; }
 
   // Returns the sign bit of this number.
-  Bits sign_bit() const { return kSignBitMask & u_.bits_; }
+  [[nodiscard]] Bits sign_bit() const { return kSignBitMask & u_.bits_; }
 
   // Returns true if and only if this is NAN (not a number).
-  bool is_nan() const {
+  [[nodiscard]] bool is_nan() const {
     // It's a NAN if the exponent bits are all ones and the fraction
     // bits are not entirely zeros.
     return (exponent_bits() == kExponentBitMask) && (fraction_bits() != 0);
@@ -343,7 +343,7 @@ class FloatingPoint {
   //   - returns false if either number is (or both are) NAN.
   //   - treats really large numbers as almost equal to infinity.
   //   - thinks +0.0 and -0.0 are 0 DLP's apart.
-  bool AlmostEquals(const FloatingPoint& rhs) const {
+  [[nodiscard]] bool AlmostEquals(const FloatingPoint& rhs) const {
     // The IEEE standard says that any comparison operation involving
     // a NAN must return false.
     if (is_nan() || rhs.is_nan()) return false;
@@ -621,11 +621,11 @@ class GTEST_API_ TypedTestSuitePState {
     return true;
   }
 
-  bool TestExists(const std::string& test_name) const {
+  [[nodiscard]] bool TestExists(const std::string& test_name) const {
     return registered_tests_.count(test_name) > 0;
   }
 
-  const CodeLocation& GetCodeLocation(const std::string& test_name) const {
+  [[nodiscard]] const CodeLocation& GetCodeLocation(const std::string& test_name) const {
     RegisteredTestsMap::const_iterator it = registered_tests_.find(test_name);
     GTEST_CHECK_(it != registered_tests_.end());
     return it->second;
@@ -1129,7 +1129,7 @@ class NativeArray {
   }
 
   // STL-style container methods.
-  size_t size() const { return size_; }
+  [[nodiscard]] size_t size() const { return size_; }
   const_iterator begin() const { return array_; }
   const_iterator end() const { return array_ + size_; }
   bool operator==(const NativeArray& rhs) const {
@@ -1252,7 +1252,7 @@ struct FlatTupleBase<FlatTuple<T...>, IndexSequence<Idx...>>
                                                 std::forward<Args>(args))... {}
 
   template <size_t I>
-  const typename ElemFromList<I, T...>::type& Get() const {
+  [[nodiscard]] [[nodiscard]] const typename ElemFromList<I, T...>::type& Get() const {
     return FlatTupleElemBase<FlatTuple<T...>, I>::value;
   }
 
@@ -1381,7 +1381,7 @@ namespace internal {
 
 class NeverThrown {
  public:
-  const char* what() const noexcept {
+  [[nodiscard]] const char* what() const noexcept {
     return "this exception should never be thrown";
   }
 };

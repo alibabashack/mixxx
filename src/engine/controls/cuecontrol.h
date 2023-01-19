@@ -74,39 +74,39 @@ class HotcueControl : public QObject {
     HotcueControl(const QString& group, int hotcueIndex);
     ~HotcueControl() override;
 
-    int getHotcueIndex() const {
+    [[nodiscard]] int getHotcueIndex() const {
         return m_hotcueIndex;
     }
 
-    CuePointer getCue() const {
+    [[nodiscard]] CuePointer getCue() const {
         return m_pCue;
     }
     void setCue(const CuePointer& pCue);
     void resetCue();
 
-    mixxx::audio::FramePos getPosition() const;
+    [[nodiscard]] mixxx::audio::FramePos getPosition() const;
     void setPosition(mixxx::audio::FramePos position);
 
-    mixxx::audio::FramePos getEndPosition() const;
+    [[nodiscard]] mixxx::audio::FramePos getEndPosition() const;
     void setEndPosition(mixxx::audio::FramePos endPosition);
 
     void setType(mixxx::CueType type);
 
     void setStatus(HotcueControl::Status status);
-    HotcueControl::Status getStatus() const;
+    [[nodiscard]] HotcueControl::Status getStatus() const;
 
     void setColor(mixxx::RgbColor::optional_t newColor);
-    mixxx::RgbColor::optional_t getColor() const;
+    [[nodiscard]] mixxx::RgbColor::optional_t getColor() const;
 
     /// Used for caching the preview state of this hotcue control
     /// for the case the cue is deleted during preview.
-    mixxx::CueType getPreviewingType() const {
+    [[nodiscard]] mixxx::CueType getPreviewingType() const {
         return m_previewingType.getValue();
     }
 
     /// Used for caching the preview state of this hotcue control
     /// for the case the cue is deleted during preview.
-    mixxx::audio::FramePos getPreviewingPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos getPreviewingPosition() const {
         return m_previewingPosition.getValue();
     }
 
@@ -283,10 +283,10 @@ class CueControl : public EngineControl {
     void loadCuesFromTrack();
     mixxx::audio::FramePos quantizeCuePoint(mixxx::audio::FramePos position);
     mixxx::audio::FramePos getQuantizedCurrentPosition();
-    TrackAt getTrackAt() const;
+    [[nodiscard]] TrackAt getTrackAt() const;
     void seekOnLoad(mixxx::audio::FramePos seekOnLoadPosition);
     void setHotcueFocusIndex(int hotcueIndex);
-    int getHotcueFocusIndex() const;
+    [[nodiscard]] int getHotcueFocusIndex() const;
 
     UserSettingsPointer m_pConfig;
     ColorPaletteSettings m_colorPaletteSettings;

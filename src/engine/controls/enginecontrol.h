@@ -61,7 +61,7 @@ class EngineControl : public QObject {
     virtual void setFrameInfo(mixxx::audio::FramePos currentPosition,
             mixxx::audio::FramePos trackEndPosition,
             mixxx::audio::SampleRate sampleRate);
-    QString getGroup() const;
+    [[nodiscard]] QString getGroup() const;
 
     void setBeatLoop(mixxx::audio::FramePos startPosition, bool enabled);
     void setLoop(mixxx::audio::FramePos startPosition,
@@ -93,7 +93,7 @@ class EngineControl : public QObject {
         mixxx::audio::SampleRate sampleRate;
     };
 
-    FrameInfo frameInfo() const {
+    [[nodiscard]] FrameInfo frameInfo() const {
         return m_frameInfo.getValue();
     }
     void seek(double fractionalPosition);

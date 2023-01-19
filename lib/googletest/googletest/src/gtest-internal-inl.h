@@ -528,69 +528,69 @@ class GTEST_API_ UnitTestImpl {
       TestPartResultReporterInterface* reporter);
 
   // Gets the number of successful test suites.
-  int successful_test_suite_count() const;
+  [[nodiscard]] int successful_test_suite_count() const;
 
   // Gets the number of failed test suites.
-  int failed_test_suite_count() const;
+  [[nodiscard]] int failed_test_suite_count() const;
 
   // Gets the number of all test suites.
-  int total_test_suite_count() const;
+  [[nodiscard]] int total_test_suite_count() const;
 
   // Gets the number of all test suites that contain at least one test
   // that should run.
-  int test_suite_to_run_count() const;
+  [[nodiscard]] int test_suite_to_run_count() const;
 
   // Gets the number of successful tests.
-  int successful_test_count() const;
+  [[nodiscard]] int successful_test_count() const;
 
   // Gets the number of skipped tests.
-  int skipped_test_count() const;
+  [[nodiscard]] int skipped_test_count() const;
 
   // Gets the number of failed tests.
-  int failed_test_count() const;
+  [[nodiscard]] int failed_test_count() const;
 
   // Gets the number of disabled tests that will be reported in the XML report.
-  int reportable_disabled_test_count() const;
+  [[nodiscard]] int reportable_disabled_test_count() const;
 
   // Gets the number of disabled tests.
-  int disabled_test_count() const;
+  [[nodiscard]] int disabled_test_count() const;
 
   // Gets the number of tests to be printed in the XML report.
-  int reportable_test_count() const;
+  [[nodiscard]] int reportable_test_count() const;
 
   // Gets the number of all tests.
-  int total_test_count() const;
+  [[nodiscard]] int total_test_count() const;
 
   // Gets the number of tests that should run.
-  int test_to_run_count() const;
+  [[nodiscard]] int test_to_run_count() const;
 
   // Gets the time of the test program start, in ms from the start of the
   // UNIX epoch.
-  TimeInMillis start_timestamp() const { return start_timestamp_; }
+  [[nodiscard]] TimeInMillis start_timestamp() const { return start_timestamp_; }
 
   // Gets the elapsed time, in milliseconds.
-  TimeInMillis elapsed_time() const { return elapsed_time_; }
+  [[nodiscard]] TimeInMillis elapsed_time() const { return elapsed_time_; }
 
   // Returns true if and only if the unit test passed (i.e. all test suites
   // passed).
-  bool Passed() const { return !Failed(); }
+  [[nodiscard]] bool Passed() const { return !Failed(); }
 
   // Returns true if and only if the unit test failed (i.e. some test suite
   // failed or something outside of all tests failed).
-  bool Failed() const {
+  [[nodiscard]] bool Failed() const {
     return failed_test_suite_count() > 0 || ad_hoc_test_result()->Failed();
   }
 
   // Gets the i-th test suite among all the test suites. i can range from 0 to
   // total_test_suite_count() - 1. If i is not in that range, returns NULL.
-  const TestSuite* GetTestSuite(int i) const {
+  [[nodiscard]] const TestSuite* GetTestSuite(int i) const {
     const int index = GetElementOr(test_suite_indices_, i, -1);
     return index < 0 ? nullptr : test_suites_[static_cast<size_t>(i)];
   }
 
   //  Legacy API is deprecated but still available
 #ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-  const TestCase* GetTestCase(int i) const { return GetTestSuite(i); }
+  [[nodiscard]] const TestCase* GetTestCase(int i) const { return GetTestSuite(i); }
 #endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
 
   // Gets the i-th test suite among all the test suites. i can range from 0 to
@@ -608,7 +608,7 @@ class GTEST_API_ UnitTestImpl {
   TestResult* current_test_result();
 
   // Returns the TestResult for the ad hoc test.
-  const TestResult* ad_hoc_test_result() const { return &ad_hoc_test_result_; }
+  [[nodiscard]] const TestResult* ad_hoc_test_result() const { return &ad_hoc_test_result_; }
 
   // Sets the OS stack trace getter.
   //
@@ -758,9 +758,9 @@ class GTEST_API_ UnitTestImpl {
   // Prints the names of the tests matching the user-specified filter flag.
   void ListTestsMatchingFilter();
 
-  const TestSuite* current_test_suite() const { return current_test_suite_; }
+  [[nodiscard]] const TestSuite* current_test_suite() const { return current_test_suite_; }
   TestInfo* current_test_info() { return current_test_info_; }
-  const TestInfo* current_test_info() const { return current_test_info_; }
+  [[nodiscard]] const TestInfo* current_test_info() const { return current_test_info_; }
 
   // Returns the vector of environments that need to be set-up/torn-down
   // before/after the tests are run.
@@ -770,7 +770,7 @@ class GTEST_API_ UnitTestImpl {
   std::vector<TraceInfo>& gtest_trace_stack() {
     return *(gtest_trace_stack_.pointer());
   }
-  const std::vector<TraceInfo>& gtest_trace_stack() const {
+  [[nodiscard]] const std::vector<TraceInfo>& gtest_trace_stack() const {
     return gtest_trace_stack_.get();
   }
 
@@ -782,7 +782,7 @@ class GTEST_API_ UnitTestImpl {
   // flag, or NULL if that flag was not specified.
   // This information is useful only in a death test child process.
   // Must not be called before a call to InitGoogleTest.
-  const InternalRunDeathTestFlag* internal_run_death_test_flag() const {
+  [[nodiscard]] const InternalRunDeathTestFlag* internal_run_death_test_flag() const {
     return internal_run_death_test_flag_.get();
   }
 
@@ -814,7 +814,7 @@ class GTEST_API_ UnitTestImpl {
   void PostFlagParsingInit();
 
   // Gets the random seed used at the start of the current test iteration.
-  int random_seed() const { return random_seed_; }
+  [[nodiscard]] int random_seed() const { return random_seed_; }
 
   // Gets the random number generator.
   internal::Random* random() { return &random_; }
@@ -828,7 +828,7 @@ class GTEST_API_ UnitTestImpl {
 
   // Returns the value of GTEST_FLAG(catch_exceptions) at the moment
   // UnitTest::Run() starts.
-  bool catch_exceptions() const { return catch_exceptions_; }
+  [[nodiscard]] bool catch_exceptions() const { return catch_exceptions_; }
 
  private:
   friend class ::testing::UnitTest;

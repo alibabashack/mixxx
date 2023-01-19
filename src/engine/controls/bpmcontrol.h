@@ -25,8 +25,8 @@ class BpmControl : public EngineControl {
     BpmControl(const QString& group, UserSettingsPointer pConfig);
     ~BpmControl() override;
 
-    mixxx::Bpm getBpm() const;
-    mixxx::Bpm getLocalBpm() const {
+    [[nodiscard]] mixxx::Bpm getBpm() const;
+    [[nodiscard]] mixxx::Bpm getLocalBpm() const {
         return m_pLocalBpm ? mixxx::Bpm(m_pLocalBpm->get()) : mixxx::Bpm();
     }
 
@@ -50,8 +50,8 @@ class BpmControl : public EngineControl {
     double getPhaseOffset(mixxx::audio::FramePos thisPosition);
     /// getBeatDistance is adjusted to include the user offset so it's
     /// transparent to other decks.
-    double getBeatDistance(mixxx::audio::FramePos thisPosition) const;
-    double getUserOffset() const {
+    [[nodiscard]] double getBeatDistance(mixxx::audio::FramePos thisPosition) const;
+    [[nodiscard]] double getUserOffset() const {
         return m_dUserOffset.getValue();
     }
 
@@ -93,7 +93,7 @@ class BpmControl : public EngineControl {
     // Example: shortestPercentageChange(0.99, 0.01) == 0.02
     static double shortestPercentageChange(const double& current_percentage,
                                            const double& target_percentage);
-    double getRateRatio() const;
+    [[nodiscard]] double getRateRatio() const;
     void trackLoaded(TrackPointer pNewTrack) override;
     void trackBeatsUpdated(mixxx::BeatsPointer pBeats) override;
     void notifySeek(mixxx::audio::FramePos position) override;
@@ -111,10 +111,10 @@ class BpmControl : public EngineControl {
     void slotBeatsTranslateMatchAlignment(double);
 
   private:
-    SyncMode getSyncMode() const {
+    [[nodiscard]] SyncMode getSyncMode() const {
         return syncModeFromDouble(m_pSyncMode->get());
     }
-    inline bool isSynchronized() const {
+    [[nodiscard]] inline bool isSynchronized() const {
         return toSynchronized(getSyncMode());
     }
     double calcSyncAdjustment(bool userTweakingSync);

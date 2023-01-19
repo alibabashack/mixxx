@@ -69,14 +69,14 @@ class BetweenCardinalityImpl : public CardinalityInterface {
 
   // Conservative estimate on the lower/upper bound of the number of
   // calls allowed.
-  int ConservativeLowerBound() const override { return min_; }
-  int ConservativeUpperBound() const override { return max_; }
+  [[nodiscard]] int ConservativeLowerBound() const override { return min_; }
+  [[nodiscard]] int ConservativeUpperBound() const override { return max_; }
 
-  bool IsSatisfiedByCallCount(int call_count) const override {
+  [[nodiscard]] bool IsSatisfiedByCallCount(int call_count) const override {
     return min_ <= call_count && call_count <= max_;
   }
 
-  bool IsSaturatedByCallCount(int call_count) const override {
+  [[nodiscard]] bool IsSaturatedByCallCount(int call_count) const override {
     return call_count >= max_;
   }
 

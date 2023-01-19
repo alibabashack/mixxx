@@ -15,11 +15,11 @@ class EngineEffectParameter {
     virtual ~EngineEffectParameter() {
     }
 
-    const QString& id() const {
+    [[nodiscard]] const QString& id() const {
         return m_pParameterManifest->id();
     }
 
-    inline double value() const {
+    [[nodiscard]] inline double value() const {
         return m_value;
     }
     inline void setValue(const double value) {
@@ -31,10 +31,10 @@ class EngineEffectParameter {
         }
         m_value = value;
     }
-    inline int toInt() const {
+    [[nodiscard]] inline int toInt() const {
         return static_cast<int>(m_value);
     }
-    inline bool toBool() const {
+    [[nodiscard]] inline bool toBool() const {
         return m_value > 0.0;
     }
 

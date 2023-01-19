@@ -77,8 +77,8 @@ class GTEST_API_ FilePath {
 
   void Set(const FilePath& rhs) { pathname_ = rhs.pathname_; }
 
-  const std::string& string() const { return pathname_; }
-  const char* c_str() const { return pathname_.c_str(); }
+  [[nodiscard]] const std::string& string() const { return pathname_; }
+  [[nodiscard]] const char* c_str() const { return pathname_.c_str(); }
 
   // Returns the current working directory, or "" if unsuccessful.
   static FilePath GetCurrentDir();
@@ -110,12 +110,12 @@ class GTEST_API_ FilePath {
                                          const char* extension);
 
   // Returns true if and only if the path is "".
-  bool IsEmpty() const { return pathname_.empty(); }
+  [[nodiscard]] bool IsEmpty() const { return pathname_.empty(); }
 
   // If input name has a trailing separator character, removes it and returns
   // the name, otherwise return the name string unmodified.
   // On Windows platform, uses \ as the separator, other platforms use /.
-  FilePath RemoveTrailingPathSeparator() const;
+  [[nodiscard]] FilePath RemoveTrailingPathSeparator() const;
 
   // Returns a copy of the FilePath with the directory part removed.
   // Example: FilePath("path/to/file").RemoveDirectoryName() returns
@@ -123,7 +123,7 @@ class GTEST_API_ FilePath {
   // the FilePath unmodified. If there is no file part ("just_a_dir/") it
   // returns an empty FilePath ("").
   // On Windows platform, '\' is the path separator, otherwise it is '/'.
-  FilePath RemoveDirectoryName() const;
+  [[nodiscard]] FilePath RemoveDirectoryName() const;
 
   // RemoveFileName returns the directory path with the filename removed.
   // Example: FilePath("path/to/file").RemoveFileName() returns "path/to/".
@@ -131,7 +131,7 @@ class GTEST_API_ FilePath {
   // FilePath("./") or, on Windows, FilePath(".\\"). If the filepath does
   // not have a file, like "just/a/dir/", it returns the FilePath unmodified.
   // On Windows platform, '\' is the path separator, otherwise it is '/'.
-  FilePath RemoveFileName() const;
+  [[nodiscard]] FilePath RemoveFileName() const;
 
   // Returns a copy of the FilePath with the case-insensitive extension removed.
   // Example: FilePath("dir/file.exe").RemoveExtension("EXE") returns
@@ -143,33 +143,33 @@ class GTEST_API_ FilePath {
   // the directories already exist; returns false if unable to create
   // directories for any reason. Will also return false if the FilePath does
   // not represent a directory (that is, it doesn't end with a path separator).
-  bool CreateDirectoriesRecursively() const;
+  [[nodiscard]] bool CreateDirectoriesRecursively() const;
 
   // Create the directory so that path exists. Returns true if successful or
   // if the directory already exists; returns false if unable to create the
   // directory for any reason, including if the parent directory does not
   // exist. Not named "CreateDirectory" because that's a macro on Windows.
-  bool CreateFolder() const;
+  [[nodiscard]] bool CreateFolder() const;
 
   // Returns true if FilePath describes something in the file-system,
   // either a file, directory, or whatever, and that something exists.
-  bool FileOrDirectoryExists() const;
+  [[nodiscard]] bool FileOrDirectoryExists() const;
 
   // Returns true if pathname describes a directory in the file-system
   // that exists.
-  bool DirectoryExists() const;
+  [[nodiscard]] bool DirectoryExists() const;
 
   // Returns true if FilePath ends with a path separator, which indicates that
   // it is intended to represent a directory. Returns false otherwise.
   // This does NOT check that a directory (or file) actually exists.
-  bool IsDirectory() const;
+  [[nodiscard]] bool IsDirectory() const;
 
   // Returns true if pathname describes a root directory. (Windows has one
   // root directory per disk drive.)
-  bool IsRootDirectory() const;
+  [[nodiscard]] bool IsRootDirectory() const;
 
   // Returns true if pathname describes an absolute path.
-  bool IsAbsolutePath() const;
+  [[nodiscard]] bool IsAbsolutePath() const;
 
  private:
   // Replaces multiple consecutive separators with a single separator.
@@ -197,7 +197,7 @@ class GTEST_API_ FilePath {
   // Returns a pointer to the last occurrence of a valid path separator in
   // the FilePath. On Windows, for example, both '/' and '\' are valid path
   // separators. Returns NULL if no path separator was found.
-  const char* FindLastPathSeparator() const;
+  [[nodiscard]] const char* FindLastPathSeparator() const;
 
   std::string pathname_;
 };  // class FilePath

@@ -71,7 +71,7 @@ class EngineEffectsManager final : public EffectsRequestHandler {
             EffectsResponsePipe* pResponsePipe) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EngineEffectsManager");
     }
 

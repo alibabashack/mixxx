@@ -1749,7 +1749,7 @@ class FloatingEqMatcher {
     }
 
    private:
-    bool HasMaxAbsError() const { return max_abs_error_ >= 0; }
+    [[nodiscard]] bool HasMaxAbsError() const { return max_abs_error_ >= 0; }
 
     const FloatType expected_;
     const bool nan_eq_nan_;
@@ -3483,7 +3483,7 @@ class ElementsAreMatcherImpl : public MatcherInterface<Container> {
     return Message() << count << (count == 1 ? " element" : " elements");
   }
 
-  size_t count() const { return matchers_.size(); }
+  [[nodiscard]] size_t count() const { return matchers_.size(); }
 
   ::std::vector<Matcher<const Element&>> matchers_;
 };
@@ -3499,9 +3499,9 @@ class GTEST_API_ MatchMatrix {
         num_matchers_(num_matchers),
         matched_(num_elements_ * num_matchers_, 0) {}
 
-  size_t LhsSize() const { return num_elements_; }
-  size_t RhsSize() const { return num_matchers_; }
-  bool HasEdge(size_t ilhs, size_t irhs) const {
+  [[nodiscard]] size_t LhsSize() const { return num_elements_; }
+  [[nodiscard]] size_t RhsSize() const { return num_matchers_; }
+  [[nodiscard]] bool HasEdge(size_t ilhs, size_t irhs) const {
     return matched_[SpaceIndex(ilhs, irhs)] == 1;
   }
   void SetEdge(size_t ilhs, size_t irhs, bool b) {
@@ -3515,10 +3515,10 @@ class GTEST_API_ MatchMatrix {
 
   void Randomize();
 
-  std::string DebugString() const;
+  [[nodiscard]] std::string DebugString() const;
 
  private:
-  size_t SpaceIndex(size_t ilhs, size_t irhs) const {
+  [[nodiscard]] size_t SpaceIndex(size_t ilhs, size_t irhs) const {
     return ilhs * num_matchers_ + irhs;
   }
 
@@ -3579,7 +3579,7 @@ class GTEST_API_ UnorderedElementsAreMatcherImplBase {
     return Message() << n << " element" << (n == 1 ? "" : "s");
   }
 
-  UnorderedMatcherRequire::Flags match_flags() const { return match_flags_; }
+  [[nodiscard]] UnorderedMatcherRequire::Flags match_flags() const { return match_flags_; }
 
  private:
   UnorderedMatcherRequire::Flags match_flags_;
@@ -5296,7 +5296,7 @@ template <typename Err>
 class ExceptionMatcherImpl {
   class NeverThrown {
    public:
-    const char* what() const noexcept {
+    [[nodiscard]] const char* what() const noexcept {
       return "this exception should never be thrown";
     }
   };

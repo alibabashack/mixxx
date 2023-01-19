@@ -87,9 +87,9 @@ public slots:
 
 private:
   void processTempRate(const int bufferSamples);
-  double getJogFactor() const;
-  double getWheelFactor() const;
-  SyncMode getSyncMode() const;
+  [[nodiscard]] double getJogFactor() const;
+  [[nodiscard]] double getWheelFactor() const;
+  [[nodiscard]] SyncMode getSyncMode() const;
 
   // Set rate change of the temporary pitch rate
   void setRateTemp(double v);

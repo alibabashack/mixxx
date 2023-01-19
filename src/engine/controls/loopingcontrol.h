@@ -121,11 +121,11 @@ class LoopingControl : public EngineControl {
     void setLoopOutToCurrentPosition();
     void clearActiveBeatLoop();
     void updateBeatLoopingControls();
-    bool currentLoopMatchesBeatloopSize(const LoopInfo& loopInfo) const;
+    [[nodiscard]] bool currentLoopMatchesBeatloopSize(const LoopInfo& loopInfo) const;
 
     // Given loop in and out points, determine if this is a beatloop of a particular
     // size.
-    double findBeatloopSizeForLoop(mixxx::audio::FramePos startPosition,
+    [[nodiscard]] double findBeatloopSizeForLoop(mixxx::audio::FramePos startPosition,
             mixxx::audio::FramePos endPosition) const;
     // When a loop changes size such that the playposition is outside of the loop,
     // we can figure out the best place in the new loop to seek to maintain
@@ -135,7 +135,7 @@ class LoopingControl : public EngineControl {
             mixxx::audio::FramePos oldLoopInPosition,
             mixxx::audio::FramePos newLoopInPosition,
             mixxx::audio::FramePos newLoopOutPosition);
-    mixxx::audio::FramePos findQuantizedBeatloopStart(
+    [[nodiscard]] mixxx::audio::FramePos findQuantizedBeatloopStart(
             const mixxx::BeatsPointer& pBeats,
             mixxx::audio::FramePos currentPosition,
             double beats) const;

@@ -71,7 +71,7 @@ class PerfCounters final {
   // True iff this platform supports performance counters.
   static const bool kSupported;
 
-  bool IsValid() const { return is_valid_; }
+  [[nodiscard]] bool IsValid() const { return is_valid_; }
   static PerfCounters NoCounters() { return PerfCounters(); }
 
   ~PerfCounters();
@@ -105,8 +105,8 @@ class PerfCounters final {
 #endif
   }
 
-  const std::vector<std::string>& names() const { return counter_names_; }
-  size_t num_counters() const { return counter_names_.size(); }
+  [[nodiscard]] const std::vector<std::string>& names() const { return counter_names_; }
+  [[nodiscard]] size_t num_counters() const { return counter_names_.size(); }
 
  private:
   PerfCounters(const std::vector<std::string>& counter_names,
@@ -129,7 +129,7 @@ class PerfCountersMeasurement final {
         start_values_(counters_.IsValid() ? counters_.names().size() : 0),
         end_values_(counters_.IsValid() ? counters_.names().size() : 0) {}
 
-  bool IsValid() const { return counters_.IsValid(); }
+  [[nodiscard]] bool IsValid() const { return counters_.IsValid(); }
 
   BENCHMARK_ALWAYS_INLINE void Start() {
     assert(IsValid());

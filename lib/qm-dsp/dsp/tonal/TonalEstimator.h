@@ -66,7 +66,7 @@ public:
         std::cout << std::endl;
     }
         
-    double magnitude() const {
+    [[nodiscard]] double magnitude() const {
         double dMag = 0.0;
                 
         for (size_t i = 0; i < 6; i++) {

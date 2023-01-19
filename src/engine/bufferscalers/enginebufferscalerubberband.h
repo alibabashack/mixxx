@@ -46,10 +46,10 @@ class EngineBufferScaleRubberBand final : public EngineBufferScale {
 
     /// Calls `m_pRubberBand->getPreferredStartPad()`, with backwards
     /// compatibility for older librubberband versions.
-    size_t getPreferredStartPad() const;
+    [[nodiscard]] size_t getPreferredStartPad() const;
     /// Calls `m_pRubberBand->getStartDelay()`, with backwards compatibility for
     /// older librubberband versions.
-    size_t getStartDelay() const;
+    [[nodiscard]] size_t getStartDelay() const;
     int runningEngineVersion();
     /// Reset the rubberband instance and run the prerequisite amount of padding
     /// through it. This should be used instead of calling

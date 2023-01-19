@@ -34,13 +34,13 @@ class EngineChannel : public EngineObject {
             bool isPrimaryDeck);
     ~EngineChannel() override;
 
-    virtual ChannelOrientation getOrientation() const;
+    [[nodiscard]] virtual ChannelOrientation getOrientation() const;
 
-    inline ChannelHandle getHandle() const {
+    [[nodiscard]] inline ChannelHandle getHandle() const {
         return m_group.handle();
     }
 
-    const QString& getGroup() const {
+    [[nodiscard]] const QString& getGroup() const {
         return m_group.name();
     }
 
@@ -50,11 +50,11 @@ class EngineChannel : public EngineObject {
     }
 
     void setPfl(bool enabled);
-    virtual bool isPflEnabled() const;
+    [[nodiscard]] virtual bool isPflEnabled() const;
     void setMaster(bool enabled);
-    virtual bool isMasterEnabled() const;
+    [[nodiscard]] virtual bool isMasterEnabled() const;
     void setTalkover(bool enabled);
-    virtual bool isTalkoverEnabled() const;
+    [[nodiscard]] virtual bool isTalkoverEnabled() const;
     inline bool isTalkoverChannel() { return m_bIsTalkoverChannel; };
     inline bool isPrimaryDeck() {
         return m_bIsPrimaryDeck;

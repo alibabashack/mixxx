@@ -183,7 +183,7 @@ class GTEST_API_ Message {
   // Each '\0' character in the buffer is replaced with "\\0".
   //
   // INTERNAL IMPLEMENTATION - DO NOT USE IN A USER PROGRAM.
-  std::string GetString() const;
+  [[nodiscard]] std::string GetString() const;
 
  private:
   // We'll hold the text streamed to this object here.

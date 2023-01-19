@@ -58,7 +58,7 @@ class EngineSync : public SyncableListener {
     bool otherSyncedPlaying(const QString& group);
 
     void addSyncableDeck(Syncable* pSyncable);
-    EngineChannel* getLeaderChannel() const;
+    [[nodiscard]] EngineChannel* getLeaderChannel() const;
     void onCallbackStart(mixxx::audio::SampleRate sampleRate, int bufferSize);
     void onCallbackEnd(mixxx::audio::SampleRate sampleRate, int bufferSize);
 
@@ -89,20 +89,20 @@ class EngineSync : public SyncableListener {
     void deactivateSync(Syncable* pSyncable);
 
     /// This utility method returns true if it finds a deck not in SyncMode::None.
-    bool syncDeckExists() const;
+    [[nodiscard]] bool syncDeckExists() const;
 
     /// Return the current BPM of the Leader Syncable. If no Leader syncable is
     /// set then returns the BPM of the internal clock.
-    mixxx::Bpm leaderBpm() const;
+    [[nodiscard]] mixxx::Bpm leaderBpm() const;
 
     /// Returns the current beat distance of the Leader Syncable. If no Leader
     /// Syncable is set, then returns the beat distance of the internal clock.
-    double leaderBeatDistance() const;
+    [[nodiscard]] double leaderBeatDistance() const;
 
     /// Returns the overall average BPM of the Leader Syncable if it were playing
     /// at 1.0 rate. This is used to calculate half/double multipliers and whether
     /// the Leader has a bpm at all.
-    mixxx::Bpm leaderBaseBpm() const;
+    [[nodiscard]] mixxx::Bpm leaderBaseBpm() const;
 
     /// Set the BPM on every sync-enabled Syncable except pSource.
     void updateLeaderBpm(Syncable* pSource, mixxx::Bpm bpm);
@@ -122,7 +122,7 @@ class EngineSync : public SyncableListener {
 
     /// Iff there is a single playing syncable in sync mode, return it.
     /// This is used to initialize leader params.
-    Syncable* getUniquePlayingSyncedDeck() const;
+    [[nodiscard]] Syncable* getUniquePlayingSyncedDeck() const;
 
     /// Only for testing. Do not use.
     Syncable* getSyncableForGroup(const QString& group);

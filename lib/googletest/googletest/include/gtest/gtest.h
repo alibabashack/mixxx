@@ -358,10 +358,10 @@ class TestProperty {
       : key_(a_key), value_(a_value) {}
 
   // Gets the user supplied key.
-  const char* key() const { return key_.c_str(); }
+  [[nodiscard]] const char* key() const { return key_.c_str(); }
 
   // Gets the user supplied value.
-  const char* value() const { return value_.c_str(); }
+  [[nodiscard]] const char* value() const { return value_.c_str(); }
 
   // Sets a new value, overriding the one supplied in the constructor.
   void SetValue(const std::string& new_value) { value_ = new_value; }
@@ -389,41 +389,41 @@ class GTEST_API_ TestResult {
 
   // Gets the number of all test parts.  This is the sum of the number
   // of successful test parts and the number of failed test parts.
-  int total_part_count() const;
+  [[nodiscard]] int total_part_count() const;
 
   // Returns the number of the test properties.
-  int test_property_count() const;
+  [[nodiscard]] int test_property_count() const;
 
   // Returns true if and only if the test passed (i.e. no test part failed).
-  bool Passed() const { return !Skipped() && !Failed(); }
+  [[nodiscard]] bool Passed() const { return !Skipped() && !Failed(); }
 
   // Returns true if and only if the test was skipped.
-  bool Skipped() const;
+  [[nodiscard]] bool Skipped() const;
 
   // Returns true if and only if the test failed.
-  bool Failed() const;
+  [[nodiscard]] bool Failed() const;
 
   // Returns true if and only if the test fatally failed.
-  bool HasFatalFailure() const;
+  [[nodiscard]] bool HasFatalFailure() const;
 
   // Returns true if and only if the test has a non-fatal failure.
-  bool HasNonfatalFailure() const;
+  [[nodiscard]] bool HasNonfatalFailure() const;
 
   // Returns the elapsed time, in milliseconds.
-  TimeInMillis elapsed_time() const { return elapsed_time_; }
+  [[nodiscard]] TimeInMillis elapsed_time() const { return elapsed_time_; }
 
   // Gets the time of the test case start, in ms from the start of the
   // UNIX epoch.
-  TimeInMillis start_timestamp() const { return start_timestamp_; }
+  [[nodiscard]] TimeInMillis start_timestamp() const { return start_timestamp_; }
 
   // Returns the i-th test part result among all the results. i can range from 0
   // to total_part_count() - 1. If i is not in that range, aborts the program.
-  const TestPartResult& GetTestPartResult(int i) const;
+  [[nodiscard]] const TestPartResult& GetTestPartResult(int i) const;
 
   // Returns the i-th test property. i can range from 0 to
   // test_property_count() - 1. If i is not in that range, aborts the
   // program.
-  const TestProperty& GetTestProperty(int i) const;
+  [[nodiscard]] const TestProperty& GetTestProperty(int i) const;
 
  private:
   friend class TestInfo;
@@ -437,12 +437,12 @@ class GTEST_API_ TestResult {
   friend class internal::FuchsiaDeathTest;
 
   // Gets the vector of TestPartResults.
-  const std::vector<TestPartResult>& test_part_results() const {
+  [[nodiscard]] const std::vector<TestPartResult>& test_part_results() const {
     return test_part_results_;
   }
 
   // Gets the vector of TestProperties.
-  const std::vector<TestProperty>& test_properties() const {
+  [[nodiscard]] const std::vector<TestProperty>& test_properties() const {
     return test_properties_;
   }
 
@@ -471,7 +471,7 @@ class GTEST_API_ TestResult {
   void AddTestPartResult(const TestPartResult& test_part_result);
 
   // Returns the death test count.
-  int death_test_count() const { return death_test_count_; }
+  [[nodiscard]] int death_test_count() const { return death_test_count_; }
 
   // Increments the death test count, returning the new count.
   int increment_death_test_count() { return ++death_test_count_; }
@@ -520,38 +520,38 @@ class GTEST_API_ TestInfo {
   ~TestInfo();
 
   // Returns the test suite name.
-  const char* test_suite_name() const { return test_suite_name_.c_str(); }
+  [[nodiscard]] const char* test_suite_name() const { return test_suite_name_.c_str(); }
 
 // Legacy API is deprecated but still available
 #ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-  const char* test_case_name() const { return test_suite_name(); }
+  [[nodiscard]] const char* test_case_name() const { return test_suite_name(); }
 #endif  // GTEST_REMOVE_LEGACY_TEST_CASEAPI_
 
   // Returns the test name.
-  const char* name() const { return name_.c_str(); }
+  [[nodiscard]] const char* name() const { return name_.c_str(); }
 
   // Returns the name of the parameter type, or NULL if this is not a typed
   // or a type-parameterized test.
-  const char* type_param() const {
+  [[nodiscard]] const char* type_param() const {
     if (type_param_.get() != nullptr) return type_param_->c_str();
     return nullptr;
   }
 
   // Returns the text representation of the value parameter, or NULL if this
   // is not a value-parameterized test.
-  const char* value_param() const {
+  [[nodiscard]] const char* value_param() const {
     if (value_param_.get() != nullptr) return value_param_->c_str();
     return nullptr;
   }
 
   // Returns the file name where this test is defined.
-  const char* file() const { return location_.file.c_str(); }
+  [[nodiscard]] const char* file() const { return location_.file.c_str(); }
 
   // Returns the line where this test is defined.
-  int line() const { return location_.line; }
+  [[nodiscard]] int line() const { return location_.line; }
 
   // Return true if this test should not be run because it's in another shard.
-  bool is_in_another_shard() const { return is_in_another_shard_; }
+  [[nodiscard]] bool is_in_another_shard() const { return is_in_another_shard_; }
 
   // Returns true if this test should run, that is if the test is not
   // disabled (or it is disabled but the also_run_disabled_tests flag has
@@ -569,17 +569,17 @@ class GTEST_API_ TestInfo {
   //
   // For example, *A*:Foo.* is a filter that matches any string that
   // contains the character 'A' or starts with "Foo.".
-  bool should_run() const { return should_run_; }
+  [[nodiscard]] bool should_run() const { return should_run_; }
 
   // Returns true if and only if this test will appear in the XML report.
-  bool is_reportable() const {
+  [[nodiscard]] bool is_reportable() const {
     // The XML report includes tests matching the filter, excluding those
     // run in other shards.
     return matches_filter_ && !is_in_another_shard_;
   }
 
   // Returns the result of the test.
-  const TestResult* result() const { return &result_; }
+  [[nodiscard]] const TestResult* result() const { return &result_; }
 
  private:
 #if GTEST_HAS_DEATH_TEST
@@ -674,64 +674,64 @@ class GTEST_API_ TestSuite {
   virtual ~TestSuite();
 
   // Gets the name of the TestSuite.
-  const char* name() const { return name_.c_str(); }
+  [[nodiscard]] const char* name() const { return name_.c_str(); }
 
   // Returns the name of the parameter type, or NULL if this is not a
   // type-parameterized test suite.
-  const char* type_param() const {
+  [[nodiscard]] const char* type_param() const {
     if (type_param_.get() != nullptr) return type_param_->c_str();
     return nullptr;
   }
 
   // Returns true if any test in this test suite should run.
-  bool should_run() const { return should_run_; }
+  [[nodiscard]] bool should_run() const { return should_run_; }
 
   // Gets the number of successful tests in this test suite.
-  int successful_test_count() const;
+  [[nodiscard]] int successful_test_count() const;
 
   // Gets the number of skipped tests in this test suite.
-  int skipped_test_count() const;
+  [[nodiscard]] int skipped_test_count() const;
 
   // Gets the number of failed tests in this test suite.
-  int failed_test_count() const;
+  [[nodiscard]] int failed_test_count() const;
 
   // Gets the number of disabled tests that will be reported in the XML report.
-  int reportable_disabled_test_count() const;
+  [[nodiscard]] int reportable_disabled_test_count() const;
 
   // Gets the number of disabled tests in this test suite.
-  int disabled_test_count() const;
+  [[nodiscard]] int disabled_test_count() const;
 
   // Gets the number of tests to be printed in the XML report.
-  int reportable_test_count() const;
+  [[nodiscard]] int reportable_test_count() const;
 
   // Get the number of tests in this test suite that should run.
-  int test_to_run_count() const;
+  [[nodiscard]] int test_to_run_count() const;
 
   // Gets the number of all tests in this test suite.
-  int total_test_count() const;
+  [[nodiscard]] int total_test_count() const;
 
   // Returns true if and only if the test suite passed.
-  bool Passed() const { return !Failed(); }
+  [[nodiscard]] bool Passed() const { return !Failed(); }
 
   // Returns true if and only if the test suite failed.
-  bool Failed() const {
+  [[nodiscard]] bool Failed() const {
     return failed_test_count() > 0 || ad_hoc_test_result().Failed();
   }
 
   // Returns the elapsed time, in milliseconds.
-  TimeInMillis elapsed_time() const { return elapsed_time_; }
+  [[nodiscard]] TimeInMillis elapsed_time() const { return elapsed_time_; }
 
   // Gets the time of the test suite start, in ms from the start of the
   // UNIX epoch.
-  TimeInMillis start_timestamp() const { return start_timestamp_; }
+  [[nodiscard]] TimeInMillis start_timestamp() const { return start_timestamp_; }
 
   // Returns the i-th test among all the tests. i can range from 0 to
   // total_test_count() - 1. If i is not in that range, returns NULL.
-  const TestInfo* GetTestInfo(int i) const;
+  [[nodiscard]] const TestInfo* GetTestInfo(int i) const;
 
   // Returns the TestResult that holds test properties recorded during
   // execution of SetUpTestSuite and TearDownTestSuite.
-  const TestResult& ad_hoc_test_result() const { return ad_hoc_test_result_; }
+  [[nodiscard]] const TestResult& ad_hoc_test_result() const { return ad_hoc_test_result_; }
 
  private:
   friend class Test;
@@ -741,7 +741,7 @@ class GTEST_API_ TestSuite {
   std::vector<TestInfo*>& test_info_list() { return test_info_list_; }
 
   // Gets the (immutable) vector of TestInfos in this TestSuite.
-  const std::vector<TestInfo*>& test_info_list() const {
+  [[nodiscard]] const std::vector<TestInfo*>& test_info_list() const {
     return test_info_list_;
   }
 
@@ -1022,7 +1022,7 @@ class GTEST_API_ TestEventListeners {
   // console output.  Note that removing this object from the listener list
   // with Release transfers its ownership to the caller and makes this
   // function return NULL the next time.
-  TestEventListener* default_result_printer() const {
+  [[nodiscard]] TestEventListener* default_result_printer() const {
     return default_result_printer_;
   }
 
@@ -1033,7 +1033,7 @@ class GTEST_API_ TestEventListeners {
   // removing this object from the listener list with Release transfers its
   // ownership to the caller and makes this function return NULL the next
   // time.
-  TestEventListener* default_xml_generator() const {
+  [[nodiscard]] TestEventListener* default_xml_generator() const {
     return default_xml_generator_;
   }
 
@@ -1065,7 +1065,7 @@ class GTEST_API_ TestEventListeners {
 
   // Controls whether events will be forwarded by the repeater to the
   // listeners in the list.
-  bool EventForwardingEnabled() const;
+  [[nodiscard]] bool EventForwardingEnabled() const;
   void SuppressEventForwarding();
 
   // The actual list of listeners.

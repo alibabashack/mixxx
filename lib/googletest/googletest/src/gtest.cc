@@ -1397,7 +1397,7 @@ class Hunk {
     }
   }
 
-  bool has_edits() const { return adds_ || removes_; }
+  [[nodiscard]] bool has_edits() const { return adds_ || removes_; }
 
  private:
   void FlushEdits() {
@@ -3767,7 +3767,7 @@ class TestEventRepeater : public TestEventListener {
 
   // Controls whether events will be forwarded to listeners_. Set to false
   // in death test child processes.
-  bool forwarding_enabled() const { return forwarding_enabled_; }
+  [[nodiscard]] bool forwarding_enabled() const { return forwarding_enabled_; }
   void set_forwarding_enabled(bool enable) { forwarding_enabled_ = enable; }
 
   void OnTestProgramStart(const UnitTest& unit_test) override;

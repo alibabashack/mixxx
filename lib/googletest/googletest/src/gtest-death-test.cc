@@ -414,16 +414,16 @@ class DeathTestImpl : public DeathTest {
   void Abort(AbortReason reason) override;
   bool Passed(bool status_ok) override;
 
-  const char* statement() const { return statement_; }
-  bool spawned() const { return spawned_; }
+  [[nodiscard]] const char* statement() const { return statement_; }
+  [[nodiscard]] bool spawned() const { return spawned_; }
   void set_spawned(bool is_spawned) { spawned_ = is_spawned; }
-  int status() const { return status_; }
+  [[nodiscard]] int status() const { return status_; }
   void set_status(int a_status) { status_ = a_status; }
-  DeathTestOutcome outcome() const { return outcome_; }
+  [[nodiscard]] DeathTestOutcome outcome() const { return outcome_; }
   void set_outcome(DeathTestOutcome an_outcome) { outcome_ = an_outcome; }
-  int read_fd() const { return read_fd_; }
+  [[nodiscard]] int read_fd() const { return read_fd_; }
   void set_read_fd(int fd) { read_fd_ = fd; }
-  int write_fd() const { return write_fd_; }
+  [[nodiscard]] int write_fd() const { return write_fd_; }
   void set_write_fd(int fd) { write_fd_ = fd; }
 
   // Called in the parent process only. Reads the result code of the death

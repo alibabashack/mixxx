@@ -25,39 +25,39 @@ class InternalClock : public QObject, public Clock, public Syncable {
     InternalClock(const QString& group, SyncableListener* pEngineSync);
     ~InternalClock() override;
 
-    const QString& getGroup() const override {
+    [[nodiscard]] const QString& getGroup() const override {
         return m_group;
     }
-    EngineChannel* getChannel() const override {
+    [[nodiscard]] EngineChannel* getChannel() const override {
         return nullptr;
     }
 
     void setSyncMode(SyncMode mode) override;
     void notifyUniquePlaying() override;
     void requestSync() override;
-    SyncMode getSyncMode() const override {
+    [[nodiscard]] SyncMode getSyncMode() const override {
         return m_mode;
     }
 
     // The clock is always "playing" in a sense but this specifically refers to
     // decks so always return false.
-    bool isPlaying() const override {
+    [[nodiscard]] bool isPlaying() const override {
         return false;
     }
-    bool isAudible() const override {
+    [[nodiscard]] bool isAudible() const override {
         return false;
     }
-    bool isQuantized() const override {
+    [[nodiscard]] bool isQuantized() const override {
         return true;
     }
 
-    double getBeatDistance() const override;
+    [[nodiscard]] double getBeatDistance() const override;
     void updateLeaderBeatDistance(double beatDistance) override;
 
-    mixxx::Bpm getBaseBpm() const override;
+    [[nodiscard]] mixxx::Bpm getBaseBpm() const override;
     void updateLeaderBpm(mixxx::Bpm bpm) override;
     void notifyLeaderParamSource() override;
-    mixxx::Bpm getBpm() const override;
+    [[nodiscard]] mixxx::Bpm getBpm() const override;
     void updateInstantaneousBpm(mixxx::Bpm bpm) override;
     void reinitLeaderParams(double beatDistance, mixxx::Bpm baseBpm, mixxx::Bpm bpm) override;
 

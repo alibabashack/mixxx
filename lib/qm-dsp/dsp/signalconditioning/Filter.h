@@ -48,7 +48,7 @@ public:
                  double *const QM_R__ out,
                  const int n);
 
-    int getOrder() const { return m_order; }
+    [[nodiscard]] int getOrder() const { return m_order; }
     
 private:
     int m_order;

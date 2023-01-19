@@ -177,11 +177,11 @@ class GTEST_API_ AssertionResult {
   // use it when they fail (i.e., the predicate's outcome doesn't match the
   // assertion's expectation). When nothing has been streamed into the
   // object, returns an empty string.
-  const char* message() const {
+  [[nodiscard]] const char* message() const {
     return message_.get() != nullptr ? message_->c_str() : "";
   }
   // Deprecated; please use message() instead.
-  const char* failure_message() const { return message(); }
+  [[nodiscard]] const char* failure_message() const { return message(); }
 
   // Streams a custom failure message into this object.
   template <typename T>

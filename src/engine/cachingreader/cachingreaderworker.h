@@ -85,7 +85,7 @@ typedef struct ReaderStatusUpdate {
         return pChunk;
     }
 
-    mixxx::IndexRange readableFrameIndexRange() const {
+    [[nodiscard]] mixxx::IndexRange readableFrameIndexRange() const {
         return mixxx::IndexRange::between(
                 readableFrameIndexRangeStart,
                 readableFrameIndexRangeEnd);

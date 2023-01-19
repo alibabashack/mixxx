@@ -901,7 +901,7 @@ class GTEST_API_ RE {
   ~RE();
 
   // Returns the string representation of the regex.
-  const char* pattern() const { return pattern_; }
+  [[nodiscard]] const char* pattern() const { return pattern_; }
 
   // FullMatch(str, re) returns true if and only if regular expression re
   // matches the entire str.
@@ -1737,8 +1737,8 @@ class GTEST_API_ ThreadLocal {
   }
 
   T* pointer() { return GetOrCreateValue(); }
-  const T* pointer() const { return GetOrCreateValue(); }
-  const T& get() const { return *pointer(); }
+  [[nodiscard]] const T* pointer() const { return GetOrCreateValue(); }
+  [[nodiscard]] const T& get() const { return *pointer(); }
   void set(const T& value) { *pointer() = value; }
 
  private:
@@ -1765,7 +1765,7 @@ class GTEST_API_ ThreadLocal {
     return key;
   }
 
-  T* GetOrCreateValue() const {
+  [[nodiscard]] T* GetOrCreateValue() const {
     ThreadLocalValueHolderBase* const holder =
         static_cast<ThreadLocalValueHolderBase*>(pthread_getspecific(key_));
     if (holder != nullptr) {
@@ -1782,7 +1782,7 @@ class GTEST_API_ ThreadLocal {
    public:
     ValueHolderFactory() {}
     virtual ~ValueHolderFactory() {}
-    virtual ValueHolder* MakeNewHolder() const = 0;
+    [[nodiscard]] virtual ValueHolder* MakeNewHolder() const = 0;
 
    private:
     ValueHolderFactory(const ValueHolderFactory&) = delete;
@@ -1792,7 +1792,7 @@ class GTEST_API_ ThreadLocal {
   class DefaultValueHolderFactory : public ValueHolderFactory {
    public:
     DefaultValueHolderFactory() {}
-    ValueHolder* MakeNewHolder() const override { return new ValueHolder(); }
+    [[nodiscard]] ValueHolder* MakeNewHolder() const override { return new ValueHolder(); }
 
    private:
     DefaultValueHolderFactory(const DefaultValueHolderFactory&) = delete;
@@ -1803,7 +1803,7 @@ class GTEST_API_ ThreadLocal {
   class InstanceValueHolderFactory : public ValueHolderFactory {
    public:
     explicit InstanceValueHolderFactory(const T& value) : value_(value) {}
-    ValueHolder* MakeNewHolder() const override {
+    [[nodiscard]] ValueHolder* MakeNewHolder() const override {
       return new ValueHolder(value_);
     }
 

@@ -87,24 +87,24 @@ class EngineMaster : public QObject, public AudioSource {
     }
 
     // Provide access to the sync lock so enginebuffers can know what their rate controller is.
-    EngineSync* getEngineSync() const{
+    [[nodiscard]] EngineSync* getEngineSync() const{
         return m_pEngineSync;
     }
 
     // These are really only exposed for tests to use.
-    const CSAMPLE* getMasterBuffer() const;
-    const CSAMPLE* getBoothBuffer() const;
-    const CSAMPLE* getHeadphoneBuffer() const;
-    const CSAMPLE* getOutputBusBuffer(unsigned int i) const;
-    const CSAMPLE* getDeckBuffer(unsigned int i) const;
-    const CSAMPLE* getChannelBuffer(const QString& name) const;
-    const CSAMPLE* getSidechainBuffer() const;
+    [[nodiscard]] const CSAMPLE* getMasterBuffer() const;
+    [[nodiscard]] const CSAMPLE* getBoothBuffer() const;
+    [[nodiscard]] const CSAMPLE* getHeadphoneBuffer() const;
+    [[nodiscard]] const CSAMPLE* getOutputBusBuffer(unsigned int i) const;
+    [[nodiscard]] const CSAMPLE* getDeckBuffer(unsigned int i) const;
+    [[nodiscard]] const CSAMPLE* getChannelBuffer(const QString& name) const;
+    [[nodiscard]] const CSAMPLE* getSidechainBuffer() const;
 
-    EngineSideChain* getSideChain() const {
+    [[nodiscard]] EngineSideChain* getSideChain() const {
         return m_pEngineSideChain;
     }
 
-    CSAMPLE_GAIN getMasterGain(int channelIndex) const;
+    [[nodiscard]] CSAMPLE_GAIN getMasterGain(int channelIndex) const;
 
     struct ChannelInfo {
         ChannelInfo(int index)
@@ -220,7 +220,7 @@ class EngineMaster : public QObject, public AudioSource {
     ChannelHandleFactoryPointer m_pChannelHandleFactory;
     void applyMasterEffects();
     void processHeadphones(const CSAMPLE_GAIN masterMixGainInHeadphones);
-    bool sidechainMixRequired() const;
+    [[nodiscard]] bool sidechainMixRequired() const;
 
     EngineEffectsManager* m_pEngineEffectsManager;
 

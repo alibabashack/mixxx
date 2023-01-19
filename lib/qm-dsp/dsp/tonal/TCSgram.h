@@ -31,10 +31,10 @@ public:
     ~TCSGram();
     void getTCSVector(int, TCSVector&) const;
     void addTCSVector(const TCSVector&);
-    long getTime(size_t) const;
-    long getDuration() const;
+    [[nodiscard]] long getTime(size_t) const;
+    [[nodiscard]] long getDuration() const;
     void printDebug();
-    int getSize() const { return m_VectorList.size(); }
+    [[nodiscard]] int getSize() const { return m_VectorList.size(); }
     void reserve(size_t uSize) { m_VectorList.reserve(uSize); }
     void clear() { m_VectorList.clear(); }
     void setFrameDuration(const double dFrameDurationMS) {

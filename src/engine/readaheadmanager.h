@@ -42,7 +42,7 @@ class ReadAheadManager {
 
     /// Get the current read-ahead position in samples.
     /// unused in Mixxx, but needed for testing
-    virtual inline double getPlaypos() const {
+    [[nodiscard]] virtual inline double getPlaypos() const {
         return m_currentPosition;
     }
 
@@ -76,7 +76,7 @@ class ReadAheadManager {
                     virtualPlaypositionEndNonInclusive;
         }
 
-        bool direction() const {
+        [[nodiscard]] bool direction() const {
             // NOTE(rryan): We try to avoid 0-length ReadLogEntry's when
             // possible but they have happened in the past. We treat 0-length
             // ReadLogEntry's as forward reads because this prevents them from
@@ -84,7 +84,7 @@ class ReadAheadManager {
             return virtualPlaypositionStart <= virtualPlaypositionEndNonInclusive;
         }
 
-        double length() const {
+        [[nodiscard]] double length() const {
             return fabs(virtualPlaypositionEndNonInclusive -
                        virtualPlaypositionStart);
         }

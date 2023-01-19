@@ -33,11 +33,11 @@ class ChannelHandle {
     ChannelHandle() : m_iHandle(-1) {
     }
 
-    inline bool valid() const {
+    [[nodiscard]] inline bool valid() const {
         return m_iHandle >= 0;
     }
 
-    inline int handle() const {
+    [[nodiscard]] inline int handle() const {
         return m_iHandle;
     }
 
@@ -99,11 +99,11 @@ class ChannelHandleAndGroup {
               m_name(name) {
     }
 
-    inline const QString& name() const {
+    [[nodiscard]] inline const QString& name() const {
         return m_name;
     }
 
-    inline ChannelHandle handle() const {
+    [[nodiscard]] inline ChannelHandle handle() const {
         return m_handle;
     }
 
@@ -151,11 +151,11 @@ class ChannelHandleFactory {
         return handle;
     }
 
-    ChannelHandle handleForGroup(const QString& group) const {
+    [[nodiscard]] ChannelHandle handleForGroup(const QString& group) const {
         return m_groupToHandle.value(group, ChannelHandle());
     }
 
-    QString groupForHandle(const ChannelHandle& handle) const {
+    [[nodiscard]] QString groupForHandle(const ChannelHandle& handle) const {
         return m_handleToGroup.value(handle, QString());
     }
 
@@ -185,7 +185,7 @@ class ChannelHandleMap {
             : m_dummy{} {
     }
 
-    const T& at(const ChannelHandle& handle) const {
+    [[nodiscard]] const T& at(const ChannelHandle& handle) const {
         if (!handle.valid()) {
             return m_dummy;
         }
@@ -213,7 +213,7 @@ class ChannelHandleMap {
         m_data.clear();
     }
 
-    int size() const {
+    [[nodiscard]] int size() const {
         return m_data.size();
     }
 
@@ -225,7 +225,7 @@ class ChannelHandleMap {
         return m_data.begin();
     }
 
-    typename container_type::const_iterator begin() const {
+    [[nodiscard]] typename container_type::const_iterator begin() const {
         return m_data.begin();
     }
 
@@ -233,7 +233,7 @@ class ChannelHandleMap {
         return m_data.end();
     }
 
-    typename container_type::const_iterator end() const {
+    [[nodiscard]] typename container_type::const_iterator end() const {
         return m_data.end();
     }
 

@@ -40,28 +40,28 @@ class ThreadTimer {
   // Called by each thread
   void SetIterationTime(double seconds) { manual_time_used_ += seconds; }
 
-  bool running() const { return running_; }
+  [[nodiscard]] bool running() const { return running_; }
 
   // REQUIRES: timer is not running
-  double real_time_used() const {
+  [[nodiscard]] double real_time_used() const {
     BM_CHECK(!running_);
     return real_time_used_;
   }
 
   // REQUIRES: timer is not running
-  double cpu_time_used() const {
+  [[nodiscard]] double cpu_time_used() const {
     BM_CHECK(!running_);
     return cpu_time_used_;
   }
 
   // REQUIRES: timer is not running
-  double manual_time_used() const {
+  [[nodiscard]] double manual_time_used() const {
     BM_CHECK(!running_);
     return manual_time_used_;
   }
 
  private:
-  double ReadCpuTimerOfChoice() const {
+  [[nodiscard]] double ReadCpuTimerOfChoice() const {
     if (measure_process_cpu_time) return ProcessCPUUsage();
     return ThreadCPUUsage();
   }

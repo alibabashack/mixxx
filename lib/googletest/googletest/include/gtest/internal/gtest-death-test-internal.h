@@ -278,10 +278,10 @@ class InternalRunDeathTestFlag {
     if (write_fd_ >= 0) posix::Close(write_fd_);
   }
 
-  const std::string& file() const { return file_; }
-  int line() const { return line_; }
-  int index() const { return index_; }
-  int write_fd() const { return write_fd_; }
+  [[nodiscard]] const std::string& file() const { return file_; }
+  [[nodiscard]] int line() const { return line_; }
+  [[nodiscard]] int index() const { return index_; }
+  [[nodiscard]] int write_fd() const { return write_fd_; }
 
  private:
   std::string file_;

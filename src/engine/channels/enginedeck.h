@@ -57,7 +57,7 @@ class EngineDeck : public EngineChannel, public AudioDestination {
     void onInputUnconfigured(const AudioInput& input) override;
 
     // Return whether or not passthrough is active
-    bool isPassthroughActive() const;
+    [[nodiscard]] bool isPassthroughActive() const;
 
   signals:
     void noPassthroughInputConfigured();

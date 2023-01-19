@@ -27,24 +27,24 @@ class SyncControl : public EngineControl, public Syncable {
             EngineSync* pEngineSync);
     ~SyncControl() override;
 
-    const QString& getGroup() const override {
+    [[nodiscard]] const QString& getGroup() const override {
         return m_sGroup;
     }
-    EngineChannel* getChannel() const override {
+    [[nodiscard]] EngineChannel* getChannel() const override {
         return m_pChannel;
     }
-    mixxx::Bpm getBpm() const override;
+    [[nodiscard]] mixxx::Bpm getBpm() const override;
 
-    SyncMode getSyncMode() const override;
+    [[nodiscard]] SyncMode getSyncMode() const override;
     void setSyncMode(SyncMode mode) override;
     void notifyUniquePlaying() override;
     void requestSync() override;
-    bool isPlaying() const override;
-    bool isAudible() const override;
-    bool isQuantized() const override;
+    [[nodiscard]] bool isPlaying() const override;
+    [[nodiscard]] bool isAudible() const override;
+    [[nodiscard]] bool isQuantized() const override;
 
-    double adjustSyncBeatDistance(double beatDistance) const;
-    double getBeatDistance() const override;
+    [[nodiscard]] double adjustSyncBeatDistance(double beatDistance) const;
+    [[nodiscard]] double getBeatDistance() const override;
     /// updateTargetBeatDistance calculates the correct beat distance that
     /// we should sync against.  This may be different from the leader's
     /// distance due to half/double calculation.  This override is called once
@@ -52,7 +52,7 @@ class SyncControl : public EngineControl, public Syncable {
     void updateTargetBeatDistance();
     /// This override uses the provided position, and is used after seeks.
     void updateTargetBeatDistance(mixxx::audio::FramePos position);
-    mixxx::Bpm getBaseBpm() const override;
+    [[nodiscard]] mixxx::Bpm getBaseBpm() const override;
 
     // The local bpm is the base bpm of the track around the current position.
     // For beatmap tracks, this can change with every beat.
@@ -109,9 +109,9 @@ class SyncControl : public EngineControl, public Syncable {
     // bpm.  e.g. 70 matches better with 140/2.  This function returns the
     // best factor for multiplying the leader bpm to get a bpm this syncable
     // should match against.
-    double determineBpmMultiplier(mixxx::Bpm myBpm, mixxx::Bpm targetBpm) const;
-    mixxx::Bpm fileBpm() const;
-    mixxx::Bpm getLocalBpm() const;
+    [[nodiscard]] double determineBpmMultiplier(mixxx::Bpm myBpm, mixxx::Bpm targetBpm) const;
+    [[nodiscard]] mixxx::Bpm fileBpm() const;
+    [[nodiscard]] mixxx::Bpm getLocalBpm() const;
 
     QString m_sGroup;
     // The only reason we have this pointer is an optimzation so that the

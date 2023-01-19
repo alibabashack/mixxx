@@ -48,9 +48,9 @@ class BenchmarkRunner {
   BenchmarkRunner(const benchmark::internal::BenchmarkInstance& b_,
                   BenchmarkReporter::PerFamilyRunReports* reports_for_family);
 
-  int GetNumRepeats() const { return repeats; }
+  [[nodiscard]] int GetNumRepeats() const { return repeats; }
 
-  bool HasRepeatsRemaining() const {
+  [[nodiscard]] bool HasRepeatsRemaining() const {
     return GetNumRepeats() != num_repetitions_done;
   }
 
@@ -58,7 +58,7 @@ class BenchmarkRunner {
 
   RunResults&& GetResults();
 
-  BenchmarkReporter::PerFamilyRunReports* GetReportsForFamily() const {
+  [[nodiscard]] BenchmarkReporter::PerFamilyRunReports* GetReportsForFamily() const {
     return reports_for_family;
   }
 
@@ -90,9 +90,9 @@ class BenchmarkRunner {
   };
   IterationResults DoNIterations();
 
-  IterationCount PredictNumItersNeeded(const IterationResults& i) const;
+  [[nodiscard]] IterationCount PredictNumItersNeeded(const IterationResults& i) const;
 
-  bool ShouldReportIterationResults(const IterationResults& i) const;
+  [[nodiscard]] bool ShouldReportIterationResults(const IterationResults& i) const;
 };
 
 }  // namespace internal

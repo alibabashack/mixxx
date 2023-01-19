@@ -69,16 +69,16 @@ class CardinalityInterface {
 
   // Conservative estimate on the lower/upper bound of the number of
   // calls allowed.
-  virtual int ConservativeLowerBound() const { return 0; }
-  virtual int ConservativeUpperBound() const { return INT_MAX; }
+  [[nodiscard]] virtual int ConservativeLowerBound() const { return 0; }
+  [[nodiscard]] virtual int ConservativeUpperBound() const { return INT_MAX; }
 
   // Returns true if and only if call_count calls will satisfy this
   // cardinality.
-  virtual bool IsSatisfiedByCallCount(int call_count) const = 0;
+  [[nodiscard]] virtual bool IsSatisfiedByCallCount(int call_count) const = 0;
 
   // Returns true if and only if call_count calls will saturate this
   // cardinality.
-  virtual bool IsSaturatedByCallCount(int call_count) const = 0;
+  [[nodiscard]] virtual bool IsSaturatedByCallCount(int call_count) const = 0;
 
   // Describes self to an ostream.
   virtual void DescribeTo(::std::ostream* os) const = 0;
@@ -99,24 +99,24 @@ class GTEST_API_ Cardinality {
 
   // Conservative estimate on the lower/upper bound of the number of
   // calls allowed.
-  int ConservativeLowerBound() const { return impl_->ConservativeLowerBound(); }
-  int ConservativeUpperBound() const { return impl_->ConservativeUpperBound(); }
+  [[nodiscard]] int ConservativeLowerBound() const { return impl_->ConservativeLowerBound(); }
+  [[nodiscard]] int ConservativeUpperBound() const { return impl_->ConservativeUpperBound(); }
 
   // Returns true if and only if call_count calls will satisfy this
   // cardinality.
-  bool IsSatisfiedByCallCount(int call_count) const {
+  [[nodiscard]] bool IsSatisfiedByCallCount(int call_count) const {
     return impl_->IsSatisfiedByCallCount(call_count);
   }
 
   // Returns true if and only if call_count calls will saturate this
   // cardinality.
-  bool IsSaturatedByCallCount(int call_count) const {
+  [[nodiscard]] bool IsSaturatedByCallCount(int call_count) const {
     return impl_->IsSaturatedByCallCount(call_count);
   }
 
   // Returns true if and only if call_count calls will over-saturate this
   // cardinality, i.e. exceed the maximum number of allowed calls.
-  bool IsOverSaturatedByCallCount(int call_count) const {
+  [[nodiscard]] bool IsOverSaturatedByCallCount(int call_count) const {
     return impl_->IsSaturatedByCallCount(call_count) &&
            !impl_->IsSatisfiedByCallCount(call_count);
   }

@@ -42,12 +42,12 @@ public:
     CachingReaderChunk(const CachingReaderChunk&) = delete;
     CachingReaderChunk(CachingReaderChunk&&) = delete;
 
-    SINT getIndex() const {
+    [[nodiscard]] SINT getIndex() const {
         return m_index;
     }
 
     // Frame index range of this chunk for the given audio source.
-    mixxx::IndexRange frameIndexRange(
+    [[nodiscard]] mixxx::IndexRange frameIndexRange(
             const mixxx::AudioSourcePointer& pAudioSource) const;
 
     // Read sample frames from the audio source and return the
@@ -71,7 +71,7 @@ protected:
     void init(SINT index);
 
 private:
-    SINT frameIndexOffset() const {
+    [[nodiscard]] SINT frameIndexOffset() const {
         return m_index * kFrames;
     }
 
@@ -101,7 +101,7 @@ public:
         READ_PENDING
     };
 
-    State getState() const {
+    [[nodiscard]] State getState() const {
         return m_state;
     }
 
