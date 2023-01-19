@@ -24,7 +24,7 @@ class ConfigKey final {
 
     static ConfigKey parseCommaSeparated(const QString& key);
 
-    bool isValid() const {
+    [[nodiscard]] bool isValid() const {
         return !group.isEmpty() && !item.isEmpty();
     }
 
@@ -83,7 +83,7 @@ class ConfigValue {
     explicit ConfigValue(const QDomNode&) {
         reportFatalErrorAndQuit("ConfigValue from QDomNode not implemented here");
     }
-    bool isNull() const { return value.isNull(); }
+    [[nodiscard]] bool isNull() const { return value.isNull(); }
 
     QString value;
 };

@@ -7,21 +7,21 @@ class ReplayGainSettings {
   public:
     ReplayGainSettings(UserSettingsPointer pConfig);
 
-    int getInitialReplayGainBoost() const;
+    [[nodiscard]] int getInitialReplayGainBoost() const;
     void setInitialReplayGainBoost(int value);
-    int getInitialDefaultBoost() const;
+    [[nodiscard]] int getInitialDefaultBoost() const;
     void setInitialDefaultBoost(int value);
-    bool getReplayGainEnabled() const;
+    [[nodiscard]] bool getReplayGainEnabled() const;
     void setReplayGainEnabled(bool value);
-    bool getReplayGainAnalyzerEnabled() const;
+    [[nodiscard]] bool getReplayGainAnalyzerEnabled() const;
     void setReplayGainAnalyzerEnabled(bool value);
-    int getReplayGainAnalyzerVersion() const;
+    [[nodiscard]] int getReplayGainAnalyzerVersion() const;
     void setReplayGainAnalyzerVersion(int value);
-    bool getReplayGainReanalyze() const;
+    [[nodiscard]] bool getReplayGainReanalyze() const;
     void setReplayGainReanalyze(bool value);
 
-    bool isAnalyzerEnabled(int version) const;
-    bool isAnalyzerDisabled(int version, TrackPointer tio) const;
+    [[nodiscard]] bool isAnalyzerEnabled(int version) const;
+    [[nodiscard]] bool isAnalyzerDisabled(int version, TrackPointer tio) const;
 
   private:
     // Pointer to config object

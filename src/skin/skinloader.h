@@ -22,15 +22,15 @@ class SkinLoader {
 
     LaunchImage* loadLaunchImage(QWidget* pParent) const;
 
-    SkinPointer getSkin(const QString& skinName) const;
-    SkinPointer getConfiguredSkin() const;
-    QString getDefaultSkinName() const;
-    QList<QDir> getSkinSearchPaths() const;
-    QList<SkinPointer> getSkins() const;
+    [[nodiscard]] SkinPointer getSkin(const QString& skinName) const;
+    [[nodiscard]] SkinPointer getConfiguredSkin() const;
+    [[nodiscard]] QString getDefaultSkinName() const;
+    [[nodiscard]] QList<QDir> getSkinSearchPaths() const;
+    [[nodiscard]] QList<SkinPointer> getSkins() const;
 
   private:
-    QString pickResizableSkin(const QString& oldSkin) const;
-    SkinPointer skinFromDirectory(const QDir& dir) const;
+    [[nodiscard]] QString pickResizableSkin(const QString& oldSkin) const;
+    [[nodiscard]] SkinPointer skinFromDirectory(const QDir& dir) const;
 
     UserSettingsPointer m_pConfig;
 };

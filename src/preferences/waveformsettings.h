@@ -6,7 +6,7 @@ class WaveformSettings {
   public:
     WaveformSettings(UserSettingsPointer pConfig) : m_pConfig(pConfig) {}
 
-    bool waveformCachingEnabled() const {
+    [[nodiscard]] bool waveformCachingEnabled() const {
         return m_pConfig->getValue<bool>(
                 ConfigKey("[Library]", "EnableWaveformCaching"), true);
     }
@@ -16,7 +16,7 @@ class WaveformSettings {
                 ConfigKey("[Library]", "EnableWaveformCaching"), enabled);
     }
 
-    bool waveformGenerationWithAnalysisEnabled() const {
+    [[nodiscard]] bool waveformGenerationWithAnalysisEnabled() const {
         return m_pConfig->getValue<bool>(
                 ConfigKey("[Library]", "EnableWaveformGenerationWithAnalysis"), true);
     }

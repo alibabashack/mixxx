@@ -10,13 +10,13 @@ class PixmapSource final {
     PixmapSource();
     PixmapSource(const QString& filepath);
 
-    bool isEmpty() const;
-    bool isSVG() const;
-    bool isBitmap() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isSVG() const;
+    [[nodiscard]] bool isBitmap() const;
     void setSVG(const QByteArray& content);
-    const QString& getPath() const;
-    const QByteArray& getSvgSourceData() const;
-    QString getId() const;
+    [[nodiscard]] const QString& getPath() const;
+    [[nodiscard]] const QByteArray& getSvgSourceData() const;
+    [[nodiscard]] QString getId() const;
 
   private:
     enum Type {

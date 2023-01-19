@@ -10,12 +10,12 @@ class SettingsManager {
     explicit SettingsManager(const QString& settingsPath);
     virtual ~SettingsManager();
 
-    UserSettingsPointer settings() const {
+    [[nodiscard]] UserSettingsPointer settings() const {
         return m_pSettings;
     }
 
 #ifdef __BROADCAST__
-    BroadcastSettingsPointer broadcastSettings() const {
+    [[nodiscard]] BroadcastSettingsPointer broadcastSettings() const {
         return m_pBroadcastSettings;
     }
 #endif

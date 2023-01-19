@@ -14,18 +14,18 @@ class EffectChainPresetListModel : public QStringListModel {
   public:
     EffectChainPresetListModel(QObject* parent, EffectChainPresetManagerPointer pPresetManager);
 
-    QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    [[nodiscard]] QMimeData* mimeData(const QModelIndexList& indexes) const override;
     bool dropMimeData(
             const QMimeData* data,
             Qt::DropAction action,
             int row,
             int column,
             const QModelIndex& parent) override;
-    QStringList mimeTypes() const override;
-    Qt::DropActions supportedDropActions() const override;
+    [[nodiscard]] QStringList mimeTypes() const override;
+    [[nodiscard]] Qt::DropActions supportedDropActions() const override;
 
     // required to make items not editable
-    Qt::ItemFlags flags(const QModelIndex& index) const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex& index) const override;
 
   private:
     EffectChainPresetManagerPointer m_pPresetManager;

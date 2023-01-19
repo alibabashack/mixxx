@@ -9,10 +9,10 @@
 class ImgSource {
   public:
     virtual ~ImgSource() {};
-    virtual QImage* getImage(const QString& fileName, double scaleFactor) const = 0;
-    virtual QColor getCorrectColor(const QColor& c) const { return c; }
+    [[nodiscard]] virtual QImage* getImage(const QString& fileName, double scaleFactor) const = 0;
+    [[nodiscard]] virtual QColor getCorrectColor(const QColor& c) const { return c; }
     virtual void correctImageColors(QImage* p) const { (void)p; };
-    virtual bool willCorrectColors() const { return false; };
+    [[nodiscard]] virtual bool willCorrectColors() const { return false; };
 };
 
 class ImgProcessor : public ImgSource {
@@ -20,12 +20,12 @@ class ImgProcessor : public ImgSource {
   public:
     ~ImgProcessor() override {};
     inline ImgProcessor(ImgSource* parent) : m_parent(parent) {}
-    virtual QColor doColorCorrection(const QColor& c) const = 0;
-    QColor getCorrectColor(const QColor& c) const override {
+    [[nodiscard]] virtual QColor doColorCorrection(const QColor& c) const = 0;
+    [[nodiscard]] QColor getCorrectColor(const QColor& c) const override {
         return doColorCorrection(m_parent->getCorrectColor(c));
     }
     void correctImageColors(QImage* p) const override { (void)p; }
-    bool willCorrectColors() const override { return false; }
+    [[nodiscard]] bool willCorrectColors() const override { return false; }
 
   protected:
     ImgSource* m_parent;
@@ -38,7 +38,7 @@ public:
 
     inline ImgColorProcessor(ImgSource* parent) : ImgProcessor(parent) {}
 
-    QImage* getImage(const QString& fileName, double scaleFactor) const override {
+    [[nodiscard]] QImage* getImage(const QString& fileName, double scaleFactor) const override {
         QImage* i = m_parent->getImage(fileName, scaleFactor);
         correctImageColors(i);
         return i;
@@ -116,5 +116,5 @@ public:
         }
     }
 
-    bool willCorrectColors() const override { return true; }
+    [[nodiscard]] bool willCorrectColors() const override { return true; }
 };

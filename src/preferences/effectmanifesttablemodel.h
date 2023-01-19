@@ -19,30 +19,30 @@ class EffectManifestTableModel : public QAbstractTableModel {
     EffectManifestTableModel(QObject* parent, EffectsBackendManagerPointer pBackendManager);
     ~EffectManifestTableModel() override = default;
 
-    const QList<EffectManifestPointer>& getList() const {
+    [[nodiscard]] const QList<EffectManifestPointer>& getList() const {
         return m_manifests;
     }
     void setList(const QList<EffectManifestPointer>& newList);
 
     // These functions are required for displaying data.
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
-    QVariant headerData(int section,
+    [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]] int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]] QVariant headerData(int section,
             Qt::Orientation orientation,
             int role = Qt::DisplayRole) const override;
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
     // These functions are required for drag and drop.
-    Qt::ItemFlags flags(const QModelIndex& index) const override;
-    QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex& index) const override;
+    [[nodiscard]] QMimeData* mimeData(const QModelIndexList& indexes) const override;
     bool dropMimeData(
             const QMimeData* data,
             Qt::DropAction action,
             int row,
             int column,
             const QModelIndex& parent) override;
-    QStringList mimeTypes() const override;
-    Qt::DropActions supportedDropActions() const override;
+    [[nodiscard]] QStringList mimeTypes() const override;
+    [[nodiscard]] Qt::DropActions supportedDropActions() const override;
     bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex()) override;
 
   private:

@@ -27,16 +27,16 @@ class ColorPaletteEditorModel : public QStandardItemModel {
         emit dirtyChanged(m_bDirty);
     }
 
-    bool isDirty() const {
+    [[nodiscard]] bool isDirty() const {
         return m_bDirty;
     }
 
-    bool isEmpty() const {
+    [[nodiscard]] bool isEmpty() const {
         return m_bEmpty;
     }
 
     void setColorPalette(const ColorPalette& palette);
-    ColorPalette getColorPalette(const QString& name) const;
+    [[nodiscard]] ColorPalette getColorPalette(const QString& name) const;
 
   signals:
     void emptyChanged(bool bIsEmpty);
@@ -52,13 +52,13 @@ class HotcueIndexListItem : public QStandardItem {
     HotcueIndexListItem(const QList<int>& hotcueList = {});
 
     void setData(const QVariant& value, int role = Qt::UserRole + 1) override;
-    QVariant data(int role = Qt::UserRole + 1) const override;
+    [[nodiscard]] QVariant data(int role = Qt::UserRole + 1) const override;
 
-    int type() const override {
+    [[nodiscard]] int type() const override {
         return QStandardItem::UserType;
     };
 
-    const QList<int>& getHotcueIndexList() const {
+    [[nodiscard]] const QList<int>& getHotcueIndexList() const {
         return m_hotcueIndexList;
     }
     void setHotcueIndexList(const QList<int>& list) {

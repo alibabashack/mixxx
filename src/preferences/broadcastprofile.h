@@ -33,7 +33,7 @@ class BroadcastProfile : public QObject {
     static bool validName(const QString& str);
     static QString stripForbiddenChars(const QString& str);
 
-    QString getLastFilename() const;
+    [[nodiscard]] QString getLastFilename() const;
 
     void setConnectionStatus(int newState);
     int connectionStatus();
@@ -42,96 +42,96 @@ class BroadcastProfile : public QObject {
     bool secureCredentialStorage();
 
     void setProfileName(const QString& profileName);
-    QString getProfileName() const;
+    [[nodiscard]] QString getProfileName() const;
 
-    bool getEnabled() const;
+    [[nodiscard]] bool getEnabled() const;
     void setEnabled(bool value);
 
-    QString getHost() const;
+    [[nodiscard]] QString getHost() const;
     void setHost(const QString& value);
 
-    int getPort() const;
+    [[nodiscard]] int getPort() const;
     void setPort(int value);
 
-    QString getServertype() const;
+    [[nodiscard]] QString getServertype() const;
     void setServertype(const QString& value);
 
-    QString getLogin() const;
+    [[nodiscard]] QString getLogin() const;
     void setLogin(const QString& value);
 
-    QString getPassword() const;
+    [[nodiscard]] QString getPassword() const;
     void setPassword(const QString& value);
 
-    bool getEnableReconnect() const;
+    [[nodiscard]] bool getEnableReconnect() const;
     void setEnableReconnect(bool value);
 
-    double getReconnectPeriod() const;
+    [[nodiscard]] double getReconnectPeriod() const;
     void setReconnectPeriod(double value);
 
-    bool getLimitReconnects() const;
+    [[nodiscard]] bool getLimitReconnects() const;
     void setLimitReconnects(bool value);
 
-    int getMaximumRetries() const;
+    [[nodiscard]] int getMaximumRetries() const;
     void setMaximumRetries(int value);
 
-    bool getNoDelayFirstReconnect() const;
+    [[nodiscard]] bool getNoDelayFirstReconnect() const;
     void setNoDelayFirstReconnect(bool value);
 
-    double getReconnectFirstDelay() const;
+    [[nodiscard]] double getReconnectFirstDelay() const;
     void setReconnectFirstDelay(double value);
 
-    QString getFormat() const;
+    [[nodiscard]] QString getFormat() const;
     void setFormat(const QString& value);
 
-    int getBitrate() const;
+    [[nodiscard]] int getBitrate() const;
     void setBitrate(int value);
 
-    int getChannels() const;
+    [[nodiscard]] int getChannels() const;
     void setChannels(int value);
 
-    QString getMountpoint() const;
+    [[nodiscard]] QString getMountpoint() const;
     void setMountPoint(const QString& value);
 
-    QString getStreamName() const;
+    [[nodiscard]] QString getStreamName() const;
     void setStreamName(const QString& value);
 
-    QString getStreamDesc() const;
+    [[nodiscard]] QString getStreamDesc() const;
     void setStreamDesc(const QString& value);
 
-    QString getStreamGenre() const;
+    [[nodiscard]] QString getStreamGenre() const;
     void setStreamGenre(const QString& value);
 
-    bool getStreamPublic() const;
+    [[nodiscard]] bool getStreamPublic() const;
     void setStreamPublic(bool value);
 
-    QString getStreamWebsite() const;
+    [[nodiscard]] QString getStreamWebsite() const;
     void setStreamWebsite(const QString& value);
 
-    QString getStreamIRC() const;
+    [[nodiscard]] QString getStreamIRC() const;
     void setStreamIRC(const QString& value);
 
-    QString getStreamAIM() const;
+    [[nodiscard]] QString getStreamAIM() const;
     void setStreamAIM(const QString& value);
 
-    QString getStreamICQ() const;
+    [[nodiscard]] QString getStreamICQ() const;
     void setStreamICQ(const QString& value);
 
-    bool getEnableMetadata() const;
+    [[nodiscard]] bool getEnableMetadata() const;
     void setEnableMetadata(bool value);
 
-    QString getMetadataCharset() const;
+    [[nodiscard]] QString getMetadataCharset() const;
     void setMetadataCharset(const QString& value);
 
-    QString getCustomArtist() const;
+    [[nodiscard]] QString getCustomArtist() const;
     void setCustomArtist(const QString& value);
 
-    QString getCustomTitle() const;
+    [[nodiscard]] QString getCustomTitle() const;
     void setCustomTitle(const QString& value);
 
-    QString getMetadataFormat() const;
+    [[nodiscard]] QString getMetadataFormat() const;
     void setMetadataFormat(const QString& value);
 
-    bool getOggDynamicUpdate() const;
+    [[nodiscard]] bool getOggDynamicUpdate() const;
     void setOggDynamicUpdate(bool value);
 
   signals:

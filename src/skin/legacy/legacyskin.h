@@ -20,18 +20,18 @@ class LegacySkin : public mixxx::skin::Skin {
 
     static SkinPointer fromDirectory(const QDir& dir);
 
-    mixxx::skin::SkinType type() const override {
+    [[nodiscard]] mixxx::skin::SkinType type() const override {
         return mixxx::skin::SkinType::Legacy;
     };
-    bool isValid() const override;
-    QFileInfo path() const override;
-    QPixmap preview(const QString& schemeName) const override;
+    [[nodiscard]] bool isValid() const override;
+    [[nodiscard]] QFileInfo path() const override;
+    [[nodiscard]] QPixmap preview(const QString& schemeName) const override;
 
-    QString name() const override;
-    QString description() const override;
-    QList<QString> colorschemes() const override;
+    [[nodiscard]] QString name() const override;
+    [[nodiscard]] QString description() const override;
+    [[nodiscard]] QList<QString> colorschemes() const override;
 
-    bool fitsScreenSize(const QScreen& screen) const override;
+    [[nodiscard]] bool fitsScreenSize(const QScreen& screen) const override;
     LaunchImage* loadLaunchImage(QWidget* pParent, UserSettingsPointer pConfig) const override;
     QWidget* loadSkin(QWidget* pParent,
             UserSettingsPointer pConfig,
@@ -39,7 +39,7 @@ class LegacySkin : public mixxx::skin::Skin {
             mixxx::CoreServices* pCoreServices) const override;
 
   private:
-    QFileInfo skinFile() const;
+    [[nodiscard]] QFileInfo skinFile() const;
 
     QFileInfo m_path;
 };

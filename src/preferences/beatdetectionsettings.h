@@ -40,7 +40,7 @@ class BeatDetectionSettings {
     DEFINE_PREFERENCE_HELPERS(FastAnalysis, bool,
                               BPM_CONFIG_KEY, BPM_FAST_ANALYSIS_ENABLED, false);
 
-    QString getBeatPluginId() const {
+    [[nodiscard]] QString getBeatPluginId() const {
         return m_pConfig->getValue<QString>(ConfigKey(
                 VAMP_CONFIG_KEY, VAMP_ANALYZER_BEAT_PLUGIN_ID));
     }

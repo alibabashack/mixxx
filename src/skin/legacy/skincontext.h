@@ -38,7 +38,7 @@ class SkinContext {
     SkinContext& operator=(SkinContext&&) = default;
 
     // Gets a path relative to the skin path.
-    QString makeSkinPath(const QString& relativePath) const {
+    [[nodiscard]] QString makeSkinPath(const QString& relativePath) const {
         if (relativePath.isEmpty() || relativePath.startsWith("/")
                 || relativePath.contains(":")) {
             // This is already an absolute path start with the root folder "/"
@@ -63,15 +63,15 @@ class SkinContext {
     }
 
     // Variable lookup and modification methods.
-    QString variable(const QString& name) const;
-    const QHash<QString, QString>& variables() const {
+    [[nodiscard]] QString variable(const QString& name) const;
+    [[nodiscard]] const QHash<QString, QString>& variables() const {
         return m_variables;
     }
     void setVariable(const QString& name, const QString& value);
     void setXmlPath(const QString& xmlPath);
 
     // Returns whether the node has a <SetVariable> node.
-    bool hasVariableUpdates(const QDomNode& node) const;
+    [[nodiscard]] bool hasVariableUpdates(const QDomNode& node) const;
     // Updates the SkinContext with all the <SetVariable> children of node.
     void updateVariables(const QDomNode& node);
     // Updates the SkinContext with 'element', a <SetVariable> node.
@@ -93,18 +93,18 @@ class SkinContext {
         return child.toElement();
     }
 
-    inline QString selectString(const QDomNode& node, const QString& nodeName) const {
+    [[nodiscard]] inline QString selectString(const QDomNode& node, const QString& nodeName) const {
         QDomElement child = selectElement(node, nodeName);
         return nodeToString(child);
     }
 
-    inline float selectFloat(const QDomNode& node, const QString& nodeName, float defaultValue = 0.0) const {
+    [[nodiscard]] inline float selectFloat(const QDomNode& node, const QString& nodeName, float defaultValue = 0.0) const {
         bool ok = false;
         float conv = nodeToString(selectElement(node, nodeName)).toFloat(&ok);
         return ok ? conv : defaultValue;
     }
 
-    inline double selectDouble(const QDomNode& node, const QString& nodeName, double defaultValue = 0.0) const {
+    [[nodiscard]] inline double selectDouble(const QDomNode& node, const QString& nodeName, double defaultValue = 0.0) const {
         bool ok = false;
         double conv = nodeToString(selectElement(node, nodeName)).toDouble(&ok);
         return ok ? conv : defaultValue;
@@ -120,12 +120,12 @@ class SkinContext {
             return ok ? conv : 0;
     }
 
-    inline QColor selectColor(const QDomNode& node, const QString& nodeName) const {
+    [[nodiscard]] inline QColor selectColor(const QDomNode& node, const QString& nodeName) const {
         QString sColorString = nodeToString(selectElement(node, nodeName));
         return QColor(sColorString);
     }
 
-    inline bool selectBool(const QDomNode& node, const QString& nodeName,
+    [[nodiscard]] inline bool selectBool(const QDomNode& node, const QString& nodeName,
                            bool defaultValue) const {
         QDomNode child = selectNode(node, nodeName);
         if (!child.isNull()) {
@@ -194,7 +194,7 @@ class SkinContext {
         return false;
     }
 
-    inline bool selectAttributeBool(const QDomElement& element,
+    [[nodiscard]] inline bool selectAttributeBool(const QDomElement& element,
                                     const QString& attributeName,
                                     bool defaultValue) const {
         QString stringValue;
@@ -211,11 +211,11 @@ class SkinContext {
         return !result->isNull();
     }
 
-    QString nodeToString(const QDomNode& node) const;
-    PixmapSource getPixmapSource(const QDomNode& pixmapNode) const;
-    PixmapSource getPixmapSource(const QString& filename) const;
+    [[nodiscard]] QString nodeToString(const QDomNode& node) const;
+    [[nodiscard]] PixmapSource getPixmapSource(const QDomNode& pixmapNode) const;
+    [[nodiscard]] PixmapSource getPixmapSource(const QString& filename) const;
 
-    inline Paintable::DrawMode selectScaleMode(
+    [[nodiscard]] inline Paintable::DrawMode selectScaleMode(
             const QDomElement& element,
             Paintable::DrawMode defaultDrawMode) const {
         QString drawModeStr;
@@ -231,34 +231,34 @@ class SkinContext {
         m_pSharedState->singletons.insertSingleton(objectName, widget);
     }
 
-    QWidget* getSingletonWidget(const QString& objectName) const {
+    [[nodiscard]] QWidget* getSingletonWidget(const QString& objectName) const {
         return m_pSharedState->singletons.getSingletonWidget(objectName);
     }
 
-    const QRegularExpression& getHookRegex() const {
+    [[nodiscard]] const QRegularExpression& getHookRegex() const {
         return m_hookRx;
     }
 
     int scaleToWidgetSize(QString& size) const;
 
-    double getScaleFactor() const {
+    [[nodiscard]] double getScaleFactor() const {
         return m_scaleFactor;
     }
 
-    UserSettingsPointer getConfig() const {
+    [[nodiscard]] UserSettingsPointer getConfig() const {
         return m_pConfig;
     }
 
-    QString getSkinBasePath() const {
+    [[nodiscard]] QString getSkinBasePath() const {
         return m_skinBasePath;
     }
 
   private:
-    PixmapSource getPixmapSourceInner(const QString& filename) const;
+    [[nodiscard]] PixmapSource getPixmapSourceInner(const QString& filename) const;
 
-    QDomElement loadSvg(const QString& filename) const;
+    [[nodiscard]] QDomElement loadSvg(const QString& filename) const;
 
-    QString variableNodeToText(const QDomElement& element) const;
+    [[nodiscard]] QString variableNodeToText(const QDomElement& element) const;
 
     UserSettingsPointer m_pConfig;
 

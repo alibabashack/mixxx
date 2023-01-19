@@ -6,5 +6,5 @@ class ImgLoader : public ImgSource {
 
 public:
     ImgLoader();
-    QImage* getImage(const QString &fileName, double scaleFactor) const override;
+    [[nodiscard]] QImage* getImage(const QString &fileName, double scaleFactor) const override;
 };

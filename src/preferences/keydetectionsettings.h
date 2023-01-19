@@ -54,7 +54,7 @@ class KeyDetectionSettings {
                                       QString::number(key)), notation);
     }
 
-    QString getKeyPluginId() const {
+    [[nodiscard]] QString getKeyPluginId() const {
         return m_pConfig->getValue<QString>(ConfigKey(
             VAMP_CONFIG_KEY, VAMP_ANALYZER_KEY_PLUGIN_ID));
     }
