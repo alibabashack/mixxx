@@ -50,20 +50,20 @@ constexpr double kPastBeatMatchThreshold = 1 / 8.0;
 BpmControl::BpmControl(const QString& group,
         UserSettingsPointer pConfig)
         : EngineControl(group, pConfig),
-          m_pPlayButton(new ControlProxy(group, "play", this)),
-          m_pReverseButton(new ControlProxy(group, "reverse", this)),
-          m_pRateRatio(new ControlProxy(group, "rate_ratio", this)),
+          m_pPlayButton(std::make_unique<ControlProxy>(group, "play", this)),
+          m_pReverseButton(std::make_unique<ControlProxy>(group, "reverse", this)),
+          m_pRateRatio(std::make_unique<ControlProxy>(group, "rate_ratio", this)),
           m_pQuantize(ControlObject::getControl(group, "quantize")),
-          m_pNextBeat(new ControlProxy(group, "beat_next")),
-          m_pPrevBeat(new ControlProxy(group, "beat_prev")),
-          m_pLoopEnabled(new ControlProxy(group, "loop_enabled", this)),
-          m_pLoopStartPosition(new ControlProxy(group, "loop_start_position", this)),
-          m_pLoopEndPosition(new ControlProxy(group, "loop_end_position", this)),
-          m_pLocalBpm(new ControlObject(ConfigKey(group, "local_bpm"))),
-          m_pAdjustBeatsFaster(new ControlPushButton(ConfigKey(group, "beats_adjust_faster"), false)),
-          m_pAdjustBeatsSlower(new ControlPushButton(ConfigKey(group, "beats_adjust_slower"), false)),
-          m_pTranslateBeatsEarlier(new ControlPushButton(ConfigKey(group, "beats_translate_earlier"), false)),
-          m_pTranslateBeatsLater(new ControlPushButton(ConfigKey(group, "beats_translate_later"), false)),
+          m_pNextBeat(std::make_unique<ControlProxy>(group, "beat_next")),
+          m_pPrevBeat(std::make_unique<ControlProxy>(group, "beat_prev")),
+          m_pLoopEnabled(std::make_unique<ControlProxy>(group, "loop_enabled", this)),
+          m_pLoopStartPosition(std::make_unique<ControlProxy>(group, "loop_start_position", this)),
+          m_pLoopEndPosition(std::make_unique<ControlProxy>(group, "loop_end_position", this)),
+          m_pLocalBpm(std::make_unique<ControlObject>(ConfigKey(group, "local_bpm"))),
+          m_pAdjustBeatsFaster(std::make_unique<ControlPushButton>(ConfigKey(group, "beats_adjust_faster"), false)),
+          m_pAdjustBeatsSlower(std::make_unique<ControlPushButton>(ConfigKey(group, "beats_adjust_slower"), false)),
+          m_pTranslateBeatsEarlier(std::make_unique<ControlPushButton>(ConfigKey(group, "beats_translate_earlier"), false)),
+          m_pTranslateBeatsLater(std::make_unique<ControlPushButton>(ConfigKey(group, "beats_translate_later"), false)),
 
           // Pick a wide range (kBpmRangeMin to kBpmRangeMax) and allow out of bounds sets. This lets you
           // map a soft-takeover MIDI knob to the BPM. This also creates bpm_up and
@@ -91,51 +91,39 @@ BpmControl::BpmControl(const QString& group,
     m_pRateRatio->connectValueChanged(this, &BpmControl::slotUpdateEngineBpm,
                                       Qt::DirectConnection);
 
-    connect(m_pAdjustBeatsFaster, &ControlObject::valueChanged,
+    connect(m_pAdjustBeatsFaster.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotAdjustBeatsFaster,
             Qt::DirectConnection);
-    connect(m_pAdjustBeatsSlower, &ControlObject::valueChanged,
+    connect(m_pAdjustBeatsSlower.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotAdjustBeatsSlower,
             Qt::DirectConnection);
-    connect(m_pTranslateBeatsEarlier, &ControlObject::valueChanged,
+    connect(m_pTranslateBeatsEarlier.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotTranslateBeatsEarlier,
             Qt::DirectConnection);
-    connect(m_pTranslateBeatsLater, &ControlObject::valueChanged,
+    connect(m_pTranslateBeatsLater.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotTranslateBeatsLater,
             Qt::DirectConnection);
 
     m_pEngineBpm->set(0.0);
-    connect(m_pEngineBpm, &ControlObject::valueChanged,
+    connect(m_pEngineBpm.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotUpdateRateSlider,
             Qt::DirectConnection);
 
-    connect(m_pButtonTap, &ControlObject::valueChanged,
+    connect(m_pButtonTap.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotBpmTap,
             Qt::DirectConnection);
 
-    connect(m_pTranslateBeats, &ControlObject::valueChanged,
+    connect(m_pTranslateBeats.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotBeatsTranslate,
             Qt::DirectConnection);
 
-    connect(m_pBeatsTranslateMatchAlignment, &ControlObject::valueChanged,
+    connect(m_pBeatsTranslateMatchAlignment.get(), &ControlObject::valueChanged,
             this, &BpmControl::slotBeatsTranslateMatchAlignment,
             Qt::DirectConnection);
 
     connect(&m_tapFilter, &TapFilter::tapped,
             this, &BpmControl::slotTapFilter,
             Qt::DirectConnection);
-}
-
-BpmControl::~BpmControl() {
-    delete m_pLocalBpm;
-    delete m_pEngineBpm;
-    delete m_pButtonTap;
-    delete m_pTranslateBeats;
-    delete m_pBeatsTranslateMatchAlignment;
-    delete m_pTranslateBeatsEarlier;
-    delete m_pTranslateBeatsLater;
-    delete m_pAdjustBeatsFaster;
-    delete m_pAdjustBeatsSlower;
 }
 
 mixxx::Bpm BpmControl::getBpm() const {
