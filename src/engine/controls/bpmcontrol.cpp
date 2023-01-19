@@ -50,73 +50,74 @@ constexpr double kPastBeatMatchThreshold = 1 / 8.0;
 BpmControl::BpmControl(const QString& group,
         UserSettingsPointer pConfig)
         : EngineControl(group, pConfig),
+          m_pPlayButton(new ControlProxy(group, "play", this)),
+          m_oldPlayButton(),
+          m_pReverseButton(new ControlProxy(group, "reverse", this)),
+          m_pRateRatio(new ControlProxy(group, "rate_ratio", this)),
+          m_pQuantize(ControlObject::getControl(group, "quantize")),
+          m_pNextBeat(new ControlProxy(group, "beat_next")),
+          m_pPrevBeat(new ControlProxy(group, "beat_prev")),
+          m_pLoopEnabled(new ControlProxy(group, "loop_enabled", this)),
+          m_pLoopStartPosition(new ControlProxy(group, "loop_start_position", this)),
+          m_pLoopEndPosition(new ControlProxy(group, "loop_end_position", this)),
+          m_pLocalBpm(new ControlObject(ConfigKey(group, "local_bpm"))),
+          m_pAdjustBeatsFaster(new ControlPushButton(ConfigKey(group, "beats_adjust_faster"), false)),
+          m_pAdjustBeatsSlower(new ControlPushButton(ConfigKey(group, "beats_adjust_slower"), false)),
+          m_pTranslateBeatsEarlier(new ControlPushButton(ConfigKey(group, "beats_translate_earlier"), false)),
+          m_pTranslateBeatsLater(new ControlPushButton(ConfigKey(group, "beats_translate_later"), false)),
+
+          // Pick a wide range (kBpmRangeMin to kBpmRangeMax) and allow out of bounds sets. This lets you
+          // map a soft-takeover MIDI knob to the BPM. This also creates bpm_up and
+          // bpm_down controls.
+          // bpm_up / bpm_down steps by kBpmRangeStep
+          // bpm_up_small / bpm_down_small steps by kBpmRangeSmallStep
+          m_pEngineBpm(new ControlLinPotmeter(ConfigKey(group, "bpm"), kBpmRangeMin, kBpmRangeMax, kBpmRangeStep, kBpmRangeSmallStep, true)),
+          m_pButtonTap(new ControlPushButton(ConfigKey(group, "bpm_tap"))),
+          m_pTranslateBeats(new ControlPushButton(ConfigKey(group, "beats_translate_curpos"))),
+          m_pBeatsTranslateMatchAlignment(new ControlPushButton(ConfigKey(group, "beats_translate_match_alignment"))),
+
+          // Measures distance from last beat in percentage: 0.5 = half-beat away.
+          m_pThisBeatDistance(new ControlProxy(group, "beat_distance", this)),
+          m_dSyncTargetBeatDistance(),
+          m_dUserOffset(),
+          m_pSyncMode(new ControlProxy(group, "sync_mode", this)),
+          m_pSyncEnabled(new ControlProxy(group, "sync_enabled", this)),
           m_tapFilter(this, kBpmTapFilterLength, kBpmTapMaxInterval),
           m_dSyncInstantaneousBpm(0.0),
           m_dLastSyncAdjustment(1.0) {
+
     m_dSyncTargetBeatDistance.setValue(0.0);
     m_dUserOffset.setValue(0.0);
 
-    m_pPlayButton = new ControlProxy(group, "play", this);
-    m_pReverseButton = new ControlProxy(group, "reverse", this);
-    m_pRateRatio = new ControlProxy(group, "rate_ratio", this);
     m_pRateRatio->connectValueChanged(this, &BpmControl::slotUpdateEngineBpm,
                                       Qt::DirectConnection);
 
-    m_pQuantize = ControlObject::getControl(group, "quantize");
-
-    m_pPrevBeat.reset(new ControlProxy(group, "beat_prev"));
-    m_pNextBeat.reset(new ControlProxy(group, "beat_next"));
-
-    m_pLoopEnabled = new ControlProxy(group, "loop_enabled", this);
-    m_pLoopStartPosition = new ControlProxy(group, "loop_start_position", this);
-    m_pLoopEndPosition = new ControlProxy(group, "loop_end_position", this);
-
-    m_pLocalBpm = new ControlObject(ConfigKey(group, "local_bpm"));
-    m_pAdjustBeatsFaster = new ControlPushButton(ConfigKey(group, "beats_adjust_faster"), false);
     connect(m_pAdjustBeatsFaster, &ControlObject::valueChanged,
             this, &BpmControl::slotAdjustBeatsFaster,
             Qt::DirectConnection);
-    m_pAdjustBeatsSlower = new ControlPushButton(ConfigKey(group, "beats_adjust_slower"), false);
     connect(m_pAdjustBeatsSlower, &ControlObject::valueChanged,
             this, &BpmControl::slotAdjustBeatsSlower,
             Qt::DirectConnection);
-    m_pTranslateBeatsEarlier = new ControlPushButton(ConfigKey(group, "beats_translate_earlier"), false);
     connect(m_pTranslateBeatsEarlier, &ControlObject::valueChanged,
             this, &BpmControl::slotTranslateBeatsEarlier,
             Qt::DirectConnection);
-    m_pTranslateBeatsLater = new ControlPushButton(ConfigKey(group, "beats_translate_later"), false);
     connect(m_pTranslateBeatsLater, &ControlObject::valueChanged,
             this, &BpmControl::slotTranslateBeatsLater,
             Qt::DirectConnection);
 
-    // Pick a wide range (kBpmRangeMin to kBpmRangeMax) and allow out of bounds sets. This lets you
-    // map a soft-takeover MIDI knob to the BPM. This also creates bpm_up and
-    // bpm_down controls.
-    // bpm_up / bpm_down steps by kBpmRangeStep
-    // bpm_up_small / bpm_down_small steps by kBpmRangeSmallStep
-    m_pEngineBpm = new ControlLinPotmeter(
-            ConfigKey(group, "bpm"),
-            kBpmRangeMin,
-            kBpmRangeMax,
-            kBpmRangeStep,
-            kBpmRangeSmallStep,
-            true);
     m_pEngineBpm->set(0.0);
     connect(m_pEngineBpm, &ControlObject::valueChanged,
             this, &BpmControl::slotUpdateRateSlider,
             Qt::DirectConnection);
 
-    m_pButtonTap = new ControlPushButton(ConfigKey(group, "bpm_tap"));
     connect(m_pButtonTap, &ControlObject::valueChanged,
             this, &BpmControl::slotBpmTap,
             Qt::DirectConnection);
 
-    m_pTranslateBeats = new ControlPushButton(ConfigKey(group, "beats_translate_curpos"));
     connect(m_pTranslateBeats, &ControlObject::valueChanged,
             this, &BpmControl::slotBeatsTranslate,
             Qt::DirectConnection);
 
-    m_pBeatsTranslateMatchAlignment = new ControlPushButton(ConfigKey(group, "beats_translate_match_alignment"));
     connect(m_pBeatsTranslateMatchAlignment, &ControlObject::valueChanged,
             this, &BpmControl::slotBeatsTranslateMatchAlignment,
             Qt::DirectConnection);
@@ -124,11 +125,6 @@ BpmControl::BpmControl(const QString& group,
     connect(&m_tapFilter, &TapFilter::tapped,
             this, &BpmControl::slotTapFilter,
             Qt::DirectConnection);
-
-    // Measures distance from last beat in percentage: 0.5 = half-beat away.
-    m_pThisBeatDistance = new ControlProxy(group, "beat_distance", this);
-    m_pSyncMode = new ControlProxy(group, "sync_mode", this);
-    m_pSyncEnabled = new ControlProxy(group, "sync_enabled", this);
 }
 
 BpmControl::~BpmControl() {
