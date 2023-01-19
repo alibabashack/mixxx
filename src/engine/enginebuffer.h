@@ -58,6 +58,7 @@ class EngineBuffer : public EngineObject {
         SYNC_REQUEST_DISABLE,
         SYNC_REQUEST_ENABLEDISABLE,
     };
+    static CachingReader* buildCachingReader(const QString& group, UserSettingsPointer pConfig, auto receiver);
   public:
     enum SeekRequest {
         SEEK_NONE = 0u,
