@@ -1,5 +1,6 @@
 #pragma once
 
+#include "control/controlpushbutton.h"
 #include "control/pollingcontrolproxy.h"
 #include "effects/effectsmanager.h"
 #include "engine/channelhandle.h"
@@ -9,8 +10,6 @@
 
 class ControlObject;
 class EngineBuffer;
-class EngineFilterBlock;
-class ControlPushButton;
 
 class EngineChannel : public EngineObject {
     Q_OBJECT
@@ -32,7 +31,6 @@ class EngineChannel : public EngineObject {
             EffectsManager* pEffectsManager,
             bool isTalkoverChannel,
             bool isPrimaryDeck);
-    ~EngineChannel() override;
 
     [[nodiscard]] virtual ChannelOrientation getOrientation() const;
 
@@ -92,13 +90,13 @@ class EngineChannel : public EngineObject {
     void slotOrientationCenter(double v);
 
   private:
-    ControlPushButton* m_pMaster;
-    ControlPushButton* m_pPFL;
-    ControlPushButton* m_pOrientation;
-    ControlPushButton* m_pOrientationLeft;
-    ControlPushButton* m_pOrientationRight;
-    ControlPushButton* m_pOrientationCenter;
-    ControlPushButton* m_pTalkover;
+    ControlPushButton m_master;
+    ControlPushButton m_PFL;
+    ControlPushButton m_orientation;
+    ControlPushButton m_orientationLeft;
+    ControlPushButton m_orientationRight;
+    ControlPushButton m_orientationCenter;
+    ControlPushButton m_talkover;
     bool m_bIsTalkoverChannel;
     int m_channelIndex;
 };

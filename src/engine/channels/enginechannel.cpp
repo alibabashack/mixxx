@@ -16,87 +16,77 @@ EngineChannel::EngineChannel(const ChannelHandleAndGroup& handleGroup,
           m_sampleBuffer(nullptr),
           m_bIsPrimaryDeck(isPrimaryDeck),
           m_active(false),
-          m_pMaster(new ControlPushButton(ConfigKey(getGroup(), "master"))),
-          m_pPFL(new ControlPushButton(ConfigKey(getGroup(), "pfl"))),
-          m_pOrientation(new ControlPushButton(ConfigKey(getGroup(), "orientation"))),
-          m_pOrientationLeft(new ControlPushButton(ConfigKey(getGroup(), "orientation_left"))),
-          m_pOrientationRight(new ControlPushButton(ConfigKey(getGroup(), "orientation_right"))),
-          m_pOrientationCenter(new ControlPushButton(ConfigKey(getGroup(), "orientation_center"))),
-          m_pTalkover(new ControlPushButton(ConfigKey(getGroup(), "talkover"))),
+          m_master(ConfigKey(getGroup(), "master")),
+          m_PFL(ConfigKey(getGroup(), "pfl")),
+          m_orientation(ConfigKey(getGroup(), "orientation")),
+          m_orientationLeft(ConfigKey(getGroup(), "orientation_left")),
+          m_orientationRight(ConfigKey(getGroup(), "orientation_right")),
+          m_orientationCenter(ConfigKey(getGroup(), "orientation_center")),
+          m_talkover(ConfigKey(getGroup(), "talkover")),
           m_bIsTalkoverChannel(isTalkoverChannel),
           m_channelIndex(-1) {
-    m_pPFL->setButtonMode(ControlPushButton::TOGGLE);
-    m_pMaster->setButtonMode(ControlPushButton::POWERWINDOW);
-    m_pOrientation->setButtonMode(ControlPushButton::TOGGLE);
-    m_pOrientation->setStates(3);
-    m_pOrientation->set(defaultOrientation);
-    connect(m_pOrientationLeft, &ControlObject::valueChanged,
+    m_PFL.setButtonMode(ControlPushButton::TOGGLE);
+    m_master.setButtonMode(ControlPushButton::POWERWINDOW);
+    m_orientation.setButtonMode(ControlPushButton::TOGGLE);
+    m_orientation.setStates(3);
+    m_orientation.set(defaultOrientation);
+    connect(&m_orientationLeft, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationLeft, Qt::DirectConnection);
-    connect(m_pOrientationRight, &ControlObject::valueChanged,
+    connect(&m_orientationRight, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationRight, Qt::DirectConnection);
-    connect(m_pOrientationCenter, &ControlObject::valueChanged,
+    connect(&m_orientationCenter, &ControlObject::valueChanged,
             this, &EngineChannel::slotOrientationCenter, Qt::DirectConnection);
-    m_pTalkover->setButtonMode(ControlPushButton::POWERWINDOW);
+    m_talkover.setButtonMode(ControlPushButton::POWERWINDOW);
 
     if (m_pEffectsManager != nullptr) {
         m_pEffectsManager->registerInputChannel(handleGroup);
     }
 }
 
-EngineChannel::~EngineChannel() {
-    delete m_pMaster;
-    delete m_pPFL;
-    delete m_pOrientation;
-    delete m_pOrientationLeft;
-    delete m_pOrientationRight;
-    delete m_pOrientationCenter;
-    delete m_pTalkover;
-}
-
 void EngineChannel::setPfl(bool enabled) {
-    m_pPFL->set(enabled ? 1.0 : 0.0);
+    m_PFL.set(enabled ? 1.0 : 0.0);
 }
 
 bool EngineChannel::isPflEnabled() const {
-    return m_pPFL->toBool();
+    return m_PFL.toBool();
 }
 
 void EngineChannel::setMaster(bool enabled) {
-    m_pMaster->set(enabled ? 1.0 : 0.0);
+    m_master.set(enabled ? 1.0 : 0.0);
 }
 
 bool EngineChannel::isMasterEnabled() const {
-    return m_pMaster->toBool();
+    return m_master.toBool();
 }
 
 void EngineChannel::setTalkover(bool enabled) {
-    m_pTalkover->set(enabled ? 1.0 : 0.0);
+    m_talkover.set(enabled ? 1.0 : 0.0);
 }
 
 bool EngineChannel::isTalkoverEnabled() const {
-    return m_pTalkover->toBool();
+    return m_talkover.toBool();
 }
 
 void EngineChannel::slotOrientationLeft(double v) {
     if (v > 0) {
-        m_pOrientation->set(LEFT);
+        m_orientation.set(LEFT);
     }
 }
 
 void EngineChannel::slotOrientationRight(double v) {
     if (v > 0) {
-        m_pOrientation->set(RIGHT);
+        m_orientation.set(RIGHT);
     }
 }
 
 void EngineChannel::slotOrientationCenter(double v) {
     if (v > 0) {
-        m_pOrientation->set(CENTER);
+        m_orientation.set(CENTER);
     }
 }
 
 EngineChannel::ChannelOrientation EngineChannel::getOrientation() const {
-    const double dOrientation = m_pOrientation->get();
+    const double dOrientation = m_orientation.get();
     const int iOrientation = static_cast<int>(dOrientation);
     if (dOrientation != iOrientation) {
         return CENTER;
