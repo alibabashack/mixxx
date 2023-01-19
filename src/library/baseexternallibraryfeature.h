@@ -41,7 +41,7 @@ class BaseExternalLibraryFeature : public LibraryFeature {
     void slotImportAsMixxxPlaylist();
 
   protected:
-    QModelIndex lastRightClickedIndex() const {
+    [[nodiscard]] QModelIndex lastRightClickedIndex() const {
         return m_lastRightClickedIndex;
     }
 

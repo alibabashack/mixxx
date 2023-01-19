@@ -74,29 +74,29 @@ class ColumnCache : public QObject {
 
     void setColumns(const QStringList& columns);
 
-    inline int fieldIndex(Column column) const {
+    [[nodiscard]] inline int fieldIndex(Column column) const {
         if (column < 0 || column >= NUM_COLUMNS) {
             return -1;
         }
         return m_columnIndexByEnum[column];
     }
 
-    inline int fieldIndex(const QString& columnName) const {
+    [[nodiscard]] inline int fieldIndex(const QString& columnName) const {
         return m_columnIndexByName.value(columnName, -1);
     }
 
-    inline QString columnName(Column column) const {
+    [[nodiscard]] inline QString columnName(Column column) const {
         return m_columnNameByEnum[column];
     }
 
-    inline QString columnNameForFieldIndex(int index) const {
+    [[nodiscard]] inline QString columnNameForFieldIndex(int index) const {
         if (index < 0 || index >= m_columnsByIndex.size()) {
             return QString();
         }
         return m_columnsByIndex.at(index);
     }
 
-    inline QString columnSortForFieldIndex(int index) const {
+    [[nodiscard]] inline QString columnSortForFieldIndex(int index) const {
         // Check if there is a special sort clause
         QString format = m_columnSortByIndex.value(index, "%1");
         return format.arg(columnNameForFieldIndex(index));
@@ -121,7 +121,7 @@ class ColumnCache : public QObject {
         m_columnNameByEnum.insert(column, name);
     }
 
-    KeyUtils::KeyNotation keyNotation() const {
+    [[nodiscard]] KeyUtils::KeyNotation keyNotation() const {
         return KeyUtils::keyNotationFromNumericValue(
                 m_pKeyNotationCP->get());
     }

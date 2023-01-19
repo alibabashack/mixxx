@@ -30,7 +30,7 @@ class BpmEditorCreator : public QItemEditorCreatorBase {
         return pBpmSpinbox;
     }
 
-    QByteArray valuePropertyName() const override {
+    [[nodiscard]] QByteArray valuePropertyName() const override {
         return QByteArray("value");
     }
 };

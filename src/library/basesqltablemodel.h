@@ -25,7 +25,7 @@ class BaseSqlTableModel : public BaseTrackTableModel {
     // Returns true if the BaseSqlTableModel has been initialized. Calling data
     // access methods on a BaseSqlTableModel which is not initialized is likely
     // to cause instability / crashes.
-    bool initialized() const {
+    [[nodiscard]] bool initialized() const {
         return m_bInitialized;
     }
 
@@ -35,33 +35,33 @@ class BaseSqlTableModel : public BaseTrackTableModel {
     ///////////////////////////////////////////////////////////////////////////
     // Inherited from QAbstractItemModel
     ///////////////////////////////////////////////////////////////////////////
-    int rowCount(const QModelIndex& parent = QModelIndex()) const final;
-    int columnCount(const QModelIndex& parent = QModelIndex()) const final;
+    [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const final;
+    [[nodiscard]] int columnCount(const QModelIndex& parent = QModelIndex()) const final;
 
     void sort(int column, Qt::SortOrder order) final;
 
     ///////////////////////////////////////////////////////////////////////////
     // Inherited from TrackModel
     ///////////////////////////////////////////////////////////////////////////
-    int fieldIndex(const QString& fieldName) const final;
+    [[nodiscard]] int fieldIndex(const QString& fieldName) const final;
 
-    TrackPointer getTrack(const QModelIndex& index) const override;
-    TrackId getTrackId(const QModelIndex& index) const override;
-    QString getTrackLocation(const QModelIndex& index) const override;
+    [[nodiscard]] TrackPointer getTrack(const QModelIndex& index) const override;
+    [[nodiscard]] TrackId getTrackId(const QModelIndex& index) const override;
+    [[nodiscard]] QString getTrackLocation(const QModelIndex& index) const override;
 
-    QUrl getTrackUrl(const QModelIndex& index) const override;
+    [[nodiscard]] QUrl getTrackUrl(const QModelIndex& index) const override;
 
-    CoverInfo getCoverInfo(const QModelIndex& index) const override;
+    [[nodiscard]] CoverInfo getCoverInfo(const QModelIndex& index) const override;
 
-    const QVector<int> getTrackRows(TrackId trackId) const override {
+    [[nodiscard]] const QVector<int> getTrackRows(TrackId trackId) const override {
         return m_trackIdToRows.value(trackId);
     }
 
     void search(const QString& searchText, const QString& extraFilter = QString()) override;
-    const QString currentSearch() const override;
+    [[nodiscard]] const QString currentSearch() const override;
 
-    TrackModel::SortColumnId sortColumnIdFromColumnIndex(int column) const override;
-    int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const override;
+    [[nodiscard]] TrackModel::SortColumnId sortColumnIdFromColumnIndex(int column) const override;
+    [[nodiscard]] int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const override;
 
     void hideTracks(const QModelIndexList& indices) override;
 
@@ -70,16 +70,16 @@ class BaseSqlTableModel : public BaseTrackTableModel {
     ///////////////////////////////////////////////////////////////////////////
     // Inherited from BaseTrackTableModel
     ///////////////////////////////////////////////////////////////////////////
-    int fieldIndex(
+    [[nodiscard]] int fieldIndex(
             ColumnCache::Column column) const final;
 
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 
   protected:
     ///////////////////////////////////////////////////////////////////////////
     // Inherited from BaseTrackTableModel
     ///////////////////////////////////////////////////////////////////////////
-    QVariant rawValue(
+    [[nodiscard]] QVariant rawValue(
             const QModelIndex& index) const override;
 
     bool setTrackValueForColumn(
@@ -97,7 +97,7 @@ class BaseSqlTableModel : public BaseTrackTableModel {
     TrackCollectionManager* const m_pTrackCollectionManager;
 
   protected:
-    QList<TrackRef> getTrackRefs(const QModelIndexList& indices) const;
+    [[nodiscard]] QList<TrackRef> getTrackRefs(const QModelIndexList& indices) const;
 
     QSqlDatabase m_database;
     QString m_tableName;
@@ -116,7 +116,7 @@ class BaseSqlTableModel : public BaseTrackTableModel {
     // Set the columns used for searching. Names must correspond to the column
     // names in the table provided to setTable. Must be called after setTable is
     // called.
-    QString orderByClause() const;
+    [[nodiscard]] QString orderByClause() const;
 
     struct RowInfo {
         TrackId trackId;

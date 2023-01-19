@@ -33,10 +33,10 @@ Q_OBJECT
     ~ExternalTrackCollection() override = default;
 
     // Identifying name, e.g. for actions and menus
-    virtual QString name() const = 0;
+    [[nodiscard]] virtual QString name() const = 0;
 
     // Single line description, e.g. for tool tips
-    virtual QString description() const = 0;
+    [[nodiscard]] virtual QString description() const = 0;
 
     // Asynchronously establish the connection with the external
     // collection, e.g. by starting a separate worker thread or
@@ -60,10 +60,10 @@ Q_OBJECT
 
     // Check if the connection to the external track collection
     // has been established, i.e. if the synchronization is active.
-    virtual ConnectionState connectionState() const = 0;
+    [[nodiscard]] virtual ConnectionState connectionState() const = 0;
 
     // Utility function for convenience
-    /*non-virtual*/ bool isConnected() const {
+    /*non-virtual*/ [[nodiscard]] bool isConnected() const {
         return connectionState() == ConnectionState::Connected;
     }
 

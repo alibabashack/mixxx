@@ -23,15 +23,15 @@ class BaseExternalPlaylistModel : public BaseSqlTableModel {
 
     void setPlaylist(const QString& path_name);
 
-    TrackPointer getTrack(const QModelIndex& index) const override;
-    TrackId getTrackId(const QModelIndex& index) const override;
+    [[nodiscard]] TrackPointer getTrack(const QModelIndex& index) const override;
+    [[nodiscard]] TrackId getTrackId(const QModelIndex& index) const override;
     bool isColumnInternal(int column) override;
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
-    Capabilities getCapabilities() const override;
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
+    [[nodiscard]] Capabilities getCapabilities() const override;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 
   private:
-    TrackId doGetTrackId(const TrackPointer& pTrack) const override;
+    [[nodiscard]] TrackId doGetTrackId(const TrackPointer& pTrack) const override;
 
     QString m_playlistsTable;
     QString m_playlistTracksTable;

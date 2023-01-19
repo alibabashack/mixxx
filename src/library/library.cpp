@@ -276,7 +276,7 @@ class TrackAnalysisSchedulerEnvironmentImpl final : public TrackAnalysisSchedule
     }
     ~TrackAnalysisSchedulerEnvironmentImpl() final = default;
 
-    TrackPointer loadTrackById(TrackId trackId) const final {
+    [[nodiscard]] TrackPointer loadTrackById(TrackId trackId) const final {
         return m_pLibrary->trackCollectionManager()->getTrackById(trackId);
     }
 

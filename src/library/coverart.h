@@ -78,14 +78,14 @@ class CoverInfoRelative {
         m_legacyHash = legacyHash;
     }
 
-    bool hasImage() const {
+    [[nodiscard]] bool hasImage() const {
         return cacheKey() != CoverImageUtils::defaultCacheKey();
     }
 
-    const QByteArray imageDigest() const {
+    [[nodiscard]] const QByteArray imageDigest() const {
         return m_imageDigest;
     }
-    mixxx::cache_key_t cacheKey() const {
+    [[nodiscard]] mixxx::cache_key_t cacheKey() const {
         if (m_imageDigest.isEmpty()) {
             // Legacy fallback, required for incremental migration
             return m_legacyHash;
@@ -98,7 +98,7 @@ class CoverInfoRelative {
         return static_cast<quint16>(CoverImageUtils::defaultCacheKey());
     }
 
-    quint16 legacyHash() const {
+    [[nodiscard]] quint16 legacyHash() const {
         return m_legacyHash;
     }
 
@@ -175,7 +175,7 @@ class CoverInfo : public CoverInfoRelative {
                 : result(result) {
         }
     };
-    LoadedImage loadImage(
+    [[nodiscard]] LoadedImage loadImage(
             const SecurityTokenPointer& pTrackLocationToken = SecurityTokenPointer()) const;
 
     /// Verify the image digest and update it if necessary.

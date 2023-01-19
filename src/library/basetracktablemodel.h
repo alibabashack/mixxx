@@ -26,7 +26,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     //  Overridable functions
     ///////////////////////////////////////////////////////
 
-    virtual int fieldIndex(
+    [[nodiscard]] virtual int fieldIndex(
             ColumnCache::Column column) const {
         return m_columnCache.fieldIndex(column);
     }
@@ -35,7 +35,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     // Inherited from QAbstractItemModel
     ///////////////////////////////////////////////////////
 
-    QVariant headerData(
+    [[nodiscard]] QVariant headerData(
             int section,
             Qt::Orientation orientation,
             int role = Qt::DisplayRole) const final;
@@ -45,10 +45,10 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
             const QVariant& value,
             int role = Qt::DisplayRole) final;
 
-    QMimeData* mimeData(
+    [[nodiscard]] QMimeData* mimeData(
             const QModelIndexList& indexes) const final;
 
-    QVariant data(
+    [[nodiscard]] QVariant data(
             const QModelIndex& index,
             int role = Qt::DisplayRole) const final;
     bool setData(
@@ -60,13 +60,13 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     // column headers.
     // Reimplement in derived classes if a more efficient
     // implementation is available.
-    int columnCount(
+    [[nodiscard]] int columnCount(
             const QModelIndex& parent = QModelIndex()) const override;
 
     // Calls readWriteFlags() by default
     // Reimplement in derived classes if the table model
     // should be readOnly
-    Qt::ItemFlags flags(
+    [[nodiscard]] Qt::ItemFlags flags(
             const QModelIndex& index) const override;
 
     ///////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
             const int column,
             QObject* pParent) final;
 
-    int fieldIndex(
+    [[nodiscard]] int fieldIndex(
             const QString& fieldName) const override {
         return m_columnCache.fieldIndex(fieldName);
     }
@@ -85,7 +85,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     bool isColumnHiddenByDefault(
             int column) override;
 
-    TrackPointer getTrackByRef(
+    [[nodiscard]] TrackPointer getTrackByRef(
             const TrackRef& trackRef) const override;
 
     bool updateTrackGenre(
@@ -108,7 +108,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     void initTableColumnsAndHeaderProperties(
             const QStringList& tableColumns = defaultTableColumns());
 
-    QString columnNameForFieldIndex(int index) const {
+    [[nodiscard]] QString columnNameForFieldIndex(int index) const {
         return m_columnCache.columnNameForFieldIndex(index);
     }
 
@@ -120,7 +120,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
             const QString& title,
             int defaultWidth = 0);
 
-    ColumnCache::Column mapColumn(int column) const {
+    [[nodiscard]] ColumnCache::Column mapColumn(int column) const {
         if (column >= 0 && column < m_columnHeaders.size()) {
             return m_columnHeaders[column].column;
         } else {
@@ -136,11 +136,11 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
             int column,
             const QVector<int>& roles = QVector<int>());
 
-    const TrackId previewDeckTrackId() const {
+    [[nodiscard]] const TrackId previewDeckTrackId() const {
         return m_previewDeckTrackId;
     }
 
-    bool isBpmLocked(
+    [[nodiscard]] bool isBpmLocked(
             const QModelIndex& index) const;
 
     const QPointer<TrackCollectionManager> m_pTrackCollectionManager;
@@ -152,10 +152,10 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     virtual void initHeaderProperties();
 
     // Use this if you want a model that is read-only.
-    virtual Qt::ItemFlags readOnlyFlags(
+    [[nodiscard]] virtual Qt::ItemFlags readOnlyFlags(
             const QModelIndex& index) const;
     // Use this if you want a model that can be changed
-    virtual Qt::ItemFlags readWriteFlags(
+    [[nodiscard]] virtual Qt::ItemFlags readWriteFlags(
             const QModelIndex& index) const;
 
     /// At least one of the following functions must be overridden,
@@ -206,9 +206,9 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     /// COLUMN_LIBRARYTABLE_COVERART_HASH: quint16 (pass-through)
     /// COLUMN_LIBRARYTABLE_LAST_PLAYED_AT: QDateTime
     /// COLUMN_PLAYLISTTABLE_DATETIMEADDED: QDateTime
-    virtual QVariant rawValue(
+    [[nodiscard]] virtual QVariant rawValue(
             const QModelIndex& index) const;
-    virtual QVariant rawSiblingValue(
+    [[nodiscard]] virtual QVariant rawSiblingValue(
             const QModelIndex& index,
             ColumnCache::Column siblingField) const;
 
@@ -244,16 +244,16 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     // Track models may reference tracks by an external id
     // TODO: TrackId should only be used for tracks from
     // the internal database.
-    virtual TrackId doGetTrackId(
+    [[nodiscard]] virtual TrackId doGetTrackId(
             const TrackPointer& pTrack) const;
 
-    QVariant composeCoverArtToolTipHtml(
+    [[nodiscard]] QVariant composeCoverArtToolTipHtml(
             const QModelIndex& index) const;
 
-    Qt::ItemFlags defaultItemFlags(
+    [[nodiscard]] Qt::ItemFlags defaultItemFlags(
             const QModelIndex& index) const;
 
-    QList<QUrl> collectUrls(
+    [[nodiscard]] QList<QUrl> collectUrls(
             const QModelIndexList& indexes) const;
 
     const QString m_previewDeckGroup;
@@ -268,7 +268,7 @@ class BaseTrackTableModel : public QAbstractTableModel, public TrackModel {
     };
     QVector<ColumnHeader> m_columnHeaders;
 
-    int countValidColumnHeaders() const;
+    [[nodiscard]] int countValidColumnHeaders() const;
 
     TrackId m_previewDeckTrackId;
 };

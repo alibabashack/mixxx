@@ -25,7 +25,7 @@ class DlgAnalysis : public QWidget, public Ui::DlgAnalysis, public virtual Libra
 
     void onSearch(const QString& text) override;
     void onShow() override;
-    bool hasFocus() const override;
+    [[nodiscard]] bool hasFocus() const override;
     void setFocus() override;
     void activateSelectedTrack() override;
     void loadSelectedTrackToGroup(const QString& group, bool play) override;

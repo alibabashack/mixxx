@@ -22,7 +22,7 @@ class DlgMissing : public QWidget, public Ui::DlgMissing, public LibraryView {
     ~DlgMissing() override;
 
     void onShow() override;
-    bool hasFocus() const override;
+    [[nodiscard]] bool hasFocus() const override;
     void setFocus() override;
     void onSearch(const QString& text) override;
     QString currentSearch();

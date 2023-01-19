@@ -22,7 +22,7 @@ class DlgHidden : public QWidget, public Ui::DlgHidden, public LibraryView {
     ~DlgHidden() override;
 
     void onShow() override;
-    bool hasFocus() const override;
+    [[nodiscard]] bool hasFocus() const override;
     void setFocus() override;
     void onSearch(const QString& text) override;
     QString currentSearch();

@@ -19,12 +19,12 @@ class BaseExternalTrackModel : public BaseSqlTableModel {
                            QSharedPointer<BaseTrackCache> trackSource);
     ~BaseExternalTrackModel() override;
 
-    Capabilities getCapabilities() const override;
-    TrackId getTrackId(const QModelIndex& index) const override;
-    TrackPointer getTrack(const QModelIndex& index) const override;
+    [[nodiscard]] Capabilities getCapabilities() const override;
+    [[nodiscard]] TrackId getTrackId(const QModelIndex& index) const override;
+    [[nodiscard]] TrackPointer getTrack(const QModelIndex& index) const override;
     bool isColumnInternal(int column) override;
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
   private:
-    TrackId doGetTrackId(const TrackPointer& pTrack) const override;
+    [[nodiscard]] TrackId doGetTrackId(const TrackPointer& pTrack) const override;
 };
