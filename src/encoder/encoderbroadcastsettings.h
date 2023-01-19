@@ -11,12 +11,12 @@ class EncoderBroadcastSettings : public EncoderSettings {
     ~EncoderBroadcastSettings() override = default;
 
     // Returns the list of quality values that it supports, to assign them to the slider
-    QList<int> getQualityValues() const override;
+    [[nodiscard]] QList<int> getQualityValues() const override;
     // Returns the current quality value
-    int getQuality() const override;
-    int getQualityIndex() const override;
-    ChannelMode getChannelMode() const override;
-    QString getFormat() const override;
+    [[nodiscard]] int getQuality() const override;
+    [[nodiscard]] int getQualityIndex() const override;
+    [[nodiscard]] ChannelMode getChannelMode() const override;
+    [[nodiscard]] QString getFormat() const override;
 
   private:
     QList<int> m_qualList;

@@ -6,12 +6,12 @@
 class EncoderRecordingSettings : public EncoderSettings {
   public:
     // Indicates that it uses the quality slider section of the preferences
-    virtual bool usesQualitySlider() const {
+    [[nodiscard]] virtual bool usesQualitySlider() const {
         return false;
     }
 
     // Indicates that it uses the compression slider section of the preferences
-    virtual bool usesCompressionSlider() const {
+    [[nodiscard]] virtual bool usesCompressionSlider() const {
         return false;
     }
 

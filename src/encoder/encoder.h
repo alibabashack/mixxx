@@ -50,9 +50,9 @@ class EncoderFactory {
   public:
     static const EncoderFactory& getFactory();
 
-    const QList<Encoder::Format> getFormats() const;
-    Encoder::Format getSelectedFormat(UserSettingsPointer pConfig) const;
-    Encoder::Format getFormatFor(const QString& format) const;
+    [[nodiscard]] const QList<Encoder::Format> getFormats() const;
+    [[nodiscard]] Encoder::Format getSelectedFormat(UserSettingsPointer pConfig) const;
+    [[nodiscard]] Encoder::Format getFormatFor(const QString& format) const;
     EncoderPointer createRecordingEncoder(
             const Encoder::Format& format,
             UserSettingsPointer pConfig,
@@ -60,7 +60,7 @@ class EncoderFactory {
     EncoderPointer createEncoder(
             EncoderSettingsPointer pSettings,
             EncoderCallback* pCallback) const;
-    EncoderRecordingSettingsPointer getEncoderRecordingSettings(
+    [[nodiscard]] EncoderRecordingSettingsPointer getEncoderRecordingSettings(
             Encoder::Format format,
             UserSettingsPointer pConfig) const;
   private:

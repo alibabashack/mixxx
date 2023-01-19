@@ -11,21 +11,21 @@ class EncoderFdkAacSettings : public EncoderRecordingSettings {
     ~EncoderFdkAacSettings() override;
 
     // Indicates that it uses the quality slider section of the preferences
-    bool usesQualitySlider() const override {
+    [[nodiscard]] bool usesQualitySlider() const override {
         return true;
     }
 
     // Returns the list of quality values that it supports, to assign them to the slider
-    QList<int> getQualityValues() const override;
+    [[nodiscard]] QList<int> getQualityValues() const override;
 
     void setQualityByIndex(int qualityIndex) override;
 
     // Returns the current quality value
-    int getQuality() const override;
-    int getQualityIndex() const override;
+    [[nodiscard]] int getQuality() const override;
+    [[nodiscard]] int getQualityIndex() const override;
 
     // Returns the format of this encoder settings.
-    QString getFormat() const override {
+    [[nodiscard]] QString getFormat() const override {
         return m_format;
     }
 
