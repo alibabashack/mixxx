@@ -18,8 +18,8 @@ class MissingTableModel final : public BaseSqlTableModel {
 
     bool isColumnInternal(int column) final;
     void purgeTracks(const QModelIndexList& indices) final;
-    Qt::ItemFlags flags(const QModelIndex &index) const final;
-    Capabilities getCapabilities() const final;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const final;
+    [[nodiscard]] Capabilities getCapabilities() const final;
 
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 };

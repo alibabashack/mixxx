@@ -34,7 +34,7 @@ class MixxxLibraryFeature final : public LibraryFeature {
     QVariant title() override;
     bool dropAccept(const QList<QUrl>& urls, QObject* pSource) override;
     bool dragMoveAccept(const QUrl& url) override;
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
     void bindLibraryWidget(WLibrary* pLibrary,
                     KeyboardEventFilter* pKeyboard) override;
 #ifdef __ENGINEPRIME__
@@ -45,7 +45,7 @@ class MixxxLibraryFeature final : public LibraryFeature {
         return true;
     }
 
-    LibraryTableModel* trackTableModel() const {
+    [[nodiscard]] LibraryTableModel* trackTableModel() const {
         return m_pLibraryTableModel;
     }
 

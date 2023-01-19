@@ -56,7 +56,7 @@ class PreviewButtonDelegate : public TableItemDelegate {
             QPainter* painter,
             const QStyleOptionViewItem& option,
             const QModelIndex& index) const override;
-    QSize sizeHint(
+    [[nodiscard]] QSize sizeHint(
             const QStyleOptionViewItem& option,
             const QModelIndex& index) const override;
     void updateEditorGeometry(QWidget* editor,
@@ -73,13 +73,13 @@ class PreviewButtonDelegate : public TableItemDelegate {
     void previewDeckPlayChanged(double v);
 
   private:
-    QTableView* parentTableView() const {
+    [[nodiscard]] QTableView* parentTableView() const {
         return qobject_cast<QTableView*>(parent());
     }
-    bool isPreviewDeckPlaying() const;
-    bool isTrackLoadedInPreviewDeck(
+    [[nodiscard]] bool isPreviewDeckPlaying() const;
+    [[nodiscard]] bool isTrackLoadedInPreviewDeck(
             const QModelIndex& index) const;
-    bool isTrackLoadedInPreviewDeckAndPlaying(
+    [[nodiscard]] bool isTrackLoadedInPreviewDeckAndPlaying(
             const QModelIndex& index) const {
         if (!isPreviewDeckPlaying()) {
             // No need to query additional data from the table

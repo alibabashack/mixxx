@@ -26,7 +26,7 @@ class TableItemDelegate : public QStyledItemDelegate {
             const QStyleOptionViewItem& option,
             const QModelIndex& index);
 
-    int columnWidth(const QModelIndex &index) const;
+    [[nodiscard]] int columnWidth(const QModelIndex &index) const;
 
     QColor m_pFocusBorderColor;
 

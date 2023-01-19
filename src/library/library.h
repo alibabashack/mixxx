@@ -60,13 +60,13 @@ class Library: public QObject {
 
     void stopPendingTasks();
 
-    const mixxx::DbConnectionPoolPtr& dbConnectionPool() const {
+    [[nodiscard]] const mixxx::DbConnectionPoolPtr& dbConnectionPool() const {
         return m_pDbConnectionPool;
     }
 
-    TrackCollectionManager* trackCollectionManager() const;
+    [[nodiscard]] TrackCollectionManager* trackCollectionManager() const;
 
-    TrackAnalysisScheduler::Pointer createTrackAnalysisScheduler(
+    [[nodiscard]] TrackAnalysisScheduler::Pointer createTrackAnalysisScheduler(
             int numWorkerThreads,
             AnalyzerModeFlags modeFlags) const;
 
@@ -78,15 +78,15 @@ class Library: public QObject {
     void addFeature(LibraryFeature* feature);
 
     /// Needed for exposing models to QML
-    LibraryTableModel* trackTableModel() const;
+    [[nodiscard]] LibraryTableModel* trackTableModel() const;
 
     bool isTrackIdInCurrentLibraryView(const TrackId& trackId);
 
-    int getTrackTableRowHeight() const {
+    [[nodiscard]] int getTrackTableRowHeight() const {
         return m_iTrackTableRowHeight;
     }
 
-    const QFont& getTrackTableFont() const {
+    [[nodiscard]] const QFont& getTrackTableFont() const {
         return m_trackTableFont;
     }
 

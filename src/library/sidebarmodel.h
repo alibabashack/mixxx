@@ -31,17 +31,17 @@ class SidebarModel : public QAbstractItemModel {
     void activateDefaultSelection();
 
     // Required for QAbstractItemModel
-    QModelIndex index(int row, int column,
+    [[nodiscard]] QModelIndex index(int row, int column,
                       const QModelIndex& parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex& index) const override;
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex& index,
+    [[nodiscard]] QModelIndex parent(const QModelIndex& index) const override;
+    [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]] int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]] QVariant data(const QModelIndex& index,
                   int role = Qt::DisplayRole) const override;
     bool dropAccept(const QModelIndex& index, const QList<QUrl>& urls, QObject* pSource);
     bool dragMoveAccept(const QModelIndex& index, const QUrl& url);
-    bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
-    bool hasTrackTable(const QModelIndex& index) const;
+    [[nodiscard]] bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
+    [[nodiscard]] bool hasTrackTable(const QModelIndex& index) const;
     QModelIndex translateChildIndex(const QModelIndex& index) {
         return translateIndex(index, index.model());
     }

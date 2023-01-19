@@ -42,7 +42,7 @@ class TreeItem final {
     // Feature
     /////////////////////////////////////////////////////////////////////////
 
-    LibraryFeature* feature() const {
+    [[nodiscard]] LibraryFeature* feature() const {
         DEBUG_ASSERT(
                 !m_pParent ||
                 m_pParent->m_pFeature == m_pFeature);
@@ -54,32 +54,32 @@ class TreeItem final {
     // Parent
     /////////////////////////////////////////////////////////////////////////
 
-    TreeItem* parent() const {
+    [[nodiscard]] TreeItem* parent() const {
         return m_pParent;
     }
-    bool hasParent() const {
+    [[nodiscard]] bool hasParent() const {
         return m_pParent != nullptr;
     }
-    bool isRoot() const {
+    [[nodiscard]] bool isRoot() const {
         return !hasParent();
     }
     // Returns the position of this object within its parent
     // or kInvalidRow if this is a root item without a parent.
-    int parentRow() const;
+    [[nodiscard]] int parentRow() const;
 
 
     /////////////////////////////////////////////////////////////////////////
     // Children
     /////////////////////////////////////////////////////////////////////////
 
-    bool hasChildren() const {
+    [[nodiscard]] bool hasChildren() const {
         return !m_children.empty();
     }
-    int childRows() const {
+    [[nodiscard]] int childRows() const {
         return m_children.size();
     }
-    TreeItem* child(int row) const;
-    const QList<TreeItem*>& children() const {
+    [[nodiscard]] TreeItem* child(int row) const;
+    [[nodiscard]] const QList<TreeItem*>& children() const {
         return m_children;
     }
 
@@ -104,14 +104,14 @@ class TreeItem final {
     void setLabel(const QString& label) {
         m_label = label;
     }
-    const QString& getLabel() const {
+    [[nodiscard]] const QString& getLabel() const {
         return m_label;
     }
 
     void setData(const QVariant& data) {
         m_data = data;
     }
-    const QVariant& getData() const {
+    [[nodiscard]] const QVariant& getData() const {
         return m_data;
     }
 
@@ -125,7 +125,7 @@ class TreeItem final {
     void setBold(bool bold) {
         m_bold = bold;
     }
-    bool isBold() const {
+    [[nodiscard]] bool isBold() const {
         return m_bold;
     }
 

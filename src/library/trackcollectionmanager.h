@@ -37,24 +37,24 @@ class TrackCollectionManager: public QObject,
             deleteTrackFn_t deleteTrackForTestingFn = nullptr);
     ~TrackCollectionManager() override;
 
-    TrackCollection* internalCollection() const {
+    [[nodiscard]] TrackCollection* internalCollection() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_pInternalCollection;
     }
 
-    const QList<ExternalTrackCollection*>& externalCollections() const {
+    [[nodiscard]] const QList<ExternalTrackCollection*>& externalCollections() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_externalCollections;
     }
 
-    TrackPointer getTrackById(
+    [[nodiscard]] TrackPointer getTrackById(
             TrackId trackId) const;
-    TrackPointer getTrackByRef(
+    [[nodiscard]] TrackPointer getTrackByRef(
             const TrackRef& trackRef) const;
-    QList<TrackId> resolveTrackIdsFromUrls(
+    [[nodiscard]] QList<TrackId> resolveTrackIdsFromUrls(
             const QList<QUrl>& urls,
             bool addMissing) const;
-    QList<TrackId> resolveTrackIdsFromLocations(
+    [[nodiscard]] QList<TrackId> resolveTrackIdsFromLocations(
             const QList<QString>& locations) const;
 
     bool updateTrackGenre(
@@ -66,15 +66,15 @@ class TrackCollectionManager: public QObject,
             const QString& mood) const;
 #endif // __EXTRA_METADATA__
 
-    bool hideTracks(const QList<TrackId>& trackIds) const;
-    bool unhideTracks(const QList<TrackId>& trackIds) const;
+    [[nodiscard]] bool hideTracks(const QList<TrackId>& trackIds) const;
+    [[nodiscard]] bool unhideTracks(const QList<TrackId>& trackIds) const;
     void hideAllTracks(const QDir& rootDir) const;
 
     void purgeTracks(const QList<TrackRef>& trackRefs) const;
     void purgeAllTracks(const QDir& rootDir) const;
 
-    bool addDirectory(const mixxx::FileInfo& newDir) const;
-    bool removeDirectory(const mixxx::FileInfo& oldDir) const;
+    [[nodiscard]] bool addDirectory(const mixxx::FileInfo& newDir) const;
+    [[nodiscard]] bool removeDirectory(const mixxx::FileInfo& oldDir) const;
     void relocateDirectory(const QString& oldDir, const QString& newDir) const;
 
     TrackPointer getOrAddTrack(
@@ -89,7 +89,7 @@ class TrackCollectionManager: public QObject,
         Skipped, // e.g. unmodified or missing/deleted tracks
         Failed,
     };
-    SaveTrackResult saveTrack(const TrackPointer& pTrack) const;
+    [[nodiscard]] SaveTrackResult saveTrack(const TrackPointer& pTrack) const;
 
   signals:
     void libraryScanStarted();

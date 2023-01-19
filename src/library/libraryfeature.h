@@ -38,14 +38,14 @@ class LibraryFeature : public QObject {
     /// Returns the icon name.
     ///
     /// This is useful for QML skins that need to build a URL anyway and may use their own icon theme.
-    QString iconName() const {
+    [[nodiscard]] QString iconName() const {
         return m_iconName;
     }
 
     /// Returns the icon.
     ///
     /// This is used by legacy QWidget skins that display a QIcon directly.
-    QIcon icon() const {
+    [[nodiscard]] QIcon icon() const {
         return m_icon;
     }
 
@@ -76,17 +76,17 @@ class LibraryFeature : public QObject {
     virtual void bindLibraryWidget(WLibrary* /* libraryWidget */,
                             KeyboardEventFilter* /* keyboard */) {}
     virtual void bindSidebarWidget(WLibrarySidebar* /* sidebar widget */) {}
-    virtual TreeItemModel* sidebarModel() const = 0;
+    [[nodiscard]] virtual TreeItemModel* sidebarModel() const = 0;
 
     virtual bool hasTrackTable() {
         return false;
     }
 
   protected:
-    QStringList getPlaylistFiles() const {
+    [[nodiscard]] QStringList getPlaylistFiles() const {
         return getPlaylistFiles(QFileDialog::ExistingFiles);
     }
-    QString getPlaylistFile() const {
+    [[nodiscard]] QString getPlaylistFile() const {
         const QStringList playListFiles = getPlaylistFiles();
         if (playListFiles.isEmpty()) {
             return QString(); // no file chosen
@@ -151,7 +151,7 @@ class LibraryFeature : public QObject {
             bool useRelativePath);
 
   private:
-    QStringList getPlaylistFiles(QFileDialog::FileMode mode) const;
+    [[nodiscard]] QStringList getPlaylistFiles(QFileDialog::FileMode mode) const;
 
     QString m_iconName;
     QIcon m_icon;

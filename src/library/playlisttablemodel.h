@@ -11,7 +11,7 @@ class PlaylistTableModel final : public TrackSetTableModel {
     ~PlaylistTableModel() final = default;
 
     void setTableModel(int playlistId = -1);
-    int getPlaylist() const {
+    [[nodiscard]] int getPlaylist() const {
         return m_iPlaylistId;
     }
 
@@ -28,9 +28,9 @@ class PlaylistTableModel final : public TrackSetTableModel {
     int addTracks(const QModelIndex& index, const QList<QString>& locations) final;
     bool isLocked() final;
 
-    Capabilities getCapabilities() const final;
+    [[nodiscard]] Capabilities getCapabilities() const final;
 
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 
   private slots:
     void playlistsChanged(const QSet<int>& playlistIds);

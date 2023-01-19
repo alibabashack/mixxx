@@ -13,7 +13,7 @@ class StarDelegate : public TableItemDelegate {
                const QModelIndex& index) const override;
 
     // returns an item's preferred size
-    QSize sizeHint(const QStyleOptionViewItem& option,
+    [[nodiscard]] QSize sizeHint(const QStyleOptionViewItem& option,
                    const QModelIndex& index) const override;
 
     // called when the user starts editing an item

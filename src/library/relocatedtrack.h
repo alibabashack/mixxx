@@ -33,20 +33,20 @@ class RelocatedTrack final {
 
     // The new, updated TrackRef of the relocated track after merging
     // the missing with the newly added track.
-    TrackRef updatedTrackRef() const {
+    [[nodiscard]] TrackRef updatedTrackRef() const {
         return TrackRef(
                 m_addedTrackRef,
                 m_missingTrackRef.getId());
     }
 
     // The newly added track has been removed after merging (optional).
-    const TrackId& deletedTrackId() const {
+    [[nodiscard]] const TrackId& deletedTrackId() const {
         return m_addedTrackRef.getId();
     }
 
     // The old track location was missing and has been removed
     // after merging.
-    const QString& deletedTrackLocation() const {
+    [[nodiscard]] const QString& deletedTrackLocation() const {
         return m_missingTrackRef.getLocation();
     }
 

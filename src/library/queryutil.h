@@ -22,7 +22,7 @@ class ScopedTransaction {
             rollback();
         }
     }
-    bool active() const {
+    [[nodiscard]] bool active() const {
         return m_active;
     }
     bool transaction() {

@@ -19,7 +19,7 @@ class StarEditor : public QWidget {
                const QModelIndex& index,
                const QStyleOptionViewItem& option);
 
-    QSize sizeHint() const override;
+    [[nodiscard]] QSize sizeHint() const override;
     void setStarRating(const StarRating& starRating) {
         m_starRating = starRating;
     }

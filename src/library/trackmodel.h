@@ -102,8 +102,8 @@ class TrackModel {
 
     // Deserialize and return the track at the given QModelIndex
     // or TrackRef in this result set.
-    virtual TrackPointer getTrack(const QModelIndex& index) const = 0;
-    virtual TrackPointer getTrackByRef(const TrackRef& trackRef) const = 0;
+    [[nodiscard]] virtual TrackPointer getTrack(const QModelIndex& index) const = 0;
+    [[nodiscard]] virtual TrackPointer getTrackByRef(const TrackRef& trackRef) const = 0;
 
     /// Get the URL of the track at the given QModelIndex.
     ///
@@ -112,29 +112,29 @@ class TrackModel {
     /// also be preferred over getTrackLocation() which implicitly
     /// assumes that tracks are always stored on the local file system.
     /// Using URLs for identifying tracks is more versatile.
-    virtual QUrl getTrackUrl(const QModelIndex& index) const = 0;
+    [[nodiscard]] virtual QUrl getTrackUrl(const QModelIndex& index) const = 0;
 
     // Gets the on-disk location of the track at the given location
     // with Qt separator "/".
     // Use QDir::toNativeSeparators() before displaying this to a user.
-    virtual QString getTrackLocation(const QModelIndex& index) const = 0;
+    [[nodiscard]] virtual QString getTrackLocation(const QModelIndex& index) const = 0;
 
     // Gets the track ID of the track at the given QModelIndex
-    virtual TrackId getTrackId(const QModelIndex& index) const = 0;
+    [[nodiscard]] virtual TrackId getTrackId(const QModelIndex& index) const = 0;
 
-    virtual CoverInfo getCoverInfo(const QModelIndex& index) const = 0;
+    [[nodiscard]] virtual CoverInfo getCoverInfo(const QModelIndex& index) const = 0;
 
     // Gets the rows of the track in the current result set. Returns an
     // empty list if the track ID is not present in the result set.
-    virtual const QVector<int> getTrackRows(TrackId trackId) const = 0;
+    [[nodiscard]] virtual const QVector<int> getTrackRows(TrackId trackId) const = 0;
 
     virtual void search(const QString& searchText, const QString& extraFilter=QString()) = 0;
-    virtual const QString currentSearch() const = 0;
+    [[nodiscard]] virtual const QString currentSearch() const = 0;
     virtual bool isColumnInternal(int column) = 0;
     // if no header state exists, we may hide some columns so that the user can
     // reactivate them
     virtual bool isColumnHiddenByDefault(int column) = 0;
-    virtual const QList<int>& searchColumns() const { return m_emptyColumns; }
+    [[nodiscard]] virtual const QList<int>& searchColumns() const { return m_emptyColumns; }
 
     virtual void removeTracks(const QModelIndexList& indices) {
         Q_UNUSED(indices);
@@ -166,10 +166,10 @@ class TrackModel {
         Q_UNUSED(pParent);
         return nullptr;
     }
-    virtual Capabilities getCapabilities() const {
+    [[nodiscard]] virtual Capabilities getCapabilities() const {
         return Capability::None;
     }
-    /*non-virtual*/ bool hasCapabilities(Capabilities caps) const {
+    /*non-virtual*/ [[nodiscard]] bool hasCapabilities(Capabilities caps) const {
         return (getCapabilities() & caps) == caps;
     }
     virtual QString getModelSetting(const QString& name) {
@@ -184,11 +184,11 @@ class TrackModel {
         return settings.setValue(key, value);
     }
 
-    virtual int defaultSortColumn() const {
+    [[nodiscard]] virtual int defaultSortColumn() const {
         return m_iDefaultSortColumn;
     }
 
-    virtual Qt::SortOrder defaultSortOrder() const {
+    [[nodiscard]] virtual Qt::SortOrder defaultSortOrder() const {
         return m_eDefaultSortOrder;
     }
 
@@ -197,16 +197,16 @@ class TrackModel {
         m_eDefaultSortOrder = sortOrder;
     }
 
-    virtual bool isColumnSortable(int column) const {
+    [[nodiscard]] virtual bool isColumnSortable(int column) const {
         Q_UNUSED(column);
         return true;
     }
 
-    virtual SortColumnId sortColumnIdFromColumnIndex(int index) const = 0;
+    [[nodiscard]] virtual SortColumnId sortColumnIdFromColumnIndex(int index) const = 0;
 
-    virtual int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const = 0;
+    [[nodiscard]] virtual int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const = 0;
 
-    virtual int fieldIndex(const QString& fieldName) const {
+    [[nodiscard]] virtual int fieldIndex(const QString& fieldName) const {
         Q_UNUSED(fieldName);
         return -1;
     }
@@ -217,7 +217,7 @@ class TrackModel {
     /// @brief modelKey returns a unique identifier for the model
     /// @param noSearch don't include the current search in the key
     /// @param baseOnly return only a identifier for the whole subsystem
-    virtual QString modelKey(bool noSearch) const = 0;
+    [[nodiscard]] virtual QString modelKey(bool noSearch) const = 0;
 
     virtual bool updateTrackGenre(
             Track* pTrack,

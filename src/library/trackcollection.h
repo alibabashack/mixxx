@@ -38,15 +38,15 @@ class TrackCollection : public QObject,
             const QSqlDatabase& database) override;
     void disconnectDatabase() override;
 
-    QSqlDatabase database() const {
+    [[nodiscard]] QSqlDatabase database() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_database;
     }
 
-    QList<mixxx::FileInfo> loadRootDirs(
+    [[nodiscard]] QList<mixxx::FileInfo> loadRootDirs(
             bool skipInvalidOrMissing = false) const;
 
-    const CrateStorage& crates() const {
+    [[nodiscard]] const CrateStorage& crates() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_crates;
     }
@@ -59,7 +59,7 @@ class TrackCollection : public QObject,
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_playlistDao;
     }
-    const DirectoryDAO& getDirectoryDAO() const {
+    [[nodiscard]] const DirectoryDAO& getDirectoryDAO() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_directoryDao;
     }
@@ -71,7 +71,7 @@ class TrackCollection : public QObject,
     void connectTrackSource(QSharedPointer<BaseTrackCache> pTrackSource);
     QWeakPointer<BaseTrackCache> disconnectTrackSource();
 
-    QSharedPointer<BaseTrackCache> getTrackSource() const {
+    [[nodiscard]] QSharedPointer<BaseTrackCache> getTrackSource() const {
         DEBUG_ASSERT_QOBJECT_THREAD_AFFINITY(this);
         return m_pTrackSource;
     }
@@ -84,7 +84,7 @@ class TrackCollection : public QObject,
 
     bool updateAutoDjCrate(CrateId crateId, bool isAutoDjSource);
 
-    TrackId getTrackIdByRef(
+    [[nodiscard]] TrackId getTrackIdByRef(
             const TrackRef& trackRef) const;
 
   signals:
@@ -137,9 +137,9 @@ class TrackCollection : public QObject,
     QList<TrackId> resolveTrackIdsFromLocations(
             const QList<QString>& locations);
 
-    TrackPointer getTrackById(
+    [[nodiscard]] TrackPointer getTrackById(
             TrackId trackId) const;
-    TrackPointer getTrackByRef(
+    [[nodiscard]] TrackPointer getTrackByRef(
             const TrackRef& trackRef) const;
 
     TrackPointer getOrAddTrack(

@@ -27,12 +27,12 @@ class StarRating {
             int maxStarCount = mixxx::TrackRecord::kMaxRating - mixxx::TrackRecord::kMinRating);
 
     void paint(QPainter* painter, const QRect& rect) const;
-    QSize sizeHint() const;
+    [[nodiscard]] QSize sizeHint() const;
 
-    int starCount() const {
+    [[nodiscard]] int starCount() const {
         return m_starCount;
     }
-    int maxStarCount() const {
+    [[nodiscard]] int maxStarCount() const {
         return m_maxStarCount;
     }
     void setStarCount(int starCount) {

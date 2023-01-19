@@ -23,8 +23,8 @@ class QueryNode {
     QueryNode(const QueryNode&) = delete; // prevent copying
     virtual ~QueryNode() = default;
 
-    virtual bool match(const TrackPointer& pTrack) const = 0;
-    virtual QString toSql() const = 0;
+    [[nodiscard]] virtual bool match(const TrackPointer& pTrack) const = 0;
+    [[nodiscard]] virtual QString toSql() const = 0;
 
   protected:
     QueryNode() = default;
@@ -48,14 +48,14 @@ class GroupNode : public QueryNode {
 
 class OrNode : public GroupNode {
   public:
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 };
 
 class AndNode : public GroupNode {
   public:
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 };
 
 class NotNode : public QueryNode {
@@ -65,8 +65,8 @@ class NotNode : public QueryNode {
         DEBUG_ASSERT(m_pNode);
     }
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
   private:
     std::unique_ptr<QueryNode> m_pNode;
@@ -78,8 +78,8 @@ class TextFilterNode : public QueryNode {
             const QStringList& sqlColumns,
             const QString& argument);
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
   private:
     QSqlDatabase m_database;
@@ -95,8 +95,8 @@ class NullOrEmptyTextFilterNode : public QueryNode {
               m_sqlColumns(sqlColumns) {
     }
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
   private:
     QSqlDatabase m_database;
@@ -136,8 +136,8 @@ class NumericFilterNode : public QueryNode {
   public:
     NumericFilterNode(const QStringList& sqlColumns, const QString& argument);
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
   protected:
     // Single argument constructor for that does not call init()
@@ -166,8 +166,8 @@ class NullNumericFilterNode : public QueryNode {
   public:
     explicit NullNumericFilterNode(const QStringList& sqlColumns);
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
     QStringList m_sqlColumns;
 };
@@ -184,8 +184,8 @@ class KeyFilterNode : public QueryNode {
   public:
     KeyFilterNode(mixxx::track::io::key::ChromaticKey key, bool fuzzy);
 
-    bool match(const TrackPointer& pTrack) const override;
-    QString toSql() const override;
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override;
+    [[nodiscard]] QString toSql() const override;
 
   private:
     QList<mixxx::track::io::key::ChromaticKey> m_matchKeys;
@@ -200,14 +200,14 @@ class SqlNode : public QueryNode {
             : m_sql(sqlExpression) {
     }
 
-    bool match(const TrackPointer& pTrack) const override {
+    [[nodiscard]] bool match(const TrackPointer& pTrack) const override {
         // We are usually embedded in an AND node so if we don't match
         // everything then we block everything.
         Q_UNUSED(pTrack);
         return true;
     }
 
-    QString toSql() const override {
+    [[nodiscard]] QString toSql() const override {
         return m_sql;
     }
 

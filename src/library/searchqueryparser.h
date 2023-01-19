@@ -14,7 +14,7 @@ class SearchQueryParser {
 
     virtual ~SearchQueryParser();
 
-    std::unique_ptr<QueryNode> parseQuery(
+    [[nodiscard]] std::unique_ptr<QueryNode> parseQuery(
             const QString& query,
             const QStringList& searchColumns,
             const QString& extraFilter) const;
