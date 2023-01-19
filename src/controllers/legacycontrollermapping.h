@@ -170,7 +170,7 @@ class LegacyControllerMapping {
         setDirty(true);
     }
 
-    virtual bool saveMapping(const QString& filename) const = 0;
+    [[nodiscard]] virtual bool saveMapping(const QString& filename) const = 0;
 
     [[nodiscard]] virtual bool isMappable() const = 0;
 

@@ -96,7 +96,7 @@ public:
           : QStandardItem(year) {
   }
 
-  QVariant data(int role) const override {
+  [[nodiscard]] QVariant data(int role) const override {
       switch (role) {
       case Qt::DisplayRole: {
           const QString year(QStandardItem::data(role).toString());

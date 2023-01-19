@@ -11,14 +11,14 @@ class SettingsDAO final {
             : m_database(std::move(database)) {
     }
 
-    QString getValue(
+    [[nodiscard]] QString getValue(
             const QString& name,
             QString defaultValue = QString()) const;
-    bool setValue(
+    [[nodiscard]] bool setValue(
             const QString& name,
             const QVariant& value) const;
 
-    const QSqlDatabase& database() const {
+    [[nodiscard]] const QSqlDatabase& database() const {
         return m_database;
     }
 

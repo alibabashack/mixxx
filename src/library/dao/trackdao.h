@@ -55,17 +55,17 @@ class TrackDAO : public QObject, public virtual DAO, public virtual GlobalTrackC
             const QList<mixxx::FileInfo>& fileInfos,
             ResolveTrackIdFlags flags = ResolveTrackIdFlag::ResolveOnly);
 
-    TrackId getTrackIdByRef(
+    [[nodiscard]] TrackId getTrackIdByRef(
             const TrackRef& trackRef) const;
-    QList<TrackRef> getAllTrackRefs(
+    [[nodiscard]] QList<TrackRef> getAllTrackRefs(
             const QDir& rootDir) const;
 
-    TrackPointer getTrackByRef(
+    [[nodiscard]] TrackPointer getTrackByRef(
             const TrackRef& trackRef) const;
 
     // Returns a set of all track locations in the library.
-    QSet<QString> getAllTrackLocations() const;
-    QString getTrackLocation(TrackId trackId) const;
+    [[nodiscard]] QSet<QString> getAllTrackLocations() const;
+    [[nodiscard]] QString getTrackLocation(TrackId trackId) const;
 
     // Only used by friend class LibraryScanner, but public for testing!
     bool detectMovedTracks(
@@ -78,7 +78,7 @@ class TrackDAO : public QObject, public virtual DAO, public virtual GlobalTrackC
 
     /// Update the play counter properties according to the corresponding
     /// aggregated properties obtained from the played history.
-    bool updatePlayCounterFromPlayedHistory(
+    [[nodiscard]] bool updatePlayCounterFromPlayedHistory(
             const QSet<TrackId>& trackIds) const;
 
     /// Don't use even if public!!! Ugly workaround for C++ visibility restrictions.
@@ -102,7 +102,7 @@ class TrackDAO : public QObject, public virtual DAO, public virtual GlobalTrackC
     /// Only local file URLs are supported.
     ///
     /// Returns `nullptr` if no track matches the given URL.
-    TrackPointer getTrackByUrl(const QUrl& url) const {
+    [[nodiscard]] TrackPointer getTrackByUrl(const QUrl& url) const {
         return getTrackByRef(TrackRef::fromUrl(url));
     }
 
@@ -133,9 +133,9 @@ class TrackDAO : public QObject, public virtual DAO, public virtual GlobalTrackC
     friend class TrackCollection;
     friend class TrackAnalysisScheduler;
 
-    TrackId getTrackIdByLocation(
+    [[nodiscard]] TrackId getTrackIdByLocation(
             const QString& location) const;
-    TrackPointer getTrackById(
+    [[nodiscard]] TrackPointer getTrackById(
             TrackId trackId) const;
 
     // Loads a track from the database (by id if available, otherwise by location)
@@ -163,21 +163,21 @@ class TrackDAO : public QObject, public virtual DAO, public virtual GlobalTrackC
     }
     void addTracksFinish(bool rollback = false);
 
-    bool updateTrack(const Track& track) const;
+    [[nodiscard]] bool updateTrack(const Track& track) const;
 
     void hideAllTracks(const QDir& rootDir) const;
 
-    bool hideTracks(
+    [[nodiscard]] bool hideTracks(
             const QList<TrackId>& trackIds) const;
     void afterHidingTracks(
             const QList<TrackId>& trackIds);
 
-    bool unhideTracks(
+    [[nodiscard]] bool unhideTracks(
             const QList<TrackId>& trackIds) const;
     void afterUnhidingTracks(
             const QList<TrackId>& trackIds);
 
-    bool onPurgingTracks(
+    [[nodiscard]] bool onPurgingTracks(
             const QList<TrackId>& trackIds) const;
     void afterPurgingTracks(
             const QList<TrackId>& trackIds);

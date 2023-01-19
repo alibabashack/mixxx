@@ -24,15 +24,15 @@ class DeckAttributes : public QObject {
             BaseTrackPlayer* pPlayer);
     ~DeckAttributes() override;
 
-    bool isLeft() const {
+    [[nodiscard]] bool isLeft() const {
         return m_orientation.get() == static_cast<double>(EngineChannel::LEFT);
     }
 
-    bool isRight() const {
+    [[nodiscard]] bool isRight() const {
         return m_orientation.get() == static_cast<double>(EngineChannel::RIGHT);
     }
 
-    bool isPlaying() const {
+    [[nodiscard]] bool isPlaying() const {
         return m_play.toBool();
     }
 
@@ -44,7 +44,7 @@ class DeckAttributes : public QObject {
         m_play.set(1.0);
     }
 
-    double playPosition() const {
+    [[nodiscard]] double playPosition() const {
         return m_playPos.get();
     }
 
@@ -52,7 +52,7 @@ class DeckAttributes : public QObject {
         m_playPos.set(playpos);
     }
 
-    bool isRepeat() const {
+    [[nodiscard]] bool isRepeat() const {
         return m_repeat.toBool();
     }
 
@@ -60,35 +60,35 @@ class DeckAttributes : public QObject {
         m_repeat.set(enabled ? 1.0 : 0.0);
     }
 
-    mixxx::audio::FramePos introStartPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos introStartPosition() const {
         return mixxx::audio::FramePos::fromEngineSamplePosMaybeInvalid(m_introStartPos.get());
     }
 
-    mixxx::audio::FramePos introEndPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos introEndPosition() const {
         return mixxx::audio::FramePos::fromEngineSamplePosMaybeInvalid(m_introEndPos.get());
     }
 
-    mixxx::audio::FramePos outroStartPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos outroStartPosition() const {
         return mixxx::audio::FramePos::fromEngineSamplePosMaybeInvalid(m_outroStartPos.get());
     }
 
-    mixxx::audio::FramePos outroEndPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos outroEndPosition() const {
         return mixxx::audio::FramePos::fromEngineSamplePosMaybeInvalid(m_outroEndPos.get());
     }
 
-    mixxx::audio::SampleRate sampleRate() const {
+    [[nodiscard]] mixxx::audio::SampleRate sampleRate() const {
         return mixxx::audio::SampleRate::fromDouble(m_sampleRate.get());
     }
 
-    mixxx::audio::FramePos trackEndPosition() const {
+    [[nodiscard]] mixxx::audio::FramePos trackEndPosition() const {
         return mixxx::audio::FramePos::fromEngineSamplePosMaybeInvalid(m_trackSamples.get());
     }
 
-    double rateRatio() const {
+    [[nodiscard]] double rateRatio() const {
         return m_rateRatio.get();
     }
 
-    TrackPointer getLoadedTrack() const;
+    [[nodiscard]] TrackPointer getLoadedTrack() const;
 
   signals:
     void playChanged(DeckAttributes* pDeck, bool playing);
@@ -173,19 +173,19 @@ class AutoDJProcessor : public QObject {
                     int iAutoDJPlaylistId);
     ~AutoDJProcessor() override;
 
-    AutoDJState getState() const {
+    [[nodiscard]] AutoDJState getState() const {
         return m_eState;
     }
 
-    double getTransitionTime() const {
+    [[nodiscard]] double getTransitionTime() const {
         return m_transitionTime;
     }
 
-    TransitionMode getTransitionMode() const {
+    [[nodiscard]] TransitionMode getTransitionMode() const {
         return m_transitionMode;
     }
 
-    PlaylistTableModel* getTableModel() const {
+    [[nodiscard]] PlaylistTableModel* getTableModel() const {
         return m_pAutoDJTableModel;
     }
 
@@ -239,7 +239,7 @@ class AutoDJProcessor : public QObject {
     // all the way mixed to the left side and 1 is all the way mixed to the
     // right side. (prevents AutoDJ logic from having to check for hamster mode
     // every time)
-    double getCrossfader() const;
+    [[nodiscard]] double getCrossfader() const;
     void setCrossfader(double value);
 
     // Following functions return seconds computed from samples or -1 if

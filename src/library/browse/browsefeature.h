@@ -36,7 +36,7 @@ class BrowseFeature : public LibraryFeature {
             KeyboardEventFilter* keyboard) override;
     void bindSidebarWidget(WLibrarySidebar* pSidebarWidget) override;
 
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
 
   public slots:
     void slotAddQuickLink();
@@ -55,9 +55,9 @@ class BrowseFeature : public LibraryFeature {
     void scanLibrary();
 
   private:
-    QString getRootViewHtml() const;
+    [[nodiscard]] QString getRootViewHtml() const;
     QString extractNameFromPath(const QString& spath);
-    QStringList getDefaultQuickLinks() const;
+    [[nodiscard]] QStringList getDefaultQuickLinks() const;
     void saveQuickLinks();
     void loadQuickLinks();
 

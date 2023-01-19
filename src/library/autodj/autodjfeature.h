@@ -42,7 +42,7 @@ class AutoDJFeature : public LibraryFeature {
                     KeyboardEventFilter* keyboard) override;
     void bindSidebarWidget(WLibrarySidebar* pSidebarWidget) override;
 
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
 
     bool hasTrackTable() override {
         return true;

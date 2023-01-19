@@ -55,31 +55,31 @@ class BrowseTableModel final : public QStandardItemModel, public virtual TrackMo
     // initiate table population, store path
     void setPath(mixxx::FileAccess path);
 
-    TrackPointer getTrack(const QModelIndex& index) const override;
-    TrackPointer getTrackByRef(const TrackRef& trackRef) const override;
-    TrackModel::Capabilities getCapabilities() const override;
+    [[nodiscard]] TrackPointer getTrack(const QModelIndex& index) const override;
+    [[nodiscard]] TrackPointer getTrackByRef(const TrackRef& trackRef) const override;
+    [[nodiscard]] TrackModel::Capabilities getCapabilities() const override;
 
-    QString getTrackLocation(const QModelIndex& index) const override;
-    TrackId getTrackId(const QModelIndex& index) const override;
-    QUrl getTrackUrl(const QModelIndex& index) const final;
-    CoverInfo getCoverInfo(const QModelIndex& index) const override;
-    const QVector<int> getTrackRows(TrackId trackId) const override;
+    [[nodiscard]] QString getTrackLocation(const QModelIndex& index) const override;
+    [[nodiscard]] TrackId getTrackId(const QModelIndex& index) const override;
+    [[nodiscard]] QUrl getTrackUrl(const QModelIndex& index) const final;
+    [[nodiscard]] CoverInfo getCoverInfo(const QModelIndex& index) const override;
+    [[nodiscard]] const QVector<int> getTrackRows(TrackId trackId) const override;
     void search(const QString& searchText,const QString& extraFilter = QString()) override;
     void removeTracks(const QModelIndexList& indices) override;
-    QMimeData* mimeData(const QModelIndexList &indexes) const override;
-    const QString currentSearch() const override;
+    [[nodiscard]] QMimeData* mimeData(const QModelIndexList &indexes) const override;
+    [[nodiscard]] const QString currentSearch() const override;
     bool isColumnInternal(int) override;
     void moveTrack(const QModelIndex&, const QModelIndex&) override;
     bool isLocked() override { return false; }
     bool isColumnHiddenByDefault(int column) override;
-    const QList<int>& searchColumns() const override;
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    [[nodiscard]] const QList<int>& searchColumns() const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role=Qt::EditRole) override;
     QAbstractItemDelegate* delegateForColumn(const int i, QObject* pParent) override;
-    bool isColumnSortable(int column) const override;
-    TrackModel::SortColumnId sortColumnIdFromColumnIndex(int index) const override;
-    int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const override;
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] bool isColumnSortable(int column) const override;
+    [[nodiscard]] TrackModel::SortColumnId sortColumnIdFromColumnIndex(int index) const override;
+    [[nodiscard]] int columnIndexFromSortColumnId(TrackModel::SortColumnId sortColumn) const override;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 
     bool updateTrackGenre(
             Track* pTrack,

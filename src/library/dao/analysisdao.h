@@ -38,7 +38,7 @@ class AnalysisDao : public DAO {
     // The following functions can be used with a custom database
     // connection and independent of whether the DAO has been
     // initialized or not.
-    bool deleteAnalysesByType(
+    [[nodiscard]] bool deleteAnalysesByType(
             const QSqlDatabase& database,
             AnalysisType type) const;
     [[nodiscard]] size_t getDiskUsageInBytes(
@@ -60,8 +60,8 @@ class AnalysisDao : public DAO {
   private:
     [[nodiscard]] QDir getAnalysisStoragePath() const;
     [[nodiscard]] QByteArray loadDataFromFile(const QString& fileName) const;
-    bool saveDataToFile(const QString& fileName, const QByteArray& data) const;
-    bool deleteFile(const QString& filename) const;
+    [[nodiscard]] bool saveDataToFile(const QString& fileName, const QByteArray& data) const;
+    [[nodiscard]] bool deleteFile(const QString& filename) const;
     QList<AnalysisInfo> loadAnalysesFromQuery(TrackId trackId, QSqlQuery* query);
 
     const UserSettingsPointer m_pConfig;

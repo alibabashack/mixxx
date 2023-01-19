@@ -10,7 +10,7 @@ class DirectoryDAO : public DAO {
   public:
     ~DirectoryDAO() override = default;
 
-    QList<mixxx::FileInfo> loadAllDirectories(
+    [[nodiscard]] QList<mixxx::FileInfo> loadAllDirectories(
             bool skipInvalidOrMissing = false) const;
 
     enum class AddResult {
@@ -19,17 +19,17 @@ class DirectoryDAO : public DAO {
         InvalidOrMissingDirectory,
         SqlError,
     };
-    AddResult addDirectory(const mixxx::FileInfo& newDir) const;
+    [[nodiscard]] AddResult addDirectory(const mixxx::FileInfo& newDir) const;
 
     enum class RemoveResult {
         Ok,
         NotFound,
         SqlError,
     };
-    RemoveResult removeDirectory(const mixxx::FileInfo& oldDir) const;
+    [[nodiscard]] RemoveResult removeDirectory(const mixxx::FileInfo& oldDir) const;
 
     // TODO: Move this function out of the DAO
-    QList<RelocatedTrack> relocateDirectory(
+    [[nodiscard]] QList<RelocatedTrack> relocateDirectory(
             const QString& oldDirectory,
             const QString& newDirectory) const;
 };
