@@ -23,17 +23,17 @@ class EffectsBackend {
   public:
     virtual ~EffectsBackend(){};
 
-    virtual EffectBackendType getType() const = 0;
+    [[nodiscard]] virtual EffectBackendType getType() const = 0;
 
     /// returns a list sorted like it should be displayed in the GUI
-    virtual const QList<QString> getEffectIds() const = 0;
+    [[nodiscard]] virtual const QList<QString> getEffectIds() const = 0;
     /// returns a pointer to the manifest or a null pointer in case a
     /// previously stored effect is no longer available
-    virtual EffectManifestPointer getManifest(const QString& effectId) const = 0;
-    virtual const QList<EffectManifestPointer> getManifests() const = 0;
-    virtual bool canInstantiateEffect(const QString& effectId) const = 0;
+    [[nodiscard]] virtual EffectManifestPointer getManifest(const QString& effectId) const = 0;
+    [[nodiscard]] virtual const QList<EffectManifestPointer> getManifests() const = 0;
+    [[nodiscard]] virtual bool canInstantiateEffect(const QString& effectId) const = 0;
 
-    virtual std::unique_ptr<EffectProcessor> createProcessor(
+    [[nodiscard]] virtual std::unique_ptr<EffectProcessor> createProcessor(
             const EffectManifestPointer pManifest) const = 0;
 
     static EffectBackendType backendTypeFromString(const QString& typeName);

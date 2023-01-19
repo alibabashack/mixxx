@@ -49,7 +49,7 @@ class GraphicEQEffect : public EffectProcessorImpl<GraphicEQEffectGroupState> {
             const GroupFeatureState& groupFeatureState) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

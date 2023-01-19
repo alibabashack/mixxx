@@ -107,7 +107,7 @@ class DistortionEffect : public EffectProcessorImpl<DistortionGroupState> {
         pState->m_crossfadeParameter = crossfadeParam;
     }
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

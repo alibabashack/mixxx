@@ -34,7 +34,7 @@ class EffectManifest {
     }
 
     /// Hack to store unique IDs in QComboBox models
-    const QString uniqueId() const {
+    [[nodiscard]] const QString uniqueId() const {
         return m_id + " " + EffectsBackend::backendTypeToString(m_backendType);
     }
 
@@ -42,28 +42,28 @@ class EffectManifest {
     /// ID strings and names are only unique among EffectManifests from one
     /// EffectsBackend. Use EffectManifest::operator== to compare both ID string
     /// and EffectBackendType.
-    const QString& id() const {
+    [[nodiscard]] const QString& id() const {
         return m_id;
     }
     void setId(const QString& id) {
         m_id = id;
     }
 
-    const QString& name() const {
+    [[nodiscard]] const QString& name() const {
         return m_name;
     }
     void setName(const QString& name) {
         m_name = name;
     }
 
-    const QString& shortName() const {
+    [[nodiscard]] const QString& shortName() const {
         return m_shortName;
     }
     void setShortName(const QString& shortName) {
         m_shortName = shortName;
     }
 
-    const QString& displayName() const {
+    [[nodiscard]] const QString& displayName() const {
         if (!m_shortName.isEmpty()) {
             return m_shortName;
         } else {
@@ -71,32 +71,32 @@ class EffectManifest {
         }
     }
 
-    const EffectBackendType& backendType() const {
+    [[nodiscard]] const EffectBackendType& backendType() const {
         return m_backendType;
     }
     void setBackendType(const EffectBackendType& type) {
         m_backendType = type;
     }
 
-    const QString& author() const {
+    [[nodiscard]] const QString& author() const {
         return m_author;
     }
     void setAuthor(const QString& author) {
         m_author = author;
     }
 
-    const QString& version() const {
+    [[nodiscard]] const QString& version() const {
         return m_version;
     }
     void setVersion(const QString& version) {
         m_version = version;
     }
 
-    const QString& description() const {
+    [[nodiscard]] const QString& description() const {
         return m_description;
     }
 
-    const bool& isMixingEQ() const {
+    [[nodiscard]] const bool& isMixingEQ() const {
         return m_isMixingEQ;
     }
 
@@ -104,7 +104,7 @@ class EffectManifest {
         m_isMixingEQ = value;
     }
 
-    const bool& isMasterEQ() const {
+    [[nodiscard]] const bool& isMasterEQ() const {
         return m_isMasterEQ;
     }
 
@@ -112,13 +112,13 @@ class EffectManifest {
         m_isMasterEQ = value;
     }
 
-    bool hasMetaKnobLinking() const;
+    [[nodiscard]] bool hasMetaKnobLinking() const;
 
     void setDescription(const QString& description) {
         m_description = description;
     }
 
-    const QList<EffectManifestParameterPointer>& parameters() const {
+    [[nodiscard]] const QList<EffectManifestParameterPointer>& parameters() const {
         return m_parameters;
     }
 
@@ -134,21 +134,21 @@ class EffectManifest {
         return m_parameters[i];
     }
 
-    bool effectRampsFromDry() const {
+    [[nodiscard]] bool effectRampsFromDry() const {
         return m_effectRampsFromDry;
     }
     void setEffectRampsFromDry(bool effectFadesFromDry) {
         m_effectRampsFromDry = effectFadesFromDry;
     }
 
-    bool addDryToWet() const {
+    [[nodiscard]] bool addDryToWet() const {
         return m_bAddDryToWet;
     }
     void setAddDryToWet(bool addDryToWet) {
         m_bAddDryToWet = addDryToWet;
     }
 
-    double metaknobDefault() const {
+    [[nodiscard]] double metaknobDefault() const {
         return m_metaknobDefault;
     }
     void setMetaknobDefault(double metaknobDefault) {
@@ -170,7 +170,7 @@ class EffectManifest {
             EffectManifestPointer pManifest1, EffectManifestPointer pManifest2);
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectManifest(%1)").arg(m_id);
     }
 

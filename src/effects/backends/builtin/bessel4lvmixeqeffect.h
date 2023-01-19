@@ -39,7 +39,7 @@ class Bessel4LVMixEQEffect : public EffectProcessorImpl<Bessel4LVMixEQEffectGrou
             const GroupFeatureState& groupFeatureState) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

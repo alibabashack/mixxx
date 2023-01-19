@@ -65,7 +65,7 @@ class EchoEffect : public EffectProcessorImpl<EchoGroupState> {
             const GroupFeatureState& groupFeatures) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

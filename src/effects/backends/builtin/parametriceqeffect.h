@@ -59,7 +59,7 @@ class ParametricEQEffect : public EffectProcessorImpl<ParametricEQEffectGroupSta
             const GroupFeatureState& groupFeatureState) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

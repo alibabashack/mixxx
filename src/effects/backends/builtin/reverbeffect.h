@@ -53,7 +53,7 @@ class ReverbEffect : public EffectProcessorImpl<ReverbGroupState> {
             const GroupFeatureState& groupFeatures) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

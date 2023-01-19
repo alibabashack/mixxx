@@ -41,7 +41,7 @@ class BitCrusherEffect : public EffectProcessorImpl<BitCrusherGroupState> {
             const GroupFeatureState& groupFeatureState) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

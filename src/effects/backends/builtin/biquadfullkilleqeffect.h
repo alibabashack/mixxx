@@ -82,7 +82,7 @@ class BiquadFullKillEQEffect : public EffectProcessorImpl<BiquadFullKillEQEffect
     BiquadFullKillEQEffect(const BiquadFullKillEQEffect&) = delete;
     void operator=(const BiquadFullKillEQEffect&) = delete;
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

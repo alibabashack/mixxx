@@ -36,7 +36,7 @@ class TremoloEffect : public EffectProcessorImpl<TremoloState> {
             const GroupFeatureState& groupFeatures) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

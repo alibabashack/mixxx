@@ -11,15 +11,15 @@ class EffectsBackendManager {
     EffectsBackendManager();
     ~EffectsBackendManager() = default;
 
-    const QList<EffectManifestPointer>& getManifests() const {
+    [[nodiscard]] const QList<EffectManifestPointer>& getManifests() const {
         return m_manifests;
     };
-    const QList<EffectManifestPointer> getManifestsForBackend(EffectBackendType backendType) const;
-    EffectManifestPointer getManifestFromUniqueId(const QString& uid) const;
+    [[nodiscard]] const QList<EffectManifestPointer> getManifestsForBackend(EffectBackendType backendType) const;
+    [[nodiscard]] EffectManifestPointer getManifestFromUniqueId(const QString& uid) const;
     /// returns a pointer to the manifest or a null pointer in case a
     /// the previously stored backend or effect is no longer available
-    EffectManifestPointer getManifest(const QString& id, EffectBackendType backendType) const;
-    const QString getDisplayNameForEffectPreset(EffectPresetPointer pPreset) const;
+    [[nodiscard]] EffectManifestPointer getManifest(const QString& id, EffectBackendType backendType) const;
+    [[nodiscard]] const QString getDisplayNameForEffectPreset(EffectPresetPointer pPreset) const;
 
     std::unique_ptr<EffectProcessor> createProcessor(const EffectManifestPointer pManifest);
 

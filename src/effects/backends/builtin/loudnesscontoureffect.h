@@ -55,7 +55,7 @@ class LoudnessContourEffect
     LoudnessContourEffect(const LoudnessContourEffect&) = delete;
     void operator=(const LoudnessContourEffect&) = delete;
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

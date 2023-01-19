@@ -99,7 +99,7 @@ class AutoPanEffect : public EffectProcessorImpl<AutoPanGroupState> {
     double computeLawCoefficient(double position);
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

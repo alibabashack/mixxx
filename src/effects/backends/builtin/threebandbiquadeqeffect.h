@@ -65,7 +65,7 @@ class ThreeBandBiquadEQEffect : public EffectProcessorImpl<ThreeBandBiquadEQEffe
     ThreeBandBiquadEQEffect(const ThreeBandBiquadEQEffect&) = delete;
     void operator=(const ThreeBandBiquadEQEffect&) = delete;
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

@@ -13,18 +13,18 @@ class LV2Backend : public EffectsBackend {
     LV2Backend();
     ~LV2Backend() override;
 
-    EffectBackendType getType() const override {
+    [[nodiscard]] EffectBackendType getType() const override {
         return EffectBackendType::LV2;
     };
 
-    const QList<QString> getEffectIds() const override;
-    const QSet<QString> getDiscoveredPluginIds() const;
-    EffectManifestPointer getManifest(const QString& effectId) const override;
-    const QList<EffectManifestPointer> getManifests() const override;
-    LV2EffectManifestPointer getLV2Manifest(const QString& effectId) const;
-    std::unique_ptr<EffectProcessor> createProcessor(
+    [[nodiscard]] const QList<QString> getEffectIds() const override;
+    [[nodiscard]] const QSet<QString> getDiscoveredPluginIds() const;
+    [[nodiscard]] EffectManifestPointer getManifest(const QString& effectId) const override;
+    [[nodiscard]] const QList<EffectManifestPointer> getManifests() const override;
+    [[nodiscard]] LV2EffectManifestPointer getLV2Manifest(const QString& effectId) const;
+    [[nodiscard]] std::unique_ptr<EffectProcessor> createProcessor(
             const EffectManifestPointer pManifest) const override;
-    bool canInstantiateEffect(const QString& effectId) const override;
+    [[nodiscard]] bool canInstantiateEffect(const QString& effectId) const override;
 
   private:
     void enumeratePlugins();
@@ -33,7 +33,7 @@ class LV2Backend : public EffectsBackend {
     QHash<QString, LilvNode*> m_properties;
     QHash<QString, LV2EffectManifestPointer> m_registeredEffects;
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return "LV2Backend";
     }
 };

@@ -24,7 +24,7 @@ class MixxxDb : public QObject {
             const UserSettingsPointer& pConfig,
             bool inMemoryConnection = false);
 
-    mixxx::DbConnectionPoolPtr connectionPool() const {
+    [[nodiscard]] mixxx::DbConnectionPoolPtr connectionPool() const {
         return m_pDbConnectionPool;
     }
 

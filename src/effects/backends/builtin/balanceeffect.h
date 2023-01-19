@@ -46,7 +46,7 @@ class BalanceEffect : public EffectProcessorImpl<BalanceGroupState> {
             const GroupFeatureState& groupFeatures) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 

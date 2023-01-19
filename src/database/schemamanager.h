@@ -24,9 +24,9 @@ class SchemaManager {
 
     explicit SchemaManager(const QSqlDatabase& database);
 
-    int readCurrentVersion() const;
-    int readLastUsedVersion() const;
-    int readMinBackwardsCompatibleVersion() const;
+    [[nodiscard]] int readCurrentVersion() const;
+    [[nodiscard]] int readLastUsedVersion() const;
+    [[nodiscard]] int readMinBackwardsCompatibleVersion() const;
 
     /// Tries to update the database schema to targetVersion.
     /// Pending changes are rolled back upon failure.

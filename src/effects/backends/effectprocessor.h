@@ -77,7 +77,7 @@ class EffectProcessor {
             const mixxx::EngineParameters& engineParameters) = 0;
     virtual void loadEngineEffectParameters(
             const QMap<QString, EngineEffectParameterPointer>& parameters) = 0;
-    virtual bool hasStatesForInputChannel(ChannelHandle inputChannel) const = 0;
+    [[nodiscard]] virtual bool hasStatesForInputChannel(ChannelHandle inputChannel) const = 0;
 
     /// Called from the audio thread
     /// This method takes a buffer of audio samples as pInput, processes the buffer
@@ -221,7 +221,7 @@ class EffectProcessorImpl : public EffectProcessor {
         }
     };
 
-    bool hasStatesForInputChannel(ChannelHandle inputChannel) const final {
+    [[nodiscard]] bool hasStatesForInputChannel(ChannelHandle inputChannel) const final {
         if (inputChannel.handle() < m_channelStateMatrix.size()) {
             for (const auto& pState : m_channelStateMatrix.at(inputChannel)) {
                 if (pState) {

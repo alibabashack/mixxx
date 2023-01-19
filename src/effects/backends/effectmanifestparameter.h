@@ -112,35 +112,35 @@ class EffectManifestParameter {
     // Parameter Information
     ////////////////////////////////////////////////////////////////////////////////
 
-    const QString& id() const {
+    [[nodiscard]] const QString& id() const {
         return m_id;
     }
     void setId(const QString& id) {
         m_id = id;
     }
 
-    const QString& name() const {
+    [[nodiscard]] const QString& name() const {
         return m_name;
     }
     void setName(const QString& name) {
         m_name = name;
     }
 
-    const QString& shortName() const {
+    [[nodiscard]] const QString& shortName() const {
         return m_shortName;
     }
     void setShortName(const QString& shortName) {
         m_shortName = shortName;
     }
 
-    const QString& description() const {
+    [[nodiscard]] const QString& description() const {
         return m_description;
     }
     void setDescription(const QString& description) {
         m_description = description;
     }
 
-    int index() const {
+    [[nodiscard]] int index() const {
         return m_iIndex;
     }
     void setIndex(int index) {
@@ -151,11 +151,11 @@ class EffectManifestParameter {
     // Usage hints
     ////////////////////////////////////////////////////////////////////////////////
 
-    const ParameterType& parameterType() const {
+    [[nodiscard]] const ParameterType& parameterType() const {
         return m_parameterType;
     }
 
-    ValueScaler valueScaler() const {
+    [[nodiscard]] ValueScaler valueScaler() const {
         return m_valueScaler;
     }
     void setValueScaler(ValueScaler valueScaler) {
@@ -167,21 +167,21 @@ class EffectManifestParameter {
         }
     }
 
-    UnitsHint unitsHint() const {
+    [[nodiscard]] UnitsHint unitsHint() const {
         return m_unitsHint;
     }
     void setUnitsHint(UnitsHint unitsHint) {
         m_unitsHint = unitsHint;
     }
 
-    LinkType defaultLinkType() const {
+    [[nodiscard]] LinkType defaultLinkType() const {
         return m_defaultLinkType;
     }
     void setDefaultLinkType(const LinkType linkType) {
         m_defaultLinkType = linkType;
     }
 
-    LinkInversion defaultLinkInversion() const {
+    [[nodiscard]] LinkInversion defaultLinkInversion() const {
         return m_defaultLinkInversion;
     }
     void setDefaultLinkInversion(const LinkInversion linkInversion) {
@@ -196,7 +196,7 @@ class EffectManifestParameter {
     /// A EQ Gain has usually a neutral point of 0.5 (0 dB) while a delay knob
     /// has a neutral point of 0.0 (no delay)
     /// A EQ Gain knob cannot be used on a split meta knob.
-    double neutralPointOnScale() const {
+    [[nodiscard]] double neutralPointOnScale() const {
         return m_neutralPointOnScale;
     }
     void setNeutralPointOnScale(double neutralPoint) {
@@ -207,15 +207,15 @@ class EffectManifestParameter {
     // Value Settings
     ////////////////////////////////////////////////////////////////////////////////
 
-    const double& getDefault() const {
+    [[nodiscard]] const double& getDefault() const {
         return m_default;
     }
 
-    const double& getMinimum() const {
+    [[nodiscard]] const double& getMinimum() const {
         return m_minimum;
     }
 
-    const double& getMaximum() const {
+    [[nodiscard]] const double& getMaximum() const {
         return m_maximum;
     }
 
@@ -238,7 +238,7 @@ class EffectManifestParameter {
     void appendStep(const QPair<QString, double>& step) {
         m_steps.append(step);
     }
-    const QList<QPair<QString, double>>& getSteps() const {
+    [[nodiscard]] const QList<QPair<QString, double>>& getSteps() const {
         return m_steps;
     }
 
@@ -247,7 +247,7 @@ class EffectManifestParameter {
         m_parameterType = parameterType;
     }
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectManifestParameter(%1)").arg(m_id);
     }
 

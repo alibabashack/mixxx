@@ -48,7 +48,7 @@ class PitchShiftEffect final : public EffectProcessorImpl<PitchShiftGroupState> 
             const GroupFeatureState& groupFeatures) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return getId();
     }
 
