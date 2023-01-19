@@ -43,7 +43,7 @@ class EngineChannel : public EngineObject {
     }
 
     virtual ActiveState updateActiveState() = 0;
-    virtual bool isActive() {
+    virtual bool isActive() const {
         return m_active;
     }
 
@@ -53,18 +53,18 @@ class EngineChannel : public EngineObject {
     [[nodiscard]] virtual bool isMasterEnabled() const;
     void setTalkover(bool enabled);
     [[nodiscard]] virtual bool isTalkoverEnabled() const;
-    inline bool isTalkoverChannel() { return m_bIsTalkoverChannel; };
-    inline bool isPrimaryDeck() {
+    inline bool isTalkoverChannel() const { return m_bIsTalkoverChannel; };
+    inline bool isPrimaryDeck() const {
         return m_bIsPrimaryDeck;
     };
-    int getChannelIndex() {
+    int getChannelIndex() const {
         return m_channelIndex;
     }
-    void setChannelIndex(int channelIndex) {
+    void setChannelIndex(const int channelIndex) {
         m_channelIndex = channelIndex;
     }
 
-    virtual void postProcess(const int iBuffersize) = 0;
+    virtual void postProcess(int iBuffersize) = 0;
 
     // TODO(XXX) This hack needs to be removed.
     virtual EngineBuffer* getEngineBuffer() {

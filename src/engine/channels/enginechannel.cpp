@@ -5,10 +5,10 @@
 #include "moc_enginechannel.cpp"
 
 EngineChannel::EngineChannel(const ChannelHandleAndGroup& handleGroup,
-        EngineChannel::ChannelOrientation defaultOrientation,
-        EffectsManager* pEffectsManager,
-        bool isTalkoverChannel,
-        bool isPrimaryDeck)
+        const EngineChannel::ChannelOrientation defaultOrientation,
+        EffectsManager* const pEffectsManager,
+        const bool isTalkoverChannel,
+        const bool isPrimaryDeck)
         : m_group(handleGroup),
           m_pEffectsManager(pEffectsManager),
           m_vuMeter(getGroup()),
@@ -43,7 +43,7 @@ EngineChannel::EngineChannel(const ChannelHandleAndGroup& handleGroup,
     }
 }
 
-void EngineChannel::setPfl(bool enabled) {
+void EngineChannel::setPfl(const bool enabled) {
     m_PFL.set(enabled ? 1.0 : 0.0);
 }
 
@@ -51,7 +51,7 @@ bool EngineChannel::isPflEnabled() const {
     return m_PFL.toBool();
 }
 
-void EngineChannel::setMaster(bool enabled) {
+void EngineChannel::setMaster(const bool enabled) {
     m_master.set(enabled ? 1.0 : 0.0);
 }
 
@@ -59,7 +59,7 @@ bool EngineChannel::isMasterEnabled() const {
     return m_master.toBool();
 }
 
-void EngineChannel::setTalkover(bool enabled) {
+void EngineChannel::setTalkover(const bool enabled) {
     m_talkover.set(enabled ? 1.0 : 0.0);
 }
 
@@ -67,19 +67,19 @@ bool EngineChannel::isTalkoverEnabled() const {
     return m_talkover.toBool();
 }
 
-void EngineChannel::slotOrientationLeft(double v) {
+void EngineChannel::slotOrientationLeft(const double v) {
     if (v > 0) {
         m_orientation.set(LEFT);
     }
 }
 
-void EngineChannel::slotOrientationRight(double v) {
+void EngineChannel::slotOrientationRight(const double v) {
     if (v > 0) {
         m_orientation.set(RIGHT);
     }
 }
 
-void EngineChannel::slotOrientationCenter(double v) {
+void EngineChannel::slotOrientationCenter(const double v) {
     if (v > 0) {
         m_orientation.set(CENTER);
     }
