@@ -273,8 +273,6 @@ class EngineBuffer : public EngineObject {
     const QString m_group;
     int m_channelIndex;
 
-    UserSettingsPointer m_pConfig;
-
     friend class CueControlTest;
     friend class HotcueControlTest;
     friend class LoopingControlTest;

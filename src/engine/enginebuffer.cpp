@@ -97,7 +97,6 @@ EngineBuffer::EngineBuffer(const QString& group,
         EngineChannel* pChannel,
         EngineMaster* pMixingEngine)
         : m_group(group),
-          m_pConfig(pConfig),
           m_pLoopingControl(nullptr),
           m_pSyncControl(nullptr),
           m_pVinylControlControl(nullptr),
