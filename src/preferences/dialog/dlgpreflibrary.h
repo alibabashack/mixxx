@@ -26,7 +26,7 @@ class DlgPrefLibrary : public DlgPreferencePage, public Ui::DlgPrefLibraryDlg  {
             std::shared_ptr<Library> pLibrary);
     ~DlgPrefLibrary() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   public slots:
     // Common preference page slots.

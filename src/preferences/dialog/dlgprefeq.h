@@ -19,9 +19,9 @@ class DlgPrefEQ : public DlgPreferencePage, public Ui::DlgPrefEQDlg  {
             UserSettingsPointer _config);
     ~DlgPrefEQ() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
-    QString getEQEffectGroupForDeck(int deck) const;
+    [[nodiscard]] QString getEQEffectGroupForDeck(int deck) const;
 
   public slots:
     // Apply changes to widget

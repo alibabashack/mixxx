@@ -42,19 +42,19 @@ class JsonWebResponse final {
     JsonWebResponse& operator=(const JsonWebResponse&) = default;
     JsonWebResponse& operator=(JsonWebResponse&&) = default;
 
-    bool isStatusCodeSuccess() const {
+    [[nodiscard]] bool isStatusCodeSuccess() const {
         return m_response.isStatusCodeSuccess();
     }
 
-    HttpStatusCode statusCode() const {
+    [[nodiscard]] HttpStatusCode statusCode() const {
         return m_response.statusCode();
     }
 
-    const QUrl& replyUrl() const {
+    [[nodiscard]] const QUrl& replyUrl() const {
         return m_response.replyUrl();
     }
 
-    const QJsonDocument& content() const {
+    [[nodiscard]] const QJsonDocument& content() const {
         return m_content;
     }
 

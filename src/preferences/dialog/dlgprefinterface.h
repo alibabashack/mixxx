@@ -59,8 +59,8 @@ class DlgPrefInterface : public DlgPreferencePage, public Ui::DlgPrefControlsDlg
     // box using the user data, not the index.  Returns the index of the item
     // that has the corresponding userData. If the userdata is not in the list,
     // returns zero.
-    int cueDefaultIndexByData(int userData) const;
-    QScreen* getScreen() const;
+    [[nodiscard]] int cueDefaultIndexByData(int userData) const;
+    [[nodiscard]] QScreen* getScreen() const;
 
     UserSettingsPointer m_pConfig;
     ControlObject* m_pControlTrackTimeDisplay;

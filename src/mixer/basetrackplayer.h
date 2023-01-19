@@ -36,7 +36,7 @@ class BaseTrackPlayer : public BasePlayer {
     BaseTrackPlayer(PlayerManager* pParent, const QString& group);
     ~BaseTrackPlayer() override = default;
 
-    virtual TrackPointer getLoadedTrack() const = 0;
+    [[nodiscard]] virtual TrackPointer getLoadedTrack() const = 0;
     virtual void setupEqControls() = 0;
 
   public slots:
@@ -67,11 +67,11 @@ class BaseTrackPlayerImpl : public BaseTrackPlayer {
             bool primaryDeck);
     ~BaseTrackPlayerImpl() override;
 
-    TrackPointer getLoadedTrack() const final;
+    [[nodiscard]] TrackPointer getLoadedTrack() const final;
 
     // TODO(XXX): Only exposed to let the passthrough AudioInput get
     // connected. Delete me when EngineMaster supports AudioInput assigning.
-    EngineDeck* getEngineDeck() const;
+    [[nodiscard]] EngineDeck* getEngineDeck() const;
 
     void setupEqControls() final;
 

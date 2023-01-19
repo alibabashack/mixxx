@@ -16,7 +16,7 @@ class DlgPrefBeats : public DlgPreferencePage, public Ui::DlgBeatsDlg {
     DlgPrefBeats(QWidget *parent, UserSettingsPointer _config);
     ~DlgPrefBeats() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   public slots:
     // Apply changes to widget

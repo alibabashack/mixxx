@@ -20,7 +20,7 @@ class DlgPrefBroadcast : public DlgPreferencePage, public Ui::DlgPrefBroadcastDl
                      BroadcastSettingsPointer pBroadcastSettings);
     ~DlgPrefBroadcast() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   public slots:
     /** Apply changes to widget */

@@ -21,8 +21,8 @@ class DlgPrefSoundItem : public QWidget, public Ui::DlgPrefSoundItem {
             bool isInput, unsigned int index = 0);
     ~DlgPrefSoundItem() override;
 
-    AudioPathType type() const { return m_type; };
-    unsigned int index() const { return m_index; };
+    [[nodiscard]] AudioPathType type() const { return m_type; };
+    [[nodiscard]] unsigned int index() const { return m_index; };
 
   signals:
     void settingChanged();
@@ -37,10 +37,10 @@ class DlgPrefSoundItem : public QWidget, public Ui::DlgPrefSoundItem {
     void reload();
 
   private:
-    SoundDevicePointer getDevice() const; // if this returns NULL, we don't have a valid AudioPath
+    [[nodiscard]] SoundDevicePointer getDevice() const; // if this returns NULL, we don't have a valid AudioPath
     void setDevice(const SoundDeviceId& device);
     void setChannel(unsigned int channelBase, unsigned int channels);
-    int hasSufficientChannels(const SoundDevice& device) const;
+    [[nodiscard]] int hasSufficientChannels(const SoundDevice& device) const;
     bool eventFilter(QObject* object, QEvent* event) override;
 
     AudioPathType m_type;

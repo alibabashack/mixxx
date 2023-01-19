@@ -22,7 +22,7 @@ class DlgPrefVinyl : public DlgPreferencePage, Ui::DlgPrefVinylDlg  {
             UserSettingsPointer _config);
     ~DlgPrefVinyl() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   public slots:
     void slotUpdate() override;
@@ -49,7 +49,7 @@ class DlgPrefVinyl : public DlgPreferencePage, Ui::DlgPrefVinylDlg  {
     void setDeck3WidgetsVisible(bool visible);
     void setDeck4WidgetsVisible(bool visible);
     void verifyAndSaveLeadInTime(QSpinBox* widget, const QString& group, const QString& vinyl_type);
-    int getDefaultLeadIn(const QString& vinyl_type) const;
+    [[nodiscard]] int getDefaultLeadIn(const QString& vinyl_type) const;
 
     QList<VinylControlSignalWidget*> m_signalWidgets;
 

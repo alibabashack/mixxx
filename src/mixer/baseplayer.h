@@ -11,7 +11,7 @@ class BasePlayer : public QObject {
     BasePlayer(PlayerManager* pParent, const QString& group);
     ~BasePlayer() override = default;
 
-    inline const QString& getGroup() const {
+    [[nodiscard]] inline const QString& getGroup() const {
         return m_group;
     }
 

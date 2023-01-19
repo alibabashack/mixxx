@@ -34,7 +34,7 @@ class DlgPrefSound : public DlgPreferencePage, public Ui::DlgPrefSoundDlg  {
             UserSettingsPointer pSettings);
     ~DlgPrefSound() override;
 
-    QUrl helpUrl() const override;
+    [[nodiscard]] QUrl helpUrl() const override;
 
   signals:
     void loadPaths(const SoundManagerConfig &config);

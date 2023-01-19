@@ -35,24 +35,24 @@ class PlayerManagerInterface {
   public:
     virtual ~PlayerManagerInterface() = default;
 
-    virtual BaseTrackPlayer* getPlayer(const QString& group) const = 0;
-    virtual BaseTrackPlayer* getPlayer(const ChannelHandle& channelHandle) const = 0;
+    [[nodiscard]] virtual BaseTrackPlayer* getPlayer(const QString& group) const = 0;
+    [[nodiscard]] virtual BaseTrackPlayer* getPlayer(const ChannelHandle& channelHandle) const = 0;
 
     // Get the deck by its deck number. Decks are numbered starting with 1.
-    virtual Deck* getDeck(unsigned int player) const = 0;
+    [[nodiscard]] virtual Deck* getDeck(unsigned int player) const = 0;
 
-    virtual unsigned int numberOfDecks() const = 0;
+    [[nodiscard]] virtual unsigned int numberOfDecks() const = 0;
 
     // Get the preview deck by its deck number. Preview decks are numbered
     // starting with 1.
-    virtual PreviewDeck* getPreviewDeck(unsigned int libPreviewPlayer) const = 0;
+    [[nodiscard]] virtual PreviewDeck* getPreviewDeck(unsigned int libPreviewPlayer) const = 0;
 
-    virtual unsigned int numberOfPreviewDecks() const = 0;
+    [[nodiscard]] virtual unsigned int numberOfPreviewDecks() const = 0;
 
     // Get the sampler by its number. Samplers are numbered starting with 1.
-    virtual Sampler* getSampler(unsigned int sampler) const = 0;
+    [[nodiscard]] virtual Sampler* getSampler(unsigned int sampler) const = 0;
 
-    virtual unsigned int numberOfSamplers() const = 0;
+    [[nodiscard]] virtual unsigned int numberOfSamplers() const = 0;
 };
 
 class PlayerManager : public QObject, public PlayerManagerInterface {

@@ -36,19 +36,19 @@ class WebResponse final {
     WebResponse& operator=(const WebResponse&) = default;
     WebResponse& operator=(WebResponse&&) = default;
 
-    bool isStatusCodeSuccess() const {
+    [[nodiscard]] bool isStatusCodeSuccess() const {
         return HttpStatusCode_isSuccess(m_statusCode);
     }
 
-    const QUrl& requestUrl() const {
+    [[nodiscard]] const QUrl& requestUrl() const {
         return m_requestUrl;
     }
 
-    const QUrl& replyUrl() const {
+    [[nodiscard]] const QUrl& replyUrl() const {
         return m_replyUrl;
     }
 
-    HttpStatusCode statusCode() const {
+    [[nodiscard]] HttpStatusCode statusCode() const {
         return m_statusCode;
     }
 
@@ -79,27 +79,27 @@ class WebResponseWithContent final {
     WebResponseWithContent& operator=(const WebResponseWithContent&) = default;
     WebResponseWithContent& operator=(WebResponseWithContent&&) = default;
 
-    bool isStatusCodeSuccess() const {
+    [[nodiscard]] bool isStatusCodeSuccess() const {
         return m_response.isStatusCodeSuccess();
     }
 
-    HttpStatusCode statusCode() const {
+    [[nodiscard]] HttpStatusCode statusCode() const {
         return m_response.statusCode();
     }
 
-    const QUrl& requestUrl() const {
+    [[nodiscard]] const QUrl& requestUrl() const {
         return m_response.requestUrl();
     }
 
-    const QUrl& replyUrl() const {
+    [[nodiscard]] const QUrl& replyUrl() const {
         return m_response.replyUrl();
     }
 
-    const QMimeType& contentType() const {
+    [[nodiscard]] const QMimeType& contentType() const {
         return m_contentType;
     }
 
-    const QByteArray& contentData() const {
+    [[nodiscard]] const QByteArray& contentData() const {
         return m_contentData;
     }
 
@@ -127,7 +127,7 @@ class WebTask : public NetworkTask {
             QObject* parent = nullptr);
     ~WebTask() override = default;
 
-    bool isBusy() const {
+    [[nodiscard]] bool isBusy() const {
         return state() == State::Starting ||
                 state() == State::Pending;
     }
@@ -165,11 +165,11 @@ class WebTask : public NetworkTask {
         Finished,
     };
 
-    State state() const {
+    [[nodiscard]] State state() const {
         return m_state;
     }
 
-    bool hasTerminated() const {
+    [[nodiscard]] bool hasTerminated() const {
         return state() == State::Aborted ||
                 state() == State::TimedOut ||
                 state() == State::Failed ||

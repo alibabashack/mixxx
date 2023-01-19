@@ -101,7 +101,7 @@ class DlgPrefDeck : public DlgPreferencePage, public Ui::DlgPrefDeckDlg  {
     // box using the user data, not the index.  Returns the index of the item
     // that has the corresponding userData. If the userdata is not in the list,
     // returns zero.
-    int cueDefaultIndexByData(int userData) const;
+    [[nodiscard]] int cueDefaultIndexByData(int userData) const;
 
     void setRateRangeForAllDecks(int rangePercent);
     void setRateDirectionForAllDecks(bool inverted);
