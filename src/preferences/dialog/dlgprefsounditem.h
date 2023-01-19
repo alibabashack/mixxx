@@ -40,7 +40,7 @@ class DlgPrefSoundItem : public QWidget, public Ui::DlgPrefSoundItem {
     [[nodiscard]] SoundDevicePointer getDevice() const; // if this returns NULL, we don't have a valid AudioPath
     void setDevice(const SoundDeviceId& device);
     void setChannel(unsigned int channelBase, unsigned int channels);
-    [[nodiscard]] int hasSufficientChannels(const SoundDevice& device) const;
+    [[nodiscard]] bool hasSufficientChannels(const SoundDevice& device) const;
     bool eventFilter(QObject* object, QEvent* event) override;
 
     AudioPathType m_type;

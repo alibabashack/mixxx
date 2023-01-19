@@ -303,7 +303,7 @@ void DlgPrefSoundItem::setChannel(unsigned int channelBase,
 /**
  * Checks that a given device can act as a source/input for our type.
  */
-int DlgPrefSoundItem::hasSufficientChannels(const SoundDevice& device) const {
+bool DlgPrefSoundItem::hasSufficientChannels(const SoundDevice& device) const {
     unsigned char needed(AudioPath::minChannelsForType(m_type));
 
     if (m_isInput) {
