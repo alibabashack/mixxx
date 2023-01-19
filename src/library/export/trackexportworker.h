@@ -44,7 +44,7 @@ class TrackExportWorker : public QThread {
 
     // Calling classes can call errorMessage after a failure for a user-friendly
     // message about what happened.
-    QString errorMessage() const {
+    [[nodiscard]] QString errorMessage() const {
         return m_errorMessage;
     }
 

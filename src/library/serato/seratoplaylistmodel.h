@@ -12,7 +12,7 @@ class SeratoPlaylistModel : public BaseExternalPlaylistModel {
     SeratoPlaylistModel(QObject* parent,
             TrackCollectionManager* pTrackCollectionManager,
             QSharedPointer<BaseTrackCache> trackSource);
-    TrackPointer getTrack(const QModelIndex& index) const override;
+    [[nodiscard]] TrackPointer getTrack(const QModelIndex& index) const override;
     bool isColumnHiddenByDefault(int column) override;
 
   protected:

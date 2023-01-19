@@ -132,9 +132,9 @@ public:
         rekordbox_anlz_t::song_structure_entry_t* m__parent;
 
     public:
-        phrase_up_down_id_t id() const { return m_id; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::song_structure_entry_t* _parent() const { return m__parent; }
+        [[nodiscard]] phrase_up_down_id_t id() const { return m_id; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::song_structure_entry_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -167,10 +167,10 @@ public:
         rekordbox_anlz_t::tagged_section_t* m__parent;
 
     public:
-        uint32_t len_path() const { return m_len_path; }
-        std::string path() const { return m_path; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t len_path() const { return m_len_path; }
+        [[nodiscard]] std::string path() const { return m_path; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -210,15 +210,15 @@ public:
          * slightly redundant because it can be computed from the
          * length of the tag.
          */
-        uint32_t len_preview() const { return m_len_preview; }
-        uint32_t _unnamed1() const { return m__unnamed1; }
+        [[nodiscard]] uint32_t len_preview() const { return m_len_preview; }
+        [[nodiscard]] uint32_t _unnamed1() const { return m__unnamed1; }
 
         /**
          * The actual bytes of the waveform preview.
          */
-        std::string data() const { return m_data; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::string data() const { return m_data; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -248,20 +248,20 @@ public:
         rekordbox_anlz_t::tagged_section_t* m__parent;
 
     public:
-        uint32_t _unnamed0() const { return m__unnamed0; }
-        uint32_t _unnamed1() const { return m__unnamed1; }
+        [[nodiscard]] uint32_t _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] uint32_t _unnamed1() const { return m__unnamed1; }
 
         /**
          * The number of beat entries which follow.
          */
-        uint32_t len_beats() const { return m_len_beats; }
+        [[nodiscard]] uint32_t len_beats() const { return m_len_beats; }
 
         /**
          * The entries of the beat grid.
          */
-        std::vector<beat_grid_beat_t*>* beats() const { return m_beats; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::vector<beat_grid_beat_t*>* beats() const { return m_beats; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -295,17 +295,17 @@ public:
         /**
          * The size of each entry, in bytes. Seems to always be 6.
          */
-        uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
+        [[nodiscard]] uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
 
         /**
          * The number of waveform data points, each of which takes one
          * byte for each of six channels of information.
          */
-        uint32_t len_entries() const { return m_len_entries; }
-        uint32_t _unnamed2() const { return m__unnamed2; }
-        std::string entries() const { return m_entries; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t len_entries() const { return m_len_entries; }
+        [[nodiscard]] uint32_t _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] std::string entries() const { return m_entries; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -338,17 +338,17 @@ public:
         /**
          * The size of each entry, in bytes. Seems to always be 1.
          */
-        uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
+        [[nodiscard]] uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
 
         /**
          * The number of waveform data points, each of which takes one
          * byte.
          */
-        uint32_t len_entries() const { return m_len_entries; }
-        uint32_t _unnamed2() const { return m__unnamed2; }
-        std::string entries() const { return m_entries; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t len_entries() const { return m_len_entries; }
+        [[nodiscard]] uint32_t _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] std::string entries() const { return m_entries; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     class phrase_verse_bridge_t : public kaitai::kstruct {
@@ -369,9 +369,9 @@ public:
         rekordbox_anlz_t::song_structure_entry_t* m__parent;
 
     public:
-        phrase_verse_bridge_id_t id() const { return m_id; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::song_structure_entry_t* _parent() const { return m__parent; }
+        [[nodiscard]] phrase_verse_bridge_id_t id() const { return m_id; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::song_structure_entry_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -407,12 +407,12 @@ public:
         /**
          * The size of each entry, in bytes. Seems to always be 24.
          */
-        uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
+        [[nodiscard]] uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
 
         /**
          * The number of phrases.
          */
-        uint16_t len_entries() const { return m_len_entries; }
+        [[nodiscard]] uint16_t len_entries() const { return m_len_entries; }
 
         /**
          * The phrase style. 1 is the up-down style
@@ -423,19 +423,19 @@ public:
          * bridge-verse style except verses 1-3 are labeled VERSE1 and verses
          * 4-6 are labeled VERSE2 in rekordbox.
          */
-        uint16_t style() const { return m_style; }
-        std::string _unnamed3() const { return m__unnamed3; }
+        [[nodiscard]] uint16_t style() const { return m_style; }
+        [[nodiscard]] std::string _unnamed3() const { return m__unnamed3; }
 
         /**
          * The beat number at which the last phrase ends. The track may
          * continue after the last phrase ends. If this is the case, it will
          * mostly be silence.
          */
-        uint16_t end_beat() const { return m_end_beat; }
-        std::string _unnamed5() const { return m__unnamed5; }
-        std::vector<song_structure_entry_t*>* entries() const { return m_entries; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t end_beat() const { return m_end_beat; }
+        [[nodiscard]] std::string _unnamed5() const { return m__unnamed5; }
+        [[nodiscard]] std::vector<song_structure_entry_t*>* entries() const { return m_entries; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -519,69 +519,69 @@ public:
         rekordbox_anlz_t::cue_extended_tag_t* m__parent;
 
     public:
-        std::string _unnamed0() const { return m__unnamed0; }
-        uint32_t len_header() const { return m_len_header; }
-        uint32_t len_entry() const { return m_len_entry; }
+        [[nodiscard]] std::string _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] uint32_t len_header() const { return m_len_header; }
+        [[nodiscard]] uint32_t len_entry() const { return m_len_entry; }
 
         /**
          * If zero, this is an ordinary memory cue, otherwise this a
          * hot cue with the specified number.
          */
-        uint32_t hot_cue() const { return m_hot_cue; }
+        [[nodiscard]] uint32_t hot_cue() const { return m_hot_cue; }
 
         /**
          * Indicates whether this is a memory cue or a loop.
          */
-        cue_entry_type_t type() const { return m_type; }
-        std::string _unnamed5() const { return m__unnamed5; }
+        [[nodiscard]] cue_entry_type_t type() const { return m_type; }
+        [[nodiscard]] std::string _unnamed5() const { return m__unnamed5; }
 
         /**
          * The position, in milliseconds, at which the cue point lies
          * in the track.
          */
-        uint32_t time() const { return m_time; }
+        [[nodiscard]] uint32_t time() const { return m_time; }
 
         /**
          * The position, in milliseconds, at which the player loops
          * back to the cue time if this is a loop.
          */
-        uint32_t loop_time() const { return m_loop_time; }
+        [[nodiscard]] uint32_t loop_time() const { return m_loop_time; }
 
         /**
          * References a row in the colors table if the memory cue or loop
          * has been assigned a color
          */
-        uint8_t color_id() const { return m_color_id; }
-        std::string _unnamed9() const { return m__unnamed9; }
-        uint32_t len_comment() const { return m_len_comment; }
+        [[nodiscard]] uint8_t color_id() const { return m_color_id; }
+        [[nodiscard]] std::string _unnamed9() const { return m__unnamed9; }
+        [[nodiscard]] uint32_t len_comment() const { return m_len_comment; }
 
         /**
          * The comment assigned to this cue by the DJ, if any, with a trailing NUL.
          */
-        std::string comment() const { return m_comment; }
+        [[nodiscard]] std::string comment() const { return m_comment; }
 
         /**
          * A lookup value for a color table? We use this to index to the colors shown in rekordbox.
          */
-        uint8_t color_code() const { return m_color_code; }
+        [[nodiscard]] uint8_t color_code() const { return m_color_code; }
 
         /**
          * The red component of the color to be displayed.
          */
-        uint8_t color_red() const { return m_color_red; }
+        [[nodiscard]] uint8_t color_red() const { return m_color_red; }
 
         /**
          * The green component of the color to be displayed.
          */
-        uint8_t color_green() const { return m_color_green; }
+        [[nodiscard]] uint8_t color_green() const { return m_color_green; }
 
         /**
          * The blue component of the color to be displayed.
          */
-        uint8_t color_blue() const { return m_color_blue; }
-        std::string _unnamed16() const { return m__unnamed16; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::cue_extended_tag_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint8_t color_blue() const { return m_color_blue; }
+        [[nodiscard]] std::string _unnamed16() const { return m__unnamed16; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::cue_extended_tag_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -608,10 +608,10 @@ public:
         rekordbox_anlz_t::tagged_section_t* m__parent;
 
     public:
-        uint32_t _unnamed0() const { return m__unnamed0; }
-        std::vector<uint32_t>* index() const { return m_index; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] std::vector<uint32_t>* index() const { return m_index; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -645,30 +645,30 @@ public:
         /**
          * The absolute number of the phrase, starting at one.
          */
-        uint16_t phrase_number() const { return m_phrase_number; }
+        [[nodiscard]] uint16_t phrase_number() const { return m_phrase_number; }
 
         /**
          * The beat number at which the phrase starts.
          */
-        uint16_t beat_number() const { return m_beat_number; }
+        [[nodiscard]] uint16_t beat_number() const { return m_beat_number; }
 
         /**
          * Identifier of the phrase label.
          */
-        kaitai::kstruct* phrase_id() const { return m_phrase_id; }
-        std::string _unnamed3() const { return m__unnamed3; }
+        [[nodiscard]] kaitai::kstruct* phrase_id() const { return m_phrase_id; }
+        [[nodiscard]] std::string _unnamed3() const { return m__unnamed3; }
 
         /**
          * If nonzero, fill-in is present.
          */
-        uint8_t fill_in() const { return m_fill_in; }
+        [[nodiscard]] uint8_t fill_in() const { return m_fill_in; }
 
         /**
          * The beat number at which fill-in starts.
          */
-        uint16_t fill_in_beat_number() const { return m_fill_in_beat_number; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::song_structure_tag_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t fill_in_beat_number() const { return m_fill_in_beat_number; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::song_structure_tag_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -705,52 +705,52 @@ public:
         rekordbox_anlz_t::cue_tag_t* m__parent;
 
     public:
-        std::string _unnamed0() const { return m__unnamed0; }
-        uint32_t len_header() const { return m_len_header; }
-        uint32_t len_entry() const { return m_len_entry; }
+        [[nodiscard]] std::string _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] uint32_t len_header() const { return m_len_header; }
+        [[nodiscard]] uint32_t len_entry() const { return m_len_entry; }
 
         /**
          * If zero, this is an ordinary memory cue, otherwise this a
          * hot cue with the specified number.
          */
-        uint32_t hot_cue() const { return m_hot_cue; }
+        [[nodiscard]] uint32_t hot_cue() const { return m_hot_cue; }
 
         /**
          * If zero, this entry should be ignored.
          */
-        cue_entry_status_t status() const { return m_status; }
-        uint32_t _unnamed5() const { return m__unnamed5; }
+        [[nodiscard]] cue_entry_status_t status() const { return m_status; }
+        [[nodiscard]] uint32_t _unnamed5() const { return m__unnamed5; }
 
         /**
          * @flesniak says: "0xffff for first cue, 0,1,3 for next"
          */
-        uint16_t order_first() const { return m_order_first; }
+        [[nodiscard]] uint16_t order_first() const { return m_order_first; }
 
         /**
          * @flesniak says: "1,2,3 for first, second, third cue, 0xffff for last"
          */
-        uint16_t order_last() const { return m_order_last; }
+        [[nodiscard]] uint16_t order_last() const { return m_order_last; }
 
         /**
          * Indicates whether this is a memory cue or a loop.
          */
-        cue_entry_type_t type() const { return m_type; }
-        std::string _unnamed9() const { return m__unnamed9; }
+        [[nodiscard]] cue_entry_type_t type() const { return m_type; }
+        [[nodiscard]] std::string _unnamed9() const { return m__unnamed9; }
 
         /**
          * The position, in milliseconds, at which the cue point lies
          * in the track.
          */
-        uint32_t time() const { return m_time; }
+        [[nodiscard]] uint32_t time() const { return m_time; }
 
         /**
          * The position, in milliseconds, at which the player loops
          * back to the cue time if this is a loop.
          */
-        uint32_t loop_time() const { return m_loop_time; }
-        std::string _unnamed12() const { return m__unnamed12; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::cue_tag_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t loop_time() const { return m_loop_time; }
+        [[nodiscard]] std::string _unnamed12() const { return m__unnamed12; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::cue_tag_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -782,21 +782,21 @@ public:
          * The position of the beat within its musical bar, where beat 1
          * is the down beat.
          */
-        uint16_t beat_number() const { return m_beat_number; }
+        [[nodiscard]] uint16_t beat_number() const { return m_beat_number; }
 
         /**
          * The tempo at the time of this beat, in beats per minute,
          * multiplied by 100.
          */
-        uint16_t tempo() const { return m_tempo; }
+        [[nodiscard]] uint16_t tempo() const { return m_tempo; }
 
         /**
          * The time, in milliseconds, at which this beat occurs when
          * the track is played at normal (100%) pitch.
          */
-        uint32_t time() const { return m_time; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::beat_grid_tag_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t time() const { return m_time; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::beat_grid_tag_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -831,16 +831,16 @@ public:
         /**
          * Identifies whether this tag stores ordinary or hot cues.
          */
-        cue_list_type_t type() const { return m_type; }
+        [[nodiscard]] cue_list_type_t type() const { return m_type; }
 
         /**
          * The length of the cue comment list.
          */
-        uint16_t len_cues() const { return m_len_cues; }
-        std::string _unnamed2() const { return m__unnamed2; }
-        std::vector<cue_extended_entry_t*>* cues() const { return m_cues; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t len_cues() const { return m_len_cues; }
+        [[nodiscard]] std::string _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] std::vector<cue_extended_entry_t*>* cues() const { return m_cues; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     class unknown_tag_t : public kaitai::kstruct {
@@ -860,8 +860,8 @@ public:
         rekordbox_anlz_t::tagged_section_t* m__parent;
 
     public:
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -897,22 +897,22 @@ public:
         /**
          * A tag value indicating what kind of section this is.
          */
-        int32_t fourcc() const { return m_fourcc; }
+        [[nodiscard]] int32_t fourcc() const { return m_fourcc; }
 
         /**
          * The size, in bytes, of the header portion of the tag.
          */
-        uint32_t len_header() const { return m_len_header; }
+        [[nodiscard]] uint32_t len_header() const { return m_len_header; }
 
         /**
          * The size, in bytes, of this entire tag, counting the header.
          */
-        uint32_t len_tag() const { return m_len_tag; }
-        kaitai::kstruct* body() const { return m_body; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t* _parent() const { return m__parent; }
-        std::string _raw_body() const { return m__raw_body; }
-        kaitai::kstream* _io__raw_body() const { return m__io__raw_body; }
+        [[nodiscard]] uint32_t len_tag() const { return m_len_tag; }
+        [[nodiscard]] kaitai::kstruct* body() const { return m_body; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::string _raw_body() const { return m__raw_body; }
+        [[nodiscard]] kaitai::kstream* _io__raw_body() const { return m__io__raw_body; }
     };
 
     /**
@@ -946,17 +946,17 @@ public:
         /**
          * The size of each entry, in bytes. Seems to always be 2.
          */
-        uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
+        [[nodiscard]] uint32_t len_entry_bytes() const { return m_len_entry_bytes; }
 
         /**
          * The number of columns of waveform data (this matches the
          * non-color waveform length.
          */
-        uint32_t len_entries() const { return m_len_entries; }
-        uint32_t _unnamed2() const { return m__unnamed2; }
-        std::string entries() const { return m_entries; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t len_entries() const { return m_len_entries; }
+        [[nodiscard]] uint32_t _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] std::string entries() const { return m_entries; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -990,21 +990,21 @@ public:
         /**
          * Identifies whether this tag stores ordinary or hot cues.
          */
-        cue_list_type_t type() const { return m_type; }
-        std::string _unnamed1() const { return m__unnamed1; }
+        [[nodiscard]] cue_list_type_t type() const { return m_type; }
+        [[nodiscard]] std::string _unnamed1() const { return m__unnamed1; }
 
         /**
          * The length of the cue list.
          */
-        uint16_t len_cues() const { return m_len_cues; }
+        [[nodiscard]] uint16_t len_cues() const { return m_len_cues; }
 
         /**
          * Unsure what this means.
          */
-        uint32_t memory_count() const { return m_memory_count; }
-        std::vector<cue_entry_t*>* cues() const { return m_cues; }
-        rekordbox_anlz_t* _root() const { return m__root; }
-        rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t memory_count() const { return m_memory_count; }
+        [[nodiscard]] std::vector<cue_entry_t*>* cues() const { return m_cues; }
+        [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_anlz_t::tagged_section_t* _parent() const { return m__parent; }
     };
 
 private:
@@ -1017,24 +1017,24 @@ private:
     kaitai::kstruct* m__parent;
 
 public:
-    std::string _unnamed0() const { return m__unnamed0; }
+    [[nodiscard]] std::string _unnamed0() const { return m__unnamed0; }
 
     /**
      * The number of bytes of this header section.
      */
-    uint32_t len_header() const { return m_len_header; }
+    [[nodiscard]] uint32_t len_header() const { return m_len_header; }
 
     /**
      * The number of bytes in the entire file.
      */
-    uint32_t len_file() const { return m_len_file; }
-    std::string _unnamed3() const { return m__unnamed3; }
+    [[nodiscard]] uint32_t len_file() const { return m_len_file; }
+    [[nodiscard]] std::string _unnamed3() const { return m__unnamed3; }
 
     /**
      * The remainder of the file is a sequence of type-tagged sections,
      * identified by a four-byte magic sequence.
      */
-    std::vector<tagged_section_t*>* sections() const { return m_sections; }
-    rekordbox_anlz_t* _root() const { return m__root; }
-    kaitai::kstruct* _parent() const { return m__parent; }
+    [[nodiscard]] std::vector<tagged_section_t*>* sections() const { return m_sections; }
+    [[nodiscard]] rekordbox_anlz_t* _root() const { return m__root; }
+    [[nodiscard]] kaitai::kstruct* _parent() const { return m__parent; }
 };

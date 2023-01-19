@@ -44,7 +44,7 @@ class SetlogFeature : public BasePlaylistFeature {
   private:
     void deleteAllUnlockedPlaylistsWithFewerTracks();
     void reloadChildModel(int playlistId);
-    QString getRootViewHtml() const override;
+    [[nodiscard]] QString getRootViewHtml() const override;
 
     std::list<TrackId> m_recentTracks;
     QAction* m_pJoinWithPreviousAction;

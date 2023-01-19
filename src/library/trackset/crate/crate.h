@@ -12,14 +12,14 @@ class Crate : public DbNamedEntity<CrateId> {
     }
     ~Crate() override = default;
 
-    bool isLocked() const {
+    [[nodiscard]] bool isLocked() const {
         return m_locked;
     }
     void setLocked(bool locked = true) {
         m_locked = locked;
     }
 
-    bool isAutoDjSource() const {
+    [[nodiscard]] bool isAutoDjSource() const {
         return m_autoDjSource;
     }
     void setAutoDjSource(bool autoDjSource = true) {

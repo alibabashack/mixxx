@@ -12,7 +12,7 @@ class CrateTableModel final : public TrackSetTableModel {
     ~CrateTableModel() final = default;
 
     void selectCrate(CrateId crateId = CrateId());
-    CrateId selectedCrate() const {
+    [[nodiscard]] CrateId selectedCrate() const {
         return m_selectedCrate;
     }
 
@@ -22,8 +22,8 @@ class CrateTableModel final : public TrackSetTableModel {
     /// Returns the number of unsuccessful additions.
     int addTracks(const QModelIndex& index, const QList<QString>& locations) final;
 
-    Capabilities getCapabilities() const final;
-    QString modelKey(bool noSearch) const override;
+    [[nodiscard]] Capabilities getCapabilities() const final;
+    [[nodiscard]] QString modelKey(bool noSearch) const override;
 
   private:
     CrateId m_selectedCrate;

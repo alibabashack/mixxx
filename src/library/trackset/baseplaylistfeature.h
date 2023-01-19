@@ -34,7 +34,7 @@ class BasePlaylistFeature : public BaseTrackSetFeature {
             const QString& iconName);
     ~BasePlaylistFeature() override = default;
 
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
 
     void bindLibraryWidget(WLibrary* libraryWidget,
             KeyboardEventFilter* keyboard) override;
@@ -120,7 +120,7 @@ class BasePlaylistFeature : public BaseTrackSetFeature {
 
   private:
     void initActions();
-    virtual QString getRootViewHtml() const = 0;
+    [[nodiscard]] virtual QString getRootViewHtml() const = 0;
     void markTreeItem(TreeItem* pTreeItem);
 
     TrackId m_selectedTrackId;

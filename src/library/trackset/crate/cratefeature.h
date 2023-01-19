@@ -39,7 +39,7 @@ class CrateFeature : public BaseTrackSetFeature {
             KeyboardEventFilter* keyboard) override;
     void bindSidebarWidget(WLibrarySidebar* pSidebarWidget) override;
 
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
 
   public slots:
     void activateChild(const QModelIndex& index) override;
@@ -89,12 +89,12 @@ class CrateFeature : public BaseTrackSetFeature {
     QModelIndex rebuildChildModel(CrateId selectedCrateId = CrateId());
     void updateChildModel(const QSet<CrateId>& updatedCrateIds);
 
-    CrateId crateIdFromIndex(const QModelIndex& index) const;
-    QModelIndex indexFromCrateId(CrateId crateId) const;
+    [[nodiscard]] CrateId crateIdFromIndex(const QModelIndex& index) const;
+    [[nodiscard]] QModelIndex indexFromCrateId(CrateId crateId) const;
 
     bool readLastRightClickedCrate(Crate* pCrate) const;
 
-    QString formatRootViewHtml() const;
+    [[nodiscard]] QString formatRootViewHtml() const;
 
     const QIcon m_lockedCrateIcon;
 

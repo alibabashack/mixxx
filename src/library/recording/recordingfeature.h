@@ -24,7 +24,7 @@ class RecordingFeature final : public LibraryFeature {
     void bindLibraryWidget(WLibrary* libraryWidget,
                     KeyboardEventFilter* keyboard) override;
 
-    TreeItemModel* sidebarModel() const override;
+    [[nodiscard]] TreeItemModel* sidebarModel() const override;
 
   public slots:
     void activate() override;

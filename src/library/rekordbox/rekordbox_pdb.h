@@ -136,10 +136,10 @@ public:
          * indicating another encoding with a longer length value to
          * follow.
          */
-        uint8_t length_and_kind() const { return m_length_and_kind; }
-        kaitai::kstruct* body() const { return m_body; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        kaitai::kstruct* _parent() const { return m__parent; }
+        [[nodiscard]] uint8_t length_and_kind() const { return m_length_and_kind; }
+        [[nodiscard]] kaitai::kstruct* body() const { return m_body; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] kaitai::kstruct* _parent() const { return m__parent; }
     };
 
     /**
@@ -183,32 +183,32 @@ public:
          * The ID of the `playlist_tree_row` in which this one can be
          * found, or `0` if this playlist exists at the root level.
          */
-        uint32_t parent_id() const { return m_parent_id; }
-        std::string _unnamed1() const { return m__unnamed1; }
+        [[nodiscard]] uint32_t parent_id() const { return m_parent_id; }
+        [[nodiscard]] std::string _unnamed1() const { return m__unnamed1; }
 
         /**
          * The order in which the entries of this playlist are sorted.
          */
-        uint32_t sort_order() const { return m_sort_order; }
+        [[nodiscard]] uint32_t sort_order() const { return m_sort_order; }
 
         /**
          * The unique identifier by which this playlist or folder can
          * be requested and linked from other rows.
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * Has a non-zero value if this is actually a folder rather
          * than a playlist.
          */
-        uint32_t raw_is_folder() const { return m_raw_is_folder; }
+        [[nodiscard]] uint32_t raw_is_folder() const { return m_raw_is_folder; }
 
         /**
          * The variable-length string naming the playlist.
          */
-        device_sql_string_t* name() const { return m_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* name() const { return m_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -236,21 +236,21 @@ public:
         rekordbox_pdb_t::row_ref_t* m__parent;
 
     public:
-        std::string _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] std::string _unnamed0() const { return m__unnamed0; }
 
         /**
          * The unique identifier by which this color can be requested
          * and linked from other rows (such as tracks).
          */
-        uint16_t id() const { return m_id; }
-        uint8_t _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] uint16_t id() const { return m_id; }
+        [[nodiscard]] uint8_t _unnamed2() const { return m__unnamed2; }
 
         /**
          * The variable-length string naming the color.
          */
-        device_sql_string_t* name() const { return m_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* name() const { return m_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -297,15 +297,15 @@ public:
         /**
          * The content of the string.
          */
-        std::string text() const { return m_text; }
+        [[nodiscard]] std::string text() const { return m_text; }
 
         /**
          * Contains the actual length, incremented, doubled, and
          * incremented again. Go figure.
          */
-        uint8_t mangled_length() const { return m_mangled_length; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint8_t mangled_length() const { return m_mangled_length; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -352,38 +352,38 @@ public:
         /**
          * Some kind of magic word? Usually 0x80, 0x00.
          */
-        uint16_t _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] uint16_t _unnamed0() const { return m__unnamed0; }
 
         /**
          * TODO name from @flesniak, but what does it mean?
          */
-        uint16_t index_shift() const { return m_index_shift; }
-        uint32_t _unnamed2() const { return m__unnamed2; }
+        [[nodiscard]] uint16_t index_shift() const { return m_index_shift; }
+        [[nodiscard]] uint32_t _unnamed2() const { return m__unnamed2; }
 
         /**
          * Identifies the artist associated with the album.
          */
-        uint32_t artist_id() const { return m_artist_id; }
+        [[nodiscard]] uint32_t artist_id() const { return m_artist_id; }
 
         /**
          * The unique identifier by which this album can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
-        uint32_t _unnamed5() const { return m__unnamed5; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t _unnamed5() const { return m__unnamed5; }
 
         /**
          * @flesniak says: "alwayx 0x03, maybe an unindexed empty string"
          */
-        uint8_t _unnamed6() const { return m__unnamed6; }
+        [[nodiscard]] uint8_t _unnamed6() const { return m__unnamed6; }
 
         /**
          * The location of the variable-length name string, relative to
          * the start of this row.
          */
-        uint8_t ofs_name() const { return m_ofs_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint8_t ofs_name() const { return m_ofs_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -493,29 +493,29 @@ public:
         rekordbox_pdb_t::page_ref_t* m__parent;
 
     public:
-        std::string _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] std::string _unnamed0() const { return m__unnamed0; }
 
         /**
          * Matches the index we used to look up the page, sanity check?
          */
-        uint32_t page_index() const { return m_page_index; }
+        [[nodiscard]] uint32_t page_index() const { return m_page_index; }
 
         /**
          * Identifies the type of information stored in the rows of this page.
          */
-        page_type_t type() const { return m_type; }
+        [[nodiscard]] page_type_t type() const { return m_type; }
 
         /**
          * Index of the next page containing this type of rows. Points past
          * the end of the file if there are no more.
          */
-        page_ref_t* next_page() const { return m_next_page; }
+        [[nodiscard]] page_ref_t* next_page() const { return m_next_page; }
 
         /**
          * @flesniak said: "sequence number (0->1: 8->13, 1->2: 22, 2->3: 27)"
          */
-        uint32_t _unnamed4() const { return m__unnamed4; }
-        std::string _unnamed5() const { return m__unnamed5; }
+        [[nodiscard]] uint32_t _unnamed4() const { return m__unnamed4; }
+        [[nodiscard]] std::string _unnamed5() const { return m__unnamed5; }
 
         /**
          * Holds the value used for `num_rows` (see below) unless
@@ -525,39 +525,39 @@ public:
          * `playlist_entries` table, are too big to count with a single
          * byte. But why not just always use `num_rows_large`, then?
          */
-        uint8_t num_rows_small() const { return m_num_rows_small; }
+        [[nodiscard]] uint8_t num_rows_small() const { return m_num_rows_small; }
 
         /**
          * @flesniak said: "a bitmask (1st track: 32)"
          */
-        uint8_t _unnamed7() const { return m__unnamed7; }
+        [[nodiscard]] uint8_t _unnamed7() const { return m__unnamed7; }
 
         /**
          * @flesniak said: "often 0, sometimes larger, esp. for pages
          * with high real_entry_count (e.g. 12 for 101 entries)"
          */
-        uint8_t _unnamed8() const { return m__unnamed8; }
+        [[nodiscard]] uint8_t _unnamed8() const { return m__unnamed8; }
 
         /**
          * @flesniak said: "strange pages: 0x44, 0x64; otherwise seen: 0x24, 0x34"
          */
-        uint8_t page_flags() const { return m_page_flags; }
+        [[nodiscard]] uint8_t page_flags() const { return m_page_flags; }
 
         /**
          * Unused space (in bytes) in the page heap, excluding the row
          * index at end of page.
          */
-        uint16_t free_size() const { return m_free_size; }
+        [[nodiscard]] uint16_t free_size() const { return m_free_size; }
 
         /**
          * The number of bytes that are in use in the page heap.
          */
-        uint16_t used_size() const { return m_used_size; }
+        [[nodiscard]] uint16_t used_size() const { return m_used_size; }
 
         /**
          * @flesniak said: "(0->1: 2)"
          */
-        uint16_t _unnamed12() const { return m__unnamed12; }
+        [[nodiscard]] uint16_t _unnamed12() const { return m__unnamed12; }
 
         /**
          * Holds the value used for `num_rows` (as described above)
@@ -569,21 +569,21 @@ public:
          * `playlist_entries` table, are too big to count with a single
          * byte. But why not just always use this value, then?
          */
-        uint16_t num_rows_large() const { return m_num_rows_large; }
+        [[nodiscard]] uint16_t num_rows_large() const { return m_num_rows_large; }
 
         /**
          * @flesniak said: "1004 for strange blocks, 0 otherwise"
          */
-        uint16_t _unnamed14() const { return m__unnamed14; }
+        [[nodiscard]] uint16_t _unnamed14() const { return m__unnamed14; }
 
         /**
          * @flesniak said: "always 0 except 1 for history pages, num
          * entries for strange pages?"
          */
-        uint16_t _unnamed15() const { return m__unnamed15; }
-        std::string heap() const { return m_heap; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::page_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t _unnamed15() const { return m__unnamed15; }
+        [[nodiscard]] std::string heap() const { return m_heap; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::page_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -653,9 +653,9 @@ public:
          * Identifies which group is being generated. They build backwards
          * from the end of the page.
          */
-        uint16_t group_index() const { return m_group_index; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::page_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t group_index() const { return m_group_index; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::page_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -686,14 +686,14 @@ public:
          * The unique identifier by which this genre can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * The variable-length string naming the genre.
          */
-        device_sql_string_t* name() const { return m_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* name() const { return m_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -725,15 +725,15 @@ public:
          * The unique identifier by which this art can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * The variable-length file path string at which the art file
          * can be found.
          */
-        device_sql_string_t* path() const { return m_path; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* path() const { return m_path; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -763,14 +763,14 @@ public:
         /**
          * Contains the length of the string in bytes.
          */
-        uint16_t length() const { return m_length; }
+        [[nodiscard]] uint16_t length() const { return m_length; }
 
         /**
          * The content of the string.
          */
-        std::string text() const { return m_text; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::string text() const { return m_text; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -834,31 +834,31 @@ public:
          * Usually 0x60, but 0x64 means we have a long name offset
          * embedded in the row.
          */
-        uint16_t subtype() const { return m_subtype; }
+        [[nodiscard]] uint16_t subtype() const { return m_subtype; }
 
         /**
          * TODO name from @flesniak, but what does it mean?
          */
-        uint16_t index_shift() const { return m_index_shift; }
+        [[nodiscard]] uint16_t index_shift() const { return m_index_shift; }
 
         /**
          * The unique identifier by which this artist can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * @flesniak says: "always 0x03, maybe an unindexed empty string"
          */
-        uint8_t _unnamed3() const { return m__unnamed3; }
+        [[nodiscard]] uint8_t _unnamed3() const { return m__unnamed3; }
 
         /**
          * The location of the variable-length name string, relative to
          * the start of this row, unless subtype is 0x64.
          */
-        uint8_t ofs_name_near() const { return m_ofs_name_near; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint8_t ofs_name_near() const { return m_ofs_name_near; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -903,11 +903,11 @@ public:
         /**
          * Identifies the desired page number.
          */
-        uint32_t index() const { return m_index; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        kaitai::kstruct* _parent() const { return m__parent; }
-        std::string _raw_body() const { return m__raw_body; }
-        kaitai::kstream* _io__raw_body() const { return m__io__raw_body; }
+        [[nodiscard]] uint32_t index() const { return m_index; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] kaitai::kstruct* _parent() const { return m__parent; }
+        [[nodiscard]] std::string _raw_body() const { return m__raw_body; }
+        [[nodiscard]] kaitai::kstream* _io__raw_body() const { return m__io__raw_body; }
     };
 
     /**
@@ -937,14 +937,14 @@ public:
         /**
          * Contains the length of the string in bytes, including two trailing nulls.
          */
-        uint16_t length() const { return m_length; }
+        [[nodiscard]] uint16_t length() const { return m_length; }
 
         /**
          * The content of the string.
          */
-        std::string text() const { return m_text; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::string text() const { return m_text; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::device_sql_string_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1252,179 +1252,179 @@ public:
         /**
          * Some kind of magic word? Usually 0x24, 0x00.
          */
-        uint16_t _unnamed0() const { return m__unnamed0; }
+        [[nodiscard]] uint16_t _unnamed0() const { return m__unnamed0; }
 
         /**
          * TODO name from @flesniak, but what does it mean?
          */
-        uint16_t index_shift() const { return m_index_shift; }
+        [[nodiscard]] uint16_t index_shift() const { return m_index_shift; }
 
         /**
          * TODO what do the bits mean?
          */
-        uint32_t bitmask() const { return m_bitmask; }
+        [[nodiscard]] uint32_t bitmask() const { return m_bitmask; }
 
         /**
          * Playback sample rate of the audio file.
          */
-        uint32_t sample_rate() const { return m_sample_rate; }
+        [[nodiscard]] uint32_t sample_rate() const { return m_sample_rate; }
 
         /**
          * References a row in the artist table if the composer is
          * known.
          */
-        uint32_t composer_id() const { return m_composer_id; }
+        [[nodiscard]] uint32_t composer_id() const { return m_composer_id; }
 
         /**
          * The length of the audio file, in bytes.
          */
-        uint32_t file_size() const { return m_file_size; }
+        [[nodiscard]] uint32_t file_size() const { return m_file_size; }
 
         /**
          * Some ID? Purpose as yet unknown.
          */
-        uint32_t _unnamed6() const { return m__unnamed6; }
+        [[nodiscard]] uint32_t _unnamed6() const { return m__unnamed6; }
 
         /**
          * From @flesniak: "always 19048?"
          */
-        uint16_t _unnamed7() const { return m__unnamed7; }
+        [[nodiscard]] uint16_t _unnamed7() const { return m__unnamed7; }
 
         /**
          * From @flesniak: "always 30967?"
          */
-        uint16_t _unnamed8() const { return m__unnamed8; }
+        [[nodiscard]] uint16_t _unnamed8() const { return m__unnamed8; }
 
         /**
          * References a row in the artwork table if there is album art.
          */
-        uint32_t artwork_id() const { return m_artwork_id; }
+        [[nodiscard]] uint32_t artwork_id() const { return m_artwork_id; }
 
         /**
          * References a row in the keys table if the track has a known
          * main musical key.
          */
-        uint32_t key_id() const { return m_key_id; }
+        [[nodiscard]] uint32_t key_id() const { return m_key_id; }
 
         /**
          * References a row in the artwork table if this is a cover
          * performance and the original artist is known.
          */
-        uint32_t original_artist_id() const { return m_original_artist_id; }
+        [[nodiscard]] uint32_t original_artist_id() const { return m_original_artist_id; }
 
         /**
          * References a row in the labels table if the track has a
          * known record label.
          */
-        uint32_t label_id() const { return m_label_id; }
+        [[nodiscard]] uint32_t label_id() const { return m_label_id; }
 
         /**
          * References a row in the artists table if the track has a
          * known remixer.
          */
-        uint32_t remixer_id() const { return m_remixer_id; }
+        [[nodiscard]] uint32_t remixer_id() const { return m_remixer_id; }
 
         /**
          * Playback bit rate of the audio file.
          */
-        uint32_t bitrate() const { return m_bitrate; }
+        [[nodiscard]] uint32_t bitrate() const { return m_bitrate; }
 
         /**
          * The position of the track within an album.
          */
-        uint32_t track_number() const { return m_track_number; }
+        [[nodiscard]] uint32_t track_number() const { return m_track_number; }
 
         /**
          * The tempo at the start of the track in beats per minute,
          * multiplied by 100.
          */
-        uint32_t tempo() const { return m_tempo; }
+        [[nodiscard]] uint32_t tempo() const { return m_tempo; }
 
         /**
          * References a row in the genres table if the track has a
          * known musical genre.
          */
-        uint32_t genre_id() const { return m_genre_id; }
+        [[nodiscard]] uint32_t genre_id() const { return m_genre_id; }
 
         /**
          * References a row in the albums table if the track has a
          * known album.
          */
-        uint32_t album_id() const { return m_album_id; }
+        [[nodiscard]] uint32_t album_id() const { return m_album_id; }
 
         /**
          * References a row in the artists table if the track has a
          * known performer.
          */
-        uint32_t artist_id() const { return m_artist_id; }
+        [[nodiscard]] uint32_t artist_id() const { return m_artist_id; }
 
         /**
          * The id by which this track can be looked up; players will
          * report this value in their status packets when they are
          * playing the track.
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * The number of the disc on which this track is found, if it
          * is known to be part of a multi-disc album.
          */
-        uint16_t disc_number() const { return m_disc_number; }
+        [[nodiscard]] uint16_t disc_number() const { return m_disc_number; }
 
         /**
          * The number of times this track has been played.
          */
-        uint16_t play_count() const { return m_play_count; }
+        [[nodiscard]] uint16_t play_count() const { return m_play_count; }
 
         /**
          * The year in which this track was released.
          */
-        uint16_t year() const { return m_year; }
+        [[nodiscard]] uint16_t year() const { return m_year; }
 
         /**
          * The number of bits per sample of the audio file.
          */
-        uint16_t sample_depth() const { return m_sample_depth; }
+        [[nodiscard]] uint16_t sample_depth() const { return m_sample_depth; }
 
         /**
          * The length, in seconds, of the track when played at normal
          * speed.
          */
-        uint16_t duration() const { return m_duration; }
+        [[nodiscard]] uint16_t duration() const { return m_duration; }
 
         /**
          * From @flesniak: "always 41?"
          */
-        uint16_t _unnamed26() const { return m__unnamed26; }
+        [[nodiscard]] uint16_t _unnamed26() const { return m__unnamed26; }
 
         /**
          * References a row in the colors table if the track has been
          * assigned a color.
          */
-        uint8_t color_id() const { return m_color_id; }
+        [[nodiscard]] uint8_t color_id() const { return m_color_id; }
 
         /**
          * The number of stars to display for the track, 0 to 5.
          */
-        uint8_t rating() const { return m_rating; }
+        [[nodiscard]] uint8_t rating() const { return m_rating; }
 
         /**
          * From @flesniak: "always 1?"
          */
-        uint16_t _unnamed29() const { return m__unnamed29; }
+        [[nodiscard]] uint16_t _unnamed29() const { return m__unnamed29; }
 
         /**
          * From @flesniak: "alternating 2 or 3"
          */
-        uint16_t _unnamed30() const { return m__unnamed30; }
+        [[nodiscard]] uint16_t _unnamed30() const { return m__unnamed30; }
 
         /**
          * The location, relative to the start of this row, of a
          * variety of variable-length strings.
          */
-        std::vector<uint16_t>* ofs_strings() const { return m_ofs_strings; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] std::vector<uint16_t>* ofs_strings() const { return m_ofs_strings; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1456,19 +1456,19 @@ public:
          * The unique identifier by which this key can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * Seems to be a second copy of the ID?
          */
-        uint32_t id2() const { return m_id2; }
+        [[nodiscard]] uint32_t id2() const { return m_id2; }
 
         /**
          * The variable-length string naming the key.
          */
-        device_sql_string_t* name() const { return m_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* name() const { return m_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1499,19 +1499,19 @@ public:
         /**
          * The position within the playlist represented by this entry.
          */
-        uint32_t entry_index() const { return m_entry_index; }
+        [[nodiscard]] uint32_t entry_index() const { return m_entry_index; }
 
         /**
          * The track found at this position in the playlist.
          */
-        uint32_t track_id() const { return m_track_id; }
+        [[nodiscard]] uint32_t track_id() const { return m_track_id; }
 
         /**
          * The playlist to which this entry belongs.
          */
-        uint32_t playlist_id() const { return m_playlist_id; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint32_t playlist_id() const { return m_playlist_id; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1542,14 +1542,14 @@ public:
          * The unique identifier by which this label can be requested
          * and linked from other rows (such as tracks).
          */
-        uint32_t id() const { return m_id; }
+        [[nodiscard]] uint32_t id() const { return m_id; }
 
         /**
          * The variable-length string naming the label.
          */
-        device_sql_string_t* name() const { return m_name; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
+        [[nodiscard]] device_sql_string_t* name() const { return m_name; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_ref_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1583,8 +1583,8 @@ public:
         /**
          * Identifies the kind of rows that are found in this table.
          */
-        page_type_t type() const { return m_type; }
-        uint32_t empty_candidate() const { return m_empty_candidate; }
+        [[nodiscard]] page_type_t type() const { return m_type; }
+        [[nodiscard]] uint32_t empty_candidate() const { return m_empty_candidate; }
 
         /**
          * Links to the chain of pages making up that table. The first
@@ -1592,7 +1592,7 @@ public:
          * zero rows, but the next page it links to contains the start
          * of the meaningful data rows.
          */
-        page_ref_t* first_page() const { return m_first_page; }
+        [[nodiscard]] page_ref_t* first_page() const { return m_first_page; }
 
         /**
          * Holds the index of the last page that makes up this table.
@@ -1601,9 +1601,9 @@ public:
          * notice that the `next_page` link you followed took you to a
          * page of a different `type`.
          */
-        page_ref_t* last_page() const { return m_last_page; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t* _parent() const { return m__parent; }
+        [[nodiscard]] page_ref_t* last_page() const { return m_last_page; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t* _parent() const { return m__parent; }
     };
 
     /**
@@ -1693,9 +1693,9 @@ public:
          * came from, so the correct flag can be checked for the row
          * presence and the correct row offset can be found.
          */
-        uint16_t row_index() const { return m_row_index; }
-        rekordbox_pdb_t* _root() const { return m__root; }
-        rekordbox_pdb_t::row_group_t* _parent() const { return m__parent; }
+        [[nodiscard]] uint16_t row_index() const { return m_row_index; }
+        [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+        [[nodiscard]] rekordbox_pdb_t::row_group_t* _parent() const { return m__parent; }
     };
 
 private:
@@ -1716,7 +1716,7 @@ public:
      * Unknown purpose, perhaps an unoriginal signature, seems to
      * always have the value 0.
      */
-    uint32_t _unnamed0() const { return m__unnamed0; }
+    [[nodiscard]] uint32_t _unnamed0() const { return m__unnamed0; }
 
     /**
      * The database page size, in bytes. Pages are referred to by
@@ -1725,33 +1725,33 @@ public:
      * end of the page backwards, so finding that also requires this
      * value.
      */
-    uint32_t len_page() const { return m_len_page; }
+    [[nodiscard]] uint32_t len_page() const { return m_len_page; }
 
     /**
      * Determines the number of table entries that are present. Each
      * table is a linked list of pages containing rows of a particular
      * type.
      */
-    uint32_t num_tables() const { return m_num_tables; }
+    [[nodiscard]] uint32_t num_tables() const { return m_num_tables; }
 
     /**
      * @flesinak said: "Not used as any `empty_candidate`, points
      * past the end of the file."
      */
-    uint32_t next_unused_page() const { return m_next_unused_page; }
-    uint32_t _unnamed4() const { return m__unnamed4; }
+    [[nodiscard]] uint32_t next_unused_page() const { return m_next_unused_page; }
+    [[nodiscard]] uint32_t _unnamed4() const { return m__unnamed4; }
 
     /**
      * @flesniak said: "Always incremented by at least one,
      * sometimes by two or three."
      */
-    uint32_t sequence() const { return m_sequence; }
-    std::string _unnamed6() const { return m__unnamed6; }
+    [[nodiscard]] uint32_t sequence() const { return m_sequence; }
+    [[nodiscard]] std::string _unnamed6() const { return m__unnamed6; }
 
     /**
      * Describes and links to the tables present in the database.
      */
-    std::vector<table_t*>* tables() const { return m_tables; }
-    rekordbox_pdb_t* _root() const { return m__root; }
-    kaitai::kstruct* _parent() const { return m__parent; }
+    [[nodiscard]] std::vector<table_t*>* tables() const { return m_tables; }
+    [[nodiscard]] rekordbox_pdb_t* _root() const { return m__root; }
+    [[nodiscard]] kaitai::kstruct* _parent() const { return m__parent; }
 };

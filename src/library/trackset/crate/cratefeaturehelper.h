@@ -21,7 +21,7 @@ class CrateFeatureHelper : public QObject {
     CrateId duplicateCrate(const Crate& oldCrate);
 
   private:
-    QString proposeNameForNewCrate(
+    [[nodiscard]] QString proposeNameForNewCrate(
             const QString& initialName = QString()) const;
 
     TrackCollection* m_pTrackCollection;

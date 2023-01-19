@@ -14,7 +14,7 @@ class CrateSummary : public Crate {
     ~CrateSummary() override = default;
 
     // The number of all tracks in this crate
-    uint getTrackCount() const {
+    [[nodiscard]] uint getTrackCount() const {
         return m_trackCount;
     }
     void setTrackCount(uint trackCount) {
@@ -22,14 +22,14 @@ class CrateSummary : public Crate {
     }
 
     // The total duration (in seconds) of all tracks in this crate
-    double getTrackDuration() const {
+    [[nodiscard]] double getTrackDuration() const {
         return m_trackDuration;
     }
     void setTrackDuration(double trackDuration) {
         m_trackDuration = trackDuration;
     }
     // Returns the duration formatted as a string H:MM:SS
-    QString getTrackDurationText() const {
+    [[nodiscard]] QString getTrackDurationText() const {
         return mixxx::Duration::formatTime(getTrackDuration(), mixxx::Duration::Precision::SECONDS);
     }
 

@@ -17,16 +17,16 @@ class CrateQueryFields {
     explicit CrateQueryFields(const FwdSqlQuery& query);
     virtual ~CrateQueryFields() = default;
 
-    CrateId getId(const FwdSqlQuery& query) const {
+    [[nodiscard]] CrateId getId(const FwdSqlQuery& query) const {
         return CrateId(query.fieldValue(m_iId));
     }
-    QString getName(const FwdSqlQuery& query) const {
+    [[nodiscard]] QString getName(const FwdSqlQuery& query) const {
         return query.fieldValue(m_iName).toString();
     }
-    bool isLocked(const FwdSqlQuery& query) const {
+    [[nodiscard]] bool isLocked(const FwdSqlQuery& query) const {
         return query.fieldValueBoolean(m_iLocked);
     }
-    bool isAutoDjSource(const FwdSqlQuery& query) const {
+    [[nodiscard]] bool isAutoDjSource(const FwdSqlQuery& query) const {
         return query.fieldValueBoolean(m_iAutoDjSource);
     }
 
@@ -75,7 +75,7 @@ class CrateSummaryQueryFields : public CrateQueryFields {
     explicit CrateSummaryQueryFields(const FwdSqlQuery& query);
     ~CrateSummaryQueryFields() override = default;
 
-    uint getTrackCount(const FwdSqlQuery& query) const {
+    [[nodiscard]] uint getTrackCount(const FwdSqlQuery& query) const {
         QVariant varTrackCount = query.fieldValue(m_iTrackCount);
         if (varTrackCount.isNull()) {
             return 0; // crate is empty
@@ -83,7 +83,7 @@ class CrateSummaryQueryFields : public CrateQueryFields {
             return varTrackCount.toUInt();
         }
     }
-    double getTrackDuration(const FwdSqlQuery& query) const {
+    [[nodiscard]] double getTrackDuration(const FwdSqlQuery& query) const {
         QVariant varTrackDuration = query.fieldValue(m_iTrackDuration);
         if (varTrackDuration.isNull()) {
             return 0.0; // crate is empty
@@ -135,10 +135,10 @@ class CrateTrackQueryFields {
     explicit CrateTrackQueryFields(const FwdSqlQuery& query);
     virtual ~CrateTrackQueryFields() = default;
 
-    CrateId crateId(const FwdSqlQuery& query) const {
+    [[nodiscard]] CrateId crateId(const FwdSqlQuery& query) const {
         return CrateId(query.fieldValue(m_iCrateId));
     }
-    TrackId trackId(const FwdSqlQuery& query) const {
+    [[nodiscard]] TrackId trackId(const FwdSqlQuery& query) const {
         return TrackId(query.fieldValue(m_iTrackId));
     }
 
@@ -153,7 +153,7 @@ class TrackQueryFields {
     explicit TrackQueryFields(const FwdSqlQuery& query);
     virtual ~TrackQueryFields() = default;
 
-    TrackId trackId(const FwdSqlQuery& query) const {
+    [[nodiscard]] TrackId trackId(const FwdSqlQuery& query) const {
         return TrackId(query.fieldValue(m_iTrackId));
     }
 
@@ -169,10 +169,10 @@ class CrateTrackSelectResult : public FwdSqlQuerySelectResult {
     }
     ~CrateTrackSelectResult() override = default;
 
-    CrateId crateId() const {
+    [[nodiscard]] CrateId crateId() const {
         return m_queryFields.crateId(query());
     }
-    TrackId trackId() const {
+    [[nodiscard]] TrackId trackId() const {
         return m_queryFields.trackId(query());
     }
 
@@ -195,7 +195,7 @@ class TrackSelectResult : public FwdSqlQuerySelectResult {
     }
     ~TrackSelectResult() override = default;
 
-    TrackId trackId() const {
+    [[nodiscard]] TrackId trackId() const {
         return m_queryFields.trackId(query());
     }
 
@@ -264,7 +264,7 @@ class CrateStorage : public virtual /*implements*/ SqlStorage {
     // Crate read operations (read-only, const)
     /////////////////////////////////////////////////////////////////////////
 
-    uint countCrates() const;
+    [[nodiscard]] uint countCrates() const;
 
     // Omit the pCrate parameter for checking if the corresponding crate exists.
     bool readCrateById(
@@ -277,8 +277,8 @@ class CrateStorage : public virtual /*implements*/ SqlStorage {
     // The following list results are ordered by crate name:
     //  - case-insensitive
     //  - locale-aware
-    CrateSelectResult selectCrates() const; // all crates
-    CrateSelectResult selectCratesByIds(    // subset of crates
+    [[nodiscard]] CrateSelectResult selectCrates() const; // all crates
+    [[nodiscard]] CrateSelectResult selectCratesByIds(    // subset of crates
             const QString& subselectForCrateIds,
             SqlSubselectMode subselectMode) const;
 
@@ -290,35 +290,35 @@ class CrateStorage : public virtual /*implements*/ SqlStorage {
     // redesign of the AutoDJ feature has been reached. The main
     // ideas of the new design should be documented for verification
     // before starting to code.
-    CrateSelectResult selectAutoDjCrates(bool autoDjSource = true) const;
+    [[nodiscard]] CrateSelectResult selectAutoDjCrates(bool autoDjSource = true) const;
 
     // Crate content, i.e. the crate's tracks referenced by id
-    uint countCrateTracks(CrateId crateId) const;
+    [[nodiscard]] uint countCrateTracks(CrateId crateId) const;
 
     // Format a subselect query for the tracks contained in crate.
     static QString formatSubselectQueryForCrateTrackIds(
             CrateId crateId); // no db access
 
-    QString formatQueryForTrackIdsByCrateNameLike(
+    [[nodiscard]] QString formatQueryForTrackIdsByCrateNameLike(
             const QString& crateNameLike) const;      // no db access
     static QString formatQueryForTrackIdsWithCrate(); // no db access
     // Select the track ids of a crate or the crate ids of a track respectively.
     // The results are sorted (ascending) by the target id, i.e. the id that is
     // not provided for filtering. This enables the caller to perform efficient
     // binary searches on the result set after storing it in a list or vector.
-    CrateTrackSelectResult selectCrateTracksSorted(
+    [[nodiscard]] CrateTrackSelectResult selectCrateTracksSorted(
             CrateId crateId) const;
-    CrateTrackSelectResult selectTrackCratesSorted(
+    [[nodiscard]] CrateTrackSelectResult selectTrackCratesSorted(
             TrackId trackId) const;
-    CrateSummarySelectResult selectCratesWithTrackCount(
+    [[nodiscard]] CrateSummarySelectResult selectCratesWithTrackCount(
             const QList<TrackId>& trackIds) const;
-    CrateTrackSelectResult selectTracksSortedByCrateNameLike(
+    [[nodiscard]] CrateTrackSelectResult selectTracksSortedByCrateNameLike(
             const QString& crateNameLike) const;
-    TrackSelectResult selectAllTracksSorted() const;
+    [[nodiscard]] TrackSelectResult selectAllTracksSorted() const;
 
     // Returns the set of crate ids for crates that contain any of the
     // provided track ids.
-    QSet<CrateId> collectCrateIdsOfTracks(
+    [[nodiscard]] QSet<CrateId> collectCrateIdsOfTracks(
             const QList<TrackId>& trackIds) const;
 
     /////////////////////////////////////////////////////////////////////////
@@ -330,7 +330,7 @@ class CrateStorage : public virtual /*implements*/ SqlStorage {
     //  - The result list is ordered by crate name:
     //     - case-insensitive
     //     - locale-aware
-    CrateSummarySelectResult selectCrateSummaries() const; // all crates
+    [[nodiscard]] CrateSummarySelectResult selectCrateSummaries() const; // all crates
 
     // Omit the pCrate parameter for checking if the corresponding crate exists.
     bool readCrateSummaryById(CrateId id, CrateSummary* pCrateSummary = nullptr) const;
