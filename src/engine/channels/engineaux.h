@@ -1,12 +1,11 @@
 #pragma once
 
-#include <QScopedPointer>
-
+#include "control/controlaudiotaperpot.h"
 #include "control/controlproxy.h"
 #include "control/controlpushbutton.h"
 #include "engine/channels/enginechannel.h"
-#include "util/circularbuffer.h"
 #include "soundio/soundmanagerutil.h"
+#include "util/circularbuffer.h"
 
 class ControlAudioTaperPot;
 
@@ -16,7 +15,6 @@ class EngineAux : public EngineChannel, public AudioDestination {
     Q_OBJECT
   public:
     EngineAux(const ChannelHandleAndGroup& handleGroup, EffectsManager* pEffectsManager);
-    ~EngineAux() override;
 
     ActiveState updateActiveState() override;
 
@@ -45,6 +43,6 @@ class EngineAux : public EngineChannel, public AudioDestination {
     void onInputUnconfigured(const AudioInput& input) override;
 
   private:
-    QScopedPointer<ControlObject> m_pInputConfigured;
-    ControlAudioTaperPot* m_pPregain;
+    ControlObject m_inputConfigured;
+    ControlAudioTaperPot m_pregain;
 };

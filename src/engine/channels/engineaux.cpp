@@ -1,9 +1,6 @@
 #include "engine/channels/engineaux.h"
 
-#include <QtDebug>
-
 #include "control/control.h"
-#include "control/controlaudiotaperpot.h"
 #include "effects/effectsmanager.h"
 #include "engine/effects/engineeffectsmanager.h"
 #include "moc_engineaux.cpp"
@@ -14,10 +11,10 @@ EngineAux::EngineAux(const ChannelHandleAndGroup& handleGroup, EffectsManager* p
         : EngineChannel(handleGroup, EngineChannel::CENTER, pEffectsManager,
                   /*isTalkoverChannel*/ false,
                   /*isPrimaryDeck*/ false),
-          m_pInputConfigured(new ControlObject(ConfigKey(getGroup(), "input_configured"))),
-          m_pPregain(new ControlAudioTaperPot(ConfigKey(getGroup(), "pregain"), -12, 12, 0.5)) {
+          m_inputConfigured(ConfigKey(getGroup(), "input_configured")),
+          m_pregain(ConfigKey(getGroup(), "pregain"), -12, 12, 0.5) {
     // Make input_configured read-only.
-    m_pInputConfigured->setReadOnly();
+    m_inputConfigured.setReadOnly();
     ControlDoublePrivate::insertAlias(ConfigKey(getGroup(), "enabled"),
                                       ConfigKey(getGroup(), "input_configured"));
 
@@ -27,12 +24,8 @@ EngineAux::EngineAux(const ChannelHandleAndGroup& handleGroup, EffectsManager* p
     setMaster(false);
 }
 
-EngineAux::~EngineAux() {
-    delete m_pPregain;
-}
-
 EngineChannel::ActiveState EngineAux::updateActiveState() {
-    bool enabled = m_pInputConfigured->toBool();
+    bool enabled = m_inputConfigured.toBool();
     if (enabled && m_sampleBuffer) {
         m_active = true;
         return ActiveState::Active;
@@ -52,7 +45,7 @@ void EngineAux::onInputConfigured(const AudioInput& input) {
         return;
     }
     m_sampleBuffer = nullptr;
-    m_pInputConfigured->forceSet(1.0);
+    m_inputConfigured.forceSet(1.0);
 }
 
 void EngineAux::onInputUnconfigured(const AudioInput& input) {
@@ -62,7 +55,7 @@ void EngineAux::onInputUnconfigured(const AudioInput& input) {
         return;
     }
     m_sampleBuffer = nullptr;
-    m_pInputConfigured->forceSet(0.0);
+    m_inputConfigured.forceSet(0.0);
 }
 
 void EngineAux::receiveBuffer(
@@ -74,7 +67,7 @@ void EngineAux::receiveBuffer(
 
 void EngineAux::process(CSAMPLE* pOut, const int iBufferSize) {
     const CSAMPLE* sampleBuffer = m_sampleBuffer; // save pointer on stack
-    CSAMPLE_GAIN pregain = static_cast<CSAMPLE_GAIN>(m_pPregain->get());
+    CSAMPLE_GAIN pregain = static_cast<CSAMPLE_GAIN>(m_pregain.get());
     if (sampleBuffer) {
         SampleUtil::copyWithGain(pOut, sampleBuffer, pregain, iBufferSize);
         EngineEffectsManager* pEngineEffectsManager = m_pEffectsManager->getEngineEffectsManager();
