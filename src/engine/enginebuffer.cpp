@@ -97,13 +97,16 @@ EngineBuffer::EngineBuffer(const QString& group,
         EngineChannel* pChannel,
         EngineMaster* pMixingEngine)
         : m_group(group),
-          m_pLoopingControl(nullptr),
-          m_pSyncControl(nullptr),
+          m_pLoopingControl(new LoopingControl(group, pConfig)),
+          m_pEngineSync(pMixingEngine->getEngineSync()),
+          m_pSyncControl(new SyncControl(group, pConfig, pChannel, m_pEngineSync)),
           m_pVinylControlControl(nullptr),
-          m_pRateControl(nullptr),
-          m_pBpmControl(nullptr),
-          m_pKeyControl(nullptr),
-          m_pReadAheadManager(nullptr),
+          m_pRateControl(new RateControl(group, pConfig)),
+          m_pBpmControl(new BpmControl(group, pConfig)),
+          m_pKeyControl(new KeyControl(group, pConfig)),
+          m_pClockControl(new ClockControl(group, pConfig)),
+          m_pCueControl((new CueControl(group, pConfig))),
+          m_pReadAheadManager(new ReadAheadManager(m_pReader, m_pLoopingControl)),
           m_pReader(buildCachingReader(group, pConfig, this)),
           m_playPosition(kInitialPlayPosition),
           m_speed_old(0),
@@ -117,16 +120,27 @@ EngineBuffer::EngineBuffer(const QString& group,
           m_slipPosition(mixxx::audio::kStartFramePos),
           m_dSlipRate(1.0),
           m_bSlipEnabledProcessing(false),
+          m_pTrackSamples(new ControlObject(ConfigKey(group, "track_samples"))),
+          m_pTrackSampleRate(new ControlObject(ConfigKey(group, "track_samplerate"))),
           m_playButton(buildButtonWithSlot(ConfigKey(group, "play"), ControlPushButton::TOGGLE, this, &EngineBuffer::slotControlPlayRequest)),
           m_playStartButton(buildButtonWithSlot(ConfigKey(group, "start_play"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlPlayFromStart)),
           m_stopStartButton(buildButtonWithSlot(ConfigKey(group, "start_stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlJumpToStartAndStop)),
           m_stopButton(buildButtonWithSlot(ConfigKey(group, "stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlStop)),
+          m_fwdButton(ControlObject::getControl(ConfigKey(group, "fwd"))),
+          m_backButton(ControlObject::getControl(ConfigKey(group, "back"))),
           m_pSlipButton(buildToggleButton(ConfigKey(group, "slip_enabled"))),
           m_playposSlider(buildPlayPosSlider(group, this)),
+          m_pSampleRate(new ControlProxy("[Master]", "samplerate", this)),
+          m_pKeylockEngine(new ControlProxy("[Master]", "keylock_engine", this)),
           m_pKeylock(buildToggleButton(ConfigKey(group, "keylock"))),
+          m_pPassthroughEnabled(new ControlProxy(group, "passthrough", this)),
+          m_pTrackLoaded(new ControlObject(ConfigKey(group, "track_loaded"), false)),
           m_pRepeat(buildToggleButton(ConfigKey(group, "repeat"))),
           m_startButton(buildButtonWithSlot(ConfigKey(group, "start"), ControlPushButton::TRIGGER, this, &EngineBuffer::slotControlStart)),
           m_endButton(buildButtonWithSlot(ConfigKey(group, "end"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlEnd)),
+          m_pScaleLinear(new EngineBufferScaleLinear(m_pReadAheadManager)),
+          m_pScaleST(new EngineBufferScaleST(m_pReadAheadManager)),
+          m_pScaleRB(new EngineBufferScaleRubberBand(m_pReadAheadManager)),
           m_bScalerOverride(false),
           m_iSeekPhaseQueued(0),
           m_iEnableSyncQueued(SYNC_REQUEST_NONE),
@@ -134,7 +148,8 @@ EngineBuffer::EngineBuffer(const QString& group,
           m_bPlayAfterLoading(false),
           m_pCrossfadeBuffer(SampleUtil::alloc(MAX_BUFFER_LEN)),
           m_bCrossfadeReady(false),
-          m_iLastBufferSize(0) {
+          m_iLastBufferSize(0),
+          m_visualPlayPos(VisualPlayPosition::getVisualPlayPosition(group)) {
     // This should be a static assertion, but isValid() is not constexpr.
     DEBUG_ASSERT(kInitialPlayPosition.isValid());
 
@@ -143,15 +158,6 @@ EngineBuffer::EngineBuffer(const QString& group,
     // zero out crossfade buffer
     SampleUtil::clear(m_pCrossfadeBuffer, MAX_BUFFER_LEN);
 
-    // Control used to communicate ratio playpos to GUI thread
-    m_visualPlayPos = VisualPlayPosition::getVisualPlayPosition(m_group);
-
-    m_pSampleRate = new ControlProxy("[Master]", "samplerate", this);
-
-    m_pTrackSamples = new ControlObject(ConfigKey(m_group, "track_samples"));
-    m_pTrackSampleRate = new ControlObject(ConfigKey(m_group, "track_samplerate"));
-
-    m_pTrackLoaded = new ControlObject(ConfigKey(m_group, "track_loaded"), false);
     m_pTrackLoaded->setReadOnly();
 
     // Quantization Controller for enabling and disabling the
@@ -161,28 +167,18 @@ EngineBuffer::EngineBuffer(const QString& group,
     addControl(quantize_control);
     m_pQuantize = ControlObject::getControl(ConfigKey(group, "quantize"));
 
-    // Create the Loop Controller
-    m_pLoopingControl = new LoopingControl(group, pConfig);
     addControl(m_pLoopingControl);
-
-    m_pEngineSync = pMixingEngine->getEngineSync();
-
-    m_pSyncControl = new SyncControl(group, pConfig, pChannel, m_pEngineSync);
 
 #ifdef __VINYLCONTROL__
     m_pVinylControlControl = new VinylControlControl(group, pConfig);
     addControl(m_pVinylControlControl);
 #endif
 
-    // Create the Rate Controller
-    m_pRateControl = new RateControl(group, pConfig);
     // Add the Rate Controller
     addControl(m_pRateControl);
     // Looping Control needs Rate Control for Reverse Button
     m_pLoopingControl->setRateControl(m_pRateControl);
 
-    // Create the BPM Controller
-    m_pBpmControl = new BpmControl(group, pConfig);
     addControl(m_pBpmControl);
 
     // TODO(rryan) remove this dependence?
@@ -190,19 +186,8 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_pSyncControl->setEngineControls(m_pRateControl, m_pBpmControl);
     pMixingEngine->getEngineSync()->addSyncableDeck(m_pSyncControl);
     addControl(m_pSyncControl);
-
-    m_fwdButton = ControlObject::getControl(ConfigKey(group, "fwd"));
-    m_backButton = ControlObject::getControl(ConfigKey(group, "back"));
-
-    m_pKeyControl = new KeyControl(group, pConfig);
     addControl(m_pKeyControl);
-
-    // Create the clock controller
-    m_pClockControl = new ClockControl(group, pConfig);
     addControl(m_pClockControl);
-
-    // Create the cue controller
-    m_pCueControl = new CueControl(group, pConfig);
     addControl(m_pCueControl);
 
     connect(m_pLoopingControl,
@@ -226,25 +211,21 @@ EngineBuffer::EngineBuffer(const QString& group,
             &LoopingControl::slotLoopRemove,
             Qt::DirectConnection);
 
-    m_pReadAheadManager = new ReadAheadManager(m_pReader,
-                                               m_pLoopingControl);
+
     m_pReadAheadManager->addRateControl(m_pRateControl);
 
-    m_pKeylockEngine = new ControlProxy("[Master]", "keylock_engine", this);
+
     m_pKeylockEngine->connectValueChanged(this,
             &EngineBuffer::slotKeylockEngineChanged,
             Qt::DirectConnection);
-    // Construct scaling objects
-    m_pScaleLinear = new EngineBufferScaleLinear(m_pReadAheadManager);
-    m_pScaleST = new EngineBufferScaleST(m_pReadAheadManager);
-    m_pScaleRB = new EngineBufferScaleRubberBand(m_pReadAheadManager);
+
+
     slotKeylockEngineChanged(m_pKeylockEngine->get());
     m_pScaleVinyl = m_pScaleLinear;
     m_pScale = m_pScaleVinyl;
     m_pScale->clear();
     m_bScalerChanged = true;
 
-    m_pPassthroughEnabled = new ControlProxy(group, "passthrough", this);
     m_pPassthroughEnabled->connectValueChanged(this, &EngineBuffer::slotPassthroughChanged,
                                                Qt::DirectConnection);
 
