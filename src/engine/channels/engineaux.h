@@ -19,7 +19,7 @@ class EngineAux : public EngineChannel, public AudioDestination {
     ActiveState updateActiveState() override;
 
     /// Called by EngineMaster whenever is requesting a new buffer of audio.
-    void process(CSAMPLE* pOutput, const int iBufferSize) override;
+    void process(CSAMPLE* pOutput, int iBufferSize) override;
     void collectFeatures(GroupFeatureState* pGroupFeatures) const override;
     void postProcess(const int iBufferSize) override {
         Q_UNUSED(iBufferSize)

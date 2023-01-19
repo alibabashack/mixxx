@@ -25,7 +25,7 @@ EngineAux::EngineAux(const ChannelHandleAndGroup& handleGroup, EffectsManager* p
 }
 
 EngineChannel::ActiveState EngineAux::updateActiveState() {
-    bool enabled = m_inputConfigured.toBool();
+    const bool enabled = m_inputConfigured.toBool();
     if (enabled && m_sampleBuffer) {
         m_active = true;
         return ActiveState::Active;
@@ -66,7 +66,7 @@ void EngineAux::receiveBuffer(
 }
 
 void EngineAux::process(CSAMPLE* pOut, const int iBufferSize) {
-    const CSAMPLE* sampleBuffer = m_sampleBuffer; // save pointer on stack
+    const CSAMPLE* const sampleBuffer = m_sampleBuffer; // save pointer on stack
     CSAMPLE_GAIN pregain = static_cast<CSAMPLE_GAIN>(m_pregain.get());
     if (sampleBuffer) {
         SampleUtil::copyWithGain(pOut, sampleBuffer, pregain, iBufferSize);
