@@ -43,7 +43,7 @@ class EngineChannel : public EngineObject {
     }
 
     virtual ActiveState updateActiveState() = 0;
-    virtual bool isActive() const {
+    [[nodiscard]] virtual bool isActive() const {
         return m_active;
     }
 
@@ -53,11 +53,11 @@ class EngineChannel : public EngineObject {
     [[nodiscard]] virtual bool isMasterEnabled() const;
     void setTalkover(bool enabled);
     [[nodiscard]] virtual bool isTalkoverEnabled() const;
-    inline bool isTalkoverChannel() const { return m_bIsTalkoverChannel; };
-    inline bool isPrimaryDeck() const {
+    [[nodiscard]] inline bool isTalkoverChannel() const { return m_bIsTalkoverChannel; };
+    [[nodiscard]] inline bool isPrimaryDeck() const {
         return m_bIsPrimaryDeck;
     };
-    int getChannelIndex() const {
+    [[nodiscard]] int getChannelIndex() const {
         return m_channelIndex;
     }
     void setChannelIndex(const int channelIndex) {
