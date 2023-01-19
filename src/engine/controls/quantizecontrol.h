@@ -2,19 +2,17 @@
 
 #include <QObject>
 
+#include "control/controlobject.h"
+#include "control/controlpushbutton.h"
 #include "engine/controls/enginecontrol.h"
 #include "preferences/usersettings.h"
 #include "track/beats.h"
 #include "track/track_decl.h"
 
-class ControlObject;
-class ControlPushButton;
-
 class QuantizeControl : public EngineControl {
     Q_OBJECT
   public:
     QuantizeControl(const QString& group, UserSettingsPointer pConfig);
-    ~QuantizeControl() override;
 
     void setFrameInfo(mixxx::audio::FramePos currentPosition,
             mixxx::audio::FramePos trackEndPosition,
@@ -30,10 +28,10 @@ class QuantizeControl : public EngineControl {
     void updateClosestBeat(mixxx::audio::FramePos position);
     void playPosChanged(mixxx::audio::FramePos position);
 
-    ControlPushButton* m_pCOQuantizeEnabled;
-    ControlObject* m_pCONextBeat;
-    ControlObject* m_pCOPrevBeat;
-    ControlObject* m_pCOClosestBeat;
+    ControlPushButton m_COQuantizeEnabled;
+    ControlObject m_CONextBeat;
+    ControlObject m_COPrevBeat;
+    ControlObject m_COClosestBeat;
 
     // m_pBeats is written from an engine worker thread
     mixxx::BeatsPointer m_pBeats;
