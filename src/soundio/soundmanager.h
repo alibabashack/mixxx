@@ -46,7 +46,7 @@ class SoundManager : public QObject {
     // Returns a list of all devices we've enumerated that match the provided
     // filterApi, and have at least one output or input channel if the
     // bOutputDevices or bInputDevices are set, respectively.
-    QList<SoundDevicePointer> getDeviceList(
+    [[nodiscard]] QList<SoundDevicePointer> getDeviceList(
             const QString& filterAPI, bool bOutputDevices, bool bInputDevices) const;
 
     // Creates a list of sound devices
@@ -61,21 +61,21 @@ class SoundManager : public QObject {
 
     // Playermanager will notify us when the number of decks changes.
     void setConfiguredDeckCount(int count);
-    int getConfiguredDeckCount() const;
+    [[nodiscard]] int getConfiguredDeckCount() const;
 
-    SoundDevicePointer getErrorDevice() const;
-    QString getErrorDeviceName() const;
-    QString getLastErrorMessage(SoundDeviceStatus status) const;
+    [[nodiscard]] SoundDevicePointer getErrorDevice() const;
+    [[nodiscard]] QString getErrorDeviceName() const;
+    [[nodiscard]] QString getLastErrorMessage(SoundDeviceStatus status) const;
 
     // Returns a list of samplerates we will attempt to support for a given API.
-    QList<unsigned int> getSampleRates(const QString& api) const;
+    [[nodiscard]] QList<unsigned int> getSampleRates(const QString& api) const;
 
     // Convenience overload for SoundManager::getSampleRates(QString)
-    QList<unsigned int> getSampleRates() const;
+    [[nodiscard]] QList<unsigned int> getSampleRates() const;
 
     // Get a list of host APIs supported by PortAudio.
-    QList<QString> getHostAPIList() const;
-    SoundManagerConfig getConfig() const;
+    [[nodiscard]] QList<QString> getHostAPIList() const;
+    [[nodiscard]] SoundManagerConfig getConfig() const;
     SoundDeviceStatus setConfig(const SoundManagerConfig& config);
     void checkConfig();
 
@@ -92,10 +92,10 @@ class SoundManager : public QObject {
 
     void registerOutput(const AudioOutput& output, AudioSource* src);
     void registerInput(const AudioInput& input, AudioDestination* dest);
-    QList<AudioOutput> registeredOutputs() const;
-    QList<AudioInput> registeredInputs() const;
+    [[nodiscard]] QList<AudioOutput> registeredOutputs() const;
+    [[nodiscard]] QList<AudioInput> registeredInputs() const;
 
-    QSharedPointer<EngineNetworkStream> getNetworkStream() const {
+    [[nodiscard]] QSharedPointer<EngineNetworkStream> getNetworkStream() const {
         return m_pNetworkStream;
     }
 

@@ -72,12 +72,12 @@ class SoundSourceProxy {
     /// Holding an internal pointer to the track object ensures
     /// that all write operations to this file are deferred until
     /// the track object is released and not accessed concurrently.
-    const TrackPointer& getTrack() const {
+    [[nodiscard]] const TrackPointer& getTrack() const {
         return m_pTrack;
     }
 
     /// The URL of the audio file referenced by the track.
-    const QUrl& getUrl() const {
+    [[nodiscard]] const QUrl& getUrl() const {
         return m_url;
     }
 
@@ -85,7 +85,7 @@ class SoundSourceProxy {
     ///
     /// Note: This might change later after construction when actually
     /// trying to read the audio stream with openAudioSource()!
-    const mixxx::SoundSourceProviderPointer& getProvider() const {
+    [[nodiscard]] const mixxx::SoundSourceProviderPointer& getProvider() const {
         return m_pProvider;
     }
 

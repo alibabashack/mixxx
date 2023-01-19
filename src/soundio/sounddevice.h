@@ -22,32 +22,32 @@ class SoundDevice {
     SoundDevice(UserSettingsPointer config, SoundManager* sm);
     virtual ~SoundDevice() = default;
 
-    inline const SoundDeviceId& getDeviceId() const {
+    [[nodiscard]] inline const SoundDeviceId& getDeviceId() const {
         return m_deviceId;
     }
-    inline const QString& getDisplayName() const {
+    [[nodiscard]] inline const QString& getDisplayName() const {
         return m_strDisplayName;
     }
-    inline const QString& getHostAPI() const {
+    [[nodiscard]] inline const QString& getHostAPI() const {
         return m_hostAPI;
     }
     void setSampleRate(double sampleRate);
     void setFramesPerBuffer(unsigned int framesPerBuffer);
     virtual SoundDeviceStatus open(bool isClkRefDevice, int syncBuffers) = 0;
-    virtual bool isOpen() const = 0;
+    [[nodiscard]] virtual bool isOpen() const = 0;
     virtual SoundDeviceStatus close() = 0;
     virtual void readProcess() = 0;
     virtual void writeProcess() = 0;
-    virtual QString getError() const = 0;
-    virtual unsigned int getDefaultSampleRate() const = 0;
-    int getNumOutputChannels() const;
-    int getNumInputChannels() const;
+    [[nodiscard]] virtual QString getError() const = 0;
+    [[nodiscard]] virtual unsigned int getDefaultSampleRate() const = 0;
+    [[nodiscard]] int getNumOutputChannels() const;
+    [[nodiscard]] int getNumInputChannels() const;
     SoundDeviceStatus addOutput(const AudioOutputBuffer& out);
     SoundDeviceStatus addInput(const AudioInputBuffer& in);
-    const QList<AudioInputBuffer>& inputs() const {
+    [[nodiscard]] const QList<AudioInputBuffer>& inputs() const {
         return m_audioInputs;
     }
-    const QList<AudioOutputBuffer>& outputs() const {
+    [[nodiscard]] const QList<AudioOutputBuffer>& outputs() const {
         return m_audioOutputs;
     }
 

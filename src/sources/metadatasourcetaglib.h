@@ -26,12 +26,12 @@ class MetadataSourceTagLib : public MetadataSource {
             QImage* pCoverArt,
             bool resetMissingTagMetadata) const override;
 
-    std::pair<ExportResult, QDateTime> exportTrackMetadata(
+    [[nodiscard]] std::pair<ExportResult, QDateTime> exportTrackMetadata(
             const TrackMetadata& trackMetadata) const override;
 
   private:
-    std::pair<ImportResult, QDateTime> afterImport(ImportResult importResult) const;
-    std::pair<ExportResult, QDateTime> afterExport(ExportResult exportResult) const;
+    [[nodiscard]] std::pair<ImportResult, QDateTime> afterImport(ImportResult importResult) const;
+    [[nodiscard]] std::pair<ExportResult, QDateTime> afterExport(ExportResult exportResult) const;
 
     QString m_fileName;
     taglib::FileType m_fileType;

@@ -29,11 +29,11 @@ class ReadAheadFrameBuffer final {
     ReadAheadFrameBuffer& operator=(ReadAheadFrameBuffer&&) = default;
     ReadAheadFrameBuffer& operator=(const ReadAheadFrameBuffer&) = delete;
 
-    const audio::SignalInfo& signalInfo() const {
+    [[nodiscard]] const audio::SignalInfo& signalInfo() const {
         return m_signalInfo;
     }
 
-    FrameCount capacity() const {
+    [[nodiscard]] FrameCount capacity() const {
         return m_signalInfo.samples2frames(
                 m_sampleBuffer.capacity());
     }
@@ -44,27 +44,27 @@ class ReadAheadFrameBuffer final {
         m_readIndex = kInvalidFrameIndex;
     }
 
-    bool isValid() const {
+    [[nodiscard]] bool isValid() const {
         return m_readIndex != kInvalidFrameIndex;
     }
 
     /// Check that the first readable frame is at a valid position.
-    bool isReady() const {
+    [[nodiscard]] bool isReady() const {
         return isValid() &&
                 m_readIndex != kUnknownFrameIndex;
     }
 
-    bool isEmpty() const {
+    [[nodiscard]] bool isEmpty() const {
         return m_sampleBuffer.empty();
     }
 
-    FrameCount bufferedLength() const {
+    [[nodiscard]] FrameCount bufferedLength() const {
         DEBUG_ASSERT(isReady() || isEmpty());
         return m_signalInfo.samples2frames(
                 m_sampleBuffer.readableLength());
     }
 
-    IndexRange bufferedRange() const {
+    [[nodiscard]] IndexRange bufferedRange() const {
         return IndexRange::forward(
                 readIndex(),
                 bufferedLength());
@@ -72,14 +72,14 @@ class ReadAheadFrameBuffer final {
 
     /// Return the current position from where data
     /// could be read.
-    FrameIndex readIndex() const {
+    [[nodiscard]] FrameIndex readIndex() const {
         DEBUG_ASSERT(isValid());
         return m_readIndex;
     }
 
     /// Return the current position from where data
     /// will be written.
-    FrameIndex writeIndex() const {
+    [[nodiscard]] FrameIndex writeIndex() const {
         return readIndex() + bufferedLength();
     }
 

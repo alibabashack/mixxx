@@ -22,11 +22,11 @@ class SoundDevicePortAudio : public SoundDevice {
     ~SoundDevicePortAudio() override;
 
     SoundDeviceStatus open(bool isClkRefDevice, int syncBuffers) override;
-    bool isOpen() const override;
+    [[nodiscard]] bool isOpen() const override;
     SoundDeviceStatus close() override;
     void readProcess() override;
     void writeProcess() override;
-    QString getError() const override;
+    [[nodiscard]] QString getError() const override;
 
     // This callback function gets called every time the sound device runs out of
     // samples (ie. when it needs more sound to play)
@@ -45,7 +45,7 @@ class SoundDevicePortAudio : public SoundDevice {
                         const PaStreamCallbackTimeInfo *timeInfo,
                         PaStreamCallbackFlags statusFlags);
 
-    unsigned int getDefaultSampleRate() const override {
+    [[nodiscard]] unsigned int getDefaultSampleRate() const override {
         return m_deviceInfo ? static_cast<unsigned int>(
             m_deviceInfo->defaultSampleRate) : 44100;
     }

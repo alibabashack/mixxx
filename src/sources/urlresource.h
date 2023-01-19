@@ -10,10 +10,10 @@ class UrlResource {
   public:
     virtual ~UrlResource() = default;
 
-    QUrl getUrl() const {
+    [[nodiscard]] QUrl getUrl() const {
         return m_url;
     }
-    QString getUrlString() const {
+    [[nodiscard]] QString getUrlString() const {
         return m_url.toString();
     }
 
@@ -22,7 +22,7 @@ class UrlResource {
             : m_url(url) {
     }
 
-    inline bool isLocalFile() const {
+    [[nodiscard]] inline bool isLocalFile() const {
         // TODO(XXX): We need more testing how network shares are
         // handled! From the documentation of QUrl::isLocalFile():
         // "Note that this function considers URLs with hostnames
@@ -30,7 +30,7 @@ class UrlResource {
         return m_url.isLocalFile();
     }
 
-    inline QString getLocalFileName() const {
+    [[nodiscard]] inline QString getLocalFileName() const {
         DEBUG_ASSERT(isLocalFile());
         return m_url.toLocalFile();
     }

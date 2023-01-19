@@ -55,11 +55,11 @@ class SoundSourceProviderModPlug : public SoundSourceProvider {
   public:
     static const QString kDisplayName;
 
-    QString getDisplayName() const override {
+    [[nodiscard]] QString getDisplayName() const override {
         return kDisplayName;
     }
 
-    QStringList getSupportedFileTypes() const override;
+    [[nodiscard]] QStringList getSupportedFileTypes() const override;
 
     SoundSourcePointer newSoundSource(const QUrl& url) override {
         return newSoundSourceFromUrl<SoundSourceModPlug>(url);

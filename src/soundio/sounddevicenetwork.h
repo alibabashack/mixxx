@@ -31,13 +31,13 @@ class SoundDeviceNetwork : public SoundDevice {
     ~SoundDeviceNetwork() override;
 
     SoundDeviceStatus open(bool isClkRefDevice, int syncBuffers) override;
-    bool isOpen() const override;
+    [[nodiscard]] bool isOpen() const override;
     SoundDeviceStatus close() override;
     void readProcess() override;
     void writeProcess() override;
-    QString getError() const override;
+    [[nodiscard]] QString getError() const override;
 
-    unsigned int getDefaultSampleRate() const override {
+    [[nodiscard]] unsigned int getDefaultSampleRate() const override {
         return 44100;
     }
 

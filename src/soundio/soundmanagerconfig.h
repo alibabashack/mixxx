@@ -33,34 +33,34 @@ public:
   static const int kDefaultSyncBuffers;
 
   bool readFromDisk();
-  bool writeToDisk() const;
-  QString getAPI() const;
+  [[nodiscard]] bool writeToDisk() const;
+  [[nodiscard]] QString getAPI() const;
   void setAPI(const QString& api);
   bool checkAPI();
-  unsigned int getSampleRate() const;
+  [[nodiscard]] unsigned int getSampleRate() const;
   void setSampleRate(unsigned int sampleRate);
   bool checkSampleRate(const SoundManager& soundManager);
 
   // Record the number of decks configured with this setup so they can
   // be created and configured.
-  unsigned int getDeckCount() const;
+  [[nodiscard]] unsigned int getDeckCount() const;
   void setDeckCount(unsigned int deckCount);
   void setCorrectDeckCount(int configuredDeckCount);
-  QSet<SoundDeviceId> getDevices() const;
+  [[nodiscard]] QSet<SoundDeviceId> getDevices() const;
 
-  unsigned int getAudioBufferSizeIndex() const;
-  unsigned int getFramesPerBuffer() const;
+  [[nodiscard]] unsigned int getAudioBufferSizeIndex() const;
+  [[nodiscard]] unsigned int getFramesPerBuffer() const;
   // Returns the processing latency in milliseconds
-  double getProcessingLatency() const;
+  [[nodiscard]] double getProcessingLatency() const;
   void setAudioBufferSizeIndex(unsigned int latency);
-  unsigned int getSyncBuffers() const;
+  [[nodiscard]] unsigned int getSyncBuffers() const;
   void setSyncBuffers(unsigned int sampleRate);
-  bool getForceNetworkClock() const;
+  [[nodiscard]] bool getForceNetworkClock() const;
   void setForceNetworkClock(bool force);
   void addOutput(const SoundDeviceId& device, const AudioOutput& out);
   void addInput(const SoundDeviceId& device, const AudioInput& in);
-  QMultiHash<SoundDeviceId, AudioOutput> getOutputs() const;
-  QMultiHash<SoundDeviceId, AudioInput> getInputs() const;
+  [[nodiscard]] QMultiHash<SoundDeviceId, AudioOutput> getOutputs() const;
+  [[nodiscard]] QMultiHash<SoundDeviceId, AudioInput> getInputs() const;
   void clearOutputs();
   void clearInputs();
   bool hasMicInputs();

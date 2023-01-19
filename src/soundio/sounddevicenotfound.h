@@ -25,15 +25,15 @@ class SoundDeviceNotFound : public SoundDevice {
         Q_UNUSED(syncBuffers);
         return SoundDeviceStatus::Error;
     };
-    bool isOpen() const  override { return false; };
+    [[nodiscard]] bool isOpen() const  override { return false; };
     SoundDeviceStatus close() override {
         return SoundDeviceStatus::Error;
     };
     void readProcess() override { };
     void writeProcess() override { };
-    QString getError() const override{ return QObject::tr("Device not found"); };
+    [[nodiscard]] QString getError() const override{ return QObject::tr("Device not found"); };
 
-    unsigned int getDefaultSampleRate() const override {
+    [[nodiscard]] unsigned int getDefaultSampleRate() const override {
         return 44100;
     }
 };

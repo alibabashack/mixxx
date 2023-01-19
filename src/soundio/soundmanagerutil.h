@@ -13,11 +13,11 @@
 class ChannelGroup {
   public:
     ChannelGroup(unsigned char channelBase, unsigned char channels);
-    unsigned char getChannelBase() const;
-    unsigned char getChannelCount() const;
-    bool clashesWith(const ChannelGroup& other) const;
+    [[nodiscard]] unsigned char getChannelBase() const;
+    [[nodiscard]] unsigned char getChannelCount() const;
+    [[nodiscard]] bool clashesWith(const ChannelGroup& other) const;
 
-    uint hashValue() const {
+    [[nodiscard]] uint hashValue() const {
         return (m_channels << 8) |
                 m_channelBase;
     }
@@ -70,11 +70,11 @@ public:
     };
     AudioPath(unsigned char channelBase, unsigned char channels);
     virtual ~AudioPath() = default;
-    AudioPathType getType() const;
-    ChannelGroup getChannelGroup() const;
-    unsigned char getIndex() const;
-    bool channelsClash(const AudioPath &other) const;
-    QString getString() const;
+    [[nodiscard]] AudioPathType getType() const;
+    [[nodiscard]] ChannelGroup getChannelGroup() const;
+    [[nodiscard]] unsigned char getIndex() const;
+    [[nodiscard]] bool channelsClash(const AudioPath &other) const;
+    [[nodiscard]] QString getString() const;
     static QString getStringFromType(AudioPathType type);
     static QString getTrStringFromType(AudioPathType type, unsigned char index);
     static AudioPathType getTypeFromString(QString string);
@@ -89,7 +89,7 @@ public:
     // AudioPathType.
     static unsigned char maxChannelsForType(AudioPathType type);
 
-    uint hashValue() const {
+    [[nodiscard]] uint hashValue() const {
         // Exclude m_channelGroup from hash value!
         // See also: operator==()
         // TODO: Why??
@@ -150,7 +150,7 @@ class AudioOutputBuffer : public AudioOutput {
 
     };
     ~AudioOutputBuffer() override = default;
-    inline const CSAMPLE* getBuffer() const { return m_pBuffer; }
+    [[nodiscard]] inline const CSAMPLE* getBuffer() const { return m_pBuffer; }
   private:
     const CSAMPLE* m_pBuffer;
 };
@@ -179,7 +179,7 @@ class AudioInputBuffer : public AudioInput {
 
     }
     ~AudioInputBuffer() override = default;
-    inline CSAMPLE* getBuffer() const { return m_pBuffer; }
+    [[nodiscard]] inline CSAMPLE* getBuffer() const { return m_pBuffer; }
   private:
     CSAMPLE* m_pBuffer;
 };
@@ -189,7 +189,7 @@ class AudioSource {
   public:
     virtual ~AudioSource() = default;
 
-    virtual const CSAMPLE* buffer(const AudioOutput& output) const = 0;
+    [[nodiscard]] virtual const CSAMPLE* buffer(const AudioOutput& output) const = 0;
 
     /// This is called by SoundManager whenever an output is connected for this
     /// source. When this is called it is guaranteed that no callback is
@@ -242,7 +242,7 @@ class SoundDeviceId final {
     QString alsaHwDevice;
     int portAudioIndex;
 
-    QString debugName() const;
+    [[nodiscard]] QString debugName() const;
 
     SoundDeviceId()
        : portAudioIndex(-1) {}

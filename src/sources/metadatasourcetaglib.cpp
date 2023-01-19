@@ -302,7 +302,7 @@ class TagSaver {
   public:
     virtual ~TagSaver() = default;
 
-    virtual bool hasModifiedTags() const = 0;
+    [[nodiscard]] virtual bool hasModifiedTags() const = 0;
 
     virtual bool saveModifiedTags() = 0;
 };
@@ -315,7 +315,7 @@ class MpegTagSaver : public TagSaver {
     }
     ~MpegTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTagsBitmask != TagLib::MPEG::File::NoTags;
     }
 
@@ -365,7 +365,7 @@ class Mp4TagSaver : public TagSaver {
     }
     ~Mp4TagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -390,7 +390,7 @@ class FlacTagSaver : public TagSaver {
     }
     ~FlacTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -433,7 +433,7 @@ class OggTagSaver : public TagSaver {
     }
     ~OggTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -474,7 +474,7 @@ class OpusTagSaver : public TagSaver {
     }
     ~OpusTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -502,7 +502,7 @@ class WavPackTagSaver : public TagSaver {
     }
     ~WavPackTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -537,7 +537,7 @@ class WavTagSaver : public TagSaver {
     }
     ~WavTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 
@@ -581,7 +581,7 @@ class AiffTagSaver : public TagSaver {
     }
     ~AiffTagSaver() override = default;
 
-    bool hasModifiedTags() const override {
+    [[nodiscard]] bool hasModifiedTags() const override {
         return m_modifiedTags;
     }
 

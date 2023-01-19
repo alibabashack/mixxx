@@ -57,7 +57,7 @@ class MetadataSource {
     // Update track metadata of the source.
     // Sources that are read-only and don't support updating of metadata
     // should return Unsupported as this default implementation does.
-    virtual std::pair<ExportResult, QDateTime> exportTrackMetadata(
+    [[nodiscard]] virtual std::pair<ExportResult, QDateTime> exportTrackMetadata(
             const TrackMetadata& /*trackMetadata*/) const {
         return std::make_pair(ExportResult::Unsupported, QDateTime());
     }

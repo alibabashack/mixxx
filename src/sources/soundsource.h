@@ -25,7 +25,7 @@ class SoundSource
     /// The type of the source.
     ///
     /// The type equals the preferred suffix of the content's MIME type.
-    QString getType() const {
+    [[nodiscard]] QString getType() const {
         return m_type;
     }
 

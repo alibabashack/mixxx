@@ -18,11 +18,11 @@ class SampleFrames {
     }
     /*non-virtual*/ ~SampleFrames() = default;
 
-    IndexRange frameIndexRange() const {
+    [[nodiscard]] IndexRange frameIndexRange() const {
         return m_frameIndexRange;
     }
 
-    SINT frameLength() const {
+    [[nodiscard]] SINT frameLength() const {
         return m_frameIndexRange.length();
     }
 
@@ -49,15 +49,15 @@ class ReadableSampleFrames final : public SampleFrames {
     // frame indices and starts with the first frame. An
     // empty slice indicates that no sample data is available
     // for reading.
-    SampleBuffer::ReadableSlice readableSlice() const {
+    [[nodiscard]] SampleBuffer::ReadableSlice readableSlice() const {
         return m_readableSlice;
     }
 
-    SINT readableLength(SINT offset = 0) const {
+    [[nodiscard]] SINT readableLength(SINT offset = 0) const {
         return m_readableSlice.length(offset);
     }
 
-    const CSAMPLE* readableData(SINT offset = 0) const {
+    [[nodiscard]] const CSAMPLE* readableData(SINT offset = 0) const {
         return m_readableSlice.data(offset);
     }
 
@@ -84,15 +84,15 @@ class WritableSampleFrames final : public SampleFrames {
     // frame indices and starts with the first frame. An
     // empty slice indicates that no sample data must
     // be written.
-    SampleBuffer::WritableSlice writableSlice() const {
+    [[nodiscard]] SampleBuffer::WritableSlice writableSlice() const {
         return m_writableSlice;
     }
 
-    SINT writableLength(SINT offset = 0) const {
+    [[nodiscard]] SINT writableLength(SINT offset = 0) const {
         return m_writableSlice.length(offset);
     }
 
-    CSAMPLE* writableData(SINT offset = 0) const {
+    [[nodiscard]] CSAMPLE* writableData(SINT offset = 0) const {
         return m_writableSlice.data(offset);
     }
 
@@ -201,7 +201,7 @@ class AudioSource : public UrlResource, public virtual /*implements*/ IAudioSour
                           sampleRate) {
         }
 
-        const audio::SignalInfo& getSignalInfo() const {
+        [[nodiscard]] const audio::SignalInfo& getSignalInfo() const {
             return m_signalInfo;
         }
 
@@ -238,15 +238,15 @@ class AudioSource : public UrlResource, public virtual /*implements*/ IAudioSour
     // opened, has already been closed, or if opening has failed.
     virtual void close() = 0;
 
-    const audio::SignalInfo& getSignalInfo() const {
+    [[nodiscard]] const audio::SignalInfo& getSignalInfo() const {
         return m_signalInfo;
     }
 
-    const audio::Bitrate getBitrate() const {
+    [[nodiscard]] const audio::Bitrate getBitrate() const {
         return m_bitrate;
     }
 
-    audio::StreamInfo getStreamInfo() const {
+    [[nodiscard]] audio::StreamInfo getStreamInfo() const {
         return audio::StreamInfo(
                 getSignalInfo(),
                 getBitrate(),
@@ -254,23 +254,23 @@ class AudioSource : public UrlResource, public virtual /*implements*/ IAudioSour
     }
 
     // The total length of audio data is bounded and measured in frames.
-    IndexRange frameIndexRange() const {
+    [[nodiscard]] IndexRange frameIndexRange() const {
         return m_frameIndexRange;
     }
 
     // The total length of audio data.
-    SINT frameLength() const {
+    [[nodiscard]] SINT frameLength() const {
         return m_frameIndexRange.length();
     }
 
     // The index of the first frame.
-    SINT frameIndexMin() const {
+    [[nodiscard]] SINT frameIndexMin() const {
         DEBUG_ASSERT(m_frameIndexRange.start() <= m_frameIndexRange.end());
         return m_frameIndexRange.start();
     }
 
     // The index after the last frame.
-    SINT frameIndexMax() const {
+    [[nodiscard]] SINT frameIndexMax() const {
         DEBUG_ASSERT(m_frameIndexRange.start() <= m_frameIndexRange.end());
         return m_frameIndexRange.end();
     }
@@ -278,16 +278,16 @@ class AudioSource : public UrlResource, public virtual /*implements*/ IAudioSour
     // The sample frame index is valid within the range
     // [frameIndexMin(), frameIndexMax()]
     // including the upper bound of the range!
-    bool isValidFrameIndex(SINT frameIndex) const {
+    [[nodiscard]] bool isValidFrameIndex(SINT frameIndex) const {
         return m_frameIndexRange.clampIndex(frameIndex) == frameIndex;
     }
 
     // The actual duration in seconds.
     // Well defined only for valid files!
-    inline bool hasDuration() const {
+    [[nodiscard]] inline bool hasDuration() const {
         return getSignalInfo().getSampleRate().isValid();
     }
-    inline double getDuration() const {
+    [[nodiscard]] inline double getDuration() const {
         DEBUG_ASSERT(hasDuration()); // prevents division by zero
         return getSignalInfo().frames2secs(frameLength());
     }
@@ -372,7 +372,7 @@ class AudioSource : public UrlResource, public virtual /*implements*/ IAudioSour
             const AudioSource& inner,
             const audio::SignalInfo& signalInfo);
 
-    std::optional<WritableSampleFrames> clampWritableSampleFrames(
+    [[nodiscard]] std::optional<WritableSampleFrames> clampWritableSampleFrames(
             const WritableSampleFrames& sampleFrames) const;
 
     audio::SignalInfo m_signalInfo;

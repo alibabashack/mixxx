@@ -34,10 +34,10 @@ class SoundSourceProvider {
 
     /// A user-readable, unique display name that identifies
     /// the corresponding SoundSource.
-    virtual QString getDisplayName() const = 0;
+    [[nodiscard]] virtual QString getDisplayName() const = 0;
 
     /// A list of supported file extensions in any order.
-    virtual QStringList getSupportedFileTypes() const = 0;
+    [[nodiscard]] virtual QStringList getSupportedFileTypes() const = 0;
 
     /// The default cooperative priority of this provider compared to
     /// others supporting the same file extension(s). Please note that
@@ -46,7 +46,7 @@ class SoundSourceProvider {
     ///
     /// The priority may vary with the file type that is currently
     /// represented by the file extension.
-    virtual SoundSourceProviderPriority getPriorityHint(
+    [[nodiscard]] virtual SoundSourceProviderPriority getPriorityHint(
             const QString& supportedFileType) const {
         Q_UNUSED(supportedFileType)
         return SoundSourceProviderPriority::Default;

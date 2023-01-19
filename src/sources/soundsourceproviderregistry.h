@@ -14,11 +14,11 @@ class SoundSourceProviderRegistration final {
     SoundSourceProviderRegistration& operator=(SoundSourceProviderRegistration&&) = default;
     SoundSourceProviderRegistration& operator=(const SoundSourceProviderRegistration&) = default;
 
-    const SoundSourceProviderPointer& getProvider() const {
+    [[nodiscard]] const SoundSourceProviderPointer& getProvider() const {
         return m_pProvider;
     }
 
-    SoundSourceProviderPriority getProviderPriority() const {
+    [[nodiscard]] SoundSourceProviderPriority getProviderPriority() const {
         return m_providerPriority;
     }
 
@@ -46,19 +46,19 @@ class SoundSourceProviderRegistry {
     int registerProvider(
             const SoundSourceProviderPointer& pProvider);
 
-    QStringList getRegisteredFileTypes() const {
+    [[nodiscard]] QStringList getRegisteredFileTypes() const {
         return m_registrationListsByFileType.keys();
     }
 
     /// Returns all registrations for the given file type.
     /// If no providers have been registered for this file type
     /// an empty list will be returned.
-    QList<SoundSourceProviderRegistration> getRegistrationsForFileType(
+    [[nodiscard]] QList<SoundSourceProviderRegistration> getRegistrationsForFileType(
             const QString& fileType) const;
 
     /// Returns the primary provider registration for the given file
     /// types if available.
-    std::optional<SoundSourceProviderRegistration> getPrimaryRegistrationForFileType(
+    [[nodiscard]] std::optional<SoundSourceProviderRegistration> getPrimaryRegistrationForFileType(
             const QString& fileType) const {
         const auto registrations =
                 getRegistrationsForFileType(fileType);
@@ -71,7 +71,7 @@ class SoundSourceProviderRegistry {
 
     /// Returns the primary provider for the given file
     /// types if available.
-    SoundSourceProviderPointer getPrimaryProviderForFileType(
+    [[nodiscard]] SoundSourceProviderPointer getPrimaryProviderForFileType(
             const QString& fileType) const {
         const auto optProviderRegistration =
                 getPrimaryRegistrationForFileType(fileType);

@@ -44,15 +44,15 @@ class SoundSourceProviderOggVorbis : public SoundSourceProvider {
     static const QString kDisplayName;
     static const QStringList kSupportedFileTypes;
 
-    QString getDisplayName() const override {
+    [[nodiscard]] QString getDisplayName() const override {
         return kDisplayName;
     }
 
-    QStringList getSupportedFileTypes() const override {
+    [[nodiscard]] QStringList getSupportedFileTypes() const override {
         return kSupportedFileTypes;
     }
 
-    SoundSourceProviderPriority getPriorityHint(
+    [[nodiscard]] SoundSourceProviderPriority getPriorityHint(
             const QString& supportedFileType) const override;
 
     SoundSourcePointer newSoundSource(const QUrl &url) override {

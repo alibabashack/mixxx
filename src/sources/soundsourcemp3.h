@@ -54,7 +54,7 @@ class SoundSourceMp3 final : public SoundSource {
     void addSeekFrame(SINT frameIndex, const unsigned char* pInputData);
 
     /** Returns the position in m_seekFrameList of the requested frame index. */
-    SINT findSeekFrameIndex(SINT frameIndex) const;
+    [[nodiscard]] SINT findSeekFrameIndex(SINT frameIndex) const;
 
     SINT m_curFrameIndex;
 
@@ -79,11 +79,11 @@ class SoundSourceProviderMp3 : public SoundSourceProvider {
     static const QString kDisplayName;
     static const QStringList kSupportedFileTypes;
 
-    QString getDisplayName() const override {
+    [[nodiscard]] QString getDisplayName() const override {
         return kDisplayName;
     }
 
-    QStringList getSupportedFileTypes() const override {
+    [[nodiscard]] QStringList getSupportedFileTypes() const override {
         return kSupportedFileTypes;
     }
 
