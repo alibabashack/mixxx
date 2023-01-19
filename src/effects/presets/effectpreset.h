@@ -19,23 +19,23 @@ class EffectPreset {
 
     const QDomElement toXml(QDomDocument* doc) const;
 
-    const QString& id() const {
+    [[nodiscard]] const QString& id() const {
         return m_id;
     }
 
-    bool isEmpty() const {
+    [[nodiscard]] bool isEmpty() const {
         return m_effectParameterPresets.size() == 0;
     }
 
-    EffectBackendType backendType() const {
+    [[nodiscard]] EffectBackendType backendType() const {
         return m_backendType;
     }
 
-    double metaParameter() const {
+    [[nodiscard]] double metaParameter() const {
         return m_dMetaParameter;
     }
 
-    const QList<EffectParameterPreset>& getParameterPresets() const {
+    [[nodiscard]] const QList<EffectParameterPreset>& getParameterPresets() const {
         return m_effectParameterPresets;
     }
 

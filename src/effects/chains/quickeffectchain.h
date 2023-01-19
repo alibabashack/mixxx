@@ -19,9 +19,9 @@ class QuickEffectChain : public PerGroupEffectChain {
     static QString formatEffectSlotGroup(const QString& group,
             const int iEffectSlotNumber = 0);
 
-    int presetIndex() const override;
-    EffectChainPresetPointer presetAtIndex(int index) const override;
+    [[nodiscard]] int presetIndex() const override;
+    [[nodiscard]] EffectChainPresetPointer presetAtIndex(int index) const override;
 
     void loadChainPreset(EffectChainPresetPointer pPreset) override;
-    int numPresets() const override;
+    [[nodiscard]] int numPresets() const override;
 };

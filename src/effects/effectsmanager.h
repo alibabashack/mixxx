@@ -28,48 +28,48 @@ class EffectsManager {
     void setup();
     void addDeck(const ChannelHandleAndGroup& deckHandleGroup);
 
-    EffectChainPointer getEffectChain(const QString& group) const;
-    EqualizerEffectChainPointer getEqualizerEffectChain(
+    [[nodiscard]] EffectChainPointer getEffectChain(const QString& group) const;
+    [[nodiscard]] EqualizerEffectChainPointer getEqualizerEffectChain(
             const QString& deckGroupName) const {
         return m_equalizerEffectChains.value(deckGroupName);
     }
-    EffectChainPointer getStandardEffectChain(int unitNumber) const;
-    EffectChainPointer getOutputEffectChain() const;
+    [[nodiscard]] EffectChainPointer getStandardEffectChain(int unitNumber) const;
+    [[nodiscard]] EffectChainPointer getOutputEffectChain() const;
 
-    EngineEffectsManager* getEngineEffectsManager() const {
+    [[nodiscard]] EngineEffectsManager* getEngineEffectsManager() const {
         return m_pEngineEffectsManager;
     }
 
-    const ChannelHandle getMasterHandle() const {
+    [[nodiscard]] const ChannelHandle getMasterHandle() const {
         return m_pChannelHandleFactory->getOrCreateHandle("[Master]");
     }
 
-    const EffectChainPresetManagerPointer getChainPresetManager() const {
+    [[nodiscard]] const EffectChainPresetManagerPointer getChainPresetManager() const {
         return m_pChainPresetManager;
     }
-    const EffectPresetManagerPointer getEffectPresetManager() const {
+    [[nodiscard]] const EffectPresetManagerPointer getEffectPresetManager() const {
         return m_pEffectPresetManager;
     }
 
-    const EffectsBackendManagerPointer getBackendManager() const {
+    [[nodiscard]] const EffectsBackendManagerPointer getBackendManager() const {
         return m_pBackendManager;
     }
 
-    const VisibleEffectsListPointer getVisibleEffectsList() const {
+    [[nodiscard]] const VisibleEffectsListPointer getVisibleEffectsList() const {
         return m_pVisibleEffectsList;
     }
 
     void registerInputChannel(const ChannelHandleAndGroup& handle_group);
-    const QSet<ChannelHandleAndGroup>& registeredInputChannels() const {
+    [[nodiscard]] const QSet<ChannelHandleAndGroup>& registeredInputChannels() const {
         return m_registeredInputChannels;
     }
 
     void registerOutputChannel(const ChannelHandleAndGroup& handle_group);
-    const QSet<ChannelHandleAndGroup>& registeredOutputChannels() const {
+    [[nodiscard]] const QSet<ChannelHandleAndGroup>& registeredOutputChannels() const {
         return m_registeredOutputChannels;
     }
 
-    bool isAdoptMetaknobSettingEnabled() const;
+    [[nodiscard]] bool isAdoptMetaknobSettingEnabled() const;
 
   private:
     void addStandardEffectChains();

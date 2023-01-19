@@ -27,29 +27,29 @@ class EffectChainPresetManager : public QObject {
             EffectsBackendManagerPointer pBackendManager);
     ~EffectChainPresetManager() override = default;
 
-    const QList<EffectChainPresetPointer> getPresetsSorted() const {
+    [[nodiscard]] const QList<EffectChainPresetPointer> getPresetsSorted() const {
         return m_effectChainPresetsSorted;
     }
 
-    const QList<EffectChainPresetPointer> getQuickEffectPresetsSorted() const {
+    [[nodiscard]] const QList<EffectChainPresetPointer> getQuickEffectPresetsSorted() const {
         return m_quickEffectChainPresetsSorted;
     }
 
-    int numPresets() const {
+    [[nodiscard]] int numPresets() const {
         return m_effectChainPresetsSorted.size();
     }
 
-    int numQuickEffectPresets() const {
+    [[nodiscard]] int numQuickEffectPresets() const {
         return m_quickEffectChainPresetsSorted.size();
     }
 
-    int presetIndex(const QString& presetName) const;
-    int presetIndex(EffectChainPresetPointer pChainPreset) const;
-    EffectChainPresetPointer presetAtIndex(int index) const;
+    [[nodiscard]] int presetIndex(const QString& presetName) const;
+    [[nodiscard]] int presetIndex(EffectChainPresetPointer pChainPreset) const;
+    [[nodiscard]] EffectChainPresetPointer presetAtIndex(int index) const;
 
-    int quickEffectPresetIndex(const QString& presetName) const;
-    int quickEffectPresetIndex(EffectChainPresetPointer pChainPreset) const;
-    EffectChainPresetPointer quickEffectPresetAtIndex(int index) const;
+    [[nodiscard]] int quickEffectPresetIndex(const QString& presetName) const;
+    [[nodiscard]] int quickEffectPresetIndex(EffectChainPresetPointer pChainPreset) const;
+    [[nodiscard]] EffectChainPresetPointer quickEffectPresetAtIndex(int index) const;
 
     void importPreset();
     void exportPreset(const QString& chainPresetName);
@@ -61,7 +61,7 @@ class EffectChainPresetManager : public QObject {
     void setPresetOrder(const QStringList& chainPresetList);
     void setQuickEffectPresetOrder(const QStringList& chainPresetList);
 
-    EffectChainPresetPointer getPreset(const QString& name) const {
+    [[nodiscard]] EffectChainPresetPointer getPreset(const QString& name) const {
         return m_effectChainPresets.value(name);
     }
 

@@ -23,7 +23,7 @@ class EffectChainPreset {
 
     const QDomElement toXml(QDomDocument* doc) const;
 
-    bool isEmpty() const {
+    [[nodiscard]] bool isEmpty() const {
         return m_effectPresets.size() == 0;
     }
 
@@ -31,17 +31,17 @@ class EffectChainPreset {
     void setName(const QString& newName) {
         m_name = newName;
     }
-    const QString& name() const {
+    [[nodiscard]] const QString& name() const {
         return m_name;
     }
-    EffectChainMixMode::Type mixMode() const {
+    [[nodiscard]] EffectChainMixMode::Type mixMode() const {
         return m_mixMode;
     }
-    double superKnob() const {
+    [[nodiscard]] double superKnob() const {
         return m_dSuper;
     }
 
-    const QList<EffectPresetPointer>& effectPresets() const {
+    [[nodiscard]] const QList<EffectPresetPointer>& effectPresets() const {
         return m_effectPresets;
     }
 

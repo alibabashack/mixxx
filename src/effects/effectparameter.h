@@ -31,28 +31,28 @@ class EffectParameter {
             const EffectParameterPreset& preset);
     virtual ~EffectParameter();
 
-    EffectManifestParameterPointer manifest() const;
+    [[nodiscard]] EffectManifestParameterPointer manifest() const;
 
     void setLinkType(EffectManifestParameter::LinkType type) {
         m_linkType = type;
     }
-    EffectManifestParameter::LinkType linkType() const {
+    [[nodiscard]] EffectManifestParameter::LinkType linkType() const {
         return m_linkType;
     }
     void setLinkInversion(EffectManifestParameter::LinkInversion inversion) {
         m_linkInversion = inversion;
     }
-    EffectManifestParameter::LinkInversion linkInversion() const {
+    [[nodiscard]] EffectManifestParameter::LinkInversion linkInversion() const {
         return m_linkInversion;
     }
 
-    double getValue() const;
+    [[nodiscard]] double getValue() const;
     void setValue(double value);
 
     void updateEngineState();
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectParameter(%1)").arg(m_pParameterManifest->name());
     }
 

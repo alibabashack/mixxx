@@ -68,33 +68,33 @@ class EffectSlot : public QObject {
             EngineEffectChain* pEngineEffectChain);
     ~EffectSlot() override;
 
-    inline int getEffectSlotNumber() const {
+    [[nodiscard]] inline int getEffectSlotNumber() const {
         return m_iEffectNumber;
     }
 
-    inline bool isLoaded() const {
+    [[nodiscard]] inline bool isLoaded() const {
         return m_pEngineEffect != nullptr;
     }
 
-    const QString id() const {
+    [[nodiscard]] const QString id() const {
         if (!isLoaded() || m_pManifest == nullptr) {
             return "";
         }
         return m_pManifest->id();
     }
 
-    EffectBackendType backendType() const {
+    [[nodiscard]] EffectBackendType backendType() const {
         if (!isLoaded() || m_pManifest == nullptr) {
             return EffectBackendType::BuiltIn;
         }
         return m_pManifest->backendType();
     }
 
-    const ParameterMap getLoadedParameters() const {
+    [[nodiscard]] const ParameterMap getLoadedParameters() const {
         return m_loadedParameters;
     }
 
-    const ParameterMap getHiddenParameters() const {
+    [[nodiscard]] const ParameterMap getHiddenParameters() const {
         return m_hiddenParameters;
     }
 
@@ -113,21 +113,21 @@ class EffectSlot : public QObject {
     EffectParameterSlotBasePointer getEffectParameterSlot(
             EffectParameterType parameterType, unsigned int slotNumber);
 
-    double getMetaParameter() const;
+    [[nodiscard]] double getMetaParameter() const;
 
     /// Ensures that Softtakover is bypassed for the following
     /// ChainParameterChange. Uses for testing only
     void syncSofttakeover();
 
-    const QString& getGroup() const {
+    [[nodiscard]] const QString& getGroup() const {
         return m_group;
     }
 
     void initalizeInputChannel(ChannelHandle inputChannel);
 
-    EffectManifestPointer getManifest() const;
+    [[nodiscard]] EffectManifestPointer getManifest() const;
 
-    unsigned int numParameters(EffectParameterType parameterType) const;
+    [[nodiscard]] unsigned int numParameters(EffectParameterType parameterType) const;
 
     void setEnabled(bool enabled);
 
@@ -150,7 +150,7 @@ class EffectSlot : public QObject {
     void visibleEffectsListChanged();
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectSlot(%1)").arg(m_group);
     }
 

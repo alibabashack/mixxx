@@ -10,14 +10,14 @@ class VisibleEffectsList : public QObject {
     Q_OBJECT
 
   public:
-    const QList<EffectManifestPointer>& getList() const {
+    [[nodiscard]] const QList<EffectManifestPointer>& getList() const {
         return m_list;
     }
 
-    int indexOf(EffectManifestPointer pManifest) const;
-    const EffectManifestPointer at(int index) const;
-    const EffectManifestPointer next(const EffectManifestPointer pManifest) const;
-    const EffectManifestPointer previous(const EffectManifestPointer pManifest) const;
+    [[nodiscard]] int indexOf(EffectManifestPointer pManifest) const;
+    [[nodiscard]] const EffectManifestPointer at(int index) const;
+    [[nodiscard]] const EffectManifestPointer next(const EffectManifestPointer pManifest) const;
+    [[nodiscard]] const EffectManifestPointer previous(const EffectManifestPointer pManifest) const;
 
     void setList(const QList<EffectManifestPointer>& newList);
     void readEffectsXml(const QDomDocument& doc, EffectsBackendManagerPointer pBackendManager);

@@ -26,7 +26,7 @@ class EffectsMessenger {
   private:
     void collectGarbage(const EffectsRequest* pRequest);
 
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return "EffectsMessenger";
     }
 

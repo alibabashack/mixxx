@@ -37,16 +37,16 @@ class EffectParameterSlotBase : public QObject {
 
     virtual void onEffectMetaParameterChanged(double parameter, bool force = false);
 
-    QString name() const;
-    QString shortName() const;
-    QString description() const;
-    EffectParameterType parameterType() const;
+    [[nodiscard]] QString name() const;
+    [[nodiscard]] QString shortName() const;
+    [[nodiscard]] QString description() const;
+    [[nodiscard]] EffectParameterType parameterType() const;
     EffectManifestParameterPointer getManifest();
-    inline bool isLoaded() const {
+    [[nodiscard]] inline bool isLoaded() const {
         return m_pManifestParameter != nullptr;
     }
 
-    int slotNumber() const {
+    [[nodiscard]] int slotNumber() const {
         return m_iParameterSlotNumber;
     }
 

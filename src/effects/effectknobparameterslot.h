@@ -27,7 +27,7 @@ class EffectKnobParameterSlot : public EffectParameterSlotBase {
 
     void loadParameter(EffectParameterPointer pEffectParameter) override;
 
-    double getValueParameter() const;
+    [[nodiscard]] double getValueParameter() const;
 
     void onEffectMetaParameterChanged(double parameter, bool force = false) override;
 
@@ -47,7 +47,7 @@ class EffectKnobParameterSlot : public EffectParameterSlotBase {
     void slotLinkInverseChanged(double v);
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectKnobParameterSlot(%1,%2)").arg(m_group).arg(m_iParameterSlotNumber);
     }
 

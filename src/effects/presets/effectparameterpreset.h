@@ -20,23 +20,23 @@ class EffectParameterPreset {
 
     const QDomElement toXml(QDomDocument* doc) const;
 
-    bool isNull() const {
+    [[nodiscard]] bool isNull() const {
         return m_id.isEmpty();
     }
 
-    double value() const {
+    [[nodiscard]] double value() const {
         return m_dValue;
     }
-    const QString& id() const {
+    [[nodiscard]] const QString& id() const {
         return m_id;
     }
-    EffectManifestParameter::LinkType linkType() const {
+    [[nodiscard]] EffectManifestParameter::LinkType linkType() const {
         return m_linkType;
     }
-    EffectManifestParameter::LinkInversion linkInverted() const {
+    [[nodiscard]] EffectManifestParameter::LinkInversion linkInverted() const {
         return m_linkInversion;
     }
-    bool hidden() const {
+    [[nodiscard]] bool hidden() const {
         return m_bHidden;
     }
 

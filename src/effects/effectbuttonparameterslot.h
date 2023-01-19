@@ -29,7 +29,7 @@ class EffectButtonParameterSlot : public EffectParameterSlotBase {
     void setParameter(double value) override;
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectButtonParameterSlot(%1,%2)").arg(m_group).arg(m_iParameterSlotNumber);
     }
 

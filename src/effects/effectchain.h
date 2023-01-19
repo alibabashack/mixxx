@@ -44,7 +44,7 @@ class EffectChain : public QObject {
             SignalProcessingStage stage = SignalProcessingStage::Postfader);
     ~EffectChain() override;
 
-    QString group() const;
+    [[nodiscard]] QString group() const;
 
     EffectSlotPointer getEffectSlot(unsigned int slotNumber);
 
@@ -52,27 +52,27 @@ class EffectChain : public QObject {
             const double initialValue = 0.0);
     /// Do not store this in EffectSlot! The enabled input channels are a property
     /// of the chain, not the effect.
-    const QSet<ChannelHandleAndGroup>& getActiveChannels() const {
+    [[nodiscard]] const QSet<ChannelHandleAndGroup>& getActiveChannels() const {
         return m_enabledInputChannels;
     }
 
-    double getSuperParameter() const;
+    [[nodiscard]] double getSuperParameter() const;
     void setSuperParameter(double value, bool force = false);
 
-    EffectChainMixMode::Type mixMode() const;
+    [[nodiscard]] EffectChainMixMode::Type mixMode() const;
     void setMixMode(EffectChainMixMode::Type mixMode);
 
-    const QString& getGroup() const {
+    [[nodiscard]] const QString& getGroup() const {
         return m_group;
     }
 
-    const QString& presetName() const;
+    [[nodiscard]] const QString& presetName() const;
 
     // Get the human-readable description of the EffectChain
-    QString description() const;
+    [[nodiscard]] QString description() const;
     void setDescription(const QString& description);
 
-    const QList<EffectSlotPointer>& getEffectSlots() const {
+    [[nodiscard]] const QList<EffectSlotPointer>& getEffectSlots() const {
         return m_effectSlots;
     }
 
@@ -91,7 +91,7 @@ class EffectChain : public QObject {
   protected:
     EffectSlotPointer addEffectSlot(const QString& group);
 
-    virtual int numPresets() const;
+    [[nodiscard]] virtual int numPresets() const;
 
     // Activates EffectChain processing for the provided channel.
     void enableForInputChannel(const ChannelHandleAndGroup& handleGroup);
@@ -100,8 +100,8 @@ class EffectChain : public QObject {
     // Protected so QuickEffectChain can use the separate QuickEffect
     // chain preset list.
     QString m_presetName;
-    virtual int presetIndex() const;
-    virtual EffectChainPresetPointer presetAtIndex(int index) const;
+    [[nodiscard]] virtual int presetIndex() const;
+    [[nodiscard]] virtual EffectChainPresetPointer presetAtIndex(int index) const;
 
     EffectsManager* m_pEffectsManager;
     EffectChainPresetManagerPointer m_pChainPresetManager;
@@ -123,7 +123,7 @@ class EffectChain : public QObject {
     void slotChannelStatusChanged(double value, const ChannelHandleAndGroup& handleGroup);
 
   private:
-    QString debugString() const {
+    [[nodiscard]] QString debugString() const {
         return QString("EffectChain(%1)").arg(m_group);
     }
 
