@@ -72,55 +72,17 @@ CachingReader* EngineBuffer::buildCachingReader(const QString& group, UserSettin
     return pReader;
 }
 
-// Play button
-static ControlPushButton* buildPlayButton(const QString& group, auto receiver) {
-    auto* playButton = new ControlPushButton(ConfigKey(group, "play"));
-    playButton->setButtonMode(ControlPushButton::TOGGLE);
-    playButton->connectValueChangeRequest(
-            receiver, &EngineBuffer::slotControlPlayRequest, Qt::DirectConnection);
-    return playButton;
+static ControlPushButton* buildToggleButton(ConfigKey key) {
+    auto* button = new ControlPushButton(std::move(key));
+    button->setButtonMode(ControlPushButton::TOGGLE);
+    return button;
 }
 
-// Play from Start Button (for sampler)
-static ControlPushButton* buildPlayStartButton(const QString& group, auto receiver) {
-    auto* playStartButton = new ControlPushButton(ConfigKey(group, "start_play"));
-    QObject::connect(playStartButton, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlPlayFromStart, Qt::DirectConnection);
-    return playStartButton;
-}
-
-// Jump to start and stop button
-static ControlPushButton* buildStopStartButton(const QString& group, auto receiver) {
-    auto* stopStartButton = new ControlPushButton(ConfigKey(group, "start_stop"));
-    QObject::connect(stopStartButton, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlJumpToStartAndStop, Qt::DirectConnection);
-    return stopStartButton;
-}
-
-// Stop playback (for sampler)
-static ControlPushButton* buildStopButton(const QString& group, auto receiver) {
-    auto* stopButton = new ControlPushButton(ConfigKey(group, "stop"));
-    QObject::connect(stopButton, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlStop, Qt::DirectConnection);
-    return stopButton;
-}
-
-// Start button
-static ControlPushButton* buildStartButton(const QString& group, auto receiver) {
-    auto* startButton = new ControlPushButton(ConfigKey(group, "start"));
-    startButton->setButtonMode(ControlPushButton::TRIGGER);
-    QObject::connect(startButton, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlStart, Qt::DirectConnection);
-    return startButton;
-}
-
-// End button
-static ControlPushButton* buildEndButton(const QString& group, auto receiver) {
-    auto* endButton = new ControlPushButton(ConfigKey(group, "end"));
-    QObject::connect(endButton, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlEnd, Qt::DirectConnection);
-    return endButton;
-}
-
-static ControlPushButton* buildSlipButton(const QString& group) {
-    auto* pSlipButton = new ControlPushButton(ConfigKey(group, "slip_enabled"));
-    pSlipButton->setButtonMode(ControlPushButton::TOGGLE);
-    return pSlipButton;
+static ControlPushButton* buildButtonWithSlot(ConfigKey key, ControlPushButton::ButtonMode mode, auto receiver, auto slot) {
+    auto* button = new ControlPushButton(std::move(key));
+    button->setButtonMode(mode);
+    button->connectValueChangeRequest(receiver, slot, Qt::DirectConnection);
+    return button;
 }
 
 static ControlLinPotmeter* buildPlayPosSlider(const QString& group, auto receiver) {
@@ -128,18 +90,6 @@ static ControlLinPotmeter* buildPlayPosSlider(const QString& group, auto receive
             ConfigKey(group, "playposition"), 0.0, 1.0, 0, 0, true);
     QObject::connect(playposSlider, &ControlObject::valueChanged, receiver, &EngineBuffer::slotControlSeek, Qt::DirectConnection);
     return playposSlider;
-}
-
-static ControlPushButton* buildRepeatButton(const QString& group) {
-    auto* pRepeat = new ControlPushButton(ConfigKey(group, "repeat"));
-    pRepeat->setButtonMode(ControlPushButton::TOGGLE);
-    return pRepeat;
-}
-
-static ControlPushButton* buildKeylockButton(const QString& group) {
-    auto* pKeylock = new ControlPushButton(ConfigKey(group, "keylock"), true);
-    pKeylock->setButtonMode(ControlPushButton::TOGGLE);
-    return pKeylock;
 }
 
 EngineBuffer::EngineBuffer(const QString& group,
@@ -188,26 +138,26 @@ EngineBuffer::EngineBuffer(const QString& group,
     SampleUtil::clear(m_pCrossfadeBuffer, MAX_BUFFER_LEN);
 
     m_pReader = buildCachingReader(group, pConfig, this);
-    m_playButton = buildPlayButton(group, this);
-    m_playStartButton = buildPlayStartButton(group, this);
-    m_stopStartButton = buildStopStartButton(group, this);
-    m_stopButton = buildStopButton(group, this);
-    m_startButton = buildStartButton(group, this);
-    m_endButton = buildEndButton(group, this);
-    m_pSlipButton = buildSlipButton(group);
+    m_playButton = buildButtonWithSlot(ConfigKey(group, "play"), ControlPushButton::TOGGLE, this, &EngineBuffer::slotControlPlayRequest);
+    m_playStartButton = buildButtonWithSlot(ConfigKey(group, "start_play"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlPlayFromStart);
+    m_stopStartButton = buildButtonWithSlot(ConfigKey(group, "start_stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlJumpToStartAndStop);
+    m_stopButton = buildButtonWithSlot(ConfigKey(group, "stop"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlStop);
+    m_startButton = buildButtonWithSlot(ConfigKey(group, "start"), ControlPushButton::TRIGGER, this, &EngineBuffer::slotControlStart);
+    m_endButton = buildButtonWithSlot(ConfigKey(group, "end"), ControlPushButton::PUSH, this, &EngineBuffer::slotControlEnd);
+    m_pSlipButton = buildToggleButton(ConfigKey(group, "slip_enabled"));
     m_playposSlider = buildPlayPosSlider(group, this);
 
     // Control used to communicate ratio playpos to GUI thread
     m_visualPlayPos = VisualPlayPosition::getVisualPlayPosition(m_group);
 
-    m_pRepeat = buildRepeatButton(group);
+    m_pRepeat = buildToggleButton(ConfigKey(group, "repeat"));
 
     m_pSampleRate = new ControlProxy("[Master]", "samplerate", this);
 
     m_pTrackSamples = new ControlObject(ConfigKey(m_group, "track_samples"));
     m_pTrackSampleRate = new ControlObject(ConfigKey(m_group, "track_samplerate"));
 
-    m_pKeylock = buildKeylockButton(group);
+    m_pKeylock = buildToggleButton(ConfigKey(group, "keylock"));
 
     m_pTrackLoaded = new ControlObject(ConfigKey(m_group, "track_loaded"), false);
     m_pTrackLoaded->setReadOnly();
