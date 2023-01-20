@@ -46,10 +46,6 @@ enum class HotcueSetMode {
     Loop = 2,
 };
 
-inline SeekOnLoadMode seekOnLoadModeFromDouble(double value) {
-    return static_cast<SeekOnLoadMode>(int(value));
-}
-
 /// A `HotcueControl` represents a hotcue slot. It can either be empty or have
 /// a (hot-)cue attached to it.
 ///
