@@ -11,9 +11,9 @@
 /// hotcue. Auto will make CueControl determine the type automatically (i.e.
 /// create a loop cue if a loop is set, and a regular cue in all other cases).
 enum class HotcueSetMode {
-    Auto = 0,
-    Cue = 1,
-    Loop = 2,
+    Auto,
+    Cue,
+    Loop,
 };
 
 /// A `HotcueControl` represents a hotcue slot. It can either be empty or have
