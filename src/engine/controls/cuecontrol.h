@@ -15,7 +15,7 @@
 #include "util/compatibility/qmutex.h"
 #include "util/parented_ptr.h"
 
-#define NUM_HOT_CUES 37
+constexpr int NUM_HOT_CUES = 37;
 
 class ControlObject;
 class ControlPushButton;
