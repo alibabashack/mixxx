@@ -1,10 +1,5 @@
 #include "engine/controls/clockcontrol.h"
 
-#include "control/controlobject.h"
-#include "control/controlproxy.h"
-#include "engine/controls/enginecontrol.h"
-#include "moc_clockcontrol.cpp"
-#include "preferences/usersettings.h"
 #include "track/track.h"
 
 namespace {

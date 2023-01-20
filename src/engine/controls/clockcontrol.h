@@ -1,15 +1,8 @@
 #pragma once
 
-#include "audio/frame.h"
 #include "control/controlobject.h"
 #include "control/controlproxy.h"
 #include "engine/controls/enginecontrol.h"
-#include "preferences/usersettings.h"
-#include "track/beats.h"
-#include "track/track_decl.h"
-
-class ControlProxy;
-class ControlObject;
 
 class ClockControl: public EngineControl {
     Q_OBJECT
