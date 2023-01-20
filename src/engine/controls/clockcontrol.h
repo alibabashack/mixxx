@@ -17,8 +17,6 @@ class ClockControl: public EngineControl {
     ClockControl(const QString& group,
             UserSettingsPointer pConfig);
 
-    ~ClockControl() override;
-
     void updateIndicators(const double dRate,
             mixxx::audio::FramePos currentPosition,
             mixxx::audio::SampleRate sampleRate);

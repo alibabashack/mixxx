@@ -31,8 +31,6 @@ ClockControl::ClockControl(const QString& group, UserSettingsPointer pConfig)
     m_pCOBeatActive->forceSet(0.0);
 }
 
-ClockControl::~ClockControl() = default;
-
 // called from an engine worker thread
 void ClockControl::trackLoaded(TrackPointer pNewTrack) {
     mixxx::BeatsPointer pBeats;
