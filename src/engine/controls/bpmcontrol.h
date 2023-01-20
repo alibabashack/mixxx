@@ -2,8 +2,10 @@
 
 #include <gtest/gtest_prod.h>
 
+#include "control/controllinpotmeter.h"
 #include "control/controlobject.h"
 #include "control/controlproxy.h"
+#include "control/controlpushbutton.h"
 #include "engine/controls/enginecontrol.h"
 #include "engine/sync/syncable.h"
 #include "track/beats.h"
@@ -23,11 +25,10 @@ class BpmControl : public EngineControl {
 
   public:
     BpmControl(const QString& group, UserSettingsPointer pConfig);
-    ~BpmControl() override;
 
     mixxx::Bpm getBpm() const;
     mixxx::Bpm getLocalBpm() const {
-        return m_pLocalBpm ? mixxx::Bpm(m_pLocalBpm->get()) : mixxx::Bpm();
+        return mixxx::Bpm(m_localBpm.get());
     }
 
     // When in sync lock mode, ratecontrol calls calcSyncedRate to figure out
@@ -112,7 +113,7 @@ class BpmControl : public EngineControl {
 
   private:
     SyncMode getSyncMode() const {
-        return syncModeFromDouble(m_pSyncMode->get());
+        return syncModeFromDouble(m_syncMode.get());
     }
     inline bool isSynchronized() const {
         return toSynchronized(getSyncMode());
@@ -123,49 +124,49 @@ class BpmControl : public EngineControl {
     friend class SyncControl;
 
     // ControlObjects that come from EngineBuffer
-    ControlProxy* m_pPlayButton;
-    ControlProxy* m_pReverseButton;
-    ControlProxy* m_pRateRatio;
+    ControlProxy m_playButton;
+    ControlProxy m_reverseButton;
+    ControlProxy m_rateRatio;
     ControlObject* m_pQuantize;
 
     // ControlObjects that come from QuantizeControl
-    QScopedPointer<ControlProxy> m_pNextBeat;
-    QScopedPointer<ControlProxy> m_pPrevBeat;
+    ControlProxy m_nextBeat;
+    ControlProxy m_prevBeat;
 
     // ControlObjects that come from LoopingControl
-    ControlProxy* m_pLoopEnabled;
-    ControlProxy* m_pLoopStartPosition;
-    ControlProxy* m_pLoopEndPosition;
+    ControlProxy m_loopEnabled;
+    ControlProxy m_loopStartPosition;
+    ControlProxy m_loopEndPosition;
 
     // The average bpm around the current playposition;
-    ControlObject* m_pLocalBpm;
-    ControlPushButton* m_pAdjustBeatsFaster;
-    ControlPushButton* m_pAdjustBeatsSlower;
-    ControlPushButton* m_pTranslateBeatsEarlier;
-    ControlPushButton* m_pTranslateBeatsLater;
+    ControlObject m_localBpm;
+    ControlPushButton m_adjustBeatsFaster;
+    ControlPushButton m_adjustBeatsSlower;
+    ControlPushButton m_translateBeatsEarlier;
+    ControlPushButton m_translateBeatsLater;
 
     // The current effective BPM of the engine
-    ControlLinPotmeter* m_pEngineBpm;
+    ControlLinPotmeter m_engineBpm;
 
     // Used for bpm tapping from GUI and MIDI
-    ControlPushButton* m_pButtonTap;
+    ControlPushButton m_buttonTap;
 
     // Button that translates the beats so the nearest beat is on the current
     // playposition.
-    ControlPushButton* m_pTranslateBeats;
+    ControlPushButton m_translateBeats;
     // Button that translates beats to match another playing deck
-    ControlPushButton* m_pBeatsTranslateMatchAlignment;
+    ControlPushButton m_beatsTranslateMatchAlignment;
 
     // Measures distance from last beat in percentage: 0.5 = half-beat away.
-    ControlProxy* m_pThisBeatDistance;
+    ControlProxy m_thisBeatDistance;
     ControlValueAtomic<double> m_dSyncTargetBeatDistance;
     // The user offset is a beat distance percentage value that the user has tweaked a deck
     // to bring it in sync with the other decks. This value is added to the reported beat
     // distance to get the virtual beat distance used for sync.
     ControlValueAtomic<double> m_dUserOffset;
     QAtomicInt m_resetSyncAdjustment;
-    ControlProxy* m_pSyncMode;
-    ControlProxy* m_pSyncEnabled;
+    ControlProxy m_syncMode;
+    ControlProxy m_syncEnabled;
 
     TapFilter m_tapFilter; // threadsafe
 
