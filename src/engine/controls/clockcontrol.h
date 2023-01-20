@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>
-
 #include "audio/frame.h"
+#include "control/controlobject.h"
+#include "control/controlproxy.h"
 #include "engine/controls/enginecontrol.h"
 #include "preferences/usersettings.h"
 #include "track/beats.h"
@@ -25,12 +25,12 @@ class ClockControl: public EngineControl {
     void trackBeatsUpdated(mixxx::BeatsPointer pBeats) override;
 
   private:
-    std::unique_ptr<ControlObject> m_pCOBeatActive;
+    ControlObject m_COBeatActive;
 
     // ControlObjects that come from LoopingControl
-    std::unique_ptr<ControlProxy> m_pLoopEnabled;
-    std::unique_ptr<ControlProxy> m_pLoopStartPosition;
-    std::unique_ptr<ControlProxy> m_pLoopEndPosition;
+    ControlProxy m_loopEnabled;
+    ControlProxy m_loopStartPosition;
+    ControlProxy m_loopEndPosition;
 
     // True is forward direction, False is reverse
     bool m_lastPlayDirectionWasForwards;
