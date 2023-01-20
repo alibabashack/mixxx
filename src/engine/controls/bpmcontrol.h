@@ -115,8 +115,6 @@ class BpmControl : public EngineControl {
     double calcSyncAdjustment(bool userTweakingSync);
     void adjustBeatsBpm(double deltaBpm);
 
-    friend class SyncControl;
-
     // ControlObjects that come from EngineBuffer
     ControlProxy m_playButton;
     ControlProxy m_reverseButton;
