@@ -50,8 +50,6 @@ class CueControl : public EngineControl {
     void updateIndicators();
     bool isTrackAtIntroCue();
     void resetIndicators();
-    bool isPlayingByPlayButton();
-    bool getPlayFlashingAtPause();
     SeekOnLoadMode getSeekOnLoadPreference();
     void trackLoaded(TrackPointer pNewTrack) override;
     void trackBeatsUpdated(mixxx::BeatsPointer pBeats) override;
