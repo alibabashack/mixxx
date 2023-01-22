@@ -54,8 +54,57 @@ CueControl::CueControl(const QString& group,
           m_currentlyPreviewingIndex(Cue::kNoHotCue),
           m_pPlay(ControlObject::getControl(ConfigKey(group, "play"))),
           m_pStopButton(ControlObject::getControl(ConfigKey(group, "stop"))),
+          m_pQuantizeEnabled(ControlObject::getControl(ConfigKey(group, "quantize"))),
+          m_pClosestBeat(ControlObject::getControl(ConfigKey(group, "beat_closest"))),
+          m_pLoopStartPosition(make_parented<ControlProxy>(group, "loop_start_position", this)),
+          m_pLoopEndPosition(make_parented<ControlProxy>(group, "loop_end_position", this)),
+          m_pLoopEnabled(make_parented<ControlProxy>(group, "loop_enabled", this)),
+          m_pBeatLoopActivate(make_parented<ControlProxy>(group, "beatloop_activate", this)),
+          m_pBeatLoopSize(make_parented<ControlProxy>(group, "beatloop_size", this)),
           m_bypassCueSetByPlay(false),
           m_iNumHotCues(kNumHotCues),
+          m_pTrackSamples(ControlObject::getControl(ConfigKey(group, "track_samples"))),
+          m_pCuePoint(new ControlObject(ConfigKey(group, "cue_point"))),
+          m_pCueMode(new ControlObject(ConfigKey(group, "cue_mode"))),
+          m_pCueSet(new ControlPushButton(ConfigKey(m_group, "cue_set"))),
+          m_pCueClear(new ControlPushButton(ConfigKey(m_group, "cue_clear"))),
+          m_pCueCDJ(new ControlPushButton(ConfigKey(m_group, "cue_cdj"))),
+          m_pCueDefault(new ControlPushButton(ConfigKey(m_group, "cue_default"))),
+          m_pPlayStutter(new ControlPushButton(ConfigKey(m_group, "play_stutter"))),
+          m_pCueIndicator(new ControlIndicator(ConfigKey(m_group, "cue_indicator"))),
+          m_pPlayIndicator(new ControlIndicator(ConfigKey(m_group, "play_indicator"))),
+          m_pPlayLatched(new ControlObject(ConfigKey(m_group, "play_latched"))),
+          m_pCueGoto(new ControlPushButton(ConfigKey(m_group, "cue_goto"))),
+          m_pCueGotoAndPlay(new ControlPushButton(ConfigKey(m_group, "cue_gotoandplay"))),
+          m_pCuePlay(new ControlPushButton(ConfigKey(m_group, "cue_play"))),
+          m_pCueGotoAndStop(new ControlPushButton(ConfigKey(m_group, "cue_gotoandstop"))),
+          m_pCuePreview(new ControlPushButton(ConfigKey(m_group, "cue_preview"))),
+          m_pIntroStartPosition(new ControlObject(ConfigKey(m_group, "intro_start_position"))),
+          m_pIntroStartEnabled(new ControlObject(ConfigKey(m_group, "intro_start_enabled"))),
+          m_pIntroStartSet(new ControlPushButton(ConfigKey(m_group, "intro_start_set"))),
+          m_pIntroStartClear(new ControlPushButton(ConfigKey(m_group, "intro_start_clear"))),
+          m_pIntroStartActivate(new ControlPushButton(ConfigKey(m_group, "intro_start_activate"))),
+          m_pIntroEndPosition(new ControlObject(ConfigKey(m_group, "intro_end_position"))),
+          m_pIntroEndEnabled(new ControlObject(ConfigKey(m_group, "intro_end_enabled"))),
+          m_pIntroEndSet(new ControlPushButton(ConfigKey(m_group, "intro_end_set"))),
+          m_pIntroEndClear(new ControlPushButton(ConfigKey(m_group, "intro_end_clear"))),
+          m_pIntroEndActivate(new ControlPushButton(ConfigKey(m_group, "intro_end_activate"))),
+          m_pOutroStartPosition(new ControlObject(ConfigKey(m_group, "outro_start_position"))),
+          m_pOutroStartEnabled(new ControlObject(ConfigKey(m_group, "outro_start_enabled"))),
+          m_pOutroStartSet(new ControlPushButton(ConfigKey(m_group, "outro_start_set"))),
+          m_pOutroStartClear(new ControlPushButton(ConfigKey(m_group, "outro_start_clear"))),
+          m_pOutroStartActivate(new ControlPushButton(ConfigKey(m_group, "outro_start_activate"))),
+          m_pOutroEndPosition(new ControlObject(ConfigKey(m_group, "outro_end_position"))),
+          m_pOutroEndEnabled(new ControlObject(ConfigKey(m_group, "outro_end_enabled"))),
+          m_pOutroEndSet(new ControlPushButton(ConfigKey(m_group, "outro_end_set"))),
+          m_pOutroEndClear(new ControlPushButton(ConfigKey(m_group, "outro_end_clear"))),
+          m_pOutroEndActivate(new ControlPushButton(ConfigKey(m_group, "outro_end_activate"))),
+          m_pVinylControlEnabled(new ControlProxy(m_group, "vinylcontrol_enabled")),
+          m_pVinylControlMode(new ControlProxy(m_group, "vinylcontrol_mode")),
+          m_pHotcueFocus(new ControlObject(ConfigKey(m_group, "hotcue_focus"))),
+          m_pHotcueFocusColorNext(new ControlObject(ConfigKey(m_group, "hotcue_focus_color_next"))),
+          m_pHotcueFocusColorPrev(new ControlObject(ConfigKey(m_group, "hotcue_focus_color_prev"))),
+          m_pPassthrough(make_parented<ControlProxy>(group, "passthrough", this)),
           m_pCurrentSavedLoopControl(nullptr),
           m_trackMutex(QT_RECURSIVE_MUTEX_INIT) {
     // To silence a compiler warning about CUE_MODE_PIONEER.
@@ -64,26 +113,12 @@ CueControl::CueControl(const QString& group,
     createControls();
     connectControls();
 
-    m_pTrackSamples = ControlObject::getControl(ConfigKey(group, "track_samples"));
-
-    m_pQuantizeEnabled = ControlObject::getControl(ConfigKey(group, "quantize"));
     connect(m_pQuantizeEnabled, &ControlObject::valueChanged,
             this, &CueControl::quantizeChanged,
             Qt::DirectConnection);
 
-    m_pClosestBeat = ControlObject::getControl(ConfigKey(group, "beat_closest"));
-    m_pLoopStartPosition = make_parented<ControlProxy>(group, "loop_start_position", this);
-    m_pLoopEndPosition = make_parented<ControlProxy>(group, "loop_end_position", this);
-    m_pLoopEnabled = make_parented<ControlProxy>(group, "loop_enabled", this);
-    m_pBeatLoopActivate = make_parented<ControlProxy>(group, "beatloop_activate", this);
-    m_pBeatLoopSize = make_parented<ControlProxy>(group, "beatloop_size", this);
-
-    m_pCuePoint = new ControlObject(ConfigKey(group, "cue_point"));
     m_pCuePoint->set(Cue::kNoPosition);
 
-    m_pCueMode = new ControlObject(ConfigKey(group, "cue_mode"));
-
-    m_pPassthrough = make_parented<ControlProxy>(group, "passthrough", this);
     m_pPassthrough->connectValueChanged(this,
             &CueControl::passthroughChanged,
             Qt::DirectConnection);
@@ -134,62 +169,18 @@ CueControl::~CueControl() {
 }
 
 void CueControl::createControls() {
-    m_pCueSet = new ControlPushButton(ConfigKey(m_group, "cue_set"));
     m_pCueSet->setButtonMode(ControlPushButton::TRIGGER);
-    m_pCueClear = new ControlPushButton(ConfigKey(m_group, "cue_clear"));
     m_pCueClear->setButtonMode(ControlPushButton::TRIGGER);
-    m_pCueGoto = new ControlPushButton(ConfigKey(m_group, "cue_goto"));
-    m_pCueGotoAndPlay = new ControlPushButton(ConfigKey(m_group, "cue_gotoandplay"));
-    m_pCuePlay = new ControlPushButton(ConfigKey(m_group, "cue_play"));
-    m_pCueGotoAndStop = new ControlPushButton(ConfigKey(m_group, "cue_gotoandstop"));
-    m_pCuePreview = new ControlPushButton(ConfigKey(m_group, "cue_preview"));
-    m_pCueCDJ = new ControlPushButton(ConfigKey(m_group, "cue_cdj"));
-    m_pCueDefault = new ControlPushButton(ConfigKey(m_group, "cue_default"));
-    m_pPlayStutter = new ControlPushButton(ConfigKey(m_group, "play_stutter"));
-
-    m_pPlayLatched = new ControlObject(ConfigKey(m_group, "play_latched"));
     m_pPlayLatched->setReadOnly();
-
-    m_pCueIndicator = new ControlIndicator(ConfigKey(m_group, "cue_indicator"));
-    m_pPlayIndicator = new ControlIndicator(ConfigKey(m_group, "play_indicator"));
-
-    m_pIntroStartPosition = new ControlObject(ConfigKey(m_group, "intro_start_position"));
     m_pIntroStartPosition->set(Cue::kNoPosition);
-    m_pIntroStartEnabled = new ControlObject(ConfigKey(m_group, "intro_start_enabled"));
     m_pIntroStartEnabled->setReadOnly();
-    m_pIntroStartSet = new ControlPushButton(ConfigKey(m_group, "intro_start_set"));
-    m_pIntroStartClear = new ControlPushButton(ConfigKey(m_group, "intro_start_clear"));
-    m_pIntroStartActivate = new ControlPushButton(ConfigKey(m_group, "intro_start_activate"));
-    m_pIntroEndPosition = new ControlObject(ConfigKey(m_group, "intro_end_position"));
     m_pIntroEndPosition->set(Cue::kNoPosition);
-    m_pIntroEndEnabled = new ControlObject(ConfigKey(m_group, "intro_end_enabled"));
     m_pIntroEndEnabled->setReadOnly();
-    m_pIntroEndSet = new ControlPushButton(ConfigKey(m_group, "intro_end_set"));
-    m_pIntroEndClear = new ControlPushButton(ConfigKey(m_group, "intro_end_clear"));
-    m_pIntroEndActivate = new ControlPushButton(ConfigKey(m_group, "intro_end_activate"));
-
-    m_pOutroStartPosition = new ControlObject(ConfigKey(m_group, "outro_start_position"));
     m_pOutroStartPosition->set(Cue::kNoPosition);
-    m_pOutroStartEnabled = new ControlObject(ConfigKey(m_group, "outro_start_enabled"));
     m_pOutroStartEnabled->setReadOnly();
-    m_pOutroStartSet = new ControlPushButton(ConfigKey(m_group, "outro_start_set"));
-    m_pOutroStartClear = new ControlPushButton(ConfigKey(m_group, "outro_start_clear"));
-    m_pOutroStartActivate = new ControlPushButton(ConfigKey(m_group, "outro_start_activate"));
-    m_pOutroEndPosition = new ControlObject(ConfigKey(m_group, "outro_end_position"));
     m_pOutroEndPosition->set(Cue::kNoPosition);
-    m_pOutroEndEnabled = new ControlObject(ConfigKey(m_group, "outro_end_enabled"));
     m_pOutroEndEnabled->setReadOnly();
-    m_pOutroEndSet = new ControlPushButton(ConfigKey(m_group, "outro_end_set"));
-    m_pOutroEndClear = new ControlPushButton(ConfigKey(m_group, "outro_end_clear"));
-    m_pOutroEndActivate = new ControlPushButton(ConfigKey(m_group, "outro_end_activate"));
-
-    m_pVinylControlEnabled = new ControlProxy(m_group, "vinylcontrol_enabled");
-    m_pVinylControlMode = new ControlProxy(m_group, "vinylcontrol_mode");
-
-    m_pHotcueFocus = new ControlObject(ConfigKey(m_group, "hotcue_focus"));
     setHotcueFocusIndex(Cue::kNoHotCue);
-    m_pHotcueFocusColorPrev = new ControlObject(ConfigKey(m_group, "hotcue_focus_color_prev"));
-    m_pHotcueFocusColorNext = new ControlObject(ConfigKey(m_group, "hotcue_focus_color_next"));
 
     // Create hotcue controls
     for (int i = 0; i < m_iNumHotCues; ++i) {
