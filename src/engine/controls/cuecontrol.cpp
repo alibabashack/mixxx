@@ -44,6 +44,14 @@ void appendCueHint(gsl::not_null<HintVector*> pHintList, const double playPos, H
     appendCueHint(pHintList, frame, type);
 }
 
+std::array<std::unique_ptr<HotcueControl>, kNumHotCues> buildHotcueControls(const QString& group) {
+    std::array<std::unique_ptr<HotcueControl>, kNumHotCues> controls;
+    for (size_t i = 0; i < controls.size(); i++) {
+        controls[i] = std::make_unique<HotcueControl>(group, i);
+    }
+    return controls;
+}
+
 } // namespace
 
 CueControl::CueControl(const QString& group,
@@ -62,6 +70,7 @@ CueControl::CueControl(const QString& group,
           m_beatLoopActivate(group, "beatloop_activate", this),
           m_beatLoopSize(group, "beatloop_size", this),
           m_bypassCueSetByPlay(false),
+          m_hotcueControls(buildHotcueControls(group)),
           m_pTrackSamples(ControlObject::getControl(ConfigKey(group, "track_samples"))),
           m_cuePoint(ConfigKey(group, "cue_point")),
           m_cueMode(ConfigKey(group, "cue_mode")),
@@ -123,10 +132,6 @@ CueControl::CueControl(const QString& group,
             Qt::DirectConnection);
 }
 
-CueControl::~CueControl() {
-    qDeleteAll(m_hotcueControls);
-}
-
 void CueControl::createControls() {
     m_cueSet.setButtonMode(ControlPushButton::TRIGGER);
     m_cueClear.setButtonMode(ControlPushButton::TRIGGER);
@@ -140,12 +145,6 @@ void CueControl::createControls() {
     m_outroEndPosition.set(Cue::kNoPosition);
     m_outroEndEnabled.setReadOnly();
     setHotcueFocusIndex(Cue::kNoHotCue);
-
-    // Create hotcue controls
-    for (int i = 0; i < kNumHotCues; ++i) {
-        HotcueControl* pControl = new HotcueControl(m_group, i);
-        m_hotcueControls.append(pControl);
-    }
 }
 
 void CueControl::connectControls() {
@@ -276,55 +275,55 @@ void CueControl::connectControls() {
 
     // Hotcue controls
     for (const auto& pControl : qAsConst(m_hotcueControls)) {
-        connect(pControl, &HotcueControl::hotcuePositionChanged,
+        connect(pControl.get(), &HotcueControl::hotcuePositionChanged,
                 this, &CueControl::hotcuePositionChanged,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueEndPositionChanged,
                 this,
                 &CueControl::hotcueEndPositionChanged,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueSet,
                 this,
                 &CueControl::hotcueSet,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueGoto,
                 this,
                 &CueControl::hotcueGoto,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueGotoAndPlay,
                 this,
                 &CueControl::hotcueGotoAndPlay,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueGotoAndStop,
                 this,
                 &CueControl::hotcueGotoAndStop,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueGotoAndLoop,
                 this,
                 &CueControl::hotcueGotoAndLoop,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueCueLoop,
                 this,
                 &CueControl::hotcueCueLoop,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueActivate,
                 this,
                 &CueControl::hotcueActivate,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueActivatePreview,
                 this,
                 &CueControl::hotcueActivatePreview,
                 Qt::DirectConnection);
-        connect(pControl,
+        connect(pControl.get(),
                 &HotcueControl::hotcueClear,
                 this,
                 &CueControl::hotcueClear,
@@ -362,7 +361,7 @@ void CueControl::disconnectControls() {
     disconnect(&m_hotcueFocusColorNext, nullptr, this, nullptr);
 
     for (const auto& pControl : qAsConst(m_hotcueControls)) {
-        disconnect(pControl, nullptr, this, nullptr);
+        disconnect(pControl.get(), nullptr, this, nullptr);
     }
 }
 
@@ -418,7 +417,7 @@ void CueControl::trackLoaded(TrackPointer pNewTrack) {
         updateCurrentlyPreviewingIndex(Cue::kNoHotCue);
 
         for (const auto& pControl : qAsConst(m_hotcueControls)) {
-            detachCue(pControl);
+            detachCue(pControl.get());
         }
 
         m_pueIndicator.setBlinkValue(ControlIndicator::OFF);
@@ -567,13 +566,13 @@ void CueControl::loadCuesFromTrack() {
                 continue;
             }
 
-            int hotcue = pCue->getHotCue();
-            HotcueControl* pControl = m_hotcueControls.value(hotcue, NULL);
-
+            const size_t hotcue = pCue->getHotCue();
             // Cue's hotcue doesn't have a hotcue control.
-            if (pControl == nullptr) {
+            if (hotcue >= m_hotcueControls.size()) {
                 continue;
             }
+            HotcueControl* pControl = m_hotcueControls.at(hotcue).get();
+
 
             CuePointer pOldCue(pControl->getCue());
 
@@ -601,7 +600,7 @@ void CueControl::loadCuesFromTrack() {
     // Detach all hotcues that are no longer present
     for (int hotCueIndex = 0; hotCueIndex < kNumHotCues; ++hotCueIndex) {
         if (!active_hotcues.contains(hotCueIndex)) {
-            HotcueControl* pControl = m_hotcueControls.at(hotCueIndex);
+            HotcueControl* pControl = m_hotcueControls.at(hotCueIndex).get();
             detachCue(pControl);
         }
     }
@@ -1077,7 +1076,7 @@ void CueControl::updateCurrentlyPreviewingIndex(int hotcueIndex) {
     int oldPreviewingIndex = m_currentlyPreviewingIndex.fetchAndStoreRelease(hotcueIndex);
     if (oldPreviewingIndex >= 0 && oldPreviewingIndex < kNumHotCues) {
         // We where already in previewing state, clean up ..
-        HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex);
+        HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex).get();
         mixxx::CueType lastType = pLastControl->getPreviewingType();
         if (lastType == mixxx::CueType::Loop) {
             m_loopEnabled.set(0);
@@ -1931,7 +1930,7 @@ bool CueControl::updateIndicatorsAndModifyPlay(
                     m_currentlyPreviewingIndex.fetchAndStoreRelease(
                             Cue::kNoHotCue);
             if (oldPreviewingIndex >= 0 && oldPreviewingIndex < kNumHotCues) {
-                HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex);
+                HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex).get();
                 mixxx::CueType lastType = pLastControl->getPreviewingType();
                 if (lastType != mixxx::CueType::Loop) {
                     CuePointer pLastCue(pLastControl->getCue());
@@ -2190,7 +2189,7 @@ void CueControl::hotcueFocusColorPrev(double value) {
         return;
     }
 
-    HotcueControl* pControl = m_hotcueControls.at(hotcueIndex);
+    HotcueControl* pControl = m_hotcueControls.at(hotcueIndex).get();
     if (!pControl) {
         return;
     }
@@ -2219,7 +2218,7 @@ void CueControl::hotcueFocusColorNext(double value) {
         return;
     }
 
-    HotcueControl* pControl = m_hotcueControls.at(hotcueIndex);
+    HotcueControl* pControl = m_hotcueControls.at(hotcueIndex).get();
     if (!pControl) {
         return;
     }

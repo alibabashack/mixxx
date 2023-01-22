@@ -44,7 +44,6 @@ class CueControl : public EngineControl {
   public:
     CueControl(const QString& group,
             UserSettingsPointer pConfig);
-    ~CueControl() override;
 
     void hintReader(gsl::not_null<HintVector*> pHintList) override;
     bool updateIndicatorsAndModifyPlay(bool newPlay, bool oldPlay, bool playPossible);
@@ -152,7 +151,7 @@ class CueControl : public EngineControl {
     ControlProxy m_beatLoopSize;
     bool m_bypassCueSetByPlay;
     ControlValueAtomic<mixxx::audio::FramePos> m_usedSeekOnLoadPosition;
-    QList<HotcueControl*> m_hotcueControls;
+    std::array<std::unique_ptr<HotcueControl>, kNumHotCues> m_hotcueControls;
 
     ControlObject* m_pTrackSamples;
     ControlObject m_cuePoint;
