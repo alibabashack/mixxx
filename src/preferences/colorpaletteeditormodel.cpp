@@ -81,7 +81,7 @@ bool ColorPaletteEditorModel::setData(const QModelIndex& modelIndex, const QVari
         // make sure no index is outside of range
         DEBUG_ASSERT(std::is_sorted(hotcueIndexList.cbegin(), hotcueIndexList.cend()));
         auto endUpper = std::upper_bound(
-                hotcueIndexList.begin(), hotcueIndexList.end(), NUM_HOT_CUES);
+                hotcueIndexList.begin(), hotcueIndexList.end(), kNumHotCues);
         hotcueIndexList.erase(endUpper, hotcueIndexList.end());
         auto endLower = std::upper_bound(hotcueIndexList.begin(), hotcueIndexList.end(), 0);
         hotcueIndexList.erase(hotcueIndexList.begin(), endLower);

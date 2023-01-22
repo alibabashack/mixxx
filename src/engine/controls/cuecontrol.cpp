@@ -25,7 +25,7 @@ constexpr double CUE_MODE_MIXXX_NO_BLINK = 4.0;
 constexpr double CUE_MODE_CUP = 5.0;
 
 /// Used for a common tracking of the previewing Hotcue in m_currentlyPreviewingIndex
-constexpr int kMainCueIndex = NUM_HOT_CUES;
+constexpr int kMainCueIndex = kNumHotCues;
 
 void appendCueHint(gsl::not_null<HintVector*> pHintList,
         const mixxx::audio::FramePos& frame,
@@ -55,7 +55,7 @@ CueControl::CueControl(const QString& group,
           m_pPlay(ControlObject::getControl(ConfigKey(group, "play"))),
           m_pStopButton(ControlObject::getControl(ConfigKey(group, "stop"))),
           m_bypassCueSetByPlay(false),
-          m_iNumHotCues(NUM_HOT_CUES),
+          m_iNumHotCues(kNumHotCues),
           m_pCurrentSavedLoopControl(nullptr),
           m_trackMutex(QT_RECURSIVE_MUTEX_INIT) {
     // To silence a compiler warning about CUE_MODE_PIONEER.

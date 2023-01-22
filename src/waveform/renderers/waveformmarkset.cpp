@@ -17,7 +17,7 @@ void WaveformMarkSet::setup(const QString& group, const QDomNode& node,
                             const SkinContext& context,
                             const WaveformSignalColors& signalColors) {
 
-    m_marks.reserve(NUM_HOT_CUES + 3); // + 3 for cue_point, loop_start_position and loop_end_position
+    m_marks.reserve(kNumHotCues + 3); // + 3 for cue_point, loop_start_position and loop_end_position
     // Note: m_hotCueMarks does not support reserving space
 
     std::set<QString> controlItemSet;
@@ -51,7 +51,7 @@ void WaveformMarkSet::setup(const QString& group, const QDomNode& node,
     // check if there is a default mark and compare declared
     // and to create all missing hot_cues
     if (hasDefaultMark) {
-        for (int i = 0; i < NUM_HOT_CUES; ++i) {
+        for (int i = 0; i < kNumHotCues; ++i) {
             if (m_hotCueMarks.value(i).isNull()) {
                 //qDebug() << "WaveformRenderMark::setup - Automatic mark" << hotCueControlItem;
                 WaveformMarkPointer pMark(new WaveformMark(group, defaultChild, context, signalColors, i));

@@ -57,7 +57,7 @@ DlgReplaceCueColor::DlgReplaceCueColor(
     setupUi(this);
     setWindowModality(Qt::ApplicationModal);
 
-    spinBoxHotcueIndex->setMaximum(NUM_HOT_CUES);
+    spinBoxHotcueIndex->setMaximum(kNumHotCues);
 
     QIcon icon = QIcon::fromTheme("dialog-warning");
     if (!icon.isNull()) {

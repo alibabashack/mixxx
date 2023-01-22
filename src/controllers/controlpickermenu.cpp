@@ -448,14 +448,14 @@ ControlPickerMenu::ControlPickerMenu(QWidget* pParent)
     int moreMenuThreshold = 4;
     QMenu* parentMenu = hotcueMainMenu;
     QMenu* hotcueMoreMenu = nullptr;
-    bool moreHotcues = NUM_HOT_CUES >= preferredHotcuesVisible + moreMenuThreshold;
+    bool moreHotcues = kNumHotCues >= preferredHotcuesVisible + moreMenuThreshold;
     if (moreHotcues) {
         // populate menu here, add it below #preferredHotcuesVisible
         hotcueMoreMenu = new QMenu(
-                tr("Hotcues %1-%2").arg(preferredHotcuesVisible + 1).arg(NUM_HOT_CUES),
+                tr("Hotcues %1-%2").arg(preferredHotcuesVisible + 1).arg(kNumHotCues),
                 hotcueMainMenu);
     }
-    for (int i = 1; i <= NUM_HOT_CUES; ++i) {
+    for (int i = 1; i <= kNumHotCues; ++i) {
         if (moreHotcues && i > preferredHotcuesVisible) {
             parentMenu = hotcueMoreMenu;
         }
