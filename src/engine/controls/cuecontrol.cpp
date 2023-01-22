@@ -62,7 +62,6 @@ CueControl::CueControl(const QString& group,
           m_beatLoopActivate(group, "beatloop_activate", this),
           m_beatLoopSize(group, "beatloop_size", this),
           m_bypassCueSetByPlay(false),
-          m_iNumHotCues(kNumHotCues),
           m_pTrackSamples(ControlObject::getControl(ConfigKey(group, "track_samples"))),
           m_cuePoint(ConfigKey(group, "cue_point")),
           m_cueMode(ConfigKey(group, "cue_mode")),
@@ -143,7 +142,7 @@ void CueControl::createControls() {
     setHotcueFocusIndex(Cue::kNoHotCue);
 
     // Create hotcue controls
-    for (int i = 0; i < m_iNumHotCues; ++i) {
+    for (int i = 0; i < kNumHotCues; ++i) {
         HotcueControl* pControl = new HotcueControl(m_group, i);
         m_hotcueControls.append(pControl);
     }
@@ -600,7 +599,7 @@ void CueControl::loadCuesFromTrack() {
     }
 
     // Detach all hotcues that are no longer present
-    for (int hotCueIndex = 0; hotCueIndex < m_iNumHotCues; ++hotCueIndex) {
+    for (int hotCueIndex = 0; hotCueIndex < kNumHotCues; ++hotCueIndex) {
         if (!active_hotcues.contains(hotCueIndex)) {
             HotcueControl* pControl = m_hotcueControls.at(hotCueIndex);
             detachCue(pControl);
@@ -1076,7 +1075,7 @@ void CueControl::hotcueActivatePreview(HotcueControl* pControl, double value) {
 
 void CueControl::updateCurrentlyPreviewingIndex(int hotcueIndex) {
     int oldPreviewingIndex = m_currentlyPreviewingIndex.fetchAndStoreRelease(hotcueIndex);
-    if (oldPreviewingIndex >= 0 && oldPreviewingIndex < m_iNumHotCues) {
+    if (oldPreviewingIndex >= 0 && oldPreviewingIndex < kNumHotCues) {
         // We where already in previewing state, clean up ..
         HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex);
         mixxx::CueType lastType = pLastControl->getPreviewingType();
@@ -1931,7 +1930,7 @@ bool CueControl::updateIndicatorsAndModifyPlay(
             int oldPreviewingIndex =
                     m_currentlyPreviewingIndex.fetchAndStoreRelease(
                             Cue::kNoHotCue);
-            if (oldPreviewingIndex >= 0 && oldPreviewingIndex < m_iNumHotCues) {
+            if (oldPreviewingIndex >= 0 && oldPreviewingIndex < kNumHotCues) {
                 HotcueControl* pLastControl = m_hotcueControls.at(oldPreviewingIndex);
                 mixxx::CueType lastType = pLastControl->getPreviewingType();
                 if (lastType != mixxx::CueType::Loop) {
