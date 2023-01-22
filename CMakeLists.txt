@@ -666,7 +666,6 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/engine/enginebuffer.cpp
   src/engine/enginedelay.cpp
   src/engine/enginemaster.cpp
-  src/engine/engineobject.cpp
   src/engine/enginepregain.cpp
   src/engine/enginesidechaincompressor.cpp
   src/engine/enginetalkoverducking.cpp
