@@ -6,6 +6,7 @@
 #include <QAtomicPointer>
 #include <QList>
 
+#include "control/controlindicator.h"
 #include "control/controlproxy.h"
 #include "engine/controls/enginecontrol.h"
 #include "engine/controls/hotcuecontrol.h"
@@ -144,11 +145,11 @@ class CueControl : public EngineControl {
     ControlObject* m_pStopButton;
     ControlObject* m_pQuantizeEnabled;
     ControlObject* m_pClosestBeat;
-    parented_ptr<ControlProxy> m_pLoopStartPosition;
-    parented_ptr<ControlProxy> m_pLoopEndPosition;
-    parented_ptr<ControlProxy> m_pLoopEnabled;
-    parented_ptr<ControlProxy> m_pBeatLoopActivate;
-    parented_ptr<ControlProxy> m_pBeatLoopSize;
+    ControlProxy m_loopStartPosition;
+    ControlProxy m_loopEndPosition;
+    ControlProxy m_loopEnabled;
+    ControlProxy m_beatLoopActivate;
+    ControlProxy m_beatLoopSize;
     bool m_bypassCueSetByPlay;
     ControlValueAtomic<mixxx::audio::FramePos> m_usedSeekOnLoadPosition;
 
@@ -156,52 +157,52 @@ class CueControl : public EngineControl {
     QList<HotcueControl*> m_hotcueControls;
 
     ControlObject* m_pTrackSamples;
-    ControlObject* m_pCuePoint;
-    ControlObject* m_pCueMode;
-    ControlPushButton* m_pCueSet;
-    ControlPushButton* m_pCueClear;
-    ControlPushButton* m_pCueCDJ;
-    ControlPushButton* m_pCueDefault;
-    ControlPushButton* m_pPlayStutter;
-    ControlIndicator* m_pCueIndicator;
-    ControlIndicator* m_pPlayIndicator;
-    ControlObject* m_pPlayLatched;
-    ControlPushButton* m_pCueGoto;
-    ControlPushButton* m_pCueGotoAndPlay;
-    ControlPushButton* m_pCuePlay;
-    ControlPushButton* m_pCueGotoAndStop;
-    ControlPushButton* m_pCuePreview;
+    ControlObject m_cuePoint;
+    ControlObject m_cueMode;
+    ControlPushButton m_cueSet;
+    ControlPushButton m_cueClear;
+    ControlPushButton m_cueCDJ;
+    ControlPushButton m_cueDefault;
+    ControlPushButton m_playStutter;
+    ControlIndicator m_pueIndicator;
+    ControlIndicator m_playIndicator;
+    ControlObject m_playLatched;
+    ControlPushButton m_cueGoto;
+    ControlPushButton m_cueGotoAndPlay;
+    ControlPushButton m_cuePlay;
+    ControlPushButton m_cueGotoAndStop;
+    ControlPushButton m_cuePreview;
 
-    ControlObject* m_pIntroStartPosition;
-    ControlObject* m_pIntroStartEnabled;
-    ControlPushButton* m_pIntroStartSet;
-    ControlPushButton* m_pIntroStartClear;
-    ControlPushButton* m_pIntroStartActivate;
+    ControlObject m_introStartPosition;
+    ControlObject m_introStartEnabled;
+    ControlPushButton m_introStartSet;
+    ControlPushButton m_introStartClear;
+    ControlPushButton m_introStartActivate;
 
-    ControlObject* m_pIntroEndPosition;
-    ControlObject* m_pIntroEndEnabled;
-    ControlPushButton* m_pIntroEndSet;
-    ControlPushButton* m_pIntroEndClear;
-    ControlPushButton* m_pIntroEndActivate;
+    ControlObject m_introEndPosition;
+    ControlObject m_introEndEnabled;
+    ControlPushButton m_introEndSet;
+    ControlPushButton m_introEndClear;
+    ControlPushButton m_introEndActivate;
 
-    ControlObject* m_pOutroStartPosition;
-    ControlObject* m_pOutroStartEnabled;
-    ControlPushButton* m_pOutroStartSet;
-    ControlPushButton* m_pOutroStartClear;
-    ControlPushButton* m_pOutroStartActivate;
+    ControlObject m_outroStartPosition;
+    ControlObject m_outroStartEnabled;
+    ControlPushButton m_outroStartSet;
+    ControlPushButton m_outroStartClear;
+    ControlPushButton m_outroStartActivate;
 
-    ControlObject* m_pOutroEndPosition;
-    ControlObject* m_pOutroEndEnabled;
-    ControlPushButton* m_pOutroEndSet;
-    ControlPushButton* m_pOutroEndClear;
-    ControlPushButton* m_pOutroEndActivate;
+    ControlObject m_outroEndPosition;
+    ControlObject m_outroEndEnabled;
+    ControlPushButton m_outroEndSet;
+    ControlPushButton m_outroEndClear;
+    ControlPushButton m_outroEndActivate;
 
-    ControlProxy* m_pVinylControlEnabled;
-    ControlProxy* m_pVinylControlMode;
+    ControlProxy m_vinylControlEnabled;
+    ControlProxy m_vinylControlMode;
 
-    ControlObject* m_pHotcueFocus;
-    ControlObject* m_pHotcueFocusColorNext;
-    ControlObject* m_pHotcueFocusColorPrev;
+    ControlObject m_hotcueFocus;
+    ControlObject m_hotcueFocusColorNext;
+    ControlObject m_hotcueFocusColorPrev;
 
     parented_ptr<ControlProxy> m_pPassthrough;
 
